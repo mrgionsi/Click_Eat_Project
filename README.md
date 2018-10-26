@@ -3,18 +3,18 @@
 ### **Stile indice:**
 
 
-**"Indice":**     Calibri Light, 16pt, grassetto.
+**"Indice":**     Calibri Light, 18pt, grassetto.
 
-**Titoli:**      	Calibri Light, 16pt, grassetto.
+**Titoli:**      	Calibri Light, 14pt, grassetto.
 
-**Sottotitoli:** 	Calibri Corpo, 14pt.
+**Sottotitoli:** 	Calibri Corpo, 11pt.
 
 
 
 ### **Stile testo:**
 
 
-**Titoli:**      	Calibri Light, 16pt, grassetto.
+**Titoli:**      	Calibri Light, 18pt, grassetto.
 
 **Sottotitoli:** 	Calibri Corpo, 14pt.
 
