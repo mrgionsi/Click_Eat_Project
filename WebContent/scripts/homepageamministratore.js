@@ -9,7 +9,7 @@ function loadTables() {
         
         var toAppend = "";
 
-        toAppend='<div class="spinner-grow spinner-grow" role="status">\
+        toAppend='<div class="spinner-border text-primary" role="status">\
 	  				<span class="sr-only">Loading...</span>\
 	  				</div>';
         $("#canChange").append().html(toAppend);
@@ -83,7 +83,7 @@ function loadUsers() {
         
         var toAppend = "";
 
-        toAppend='<div class="spinner-grow spinner-grow" role="status">\
+        toAppend='<div class="spinner-border text-primary" role="status">\
         	  		<span class="sr-only">Loading...</span>\
         	  		</div>';
         $("#canChange").append().html(toAppend);
@@ -156,7 +156,7 @@ function loadPlates() {
         
         var toAppend = "";
 
-        toAppend='<div class="spinner-grow spinner-grow" role="status">\
+        toAppend='<div class="spinner-border text-primary" role="status">\
         	  		<span class="sr-only">Loading...</span>\
         	  		</div>';
         $("#canChange").append().html(toAppend);
@@ -354,7 +354,7 @@ function getAllFieldTable(){
                  success: function (data) {
                      	console.log(data);
                 	 	var success = document.createElement("span");
-                	 	$(success).text("Piatto aggiunto con successo!")
+                	 	$(success).text("Tavolo aggiunto con successo!")
                 	 	$("#showForm").empty();
                 	    $("#showForm").append(success);
 
@@ -371,28 +371,145 @@ function getAllFieldTable(){
 function addPlate() {
 	var newForm = "";
 	
-    $("#showForm").append().html(newForm);
+	newForm = document.createElement("form");
+	$(newForm).attr("id", "addPlate");
+//	--------------------------------------------------------------------
 
-	newForm = `<form>
-				  <div class="form-group">
-				    <label for="nomePiatto">Nome piatto</label>
-				    <input type="text" class="form-control" id="nomePiatto" aria-describedby="nomePiattoHelp" placeholder="Inserisci il nome del piatto">
-				  </div>
-				  div class="form-group">
-				    <label for="prezzoPiatto">Prezzo piatto </label>
-				    <input type="text" class="form-control" id="prezzoPiatto" aria-describedby="prezzoPiattoHelp" placeholder="Inserisci il prezzo del piatto">
-				  </div>
-				  div class="form-group">
-				    <label for="categoriaPiatto">Categoria </label>
-				    <input type="text" class="form-control" id="categoriaPiatto" aria-describedby="categoriaPiattoHelp" placeholder="Inserisci la categoria del piatto">
-				  </div>
-				  div class="form-group">
-				    <label for="listaIngredienti">Lista ingredienti </label>
-				    <input type="text" class="form-control" id="listaIngredienti" aria-describedby="listaIngredientiHelp" placeholder="Inserisci la lista degli ingredienti">
-				    <small id="listaIngredientiHelp" class="form-text text-muted">Inserisci gli ingredienti separati da una ','. Ad esempio: Alici, Capperi, Olive</small>
-				  </div>
-				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-				</form>`;
-    $("#showForm").append().html(newForm);
+	var newDiv = document.createElement("div");
+	$(newDiv).addClass("form-group");
+	
+	var newLabel = document.createElement("label");
+	$(newLabel).attr("for", "nomePiatto");
+	$(newLabel).text("Nome piatto");
 
+	var newInput = document.createElement("input");
+	$(newInput).attr("type", "text");
+	$(newInput).attr("id", "nomePiatto");
+	$(newInput).attr("aria-describedby", "nomePiattoHelp");
+	$(newInput).attr("placeholder", "Inserisci il nome del piatto");
+	$(newInput).addClass("form-control");
+	
+	$(newDiv).append(newLabel);
+	$(newDiv).append(newInput);
+	
+	$(newForm).append(newDiv);
+
+//	--------------------------------------------------------------------
+	var newDiv1 = document.createElement("div");
+	$(newDiv1).addClass("form-group");
+	
+	var newLabel1 = document.createElement("label");
+	$(newLabel1).attr("for", "prezzoPiatto");
+	$(newLabel1).text("Prezzo piatto");
+
+	var newInput1 = document.createElement("input");
+	$(newInput1).attr("type", "number");
+	$(newInput1).attr("id", "prezzoPiatto");
+	$(newInput1).attr("aria-describedby", "prezzoPiattoHelp");
+	$(newInput1).attr("placeholder", "Inserisci il prezzo del piatto");
+	$(newInput1).addClass("form-control");
+	
+	$(newDiv1).append(newLabel1);
+	$(newDiv1).append(newInput1);
+	
+	$(newForm).append(newDiv1);
+//	--------------------------------------------------------------------
+
+	var newDiv2 = document.createElement("div");
+	$(newDiv2).addClass("form-group");
+	
+	var newLabel2 = document.createElement("label");
+	$(newLabel2).attr("for", "categoriaPiatto");
+	$(newLabel2).text("Categoria piatto");
+
+	var newInput2 = document.createElement("input");
+	$(newInput2).attr("type", "text");
+	$(newInput2).attr("id", "categoriaPiatto");
+	$(newInput2).attr("aria-describedby", "categoriaPiattoHelp");
+	$(newInput2).attr("placeholder", "Inserisci la categoria del piatto");
+	$(newInput2).addClass("form-control");
+	
+	$(newDiv2).append(newLabel2);
+	$(newDiv2).append(newInput2);
+	
+	$(newForm).append(newDiv2);
+//	--------------------------------------------------------------------
+
+	var newDiv3 = document.createElement("div");
+	$(newDiv3).addClass("form-group");
+	
+	var newLabel3 = document.createElement("label");
+	$(newLabel3).attr("for", "listaIngredienti");
+	$(newLabel3).text("Lista ingredienti");
+
+	var newInput3 = document.createElement("input");
+	$(newInput3).attr("type", "text");
+	$(newInput3).attr("id", "listaIngredienti");
+	$(newInput3).attr("aria-describedby", "listaIngredientiHelp");
+	$(newInput3).attr("placeholder", "Inserisci la lista degli ingredienti del piatto");	
+	$(newInput3).addClass("form-control");
+	
+	var newSmall3 = document.createElement("small");
+	$(newSmall3).addClass("form-text text-muted");
+	$(newSmall3).attr("id", "listaIngredientiHelp");
+	$(newSmall3).text("Inserisci gli ingredienti separati da una virgola. Ad esempio: Alici, Capperi, Olive.");
+	
+
+	$(newDiv3).append(newLabel3);
+	$(newDiv3).append(newInput3);
+	$(newDiv3).append(newSmall3);
+
+	$(newForm).append(newDiv3);
+	
+	
+	var newButton = document.createElement("button");
+	$(newButton).addClass("btn btn-primary btn-lg");	
+	$(newButton).attr("type", "button");
+	$(newButton).attr("id", "btn-addplate");
+	$(newButton).text("Invia");	
+
+
+	$(newForm).append(newButton);
+
+	$("#showForm").append(newForm);
+    
+    $("#btn-addplate").click(function() {
+		getAllFieldPlate();
+	});
+
+}
+
+function getAllFieldPlate() {
+	
+	var userField = $("#addPlate").serializeArray();
+	 var urlString="";
+
+	 
+	 userField.forEach(element =>{
+		 
+		 urlString+="&"+element.name + "=" + element.value;
+		 console.log(urlString);
+	 });
+	 
+	 var xhttp = new XMLHttpRequest();
+	 xhttp.onreadystatechange = function () {
+        if(xhttp.readyState == 4 && xhttp.status == 200) {
+
+            $.ajax({
+                cache: false,
+                timeout: 3000,
+                success: function (data) {
+                    	console.log(data);
+               	 	var success = document.createElement("span");
+               	 	$(success).text("Piatto aggiunto con successo!")
+               	 	$("#showForm").empty();
+               	    $("#showForm").append(success);
+
+                },
+               
+            });
+        }
+    }
+	 xhttp.open("GET", "ControllerPiatto?op=" + 2 + urlString, true);
+    xhttp.send();
 }
