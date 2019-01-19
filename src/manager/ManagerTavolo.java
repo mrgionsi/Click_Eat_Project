@@ -62,9 +62,13 @@ public class ManagerTavolo {
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, numeroTavolo);
+			System.out.println("Prima di update");
 
 			int value = ps.executeUpdate();
-
+			
+			
+			System.out.println("Dopo di update");
+			System.out.println(value);
 			if(value != 0) {
 
 				BeanTavolo tavolo = new BeanTavolo(numeroTavolo);

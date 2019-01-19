@@ -278,18 +278,36 @@ function getAllFieldUser(){
 
 
 function addTable() {
-	var newForm = "";
+	var newForm = document.createElement("form");
+	$(newForm).attr("id", "addTable");
 	
-    $("#showForm").append().html(newForm);
+	var newDiv = document.createElement("div");
+	$(newDiv).addClass("form-group");
 
-	newForm = `<form id="addTable">
-				  <div class="form-group">
-				    <label for="numeroTavolo">Numero tavolo </label>
-				    <input type="text" class="form-control" name="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
-				  </div>
-				  <button type="button" class="btn btn-primary btn-lg" id="btn-addtable">Submit</button>
-				</form>`;
-    $("#showForm").append().html(newForm);
+	var newLabel = document.createElement("label");
+	$(newLabel).attr("for", "numeroTavolo");
+	$(newLabel).text("Numero tavolo");
+	
+	var newInput = document.createElement("input");
+	$(newInput).addClass("form-control");
+	$(newInput).attr("type", "text");
+	$(newInput).attr("name", "numeroTavolo");
+	$(newInput).attr("aria-describedby", "numeroTavoloHelp");
+	$(newInput).attr("placeholder", "Inserisci il numero del tavolo");
+	
+	var newButton = document.createElement("button");
+	$(newButton).attr("type", "button");
+	$(newButton).attr("id", "btn-addtable");
+	$(newButton).addClass("btn btn-primary btn-lg");
+	$(newButton).text("Invia");
+
+	$(newDiv).append(newLabel);
+	$(newDiv).append(newInput);
+
+	$(newForm).append(newDiv);
+	$(newForm).append(newButton);
+
+    $("#showForm").append(newForm);
     
     $("#btn-addtable").click(function() {
 		getAllFieldTable();
