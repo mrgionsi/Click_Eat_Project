@@ -1,9 +1,17 @@
+/* servlet Tavolo, si occupa della logica applicativa riguardante il dato Tavolo
+ * author: Andrea Cupito
+ * ogni operazione possibile verrà indicata con un numero intero (op):
+ * ottieni listaTavoli: 1
+ * aggiungere un tavolo al sistema: 2
+ * 
+ */
 package controller;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.ManagerTavolo;
 import model.BeanTavolo;
+
+
 
 @WebServlet("/ControllerTavolo")
 public class ControllerTavolo extends HttpServlet {
@@ -59,6 +69,31 @@ public class ControllerTavolo extends HttpServlet {
 			mapper.writeValue(f, listaTavoli);
 
 
+			System.out.println("-----------------------");
+			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
+			System.out.println("-----------------------");
+		}
+		
+		if(toGet.equalsIgnoreCase("2")) {
+			
+			System.out.println("-----------------------");
+			System.out.println("Inizio metodo: doGet - Servlet: ControllerTavolo");
+			System.out.println("-----------------------");
+			
+			System.out.println("nuovo Tavolo");
+			
+			String number = request.getParameter("idTavolo");
+			Integer numeroTavolo = Integer.parseInt(number);
+			
+			try {
+				ManagerTavolo tavoloManager = new ManagerTavolo();
+				tavoloManager.creaTavolo(numeroTavolo);
+				System.out.println("tavolo creato");
+			}catch(Exception e) {
+				request.setAttribute("exception", e);
+				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire
+				rq3.forward(request, response);
+			}
 			System.out.println("-----------------------");
 			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
 			System.out.println("-----------------------");

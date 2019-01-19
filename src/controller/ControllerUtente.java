@@ -18,7 +18,7 @@ import manager.ManagerUtente;
 import model.BeanUtente;
 /* servlet Utente, si occupa della logica applicativa riguardante il dato Utente
  * author: Andrea Cupito
- * ogni operazione possibile verrà indicata con un numero intero (id):
+ * ogni operazione possibile verrà indicata con un numero intero (op):
  * ottieni listaUtenti: 1
  * aggiungere un utente al sistema: 2
  * eliminare un utente dal sistema: 3
@@ -35,10 +35,7 @@ public class ControllerUtente extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Enumeration paramaterNames = request.getParameterNames();
-		while(paramaterNames.hasMoreElements() ) {
-		       System.out.println(paramaterNames.nextElement());
-		} 
+		
 		String toGet = request.getParameter("op");
 		System.out.println(toGet);
 
