@@ -83,6 +83,14 @@ public class ControllerUtente extends HttpServlet {
 			String passwordUtente = request.getParameter("passwordUtente");
 			String idLogin = request.getParameter("userId");
 
+			System.out.println(nomeUtente);
+
+			System.out.println(cognomeUtente);
+
+			System.out.println(ruoloUtente);
+
+			System.out.println(idLogin);
+
 
 
 			try {

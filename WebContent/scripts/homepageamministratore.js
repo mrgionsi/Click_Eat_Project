@@ -222,36 +222,129 @@ function loadPlates() {
     });}
 
 function addUser() {
+	
 	var newForm = "";
-	
-    $("#showForm").append().html(newForm);
+	$("#showForm").append(newForm);
 
-	newForm = `<form id="addUser" >
-				<input type="hidden" name="op" value="2" /> 
-				  <div class="form-group">
-				    <label for="nomeUtente">Nome </label>
-				    <input type="text" class="form-control" name="nomeUtente" aria-describedby="nomeUtenteHelp" placeholder="Inserisci il nome">
-				  </div>
-				  <div class="form-group">
-				    <label for="cognomeUtente">Cognome </label>
-				    <input type="text" class="form-control" name="cognomeUtente" aria-describedby="cognomeUtenteHelp" placeholder="Inserisci il cognome">
-				  </div>
-				  <div class="form-group">
-				    <label for="ruoloUtente">Ruolo </label>
-				    <input type="text" class="form-control" name="ruoloUtente" aria-describedby="ruoloUtenteHelo" placeholder="Inserisci il ruolo">
-				  </div>
-				  <div class="form-group">
-				    <label for="userId">Username </label>
-				    <input type="text" class="form-control" name="userId" aria-describedby="userIdHelp" placeholder="Inserisci lo username">
-				  </div>
-				  <div class="form-group">
-				    <label for="passwordUtente">Password </label>
-				    <input type="text" class="form-control" name="passwordUtente" aria-describedby="passwordUtenteHelp" placeholder="Inserisci la password">
-				  </div>
-				  <button type="button" class="btn btn-primary btn-lg" id="btn-adduser" >Submit</button>
-				</form>`;
 	
-    $("#showForm").append().html(newForm);
+	newForm = document.createElement("form");
+	$(newForm).attr("id", "addUser");
+//	--------------------------------------------------------------------
+
+	var newDiv = document.createElement("div");
+	$(newDiv).addClass("form-group");
+	
+	var newLabel = document.createElement("label");
+	$(newLabel).attr("for", "nomeUtente");
+	$(newLabel).text("Nome utente");
+
+	var newInput = document.createElement("input");
+	$(newInput).attr("type", "text");
+	$(newInput).attr("name", "nomeUtente");
+	$(newInput).attr("aria-describedby", "nomeUtenteHelp");
+	$(newInput).attr("placeholder", "Inserisci il nome dell'utente");
+	$(newInput).addClass("form-control");
+	
+	$(newDiv).append(newLabel);
+	$(newDiv).append(newInput);
+	
+	$(newForm).append(newDiv);
+
+//	--------------------------------------------------------------------
+	var newDiv1 = document.createElement("div");
+	$(newDiv1).addClass("form-group");
+	
+	var newLabel1 = document.createElement("label");
+	$(newLabel1).attr("for", "cognomeUtente");
+	$(newLabel1).text("Cognome utente");
+
+	var newInput1 = document.createElement("input");
+	$(newInput1).attr("type", "text");
+	$(newInput1).attr("name", "cognomeUtente");
+	$(newInput1).attr("aria-describedby", "cognomeUtenteHelp");
+	$(newInput1).attr("placeholder", "Inserisci il cognome dell'utente");
+	$(newInput1).addClass("form-control");
+	
+	$(newDiv1).append(newLabel1);
+	$(newDiv1).append(newInput1);
+	
+	$(newForm).append(newDiv1);
+//	--------------------------------------------------------------------
+
+	var newDiv2 = document.createElement("div");
+	$(newDiv2).addClass("form-group");
+	
+	var newLabel2 = document.createElement("label");
+	$(newLabel2).attr("for", "ruoloUtente");
+	$(newLabel2).text("Ruolo utente");
+
+	var newInput2 = document.createElement("input");
+	$(newInput2).attr("type", "text");
+	$(newInput2).attr("name", "ruoloUtente");
+	$(newInput2).attr("aria-describedby", "ruoloUtenteHelp");
+	$(newInput2).attr("placeholder", "Inserisci il ruolo dell'utente");
+	$(newInput2).addClass("form-control");
+	
+	$(newDiv2).append(newLabel2);
+	$(newDiv2).append(newInput2);
+	
+	$(newForm).append(newDiv2);
+//	--------------------------------------------------------------------
+
+	var newDiv3 = document.createElement("div");
+	$(newDiv3).addClass("form-group");
+	
+	var newLabel3 = document.createElement("label");
+	$(newLabel3).attr("for", "userId");
+	$(newLabel3).text("Username utente");
+
+	var newInput3 = document.createElement("input");
+	$(newInput3).attr("type", "text");
+	$(newInput3).attr("name", "userId");
+	$(newInput3).attr("aria-describedby", "userIdHelp");
+	$(newInput3).attr("placeholder", "Inserisci lo username dell'utente");	
+	$(newInput3).addClass("form-control");
+	
+	
+	
+
+	$(newDiv3).append(newLabel3);
+	$(newDiv3).append(newInput3);
+
+	$(newForm).append(newDiv3);
+//	--------------------------------------------------------------------
+
+	var newDiv4 = document.createElement("div");
+	$(newDiv4).addClass("form-group");
+	
+	var newLabel4 = document.createElement("label");
+	$(newLabel4).attr("for", "passwordUtente");
+	$(newLabel4).text("Password utente");
+
+	var newInput4 = document.createElement("input");
+	$(newInput4).attr("type", "password");
+	$(newInput4).attr("name", "passwordUtente");
+	$(newInput4).attr("aria-describedby", "passwordUtenteHelp");
+	$(newInput4).attr("placeholder", "Inserisci la password dell'utente");	
+	$(newInput4).addClass("form-control");
+	
+
+	$(newDiv4).append(newLabel4);
+	$(newDiv4).append(newInput4);
+
+	$(newForm).append(newDiv4);
+	
+	
+	var newButton = document.createElement("button");
+	$(newButton).addClass("btn btn-primary btn-lg");	
+	$(newButton).attr("type", "button");
+	$(newButton).attr("id", "btn-adduser");
+	$(newButton).text("Invia");	
+
+
+	$(newForm).append(newButton);
+
+	$("#showForm").append(newForm);
     
 	$("#btn-adduser").click(function() {
 		getAllFieldUser();
@@ -260,14 +353,18 @@ function addUser() {
 
 function getAllFieldUser(){
 	var userField = $("#addUser").serializeArray();
+	 var urlString="nulla";
+	 console.log(urlString);
 	 var urlString="";
+	 console.log(urlString);
 
 	 
 	 userField.forEach(element =>{
 		 
 		 urlString+="&"+element.name + "=" + element.value;
 	 });
-	 
+	 console.log(urlString);
+
 	 var xhttp = new XMLHttpRequest();
 	 xhttp.onreadystatechange = function () {
          if(xhttp.readyState == 4 && xhttp.status == 200) {
@@ -335,7 +432,7 @@ function addTable() {
 function getAllFieldTable(){
 	
 	var userField = $("#addTable").serializeArray();
-	 var urlString="";
+	var urlString="";
 
 	 
 	 userField.forEach(element =>{
@@ -384,7 +481,7 @@ function addPlate() {
 
 	var newInput = document.createElement("input");
 	$(newInput).attr("type", "text");
-	$(newInput).attr("id", "nomePiatto");
+	$(newInput).attr("name", "nomePiatto");
 	$(newInput).attr("aria-describedby", "nomePiattoHelp");
 	$(newInput).attr("placeholder", "Inserisci il nome del piatto");
 	$(newInput).addClass("form-control");
@@ -404,7 +501,7 @@ function addPlate() {
 
 	var newInput1 = document.createElement("input");
 	$(newInput1).attr("type", "number");
-	$(newInput1).attr("id", "prezzoPiatto");
+	$(newInput1).attr("name", "prezzoPiatto");
 	$(newInput1).attr("aria-describedby", "prezzoPiattoHelp");
 	$(newInput1).attr("placeholder", "Inserisci il prezzo del piatto");
 	$(newInput1).addClass("form-control");
@@ -424,7 +521,7 @@ function addPlate() {
 
 	var newInput2 = document.createElement("input");
 	$(newInput2).attr("type", "text");
-	$(newInput2).attr("id", "categoriaPiatto");
+	$(newInput2).attr("name", "categoriaPiatto");
 	$(newInput2).attr("aria-describedby", "categoriaPiattoHelp");
 	$(newInput2).attr("placeholder", "Inserisci la categoria del piatto");
 	$(newInput2).addClass("form-control");
@@ -444,7 +541,7 @@ function addPlate() {
 
 	var newInput3 = document.createElement("input");
 	$(newInput3).attr("type", "text");
-	$(newInput3).attr("id", "listaIngredienti");
+	$(newInput3).attr("name", "listaIngredienti");
 	$(newInput3).attr("aria-describedby", "listaIngredientiHelp");
 	$(newInput3).attr("placeholder", "Inserisci la lista degli ingredienti del piatto");	
 	$(newInput3).addClass("form-control");
