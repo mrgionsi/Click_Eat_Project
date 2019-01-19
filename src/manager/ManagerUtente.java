@@ -88,7 +88,7 @@ public class ManagerUtente {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}

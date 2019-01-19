@@ -44,7 +44,7 @@ public class ManagerIngrediente {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -80,7 +80,7 @@ public class ManagerIngrediente {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -120,7 +120,7 @@ public class ManagerIngrediente {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -162,7 +162,7 @@ public class ManagerIngrediente {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
