@@ -20,6 +20,7 @@ function loadTables() {
                 $.ajax({
                     cache: false,
                     dataType: "json",
+                    timeout: 3000,
                     error: function(){
                     	toAppend = "";
                         $("#canChange").append().html(toAppend);
@@ -35,7 +36,7 @@ function loadTables() {
                         console.log(tables.length);
                         if(tables.length == 0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        		<br><button type="button" class="btn btn-primary" onclick="addTable()">Aggiungi</button>';
+                        		<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button>';
                             $("#canChange").append().html(toAppend);
 
                         	} else {
@@ -52,8 +53,8 @@ function loadTables() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addTable()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -93,6 +94,7 @@ function loadUsers() {
                 $.ajax({
                     cache: false,
                     dataType: "json",
+                    timeout: 3000,
                     error: function(){
                     	toAppend = "";
                         $("#canChange").append().html(toAppend);
@@ -106,7 +108,7 @@ function loadUsers() {
                         var i = 0;
                         if(users.length<0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary" onclick="addUser()">Aggiungi</button>';
+                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button>';
                         
                             $("#canChange").append().html(toAppend);
 
@@ -124,8 +126,8 @@ function loadUsers() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addUser()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -168,13 +170,13 @@ function loadPlates() {
                     timeout: 3000,
                     error: function(){
                    
-                    	if(xhttp.status == 404){
+                    	
                     		toAppend = "";
                             $("#canChange").append().html(toAppend);
                             
                             toAppend = '<p><h4>Non è stato possibile ottenere i dati</h4></p>';
                             $("#canChange").append().html(toAppend);
-                    	}
+                    	
  	
                     },
                     success: function (plates) {
@@ -183,7 +185,7 @@ function loadPlates() {
                         var i = 0;
                         if(plates.length<0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary" onclick="addPlate()">Aggiungi</button>';
+                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button>';
                         
                             $("#canChange").append().html(toAppend);
 
@@ -201,8 +203,8 @@ function loadPlates() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addPlate()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -246,8 +248,8 @@ function addUser() {
 				    <label for="passwordUtente">Password </label>
 				    <input type="text" class="form-control" name="passwordUtente" aria-describedby="passwordUtenteHelp" placeholder="Inserisci la password">
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				</form>`;
     $("#showForm").append().html(newForm);
 
 }
@@ -262,8 +264,8 @@ function addTable() {
 				    <label for="numeroTavolo">Numero tavolo </label>
 				    <input type="text" class="form-control" id="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				</form>`;
     $("#showForm").append().html(newForm);
 
 }
@@ -291,8 +293,9 @@ function addPlate() {
 				    <input type="text" class="form-control" id="listaIngredienti" aria-describedby="listaIngredientiHelp" placeholder="Inserisci la lista degli ingredienti">
 				    <small id="listaIngredientiHelp" class="form-text text-muted">Inserisci gli ingredienti separati da una ','. Ad esempio: Alici, Capperi, Olive</small>
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				</form>`;
+//	hello
     $("#showForm").append().html(newForm);
 
 }
