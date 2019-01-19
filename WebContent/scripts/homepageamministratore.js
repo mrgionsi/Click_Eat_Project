@@ -230,11 +230,11 @@ function addUser() {
 				<input type="hidden" name="op" value="2" /> 
 				  <div class="form-group">
 				    <label for="nomeUtente">Nome </label>
-				    <input type="text" class="form-control" id="nomeUtente" name="nomeUtente" aria-describedby="nomeUtenteHelp" placeholder="Inserisci il nome">
+				    <input type="text" class="form-control" name="nomeUtente" aria-describedby="nomeUtenteHelp" placeholder="Inserisci il nome">
 				  </div>
 				  <div class="form-group">
 				    <label for="cognomeUtente">Cognome </label>
-				    <input type="text" class="form-control" id="cognomeUtente" name="cognomeUtente" aria-describedby="cognomeUtenteHelp" placeholder="Inserisci il cognome">
+				    <input type="text" class="form-control" name="cognomeUtente" aria-describedby="cognomeUtenteHelp" placeholder="Inserisci il cognome">
 				  </div>
 				  <div class="form-group">
 				    <label for="ruoloUtente">Ruolo </label>
@@ -248,8 +248,8 @@ function addUser() {
 				    <label for="passwordUtente">Password </label>
 				    <input type="text" class="form-control" name="passwordUtente" aria-describedby="passwordUtenteHelp" placeholder="Inserisci la password">
 				  </div>
-				  <div type="button" class="btn btn-primary btn-lg" id="btn-adduser" >Submit</div>
-				</div>`;
+				  <button type="button" class="btn btn-primary btn-lg" id="btn-adduser" >Submit</button>
+				</form>`;
 	
     $("#showForm").append().html(newForm);
     
@@ -272,10 +272,7 @@ function getAllFieldUser(){
 	 
 	 xhttp.open("GET", "ControllerUtente?op=" + 2 + urlString, true);
      xhttp.send();
-	 
-	 
-	 
-	 
+	  
 }
 
 
@@ -285,15 +282,37 @@ function addTable() {
 	
     $("#showForm").append().html(newForm);
 
-	newForm = `<form>
+	newForm = `<form id="addTable">
 				  <div class="form-group">
 				    <label for="numeroTavolo">Numero tavolo </label>
-				    <input type="text" class="form-control" id="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
+				    <input type="text" class="form-control" name="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
 				  </div>
-				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				  <button type="button" class="btn btn-primary btn-lg" id="btn-addtable">Submit</button>
 				</form>`;
     $("#showForm").append().html(newForm);
+    
+    $("#btn-addtable").click(function() {
+		getAllFieldTable();
+	});
 
+}
+
+function getAllFieldTable(){
+	var userField = $("#addTable").serializeArray();
+	 var urlString="";
+
+	 
+	 userField.forEach(element =>{
+		 
+		 urlString+="&"+element.name + "=" + element.value;
+		 console.log(urlString);
+	 });
+	 
+	 var xhttp = new XMLHttpRequest();
+	 
+	 xhttp.open("GET", "ControllerTavolo?op=" + 2 + urlString, true);
+     xhttp.send();
+	  
 }
 
 function addPlate() {
