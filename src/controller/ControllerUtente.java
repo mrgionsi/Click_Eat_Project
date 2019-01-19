@@ -80,7 +80,7 @@ public class ControllerUtente extends HttpServlet {
 			String cognomeUtente = request.getParameter("cognomeUtente");
 			String ruoloUtente = request.getParameter("ruoloUtente");
 			String passwordUtente = request.getParameter("passwordUtente");
-			String idLogin = request.getParameter("idLogin");
+			String idLogin = request.getParameter("userId");
 
 
 

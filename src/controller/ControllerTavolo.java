@@ -82,7 +82,7 @@ public class ControllerTavolo extends HttpServlet {
 			
 			System.out.println("nuovo Tavolo");
 			
-			String number = request.getParameter("idTavolo");
+			String number = request.getParameter("numeroTavolo");
 			Integer numeroTavolo = Integer.parseInt(number);
 			
 			try {
