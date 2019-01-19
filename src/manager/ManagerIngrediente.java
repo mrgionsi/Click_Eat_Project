@@ -14,23 +14,22 @@ public class ManagerIngrediente {
 	
 	private ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente> ();//lista di ingredienti
 	
-	public synchronized BeanIngrediente creaIngrediente(String nomeIngrediente, String categoriaIngrediente) {
+	public synchronized BeanIngrediente creaIngrediente(String nomeIngrediente) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente, categoriaIngrediente) VALUES(?,?)");
+			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setString(1, nomeIngrediente);
-			ps.setString(2, categoriaIngrediente);
 
 			int value = ps.executeUpdate();
 			int idIngrediente = ps.getResultSet().getInt("idLogin");
 
 			if(value != 0) {
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente, categoriaIngrediente);
+				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
 				System.out.println("Ingrediente aggiunto con successo nel Database");
 
 				return ingrediente;
@@ -106,9 +105,8 @@ public class ManagerIngrediente {
 			while(res.next()) {
 				Integer idIngrediente = res.getInt("idIngrediente");
 				String nomeIngrediente = res.getString("nomeIngrediente");
-				String categoriaIngrediente = res.getString("categoriaIngrediente");
 				
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente, categoriaIngrediente);
+				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
 				listaIngredienti.add(ingrediente);
 			}
 			
@@ -147,9 +145,8 @@ public class ManagerIngrediente {
 			
 			while(res.next()) {
 				String nomeIngrediente = res.getString("nomeIngrediente");
-				String categoriaIngrediente = res.getString("categoriaIngrediente");
 				
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente, categoriaIngrediente);
+				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
 				Integer indice = listaIngredienti.indexOf(ingrediente);
 				ingrediente = listaIngredienti.get(indice);
 				
@@ -172,4 +169,5 @@ public class ManagerIngrediente {
 		}
 		return null;
 	}
+	
 }
