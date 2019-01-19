@@ -12,9 +12,9 @@
 	        <p class="text-center">
 				<h3 class="welcome_amministrazione">Pagina amministrazione</h3>
 			</p>
-			<button type="button" class="btn btn-primary" onclick="loadTables()">Tavoli</button>
-            <button type="button" class="btn btn-primary" onclick="loadUsers()">Utenti</button>
-            <button type="button" class="btn btn-primary" onclick="loadPlates()">Piatti</button>
+			<button type="button" class="btn btn-primary btn-lg" onclick="loadTables()">Tavoli</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="loadUsers()">Utenti</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="loadPlates()">Piatti</button>
             <br>
             <br>
 			<div class = "row">

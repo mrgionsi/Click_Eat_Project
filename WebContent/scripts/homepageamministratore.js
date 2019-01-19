@@ -20,6 +20,7 @@ function loadTables() {
                 $.ajax({
                     cache: false,
                     dataType: "json",
+                    timeout: 3000,
                     error: function(){
                     	toAppend = "";
                         $("#canChange").append().html(toAppend);
@@ -35,7 +36,7 @@ function loadTables() {
                         console.log(tables.length);
                         if(tables.length == 0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        		<br><button type="button" class="btn btn-primary" onclick="addTable()">Aggiungi</button>';
+                        		<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button>';
                             $("#canChange").append().html(toAppend);
 
                         	} else {
@@ -52,8 +53,8 @@ function loadTables() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addTable()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -66,7 +67,7 @@ function loadTables() {
             }
         }
 
-        xhttp.open("GET", "ControllerTavolo?op" + 1 , true);
+        xhttp.open("GET", "ControllerTavolo?op=" + 1 , true);
         xhttp.send();
     });
 }
@@ -93,6 +94,7 @@ function loadUsers() {
                 $.ajax({
                     cache: false,
                     dataType: "json",
+                    timeout: 3000,
                     error: function(){
                     	toAppend = "";
                         $("#canChange").append().html(toAppend);
@@ -106,7 +108,7 @@ function loadUsers() {
                         var i = 0;
                         if(users.length<0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary" onclick="addUser()">Aggiungi</button>';
+                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button>';
                         
                             $("#canChange").append().html(toAppend);
 
@@ -124,8 +126,8 @@ function loadUsers() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addUser()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -168,13 +170,13 @@ function loadPlates() {
                     timeout: 3000,
                     error: function(){
                    
-                    	if(xhttp.status == 404){
+                    	
                     		toAppend = "";
                             $("#canChange").append().html(toAppend);
                             
                             toAppend = '<p><h4>Non è stato possibile ottenere i dati</h4></p>';
                             $("#canChange").append().html(toAppend);
-                    	}
+                    	
  	
                     },
                     success: function (plates) {
@@ -183,7 +185,7 @@ function loadPlates() {
                         var i = 0;
                         if(plates.length<0){
                         	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary" onclick="addPlate()">Aggiungi</button>';
+                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button>';
                         
                             $("#canChange").append().html(toAppend);
 
@@ -201,8 +203,8 @@ function loadPlates() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary" onclick="addPlate()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary">Elimina</button></form>';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
+		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
@@ -224,7 +226,7 @@ function addUser() {
 	
     $("#showForm").append().html(newForm);
 
-	newForm = `<form action="/nonmaven_ClickEat/ControllerUtente" method="GET">
+	newForm = `<form id="addUser" >
 				<input type="hidden" name="op" value="2" /> 
 				  <div class="form-group">
 				    <label for="nomeUtente">Nome </label>
@@ -240,32 +242,77 @@ function addUser() {
 				  </div>
 				  <div class="form-group">
 				    <label for="userId">Username </label>
-				    <input type="text" class="form-control" name="idLogin" aria-describedby="userIdHelp" placeholder="Inserisci lo username">
+				    <input type="text" class="form-control" name="userId" aria-describedby="userIdHelp" placeholder="Inserisci lo username">
 				  </div>
 				  <div class="form-group">
 				    <label for="passwordUtente">Password </label>
 				    <input type="text" class="form-control" name="passwordUtente" aria-describedby="passwordUtenteHelp" placeholder="Inserisci la password">
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="button" class="btn btn-primary btn-lg" id="btn-adduser" >Submit</button>
+				</form>`;
+	
     $("#showForm").append().html(newForm);
-
+    
+	$("#btn-adduser").click(function() {
+		getAllFieldUser();
+	});
 }
+
+function getAllFieldUser(){
+	var userField = $("#addUser").serializeArray();
+	 var urlString="";
+
+	 
+	 userField.forEach(element =>{
+		 
+		 urlString+="&"+element.name + "=" + element.value;
+	 });
+	 
+	 var xhttp = new XMLHttpRequest();
+	 
+	 xhttp.open("GET", "ControllerUtente?op=" + 2 + urlString, true);
+     xhttp.send();
+	  
+}
+
+
 
 function addTable() {
 	var newForm = "";
 	
     $("#showForm").append().html(newForm);
 
-	newForm = `<form>
+	newForm = `<form id="addTable">
 				  <div class="form-group">
 				    <label for="numeroTavolo">Numero tavolo </label>
-				    <input type="text" class="form-control" id="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
+				    <input type="text" class="form-control" name="numeroTavolo" aria-describedby="numeroTavoloHelp" placeholder="Inserisci il numero del tavolo">
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="button" class="btn btn-primary btn-lg" id="btn-addtable">Submit</button>
+				</form>`;
     $("#showForm").append().html(newForm);
+    
+    $("#btn-addtable").click(function() {
+		getAllFieldTable();
+	});
 
+}
+
+function getAllFieldTable(){
+	var userField = $("#addTable").serializeArray();
+	 var urlString="";
+
+	 
+	 userField.forEach(element =>{
+		 
+		 urlString+="&"+element.name + "=" + element.value;
+		 console.log(urlString);
+	 });
+	 
+	 var xhttp = new XMLHttpRequest();
+	 
+	 xhttp.open("GET", "ControllerTavolo?op=" + 2 + urlString, true);
+     xhttp.send();
+	  
 }
 
 function addPlate() {
@@ -291,8 +338,8 @@ function addPlate() {
 				    <input type="text" class="form-control" id="listaIngredienti" aria-describedby="listaIngredientiHelp" placeholder="Inserisci la lista degli ingredienti">
 				    <small id="listaIngredientiHelp" class="form-text text-muted">Inserisci gli ingredienti separati da una ','. Ad esempio: Alici, Capperi, Olive</small>
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
-				</form`;
+				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				</form>`;
     $("#showForm").append().html(newForm);
 
 }

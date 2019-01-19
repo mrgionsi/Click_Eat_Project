@@ -81,7 +81,6 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -116,7 +115,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+	
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -150,7 +149,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+			
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -190,7 +189,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -230,7 +229,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -270,7 +269,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -310,7 +309,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}

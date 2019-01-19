@@ -51,7 +51,7 @@ public class ManagerPiatto {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -92,7 +92,7 @@ public class ManagerPiatto {
 		}
 		finally {
 			try {
-				conn.commit();
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
