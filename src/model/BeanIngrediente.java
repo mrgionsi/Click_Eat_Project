@@ -4,20 +4,18 @@ public class BeanIngrediente {
 	
 	private Integer idIngrediente;
 	private String nomeIngrediente;
-	private String categoriaIngrediente;
 	
 	public BeanIngrediente() {
 		
 		setIdIngrediente(0);
 		setNomeIngrediente("");
-		setCategoriaIngrediente("");
 	}
 	
-	public BeanIngrediente(Integer idIngrediente, String nomeIngrediente, String categoriaIngrediente) {
+	public BeanIngrediente(Integer idIngrediente, String nomeIngrediente) {
 		
 		setIdIngrediente(idIngrediente);
 		setNomeIngrediente(nomeIngrediente);
-		setCategoriaIngrediente(categoriaIngrediente);
+
 	}
 
 	public Integer getIdIngrediente() {
@@ -34,13 +32,5 @@ public class BeanIngrediente {
 
 	public void setNomeIngrediente(String nomeIngrediente) {
 		this.nomeIngrediente = nomeIngrediente;
-	}
-
-	public String getCategoriaIngrediente() {
-		return categoriaIngrediente;
-	}
-
-	public void setCategoriaIngrediente(String categoriaIngrediente) {
-		this.categoriaIngrediente = categoriaIngrediente;
 	}
 }

@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import manager.ManagerIngrediente;
 import manager.ManagerPiatto;
+import model.BeanIngrediente;
 import model.BeanPiatto;
 
 
@@ -60,6 +63,40 @@ public class ControllerPiatto extends HttpServlet {
 
 			mapper.writeValue(f, listaPiatti);
 
+
+			System.out.println("-----------------------");
+			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
+			System.out.println("-----------------------");
+		}
+		else if(toGet.equalsIgnoreCase("2")) {
+			
+			System.out.println("-----------------------");
+			System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
+			System.out.println("-----------------------");
+			
+			BeanPiatto piatto = new BeanPiatto();
+			BeanIngrediente ingrediente = new BeanIngrediente();
+			ManagerPiatto piattoManager = new ManagerPiatto();
+			ManagerIngrediente ingredienteManager = new ManagerIngrediente();
+			ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
+			
+			String nomePiatto = request.getParameter("nomePiatto");
+			String categoriaPiatto = request.getParameter("categoriaPiatto");
+			String ingredienti = request.getParameter("listaIngredienti");
+			String prezzo = request.getParameter("prezzoPiatto");
+			Float prezzoPiatto = Float.parseFloat(prezzo);
+			
+			ArrayList<String> parts = (ArrayList<String>) Arrays.asList(ingredienti.split(","));
+			for(String s: parts){
+				ingrediente = ingredienteManager.creaIngrediente(s);
+				listaIngredienti.add(ingrediente);
+			}
+			
+			piatto = piattoManager.creaPiatto(nomePiatto, prezzoPiatto, categoriaPiatto);
+			piatto.setListaIngredienti(listaIngredienti);
+			
+			piattoManager.inserisciIngredientiNelPiatto(piatto);
+			
 
 			System.out.println("-----------------------");
 			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
