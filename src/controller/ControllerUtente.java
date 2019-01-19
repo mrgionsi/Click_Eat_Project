@@ -33,6 +33,7 @@ public class ControllerUtente extends HttpServlet {
 		super();
 	}
 
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Enumeration paramaterNames = request.getParameterNames();

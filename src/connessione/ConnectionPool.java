@@ -50,7 +50,7 @@ public class ConnectionPool {
         System.out.println("Port Forwarded");
         
         //mysql database connectivity
-            Class.forName(driverName).newInstance();
+            Class.forName(driverName).getDeclaredConstructor().newInstance();
             conn = DriverManager.getConnection (url, dbuserName, dbpassword);
             
             conn.setAutoCommit(true);
