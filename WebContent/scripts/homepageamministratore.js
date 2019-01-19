@@ -195,7 +195,7 @@ function loadPlates() {
 		                            var checkbox = '<form><div class="form-check">\
 		                            				<input class="form-check-input" type="checkbox" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
 		                            				<label class="form-check-label" for="plate_'+ plates[i].idPiatto +'">\
-		                            				'+ plates[i].nomePiatto +' | '+ plates[i].prezzoPiatto +'\
+		                            				'+ plates[i].nomePiatto +' | '+ plates[i].prezzoPiatto + '&euro;' + '\
 		                            				</label>\
 		                            				</div>';
 		                            
@@ -269,7 +269,24 @@ function getAllFieldUser(){
 	 });
 	 
 	 var xhttp = new XMLHttpRequest();
-	 
+	 xhttp.onreadystatechange = function () {
+         if(xhttp.readyState == 4 && xhttp.status == 200) {
+
+             $.ajax({
+                 cache: false,
+                 timeout: 3000,
+                 success: function (data) {
+                     	console.log(data);
+                	 	var success = document.createElement("span");
+                	 	$(success).text("Utente aggiunto con successo!")
+                	 	$("#showForm").empty();
+                	    $("#showForm").append(success);
+
+                 },
+                
+             });
+         }
+     }
 	 xhttp.open("GET", "ControllerUtente?op=" + 2 + urlString, true);
      xhttp.send();
 	  
@@ -316,6 +333,7 @@ function addTable() {
 }
 
 function getAllFieldTable(){
+	
 	var userField = $("#addTable").serializeArray();
 	 var urlString="";
 
@@ -327,7 +345,24 @@ function getAllFieldTable(){
 	 });
 	 
 	 var xhttp = new XMLHttpRequest();
-	 
+	 xhttp.onreadystatechange = function () {
+         if(xhttp.readyState == 4 && xhttp.status == 200) {
+
+             $.ajax({
+                 cache: false,
+                 timeout: 3000,
+                 success: function (data) {
+                     	console.log(data);
+                	 	var success = document.createElement("span");
+                	 	$(success).text("Piatto aggiunto con successo!")
+                	 	$("#showForm").empty();
+                	    $("#showForm").append(success);
+
+                 },
+                
+             });
+         }
+     }
 	 xhttp.open("GET", "ControllerTavolo?op=" + 2 + urlString, true);
      xhttp.send();
 	  

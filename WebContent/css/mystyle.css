@@ -5,3 +5,10 @@
 .btn-login{
 	width: 100%; 
 }
+
+.login-form{
+	border: 1px solid grey;
+	padding-top:1em;
+	padding-bottom:1em;
+	border-radius: 3em;
+}
