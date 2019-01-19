@@ -9,6 +9,19 @@ public class BeanOrdinazione {
 	private ArrayList<BeanPiatto> listaPiatti;
 	private Timestamp dataOrdine;
 	
+	public BeanOrdinazione() {
+		this.numeroOrdinazione = 0;
+		listaPiatti = new ArrayList<BeanPiatto>();
+		dataOrdine = null;
+	}
+
+	public BeanOrdinazione(Integer numeroOrdinazione, ArrayList<BeanPiatto> listaPiatti, Timestamp dataOrdine) {
+		super();
+		this.numeroOrdinazione = numeroOrdinazione;
+		listaPiatti = new ArrayList<BeanPiatto>();
+		this.dataOrdine = dataOrdine;
+	}
+	
 	public Integer getNumeroOrdinazione() {
 		return numeroOrdinazione;
 	}

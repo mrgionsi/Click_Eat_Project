@@ -9,17 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import manager.ManagerTavolo;
-import model.BeanTavolo;
+import manager.ManagerPiatto;
+import model.BeanPiatto;
 
-@WebServlet("/ControllerTavolo")
-public class ControllerTavolo extends HttpServlet {
+
+@WebServlet("/ControllerPiatto")
+public class ControllerPiatto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String SAVE_DIR = "jsonfiles/";
- 
-    public ControllerTavolo() {
+       
+    public ControllerPiatto() {
         super();
     }
 
@@ -30,16 +32,16 @@ public class ControllerTavolo extends HttpServlet {
 		if(toGet.equalsIgnoreCase("1")){
 			
 			System.out.println("-----------------------");
-			System.out.println("Inizio metodo: doGet - Servlet: ControllerTavolo");
+			System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
 			System.out.println("-----------------------");
 
-			ManagerTavolo tavolo = new ManagerTavolo();
+			ManagerPiatto piatto = new ManagerPiatto();
 
-			ArrayList<BeanTavolo> listaTavoli = tavolo.ottieniTavoli() ;
+			ArrayList<BeanPiatto> listaPiatti = piatto.ottieniListaPiatti();
 			String appPath = request.getServletContext().getRealPath("");
 			String savePath = appPath + File.separator + SAVE_DIR;
 
-			File f = new File(savePath +  "listaTavoli.json");
+			File f = new File(savePath +  "listaPiatti.json");
 			if(f.exists() && !f.isDirectory()) { 
 				System.out.println("Esiste");
 				f.delete();
@@ -56,7 +58,7 @@ public class ControllerTavolo extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 
 
-			mapper.writeValue(f, listaTavoli);
+			mapper.writeValue(f, listaPiatti);
 
 
 			System.out.println("-----------------------");
@@ -64,6 +66,7 @@ public class ControllerTavolo extends HttpServlet {
 			System.out.println("-----------------------");
 		}
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
