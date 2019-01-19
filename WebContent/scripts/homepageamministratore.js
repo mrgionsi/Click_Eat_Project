@@ -242,7 +242,7 @@ function addUser() {
 				  </div>
 				  <div class="form-group">
 				    <label for="userId">Username </label>
-				    <input type="text" class="form-control" name="idLogin" aria-describedby="userIdHelp" placeholder="Inserisci lo username">
+				    <input type="text" class="form-control" name="userId" aria-describedby="userIdHelp" placeholder="Inserisci lo username">
 				  </div>
 				  <div class="form-group">
 				    <label for="passwordUtente">Password </label>
