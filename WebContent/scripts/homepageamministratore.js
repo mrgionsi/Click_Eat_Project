@@ -67,7 +67,7 @@ function loadTables() {
             }
         }
 
-        xhttp.open("GET", "ControllerTavolo?op" + 1 , true);
+        xhttp.open("GET", "ControllerTavolo?op=" + 1 , true);
         xhttp.send();
     });
 }
@@ -226,15 +226,15 @@ function addUser() {
 	
     $("#showForm").append().html(newForm);
 
-	newForm = `<form action="/nonmaven_ClickEat/ControllerUtente" method="GET">
+	newForm = `<form id="addUser" >
 				<input type="hidden" name="op" value="2" /> 
 				  <div class="form-group">
 				    <label for="nomeUtente">Nome </label>
-				    <input type="text" class="form-control" name="nomeUtente" aria-describedby="nomeUtenteHelp" placeholder="Inserisci il nome">
+				    <input type="text" class="form-control" id="nomeUtente" name="nomeUtente" aria-describedby="nomeUtenteHelp" placeholder="Inserisci il nome">
 				  </div>
 				  <div class="form-group">
 				    <label for="cognomeUtente">Cognome </label>
-				    <input type="text" class="form-control" name="cognomeUtente" aria-describedby="cognomeUtenteHelp" placeholder="Inserisci il cognome">
+				    <input type="text" class="form-control" id="cognomeUtente" name="cognomeUtente" aria-describedby="cognomeUtenteHelp" placeholder="Inserisci il cognome">
 				  </div>
 				  <div class="form-group">
 				    <label for="ruoloUtente">Ruolo </label>
@@ -248,11 +248,37 @@ function addUser() {
 				    <label for="passwordUtente">Password </label>
 				    <input type="text" class="form-control" name="passwordUtente" aria-describedby="passwordUtenteHelp" placeholder="Inserisci la password">
 				  </div>
-				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-				</form>`;
+				  <div type="button" class="btn btn-primary btn-lg" id="btn-adduser" >Submit</div>
+				</div>`;
+	
     $("#showForm").append().html(newForm);
-
+    
+	$("#btn-adduser").click(function() {
+		getAllFieldUser();
+	});
 }
+
+function getAllFieldUser(){
+	var userField = $("#addUser").serializeArray();
+	 var urlString="";
+
+	 
+	 userField.forEach(element =>{
+		 
+		 urlString+="&"+element.name + "=" + element.value;
+	 });
+	 
+	 var xhttp = new XMLHttpRequest();
+	 
+	 xhttp.open("GET", "ControllerUtente?op=" + 2 + urlString, true);
+     xhttp.send();
+	 
+	 
+	 
+	 
+}
+
+
 
 function addTable() {
 	var newForm = "";
@@ -295,7 +321,6 @@ function addPlate() {
 				  </div>
 				  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
 				</form>`;
-//	hello
     $("#showForm").append().html(newForm);
 
 }
