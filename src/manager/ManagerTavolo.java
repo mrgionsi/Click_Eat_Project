@@ -323,4 +323,42 @@ public class ManagerTavolo {
 		}
 		return null;
 	}
+	
+	public synchronized Integer getOrdinazioneDiTavolo(Integer numeroTavolo) {
+		
+		Connection conn =  null;
+		PreparedStatement ps = null;
+		Integer numeroOrdine = 0;
+
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("SELECT numeroOrdinazione FROM Tavolo WHERE numeroTavolo = ?");
+			ps = conn.prepareStatement(sqlString);
+
+			ps.setInt(1,numeroTavolo);
+
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				rs.getInt("numeroOrdinazione");
+				return numeroOrdine;
+			}
+
+		}
+		catch(SQLException e){
+				e.printStackTrace(); 
+		}
+		finally {
+			try {
+				
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+		
+	}
 }
