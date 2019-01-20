@@ -15,7 +15,7 @@ public class BeanOrdinazione {
 		dataOrdine = null;
 	}
 
-	public BeanOrdinazione(Integer numeroOrdinazione, ArrayList<BeanPiatto> listaPiatti, Timestamp dataOrdine) {
+	public BeanOrdinazione(Integer numeroOrdinazione, Timestamp dataOrdine) {
 		super();
 		this.numeroOrdinazione = numeroOrdinazione;
 		listaPiatti = new ArrayList<BeanPiatto>();
