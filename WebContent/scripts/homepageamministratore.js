@@ -585,9 +585,9 @@ function getAllFieldPlate() {
 	 userField.forEach(element =>{
 		 
 		 urlString+="&"+element.name + "=" + element.value;
-		 console.log(urlString);
 	 });
-	 
+	 console.log(urlString);
+
 	 var xhttp = new XMLHttpRequest();
 	 xhttp.onreadystatechange = function () {
         if(xhttp.readyState == 4 && xhttp.status == 200) {

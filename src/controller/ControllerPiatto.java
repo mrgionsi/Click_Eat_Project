@@ -86,20 +86,42 @@ public class ControllerPiatto extends HttpServlet {
 			String prezzo = request.getParameter("prezzoPiatto");
 			Float prezzoPiatto = Float.parseFloat(prezzo);
 			
-			ArrayList<String> parts = (ArrayList<String>) Arrays.asList(ingredienti.split(","));
-			for(String s: parts){
-				ingrediente = ingredienteManager.creaIngrediente(s);
+			String[] parts = ingredienti.split(",");
+			
+			int i = 0;
+			while(i<parts.length) {
+				System.out.println("Aggiungendo al db " + parts[i]);
+				ingrediente = ingredienteManager.creaIngrediente(parts[i]);
 				listaIngredienti.add(ingrediente);
+				System.out.println(listaIngredienti.get(i).getNomeIngrediente());
+
+				i++;
 			}
 			
 			piatto = piattoManager.creaPiatto(nomePiatto, prezzoPiatto, categoriaPiatto);
-			piatto.setListaIngredienti(listaIngredienti);
 			
-			piattoManager.inserisciIngredientiNelPiatto(piatto);
+			if(piatto!=null) {
+				System.out.println("Piatto non nullo");
+				System.out.println(piatto.getCategoriaPiatto());
+				System.out.println(piatto.getNomePiatto());
+				System.out.println(piatto.getPrezzoPiatto());
+				System.out.println("Setto in locale la lista di ingredeienti");
+
+				piatto.setListaIngredienti(listaIngredienti);
+				
+
+
+			}
+			
+			if(piatto.getListaIngredienti()!=null){
+				System.out.println("Lista ingredienti non nullo");
+
+				piattoManager.inserisciIngredientiNelPiatto(piatto);
+			}
 			
 
 			System.out.println("-----------------------");
-			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
+			System.out.println("Fine Servlet: ControllerPiatto");
 			System.out.println("-----------------------");
 		}
 	}

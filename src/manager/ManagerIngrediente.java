@@ -20,36 +20,44 @@ public class ManagerIngrediente {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))");
+			//String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))"); parentesi in più che rompeva le palle
+			//																						e restituiva sempre ingrediente nullo
+			//																						visto che non inseriva nulla nel db
+			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES (?)");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setString(1, nomeIngrediente);
 
-			int value = ps.executeUpdate();
-			int idIngrediente = ps.getResultSet().getInt("idLogin");
-
-			if(value != 0) {
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
+			int value = ps.executeUpdate(); // non vorrei sbagliarmi ma dalla documentazione ho letto che
+			//									questo non restituisce nulla quindi non puoi prendere l'id dell'ingrediente
+				
+			//int idIngrediente = ps.getResultSet().getInt("idLogin"); inolte prendevi idLogin e non idIngrediente
+					
+			if(value != 0 ) {
 				System.out.println("Ingrediente aggiunto con successo nel Database");
-
-				return ingrediente;
+				
 			}
+			
+
+			
 		}
 		catch(SQLException e){
 			if(e.getErrorCode() == 1062) {
+				System.out.println("Ingrediente già esiste nel Database");
 				e.printStackTrace();
 			}
 
 		}
 		finally {
 			try {
-				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
+				return ricercaPerNome(nomeIngrediente);
 			}
 			catch(Exception e2) {
 				e2.printStackTrace();
 			}
+			
 		}
 		return null;
 
@@ -169,5 +177,54 @@ public class ManagerIngrediente {
 		}
 		return null;
 	}
+
+/*metodo che ricerca nella tabella Ingrediente un Ingrediente con il nome specificato e ritorna il Bean relativo ad esso*/
+	public synchronized BeanIngrediente ricercaPerNome(String nomeIngrediente) {
+		Connection conn =  null;
+		PreparedStatement ps = null;
 	
-}
+		//Ho creato un nuovo metodo per avere una funzione in più e non impasticciare troppo la prima funzione "creaUtente"
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("SELECT idIngrediente FROM Ingrediente WHERE nomeIngrediente = ?");
+			ps = conn.prepareStatement(sqlString);
+			ps.setString(1, nomeIngrediente);
+	
+			ResultSet res = ps.executeQuery();
+
+			int  idIngrediente = 0;// infatti questo era sempre null e quindi è null pure
+	//																		la creazione dell'ingrediente
+	
+			while(res.next()) {
+				idIngrediente = res.getInt("idIngrediente");
+			}
+	
+	
+	
+			if(idIngrediente != 0) {
+				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
+				System.out.println("Ingrediente ottenuto con successo dal Database");
+	
+				return ingrediente;
+			}
+		}
+		catch(SQLException e){
+				e.printStackTrace(); 
+	
+		}
+		finally {
+			try {
+				
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	}
+
+
