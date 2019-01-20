@@ -223,8 +223,11 @@ function loadPlates() {
 
 function addUser() {
 	
+    $("#showForm").empty();
+    $("#addUser").empty;
+
+    addUser
 	var newForm = "";
-	$("#showForm").append(newForm);
 
 	
 	newForm = document.createElement("form");
@@ -392,6 +395,10 @@ function getAllFieldUser(){
 
 
 function addTable() {
+	
+    $("#showForm").empty();
+
+
 	var newForm = document.createElement("form");
 	$(newForm).attr("id", "addTable");
 	
@@ -466,6 +473,10 @@ function getAllFieldTable(){
 }
 
 function addPlate() {
+	
+    $("#showForm").empty();
+
+
 	var newForm = "";
 	
 	newForm = document.createElement("form");
@@ -597,6 +608,8 @@ function getAllFieldPlate() {
                 timeout: 3000,
                 success: function (data) {
                     	console.log(data);
+                   	 	$("#showForm").empty();
+
                	 	var success = document.createElement("span");
                	 	$(success).text("Piatto aggiunto con successo!")
                	 	$("#showForm").empty();
