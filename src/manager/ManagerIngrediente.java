@@ -12,7 +12,6 @@ import model.BeanIngrediente;
 
 public class ManagerIngrediente {
 	
-	private ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente> ();//lista di ingredienti
 	
 	public synchronized BeanIngrediente creaIngrediente(String nomeIngrediente) {
 		Connection conn =  null;
@@ -20,7 +19,7 @@ public class ManagerIngrediente {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			//String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))"); parentesi in più che rompeva le palle
+			//String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))"); parentesi in piï¿½ che rompeva le palle
 			//																						e restituiva sempre ingrediente nullo
 			//																						visto che non inseriva nulla nel db
 			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES (?)");
@@ -43,7 +42,7 @@ public class ManagerIngrediente {
 		}
 		catch(SQLException e){
 			if(e.getErrorCode() == 1062) {
-				System.out.println("Ingrediente già esiste nel Database");
+				System.out.println("Ingrediente giï¿½ esiste nel Database");
 				e.printStackTrace();
 			}
 
@@ -101,7 +100,7 @@ public class ManagerIngrediente {
 	public synchronized ArrayList<BeanIngrediente> ottieniListaIngredienti(){
 		Connection conn =  null;
 		PreparedStatement ps = null;
-
+		ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente> ();//lista di ingredienti
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("SELECT * FROM Ingrediente");
@@ -144,22 +143,20 @@ public class ManagerIngrediente {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("SELECT * FROM Ingrediente WHERE idIngrediente = ?");
+			String sqlString = new String("SELECT nomeIngrediente FROM Ingrediente WHERE idIngrediente = ?");
 			ps = conn.prepareStatement(sqlString);
 			
 			ps.setInt(1, idIngrediente);
 
 			ResultSet res = ps.executeQuery();
 			
-			while(res.next()) {
-				String nomeIngrediente = res.getString("nomeIngrediente");
-				
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
-				Integer indice = listaIngredienti.indexOf(ingrediente);
-				ingrediente = listaIngredienti.get(indice);
-				
-				return ingrediente;
+			String nomeIngrediente = null;
+			
+			if(res.next()) {
+				nomeIngrediente = res.getString("nomeIngrediente");
 			}
+			
+			return new BeanIngrediente(idIngrediente, nomeIngrediente);
 		}
 		catch(SQLException e){
 				e.printStackTrace(); 
@@ -183,7 +180,7 @@ public class ManagerIngrediente {
 		Connection conn =  null;
 		PreparedStatement ps = null;
 	
-		//Ho creato un nuovo metodo per avere una funzione in più e non impasticciare troppo la prima funzione "creaUtente"
+		//Ho creato un nuovo metodo per avere una funzione in piï¿½ e non impasticciare troppo la prima funzione "creaUtente"
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("SELECT idIngrediente FROM Ingrediente WHERE nomeIngrediente = ?");
@@ -192,7 +189,7 @@ public class ManagerIngrediente {
 	
 			ResultSet res = ps.executeQuery();
 
-			int  idIngrediente = 0;// infatti questo era sempre null e quindi è null pure
+			int  idIngrediente = 0;// infatti questo era sempre null e quindi ï¿½ null pure
 	//																		la creazione dell'ingrediente
 	
 			while(res.next()) {
