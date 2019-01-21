@@ -1,18 +1,30 @@
+function wait(ms)
+{
+var d = new Date();
+var d2 = null;
+do { d2 = new Date(); }
+while(d2-d < ms);
+}
+
 function loadTables() {
     $(document).ready(function(){
         var tables = null;
         var xhttp = new XMLHttpRequest();
         
-        var newForm = "";
-    	
-        $("#showForm").append().html(newForm);
+    	$("#canChange").empty();
+        $("#showForm").empty();
         
-        var toAppend = "";
 
-        toAppend='<div class="spinner-border text-primary" role="status">\
-	  				<span class="sr-only">Loading...</span>\
-	  				</div>';
-        $("#canChange").append().html(toAppend);
+        var newSpinner = document.createElement("div");
+        $(newSpinner).addClass("spinner-border text-primary");
+        $(newSpinner).attr("role", "status");
+        
+        var newSpan = document.createElement("span");
+        $(newSpan).addClass("sr-only");
+        $(newSpan).text("Loading...")
+        
+        $(newSpinner).append(newSpan);
+        $("#canChange").append(newSpinner);
 
         xhttp.onreadystatechange = function () {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
@@ -22,11 +34,14 @@ function loadTables() {
                     dataType: "json",
                     timeout: 3000,
                     error: function(){
-                    	toAppend = "";
-                        $("#canChange").append().html(toAppend);
+                    	$("#canChange").empty();
                         
-                    	toAppend = '<p><h4>Non è stato possibile ottenere i dati</h4></p>';
-                        $("#canChange").append().html(toAppend);
+                        var newPar = document.createElement("p");
+                        $(newPar).addClass("h4");
+                        $(newPar).text("Non è stato possibile ottenere i dati")
+                        
+                        
+                        $("#canChange").append(newPar);
                         },
                     success: function (tables) {
                         toAppend = "";
@@ -42,8 +57,8 @@ function loadTables() {
                         	} else {
 		                        while(i < tables.length ){
 		
-		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" type="checkbox" value="' + tables[i].numeroTavolo + '" id="table_'+ tables[i].numeroTavolo +'">\
+		                            var checkbox = '<form><div class="form-check" id="tableList">\
+		                            				<input class="form-check-input" type="radio" name="tableList" value="' + tables[i].numeroTavolo + '" id="table_'+ tables[i].numeroTavolo +'">\
 		                            				<label class="form-check-label" for="table_'+ tables[i].numeroTavolo +'">\
 		                            				Tavolo '+ tables[i].numeroTavolo +'\
 		                            				</label>\
@@ -54,12 +69,16 @@ function loadTables() {
 		                            i++;
 		                        }
 		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
+		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deletetables">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
 		                        
 		                        $("#canChange").append().html(toAppend);
+		                        
+		                        $("#btn-deletetables").click(function() {
+		                    		deleteTables();
+		                    	});
 		                       }
                     },
                     url: 'jsonfiles/listaTavoli.json',
@@ -77,16 +96,21 @@ function loadUsers() {
         var users = null;
         var xhttp = new XMLHttpRequest();
         
-        var newForm = "";
-    	
-        $("#showForm").append().html(newForm);
+        $("#canChange").empty();
+        $("#showForm").empty();
         
-        var toAppend = "";
 
-        toAppend='<div class="spinner-border text-primary" role="status">\
-        	  		<span class="sr-only">Loading...</span>\
-        	  		</div>';
-        $("#canChange").append().html(toAppend);
+        var newSpinner = document.createElement("div");
+        $(newSpinner).addClass("spinner-border text-primary");
+        $(newSpinner).attr("role", "status");
+        
+        var newSpan = document.createElement("span");
+        $(newSpan).addClass("sr-only");
+        $(newSpan).text("Loading...")
+        
+        $(newSpinner).append(newSpan);
+        
+        $("#canChange").append(newSpinner);
 
         xhttp.onreadystatechange = function () {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
@@ -96,11 +120,13 @@ function loadUsers() {
                     dataType: "json",
                     timeout: 3000,
                     error: function(){
-                    	toAppend = "";
-                        $("#canChange").append().html(toAppend);
+                    	$("#canChange").empty();
                         
-                    	toAppend = '<p><h4>Non è stato possibile ottenere i dati</h4></p>';
-                        $("#canChange").append().html(toAppend);
+                        var newPar = document.createElement("p");
+                        $(newPar).addClass("h4");
+                        $(newPar).text("Non è stato possibile ottenere i dati")
+                        $("#canChange").append(newPar);
+                        
                         },
                     success: function (users) {
                         toAppend = "";
@@ -116,7 +142,7 @@ function loadUsers() {
                         
 		                        while(i < users.length ){
 		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" type="checkbox" value="' + users[i].idUtente + '" id="user_'+ users[i].idUtente +'">\
+		                            				<input class="form-check-input" name="usersList" type="radio" value="' + users[i].idUtente + '" id="user_'+ users[i].idUtente +'">\
 		                            				<label class="form-check-label" for="user_'+ users[i].idUtente +'">\
 		                            				'+ users[i].nomeUtente +' '+ users[i].cognomeUtente +' | Ruolo: '+ users[i].ruoloUtente +'\
 		                            				</label>\
@@ -127,12 +153,16 @@ function loadUsers() {
 		                            i++;
 		                        }
 		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
+		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteusers">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
 		                        
 		                        $("#canChange").append().html(toAppend);
+		                        
+		                        $("#btn-deleteusers").click(function() {
+		                        	deleteUsers();
+		                    	});
                         }
                     },
                     url: 'jsonfiles/listaUtenti.json',
@@ -151,15 +181,22 @@ function loadPlates() {
         var xhttp = new XMLHttpRequest();
         
         var newForm = "";
-    	
-        $("#showForm").append().html(newForm);
         
-        var toAppend = "";
+    	$("#canChange").empty();
+        $("#showForm").empty();
+        
 
-        toAppend='<div class="spinner-border text-primary" role="status">\
-        	  		<span class="sr-only">Loading...</span>\
-        	  		</div>';
-        $("#canChange").append().html(toAppend);
+        var newSpinner = document.createElement("div");
+        $(newSpinner).addClass("spinner-border text-primary");
+        $(newSpinner).attr("role", "status");
+        
+        var newSpan = document.createElement("span");
+        $(newSpan).addClass("sr-only");
+        $(newSpan).text("Loading...")
+        
+        $(newSpinner).append(newSpan);
+        
+        $("#canChange").append(newSpinner);
 
         xhttp.onreadystatechange = function () {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
@@ -171,11 +208,15 @@ function loadPlates() {
                     error: function(){
                    
                     	
-                    		toAppend = "";
-                            $("#canChange").append().html(toAppend);
+                    		
+                            $("#canChange").empty();
                             
-                            toAppend = '<p><h4>Non è stato possibile ottenere i dati</h4></p>';
-                            $("#canChange").append().html(toAppend);
+                            var newPar = document.createElement("p");
+                            $(newPar).addClass("h4");
+                            $(newPar).text("Non è stato possibile ottenere i dati")
+                            
+                            
+                            $("#canChange").append(newPar);
                     	
  	
                     },
@@ -193,7 +234,7 @@ function loadPlates() {
                         
 		                        while(i < plates.length ){
 		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" type="checkbox" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
+		                            				<input class="form-check-input" name="platesList" type="radio" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
 		                            				<label class="form-check-label" for="plate_'+ plates[i].idPiatto +'">\
 		                            				'+ plates[i].nomePiatto +' | '+ plates[i].prezzoPiatto + '&euro;' + '\
 		                            				</label>\
@@ -204,12 +245,16 @@ function loadPlates() {
 		                            i++;
 		                        }
 		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
+		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteplates">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
 		                        
 		                        $("#canChange").append().html(toAppend);
+		                        
+		                        $("#btn-deleteplates").click(function() {
+		                    		deletePlates();
+		                    	});
                         }
                     },
                     url: 'jsonfiles/listaPiatti.json',
@@ -223,8 +268,11 @@ function loadPlates() {
 
 function addUser() {
 	
+	$("#canChange").empty();
+    $("#showForm").empty();
+
+    addUser
 	var newForm = "";
-	$("#showForm").append(newForm);
 
 	
 	newForm = document.createElement("form");
@@ -372,8 +420,7 @@ function getAllFieldUser(){
              $.ajax({
                  cache: false,
                  timeout: 3000,
-                 success: function (data) {
-                     	console.log(data);
+                 success: function () {
                 	 	var success = document.createElement("span");
                 	 	$(success).text("Utente aggiunto con successo!")
                 	 	$("#showForm").empty();
@@ -392,6 +439,10 @@ function getAllFieldUser(){
 
 
 function addTable() {
+	$("#canChange").empty();
+    $("#showForm").empty();
+
+
 	var newForm = document.createElement("form");
 	$(newForm).attr("id", "addTable");
 	
@@ -426,6 +477,7 @@ function addTable() {
     $("#btn-addtable").click(function() {
 		getAllFieldTable();
 	});
+    
 
 }
 
@@ -448,13 +500,11 @@ function getAllFieldTable(){
              $.ajax({
                  cache: false,
                  timeout: 3000,
-                 success: function (data) {
-                     	console.log(data);
+                 success: function () {
                 	 	var success = document.createElement("span");
                 	 	$(success).text("Tavolo aggiunto con successo!")
                 	 	$("#showForm").empty();
                 	    $("#showForm").append(success);
-
                  },
                 
              });
@@ -466,6 +516,11 @@ function getAllFieldTable(){
 }
 
 function addPlate() {
+	
+	$("#canChange").empty();
+    $("#showForm").empty();
+
+
 	var newForm = "";
 	
 	newForm = document.createElement("form");
@@ -579,7 +634,7 @@ function addPlate() {
 function getAllFieldPlate() {
 	
 	var userField = $("#addPlate").serializeArray();
-	 var urlString="";
+	var urlString="";
 
 	 
 	 userField.forEach(element =>{
@@ -595,8 +650,9 @@ function getAllFieldPlate() {
             $.ajax({
                 cache: false,
                 timeout: 3000,
-                success: function (data) {
-                    	console.log(data);
+                success: function () {
+                   	 	$("#showForm").empty();
+
                	 	var success = document.createElement("span");
                	 	$(success).text("Piatto aggiunto con successo!")
                	 	$("#showForm").empty();
@@ -610,3 +666,140 @@ function getAllFieldPlate() {
 	 xhttp.open("GET", "ControllerPiatto?op=" + 2 + urlString, true);
     xhttp.send();
 }
+
+function deleteTables() {
+		
+	console.log("delete chiamata");
+	
+	var xhttp = new XMLHttpRequest();
+
+	var inputElements = document.getElementsByName('tableList');
+	for(var i=0; inputElements[i]; ++i){
+	      if(inputElements[i].checked){
+	    	  
+	    	var urlString="";
+
+	  		urlString+="&numeroTavolo" + "=" + inputElements[i].value;
+	  		
+	  		console.log(urlString)
+	  		
+	  		
+	  		xhttp.onreadystatechange = function () {
+	  			if(xhttp.readyState == 4 && xhttp.status == 200) {
+	  	        	
+	  				$.ajax({
+	  	                cache: false,
+	  	                timeout: 3000,
+	  	                success: function () {
+	  	                   	 	$("#showForm").empty();
+
+	  	               	 	var success = document.createElement("span");
+	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
+	  	               	 	$("#showForm").empty();
+	  	               	    $("#showForm").append(success);
+
+	  	                },
+	  	               
+	  	            });
+	  	        }
+	  		}
+	  	        
+	  			
+	  		xhttp.open("GET", "ControllerTavolo?op=" + 3 + urlString, true);
+	  		xhttp.send();
+	      }
+	}
+	
+
+}
+
+function deleteUsers() {
+	
+	console.log("delete chiamata");
+	
+	var xhttp = new XMLHttpRequest();
+
+	var inputElements = document.getElementsByName('usersList');
+	for(var i=0; inputElements[i]; ++i){
+	      if(inputElements[i].checked){
+	    	  
+	    	var urlString="";
+
+	  		urlString+="&idUtente" + "=" + inputElements[i].value;
+	  		
+	  		console.log(urlString)
+	  		
+	  		
+	  		xhttp.onreadystatechange = function () {
+	  			if(xhttp.readyState == 4 && xhttp.status == 200) {
+	  	        	
+	  				$.ajax({
+	  	                cache: false,
+	  	                timeout: 3000,
+	  	                success: function () {
+	  	                   	 	$("#showForm").empty();
+
+	  	               	 	var success = document.createElement("span");
+	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
+	  	               	 	$("#showForm").empty();
+	  	               	    $("#showForm").append(success);
+
+	  	                },
+	  	               
+	  	            });
+	  	        }
+	  		}
+	  	        
+	  			
+	  		xhttp.open("GET", "ControllerUtente?op=" + 3 + urlString, true);
+	  		xhttp.send();
+	      }
+	}
+	
+
+}
+
+function deletePlates() {
+	
+	console.log("delete chiamata");
+	
+	var xhttp = new XMLHttpRequest();
+
+	var inputElements = document.getElementsByName('platesList');
+	for(var i=0; inputElements[i]; ++i){
+	      if(inputElements[i].checked){
+	    	  
+	    	var urlString="";
+
+	  		urlString+="&idPiatto" + "=" + inputElements[i].value;
+	  		
+	  		console.log(urlString)
+	  		
+	  		
+	  		xhttp.onreadystatechange = function () {
+	  			if(xhttp.readyState == 4 && xhttp.status == 200) {
+	  	        	
+	  				$.ajax({
+	  	                cache: false,
+	  	                timeout: 3000,
+	  	                success: function () {
+	  	                   	 	$("#showForm").empty();
+
+	  	               	 	var success = document.createElement("span");
+	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
+	  	               	 	$("#showForm").empty();
+	  	               	    $("#showForm").append(success);
+
+	  	                },
+	  	               
+	  	            });
+	  	        }
+	  		}
+	  	        
+	  			
+	  		xhttp.open("GET", "ControllerPiatto?op=" + 3 + urlString, true);
+	  		xhttp.send();
+	      }
+	}
+}
+

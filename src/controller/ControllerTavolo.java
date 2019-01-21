@@ -98,6 +98,24 @@ public class ControllerTavolo extends HttpServlet {
 			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
 			System.out.println("-----------------------");
 		}
+		
+		if(toGet.equalsIgnoreCase("3")) {
+			
+			Integer numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
+			System.out.println("Cancella tavolo #: " + numeroTavolo);
+
+			try {
+				ManagerTavolo tavoloManager = new ManagerTavolo();
+				if(tavoloManager.eliminaTavolo(numeroTavolo))
+					System.out.println("tavolo eliminato");
+
+			}catch(Exception e) {
+				request.setAttribute("exception", e);
+				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire
+				rq3.forward(request, response);
+			}
+			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -38,7 +38,10 @@ public class ManagerPiatto {
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
 				
+				System.out.println(idPiatto);
+				
 				BeanPiatto piatto = new BeanPiatto(nomePiatto,categoriaPiatto,prezzoPiatto);
+				piatto.setIdPiatto(idPiatto);
 				listaIngredienti.addAll( ingredientiNelPiatto(idPiatto)) ; //probabile errore
 				piatto.setListaIngredienti(listaIngredienti);
 				listaPiatti.add(piatto);
@@ -250,4 +253,40 @@ public synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
 	}
 	return null;
 }
+
+public synchronized Boolean eliminaPiatto(Integer i){
+		Connection conn =  null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("DELETE FROM Piatto WHERE idPiatto = ?");
+			ps = conn.prepareStatement(sqlString);
+
+			
+			ps.setInt(1, i);
+
+			int value = ps.executeUpdate();
+
+			if(value != 0) {
+				System.out.println("Piatto eliminato con successo");
+				return true;
+			}
+		}
+		catch(SQLException e){
+				e.printStackTrace(); 
+
+		}
+		finally {
+			try {
+	
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
 }
