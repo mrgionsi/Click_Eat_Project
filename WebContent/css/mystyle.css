@@ -12,3 +12,16 @@
 	padding-bottom:1em;
 	border-radius: 3em;
 }
+
+.img-start{
+ min-height: 45em;;
+     background-image: url(../contents/images/unisa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;	
+}
+
+.blacktrasparent{
+	min-height: 45em;
+    background: rgba(26,26,26,0.4);
+    overflow-x:hidden;
+}
