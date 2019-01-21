@@ -33,24 +33,24 @@ function callApi(apiName){
 		"passwordUtente":pwd},
 		function(data)
 		{
-			console.log(data);
-			if(data == "true"){
+			console.log(typeof data);
+			if(data.toString() == "true"){
 				// similar behavior as clicking on a link
 				window.location.href = "./homepage.jsp";
 			}else{
-				if($(".row-error"))
+				if($(".row-error").length > 0 )
 				{
-					$(".row-error").remove();
 				}
 				else
-				{console.log("Error");
-				var div = document.createElement("div");
-				$(div).addClass("row text-center row-error");
-				var texterror = document.createElement("span");
-				$(texterror).addClass("error col-12 text-center");
-				$(texterror).text("Errore username e/o password");
-				$(div).append(texterror);
-				$(".login-form").append(div);
+				{
+					console.log("Error");
+					var div = document.createElement("div");
+					$(div).addClass("row text-center row-error");
+					var texterror = document.createElement("span");
+					$(texterror).addClass("error col-12 text-center");
+					$(texterror).text("Errore username e/o password");
+					$(div).append(texterror);
+					$(".login-form").append(div);
 				}
 			}
 		}).fail(function(data){
