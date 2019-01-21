@@ -38,7 +38,10 @@ public class ManagerPiatto {
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
 				
+				System.out.println(idPiatto);
+				
 				BeanPiatto piatto = new BeanPiatto(nomePiatto,categoriaPiatto,prezzoPiatto);
+				piatto.setIdPiatto(idPiatto);
 				listaIngredienti.addAll( ingredientiNelPiatto(idPiatto)) ; //probabile errore
 				piatto.setListaIngredienti(listaIngredienti);
 				listaPiatti.add(piatto);
