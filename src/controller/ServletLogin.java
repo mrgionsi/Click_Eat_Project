@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,8 +33,7 @@ public class ServletLogin extends HttpServlet {
 		String passwordUtente = request.getParameter("passwordUtente");
 		BeanUtente utente = null;
 		RequestDispatcher rq = null;
-		String redirectPage = "";
-		
+		PrintWriter out = response.getWriter();
 		System.out.println("idlogin     " + idLogin);
 		try {	
 			ManagerUtente utenteManager = new ManagerUtente();
@@ -44,8 +44,9 @@ public class ServletLogin extends HttpServlet {
 				rq = request.getRequestDispatcher(""); //jsp da inserire
 				rq.forward(request, response);
 				*/
-	    		redirectPage = "/login.jsp";
+	    		request.getSession().setAttribute("adminRoles",false);
 
+				out.print(false);
 			}
 			else {
 				/*switch(utente.getRuoloUtente().toLowerCase()) {
@@ -63,24 +64,24 @@ public class ServletLogin extends HttpServlet {
 					break;
 				}
 				*/
-				Cookie cookie = new Cookie("username",utente.getNomeUtente());
+				Cookie cookie = new Cookie("username",utente.getIdLogin());
 	        	Cookie cookierole = new Cookie("role",utente.getRuoloUtente());
 	        	System.out.println(cookie);
 	        	cookie.setMaxAge(3600);
 	        	cookierole.setMaxAge(3600);
-	        	
+	    		request.getSession().setAttribute("adminRoles",true);
+
 	    		response.addCookie(cookie);
 	    		response.addCookie(cookierole);
-	    		redirectPage = "/homepage.jsp";
+	    		out.print(true);
 			}
 		}catch(Exception e){
-    		redirectPage = "/login.jsp";
+    		request.getSession().setAttribute("adminRoles",false);
 
-		}finally {
-				response.getWriter().print(redirectPage);
-				response.sendRedirect(request.getContextPath() + redirectPage);
+			out.print(false);
+
 		}
-		return;
+	
 	}
 
 }

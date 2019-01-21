@@ -23,7 +23,7 @@
 }
 
 .blacktrasparent{
-	min-height: 45em;
+	min-height: 56em;
     background: rgba(26,26,26,0.4);
     overflow-y: hidden;
     overflow-x: hidden;
@@ -42,3 +42,7 @@
 	width:100%;
 }
 
+.error{
+	color: red;
+	text-align: center;
+}

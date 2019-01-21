@@ -147,6 +147,7 @@ public class ManagerUtente {
 
 		Connection conn = null;
 		PreparedStatement ps = null;
+		System.out.println("SONO NEL TRY DI MANAGER UTENTE");
 
 		try {
 			conn = ConnectionPool.getConnection();
