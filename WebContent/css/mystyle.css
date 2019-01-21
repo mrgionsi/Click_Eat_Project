@@ -23,5 +23,6 @@
 .blacktrasparent{
 	min-height: 45em;
     background: rgba(26,26,26,0.4);
-    overflow-x:hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
