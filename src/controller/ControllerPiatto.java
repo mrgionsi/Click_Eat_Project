@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import manager.ManagerIngrediente;
 import manager.ManagerPiatto;
+import manager.ManagerUtente;
+import model.BeanIngrediente;
 import model.BeanPiatto;
 
 
@@ -64,6 +68,77 @@ public class ControllerPiatto extends HttpServlet {
 			System.out.println("-----------------------");
 			System.out.println("Fine metodo: doGet - Servlet: ControllerTavolo");
 			System.out.println("-----------------------");
+		}
+		else if(toGet.equalsIgnoreCase("2")) {
+			
+			System.out.println("-----------------------");
+			System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
+			System.out.println("-----------------------");
+			
+			BeanPiatto piatto = new BeanPiatto();
+			BeanIngrediente ingrediente = new BeanIngrediente();
+			ManagerPiatto piattoManager = new ManagerPiatto();
+			ManagerIngrediente ingredienteManager = new ManagerIngrediente();
+			ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
+			
+			String nomePiatto = request.getParameter("nomePiatto");
+			String categoriaPiatto = request.getParameter("categoriaPiatto");
+			String ingredienti = request.getParameter("listaIngredienti");
+			String prezzo = request.getParameter("prezzoPiatto");
+			Float prezzoPiatto = Float.parseFloat(prezzo);
+			
+			String[] parts = ingredienti.split(",");
+			
+			int i = 0;
+			while(i<parts.length) {
+				System.out.println("Aggiungendo al db " + parts[i]);
+				ingrediente = ingredienteManager.creaIngrediente(parts[i]);
+				listaIngredienti.add(ingrediente);
+				System.out.println(listaIngredienti.get(i).getNomeIngrediente());
+
+				i++;
+			}
+			
+			piatto = piattoManager.creaPiatto(nomePiatto, prezzoPiatto, categoriaPiatto);
+			
+			if(piatto!=null) {
+				System.out.println("Piatto non nullo");
+				System.out.println(piatto.getCategoriaPiatto());
+				System.out.println(piatto.getNomePiatto());
+				System.out.println(piatto.getPrezzoPiatto());
+				System.out.println("Setto in locale la lista di ingredeienti");
+
+				piatto.setListaIngredienti(listaIngredienti);
+				
+
+
+			}
+			
+			if(piatto.getListaIngredienti()!=null){
+				System.out.println("Lista ingredienti non nullo");
+
+				piattoManager.inserisciIngredientiNelPiatto(piatto);
+			}
+			
+
+			System.out.println("-----------------------");
+			System.out.println("Fine Servlet: ControllerPiatto");
+			System.out.println("-----------------------");
+		}
+		
+		else if(toGet.equalsIgnoreCase("3")) {
+
+			Integer idPiatto = Integer.parseInt(request.getParameter("idPiatto"));
+
+			try {
+				ManagerPiatto piattoManager = new ManagerPiatto();
+				piattoManager.eliminaPiatto(idPiatto);
+				
+			}catch(Exception e) {
+				request.setAttribute("exception", e);
+				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire
+				rq3.forward(request, response);
+			}
 		}
 	}
 	

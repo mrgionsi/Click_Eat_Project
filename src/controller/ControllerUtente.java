@@ -3,8 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,6 +81,14 @@ public class ControllerUtente extends HttpServlet {
 			String passwordUtente = request.getParameter("passwordUtente");
 			String idLogin = request.getParameter("userId");
 
+			System.out.println(nomeUtente);
+
+			System.out.println(cognomeUtente);
+
+			System.out.println(ruoloUtente);
+
+			System.out.println(idLogin);
+
 
 
 			try {
@@ -111,16 +117,7 @@ public class ControllerUtente extends HttpServlet {
 			try {
 				ManagerUtente utenteManager = new ManagerUtente();
 				utenteManager.eliminaUtente(idUtente);
-
-				/*if(utente.getIdLogin() != "duplicato" &&  utente.getPasswordUtente() != "duplicato" ) {
-						RequestDispatcher rq = request.getRequestDispatcher("./infopages/success.jsp");
-						rq.forward(request, response);
-					}*/ //blocco da considerare per gesitire duplicati errati
-				//else {
-				//request.setAttribute("duplicato", true);
-				RequestDispatcher rq2 = request.getRequestDispatcher(""); //jsp da inserire
-				rq2.forward(request, response);
-				//}
+				
 			}catch(Exception e) {
 				request.setAttribute("exception", e);
 				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire

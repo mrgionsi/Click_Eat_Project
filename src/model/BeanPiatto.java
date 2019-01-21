@@ -10,13 +10,20 @@ public class BeanPiatto {
 	private Float prezzoPiatto;
 	private Integer idPiatto;
 	
-	public BeanPiatto(String nomePiatto, String categoriaPiatto, ArrayList<BeanIngrediente> listaIngredienti, Float prezzoPiatto, Integer idPiatto) {
+
+	public BeanPiatto() {
+		setNomePiatto("");
+		setCategoriaPiatto("");
+		listaIngredienti = new ArrayList<BeanIngrediente> ();
+		setPrezzoPiatto(null);
+	}
+	
+	public BeanPiatto(String nomePiatto, String categoriaPiatto, Float prezzoPiatto) {
 		
 		setNomePiatto(nomePiatto);
 		setCategoriaPiatto(categoriaPiatto);
 		listaIngredienti = new ArrayList<BeanIngrediente> ();
 		setPrezzoPiatto(prezzoPiatto);
-		setIdPiatto(idPiatto);
 	}
 
 	public String getNomePiatto() {
@@ -40,9 +47,10 @@ public class BeanPiatto {
 	}
 	
 	public void setListaIngredienti(ArrayList<BeanIngrediente> listaIngredienti) {
-		this.listaIngredienti = new ArrayList<BeanIngrediente>(listaIngredienti);
+		this.listaIngredienti = listaIngredienti;
 	}
 	
+
 	public Float getPrezzoPiatto() {
 		return prezzoPiatto;
 	}
