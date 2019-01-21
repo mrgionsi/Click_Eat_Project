@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <%@include file="./parts/head.jsp"%>
-<link rel="stylesheet" href="./css/mystyle.css">
 
 <title>Accedi a ClickEat</title>
 </head>
