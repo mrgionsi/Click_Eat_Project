@@ -416,8 +416,7 @@ function getAllFieldUser(){
              $.ajax({
                  cache: false,
                  timeout: 3000,
-                 success: function (data) {
-                     	console.log(data);
+                 success: function () {
                 	 	var success = document.createElement("span");
                 	 	$(success).text("Utente aggiunto con successo!")
                 	 	$("#showForm").empty();
@@ -497,8 +496,7 @@ function getAllFieldTable(){
              $.ajax({
                  cache: false,
                  timeout: 3000,
-                 success: function (data) {
-                     	console.log(data);
+                 success: function () {
                 	 	var success = document.createElement("span");
                 	 	$(success).text("Tavolo aggiunto con successo!")
                 	 	$("#showForm").empty();
