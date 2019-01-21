@@ -15,8 +15,9 @@
 					</div>
 				</div>
 
-				<div class="row  align-items-center h-70">
-					<div class="col-4 mx-auto login-form py-4">
+				<div class="row  align-items-center mt-5">
+					<div
+						class="col-lg-4 col-sm-6 col-xs-12 mx-auto login-form py-4 mt-5">
 						<div class="row">
 							<div class="col-4 mx-auto text-center h4">
 								<span>Accedi</span>
@@ -38,17 +39,18 @@
 						</div>
 						<div class="row mx-auto">
 							<div class="col-8 col-md-4 col-lg-4 mx-auto mt-4">
-								<a href="shop.html">
-									<button class="btn btn-primary btn-accedi">Accedi</button>
-								</a>
+								<button class="btn btn-primary btn-accedi" id="btn-login">Accedi</button>
 							</div>
 						</div>
-						<div class="col-8 mx-auto access-problem mt-4">Problemi di
-							accesso?</div>
+						<div class="col-12 text-center access-problem mt-4">Problemi
+							di accesso?</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="./contents/scripts/login.js"></script>
+
 </body>
+
 </html>

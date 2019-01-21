@@ -4,7 +4,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="./contents/library/bootstrap4.0/css/bootstrap.css">
-<link rel="stylesheet" href="./css/mystyle.css">
+<link rel="stylesheet" href="./contents/css/mystyle.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -14,6 +14,6 @@
 <script src="./contents/library/popper.min.js" ></script>
 
  <script src="./contents/library/bootstrap4.0/js/bootstrap.min.js"></script>
- <script src="./scripts/homepageamministratore.js"></script>
+ <script src="./contents/scripts/homepageamministratore.js"></script>
  
  
