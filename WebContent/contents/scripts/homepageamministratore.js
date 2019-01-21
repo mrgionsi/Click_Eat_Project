@@ -422,6 +422,7 @@ function getAllFieldUser(){
                  timeout: 3000,
                  success: function () {
                 	 	var success = document.createElement("span");
+                	 	$(success).addClass("h4 text-primary");
                 	 	$(success).text("Utente aggiunto con successo!")
                 	 	$("#showForm").empty();
                 	    $("#showForm").append(success);
@@ -502,6 +503,7 @@ function getAllFieldTable(){
                  timeout: 3000,
                  success: function () {
                 	 	var success = document.createElement("span");
+                	 	$(success).addClass("h4 text-primary");
                 	 	$(success).text("Tavolo aggiunto con successo!")
                 	 	$("#showForm").empty();
                 	    $("#showForm").append(success);
@@ -654,6 +656,7 @@ function getAllFieldPlate() {
                    	 	$("#showForm").empty();
 
                	 	var success = document.createElement("span");
+            	 	$(success).addClass("h4 text-primary");
                	 	$(success).text("Piatto aggiunto con successo!")
                	 	$("#showForm").empty();
                	    $("#showForm").append(success);
@@ -694,6 +697,7 @@ function deleteTables() {
 	  	                   	 	$("#showForm").empty();
 
 	  	               	 	var success = document.createElement("span");
+	                	 	$(success).addClass("h4 text-primary");
 	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
 	  	               	 	$("#showForm").empty();
 	  	               	    $("#showForm").append(success);
@@ -740,6 +744,8 @@ function deleteUsers() {
 	  	                   	 	$("#showForm").empty();
 
 	  	               	 	var success = document.createElement("span");
+	                	 	$(success).addClass("h4 text-primary");
+
 	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
 	  	               	 	$("#showForm").empty();
 	  	               	    $("#showForm").append(success);
@@ -786,6 +792,7 @@ function deletePlates() {
 	  	                   	 	$("#showForm").empty();
 
 	  	               	 	var success = document.createElement("span");
+	                	 	$(success).addClass("h4 text-primary");
 	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
 	  	               	 	$("#showForm").empty();
 	  	               	    $("#showForm").append(success);

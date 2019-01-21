@@ -1,49 +1,65 @@
-function loadTables() {
-    $(document).ready(function(){
-        var tables = null;
-        var xhttp = new XMLHttpRequest();
+$( document ).ready(function() {
+	tablesList();
+});
+
+function tablesList() {
+	$(document).ready(function(){
+		var tables = null;
+		var xhttp = new XMLHttpRequest();
+
+		var row = "";
+		row = document.createElement("div");
+		$(row).addClass("row mx-auto");
+
+		xhttp.onreadystatechange = function () {
+			if(xhttp.readyState == 4 && xhttp.status == 200) {
+
+				$.ajax({
+					cache: false,
+					dataType: "json",
+					error: function(){
+						console.log("json not found");
+					},
+					success: function (tables) {
+						console.log("success");
+						
+						$("#tablesList").empty();
+						tables.forEach(element =>{
+
+							var col = document.createElement("div");
+							$(col).addClass("col-3 pr-3 table");
+
+							var btn = document.createElement("div");
+							
 
 
-        xhttp.onreadystatechange = function () {
-            if(xhttp.readyState == 4 && xhttp.status == 200) {
 
-                $.ajax({
-                    cache: false,
-                    dataType: "json",
-                    error: function(){
-                    	console.log("json not found");
-                    },
-                    success: function (tables) {
-                        var toAppend = "";
-                        var i = 0;
-                        
-                        
-                        while(i < tables.length )
-                        {
+							$(btn).attr("id", "table-"+element.numeroTavolo);
+							if(element.flagOccupato){
+								$(btn).text("Tavolo #"+ element.numeroTavolo + " | Occupato | Ordinazione #" + element.numeroOrdinazione);
+								$(btn).addClass("bg-danger");
+							} else {
+								$(btn).text("Tavolo #"+ element.numeroTavolo +  " | Libero");
+								$(btn).addClass("bg-success");
+							}
 
-                            var button = '<button type="button" class="btn btn-primary table" id="table_id">table_text</button>';
-                            button = button.replace("table_id", tables[i].numeroTavolo);
-                            if(!tables[i].flagOccupato){
-                                button = button.replace("table_text", "Tavolo #: " + tables[i].numeroTavolo + " | Libero");
+							$(col).append(btn);
+							$(row).append(col);
+							$("#tablesList").append(row);
+						});
 
-                            }else{
-                            	button = button.replace("table_text", "Tavolo #: " + tables[i].numeroTavolo + " | Prenotazione #: " + tables[i].numeroOrdinazione + " | Occupato");
-                            }
-                            toAppend+=button;
-                            
-                            i++;
-                        }
 
-                        $("#tables").append().html(toAppend);
-                    },
-                    url: 'jsonfiles/listaTavoli.json',
-                });
-            }
-        }
-        xhttp.open("GET", "ControllerTavolo", true);
-        console.log("tutto ok");
 
-        // xhttp.open("GET, "ControllerTavolo?op=" + 1, true);
-        xhttp.send();
-    });
+
+
+					},
+					url: 'jsonfiles/listaTavoli.json',
+				});
+			}
+		}
+
+
+		xhttp.open("GET", "ControllerTavolo?op=" + 1, true);
+		xhttp.send();
+	});
 }
