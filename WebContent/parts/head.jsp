@@ -9,7 +9,6 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./scripts/homepageamministratore.js"></script>
 <script src="./scripts/homepage.js"></script>
@@ -21,7 +20,6 @@
 
 =======
 <script src="./contents/library/jQuery.js"></script>
->>>>>>> 6eb198db4a690c4ace191d29a3de14f5d80009fd
 
 <script src="./contents/library/popper.min.js" ></script>
 
