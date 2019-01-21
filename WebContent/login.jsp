@@ -11,7 +11,7 @@
            Accedi a ClickEat
           </span>
          </div>
-        <div class="row mx-auto">
+        <div class="row align-items-center h-100" style="padding-top:9em">
           <div class="col-4 mx-auto login-form ">
               <div class="form-group col-8 mx-auto ">
                   <label for="username_login">username_login</label>
