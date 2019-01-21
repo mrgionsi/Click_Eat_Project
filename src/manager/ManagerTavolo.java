@@ -95,7 +95,7 @@ public class ManagerTavolo {
 		return null;
 	}
 
-	public synchronized Boolean eliminaTavolo(String numeroTavolo){
+	public synchronized Boolean eliminaTavolo(Integer i){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -104,7 +104,8 @@ public class ManagerTavolo {
 			String sqlString = new String("DELETE FROM Tavolo WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setString(1, numeroTavolo);
+			
+			ps.setInt(1, i);
 
 			int value = ps.executeUpdate();
 

@@ -117,16 +117,7 @@ public class ControllerUtente extends HttpServlet {
 			try {
 				ManagerUtente utenteManager = new ManagerUtente();
 				utenteManager.eliminaUtente(idUtente);
-
-				/*if(utente.getIdLogin() != "duplicato" &&  utente.getPasswordUtente() != "duplicato" ) {
-						RequestDispatcher rq = request.getRequestDispatcher("./infopages/success.jsp");
-						rq.forward(request, response);
-					}*/ //blocco da considerare per gesitire duplicati errati
-				//else {
-				//request.setAttribute("duplicato", true);
-				RequestDispatcher rq2 = request.getRequestDispatcher(""); //jsp da inserire
-				rq2.forward(request, response);
-				//}
+				
 			}catch(Exception e) {
 				request.setAttribute("exception", e);
 				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire
