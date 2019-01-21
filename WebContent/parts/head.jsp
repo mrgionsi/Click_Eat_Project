@@ -3,12 +3,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="./contents/library/bootstrap4.0/css/bootstrap.css">
 <link rel="stylesheet" href="./css/mystyle.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
+<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="./scripts/homepageamministratore.js"></script>
 <script src="./scripts/homepage.js"></script>
@@ -18,5 +19,13 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
+=======
+<script src="./contents/library/jQuery.js"></script>
+>>>>>>> 6eb198db4a690c4ace191d29a3de14f5d80009fd
 
+<script src="./contents/library/popper.min.js" ></script>
 
+ <script src="./contents/library/bootstrap4.0/js/bootstrap.min.js"></script>
+ <script src="./scripts/homepageamministratore.js"></script>
+ 
+ 

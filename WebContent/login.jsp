@@ -1,33 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <%@include file="./parts/head.jsp" %>
-	<title>Accedi a ClickEat</title>
-  </head>
-  <body>
-      <div class="container-fluid">
-		<div class="row text-center">
-          <span class="col-12 text-center h3">
-           Accedi a ClickEat
-          </span>
-         </div>
-        <div class="row mx-auto">
-          <div class="col-4 mx-auto login-form ">
-              <div class="form-group col-8 mx-auto ">
-                  <label for="username_login">username_login</label>
-                  <input type="text" class="form-control col-12" id="username_login" placeholder="Enter username_login">
-              </div>
-               <div class="form-group col-8 mx-auto"> 
-                  <label for="password_login">password_login</label>
-                  <input type="password" class="form-control col-12" id="password_login" placeholder="Enter password_login">
-              </div> 
-               <div class="row">
-              	<div class="col-4 mx-auto">
-              <button type="submit" class="btn btn-lg btn-primary btn-login">Submit</button>
-              </div>
-              </div>
-         </div>
-         </div>
-         </div>
-    </body>
+<head>
+<%@include file="./parts/head.jsp"%>
+
+<title>Accedi a ClickEat</title>
+</head>
+<body>
+	<div class="container-fluid" style="padding: 0;">
+		<div class="img-start">
+			<div class="blacktrasparent">
+				<div class="row">
+					<div class="col-2 mx-auto h2 text-center header-login">
+						<span class="header-login"> Login </span>
+					</div>
+				</div>
+
+				<div class="row  align-items-center h-70">
+					<div class="col-4 mx-auto login-form py-4">
+						<div class="row">
+							<div class="col-4 mx-auto text-center h4">
+								<span>Accedi</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-8 mx-auto">
+								<label for="username">Username</label> <input type="text"
+									class="form-control" id="username"
+									placeholder="Inserisci username" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-8 mx-auto">
+								<label for="password">Password</label> <input type="password"
+									class="form-control" id="password"
+									placeholder="Inserisci password" required>
+							</div>
+						</div>
+						<div class="row mx-auto">
+							<div class="col-8 col-md-4 col-lg-4 mx-auto mt-4">
+								<a href="shop.html">
+									<button class="btn btn-primary btn-accedi">Accedi</button>
+								</a>
+							</div>
+						</div>
+						<div class="col-8 mx-auto access-problem mt-4">Problemi di
+							accesso?</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

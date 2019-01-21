@@ -13,6 +13,7 @@
 	border-radius: 3em;
 }
 
+<<<<<<< HEAD
 .table-style {
 	border: 4px solid;
 	margin-top: 6px;
@@ -27,3 +28,18 @@
 	
 }
 
+=======
+.img-start{
+ min-height: 45em;;
+     background-image: url(../contents/images/unisa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;	
+}
+
+.blacktrasparent{
+	min-height: 45em;
+    background: rgba(26,26,26,0.4);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+>>>>>>> 6eb198db4a690c4ace191d29a3de14f5d80009fd
