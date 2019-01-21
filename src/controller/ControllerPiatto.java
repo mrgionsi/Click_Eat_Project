@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.ManagerIngrediente;
 import manager.ManagerPiatto;
+import manager.ManagerUtente;
 import model.BeanIngrediente;
 import model.BeanPiatto;
 
@@ -122,6 +124,21 @@ public class ControllerPiatto extends HttpServlet {
 			System.out.println("-----------------------");
 			System.out.println("Fine Servlet: ControllerPiatto");
 			System.out.println("-----------------------");
+		}
+		
+		else if(toGet.equalsIgnoreCase("3")) {
+
+			Integer idPiatto = Integer.parseInt(request.getParameter("idPiatto"));
+
+			try {
+				ManagerPiatto piattoManager = new ManagerPiatto();
+				piattoManager.eliminaPiatto(idPiatto);
+				
+			}catch(Exception e) {
+				request.setAttribute("exception", e);
+				RequestDispatcher rq3 = request.getRequestDispatcher("");//jsp da inserire
+				rq3.forward(request, response);
+			}
 		}
 	}
 	

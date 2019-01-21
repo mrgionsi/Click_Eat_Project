@@ -234,7 +234,7 @@ function loadPlates() {
                         
 		                        while(i < plates.length ){
 		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" type="radio" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
+		                            				<input class="form-check-input" name="platesList" type="radio" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
 		                            				<label class="form-check-label" for="plate_'+ plates[i].idPiatto +'">\
 		                            				'+ plates[i].nomePiatto +' | '+ plates[i].prezzoPiatto + '&euro;' + '\
 		                            				</label>\
@@ -245,12 +245,16 @@ function loadPlates() {
 		                            i++;
 		                        }
 		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
-		                        buttonDelete='<button type="submit" class="btn btn-primary btn-lg">Elimina</button></form>';
+		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteplates">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
 		                        toAppend+=buttonDelete;
 		                        
 		                        $("#canChange").append().html(toAppend);
+		                        
+		                        $("#btn-deleteplates").click(function() {
+		                    		deletePlates();
+		                    	});
                         }
                     },
                     url: 'jsonfiles/listaPiatti.json',
@@ -753,5 +757,49 @@ function deleteUsers() {
 	}
 	
 
+}
+
+function deletePlates() {
+	
+	console.log("delete chiamata");
+	
+	var xhttp = new XMLHttpRequest();
+
+	var inputElements = document.getElementsByName('platesList');
+	for(var i=0; inputElements[i]; ++i){
+	      if(inputElements[i].checked){
+	    	  
+	    	var urlString="";
+
+	  		urlString+="&idPiatto" + "=" + inputElements[i].value;
+	  		
+	  		console.log(urlString)
+	  		
+	  		
+	  		xhttp.onreadystatechange = function () {
+	  			if(xhttp.readyState == 4 && xhttp.status == 200) {
+	  	        	
+	  				$.ajax({
+	  	                cache: false,
+	  	                timeout: 3000,
+	  	                success: function () {
+	  	                   	 	$("#showForm").empty();
+
+	  	               	 	var success = document.createElement("span");
+	  	               	 	$(success).text("Eliminazione avvenuta con successo!")
+	  	               	 	$("#showForm").empty();
+	  	               	    $("#showForm").append(success);
+
+	  	                },
+	  	               
+	  	            });
+	  	        }
+	  		}
+	  	        
+	  			
+	  		xhttp.open("GET", "ControllerPiatto?op=" + 3 + urlString, true);
+	  		xhttp.send();
+	      }
+	}
 }
 
