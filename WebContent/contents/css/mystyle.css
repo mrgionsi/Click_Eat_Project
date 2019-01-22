@@ -46,3 +46,14 @@
 	color: red;
 	text-align: center;
 }
+
+.bg-success-table > path{
+	fill:green;
+}
+.table{
+	width: 100%;
+    height: 10em;
+}
+.bg-success{
+	color:#008000;
+}

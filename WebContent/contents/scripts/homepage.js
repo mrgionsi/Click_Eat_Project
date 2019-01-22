@@ -3,16 +3,9 @@ $( document ).ready(function() {
 });
 
 function tablesList() {
-	$(document).ready(function(){
-		var tables = null;
-		var xhttp = new XMLHttpRequest();
-
 		var row = "";
 		row = document.createElement("div");
-		$(row).addClass("row mx-auto");
-
-		xhttp.onreadystatechange = function () {
-			if(xhttp.readyState == 4 && xhttp.status == 200) {
+		$(row).addClass("row");
 
 				$.ajax({
 					cache: false,
@@ -27,39 +20,50 @@ function tablesList() {
 						tables.forEach(element =>{
 
 							var col = document.createElement("div");
-							$(col).addClass("col-3 pr-3 table");
+							$(col).addClass("col-3 pr-3 mb-5");
 
 							var btn = document.createElement("div");
 							
+							 // <object data="./contents/images/Tavolo.svg" type="image/svg+xml"></object>	
+							var svg = document.createElement("img");
+							$(svg).addClass("table");
+							$(svg).attr("id","table-img");
+							
+							
 
-
-
+							
 							$(btn).attr("id", "table-"+element.numeroTavolo);
 							if(element.flagOccupato){
+								colorTable(svg,"red");
 								$(btn).text("Tavolo #"+ element.numeroTavolo + " | Occupato | Ordinazione #" + element.numeroOrdinazione);
 								$(btn).addClass("bg-danger");
+								
 							} else {
+								colorTable(svg,"green");
 								$(btn).text("Tavolo #"+ element.numeroTavolo +  " | Libero");
 								$(btn).addClass("bg-success");
 							}
 
+							
+							$(col).append(svg);
+							$(row).append(col);
+							$("#tablesList").append(row);
+							
 							$(col).append(btn);
 							$(row).append(col);
 							$("#tablesList").append(row);
 						});
-
-
-
-
-
 					},
 					url: 'jsonfiles/listaTavoli.json',
 				});
-			}
-		}
 
-
-		xhttp.open("GET", "ControllerTavolo?op=" + 1, true);
-		xhttp.send();
-	});
 }
+
+
+//la funzione colorTable seleziona tutti gli elementi del tavolo e gli assegna una classe che contiene il colore
+function colorTable(svg, colorclass)
+{
+	$(svg).attr("src","./contents/images/table-"+colorclass+".png");
+}
+
+
