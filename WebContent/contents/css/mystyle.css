@@ -1,0 +1,48 @@
+.welcome_amministrazione {
+	margin-bottom: 20px;
+}
+
+.btn-login {
+	width: 100%;
+}
+
+
+.login-form {
+	border: 1px solid grey;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border-radius: 3em;
+	background-color: white;
+}
+
+.img-start{
+ min-height: 45em;;
+     background-image: url(../images/unisa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;	
+}
+
+.blacktrasparent{
+	min-height: 56em;
+    background: rgba(26,26,26,0.4);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.access-problem{
+	cursor:pointer;
+}
+
+.access-problem:hover{
+	color:#4292e7;
+	font-weight:bold;
+}
+
+.btn-accedi{
+	width:100%;
+}
+
+.error{
+	color: red;
+	text-align: center;
+}

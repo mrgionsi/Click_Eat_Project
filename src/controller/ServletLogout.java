@@ -13,18 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ServletLogout")
 public class ServletLogout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-    public ServletLogout() {
-        super();
-    }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	public ServletLogout() {
+		super();
 	}
 
-	
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().removeAttribute("adminRoles");
+		request.getSession().invalidate();
+
+		String redirectedPage = "/login.jsp";
+		response.sendRedirect(request.getContextPath() + redirectedPage);
+	}
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rq = request.getRequestDispatcher(""); //jsp da inserire
 		rq.forward(request, response);

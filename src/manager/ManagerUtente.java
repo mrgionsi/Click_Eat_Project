@@ -147,28 +147,32 @@ public class ManagerUtente {
 
 		Connection conn = null;
 		PreparedStatement ps = null;
+		System.out.println("SONO NEL TRY DI MANAGER UTENTE");
+
 		try {
 			conn = ConnectionPool.getConnection();
-			ps = conn.prepareStatement("SELECT * FROM Utente WHERE nomeUtente = ? AND cognomeUtente = ?");
+			ps = conn.prepareStatement("SELECT * FROM Utente WHERE userId = ? AND passwordUtente = ?");
 			ps.setString(1, idLogin);
 			ps.setString(2, passwordUtente);
 
 			ResultSet res = ps.executeQuery();
-
+			
+			System.out.println("SONO NEL TRY DI MANAGER UTENTE");
 			// 4. Prendi il risultato
 			if(res.next()){
 				String nomeUtente= res.getString("nomeUtente");
 				String ruoloUtente = res.getString("ruoloUtente");
 				String cognomeUtente = res.getString("cognomeUtente");
 				Integer idUtente = res.getInt("idUtente");
-
+				System.out.println("nomeUtente =======" + nomeUtente);
+				
 				BeanUtente utenteLoggato = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				utenteLoggato.setIdUtente(idUtente);
 				return utenteLoggato;
 			}
 
 		} catch (SQLException e) {
-
+				System.out.println("SqlException in ManagerUtente");
 			e.printStackTrace();
 
 		}finally{
