@@ -68,7 +68,7 @@ function loadTables() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" id="btn-addtable">Aggiungi</button> ';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button> ';
 		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deletetables">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
@@ -78,9 +78,6 @@ function loadTables() {
 		                        
 		                        $("#btn-deletetables").click(function() {
 		                    		deleteTables();
-		                    	});
-		                        $("#btn-addtable").click(function() {
-		                    		addTable();
 		                    	});
 		                       }
                     },
@@ -155,7 +152,7 @@ function loadUsers() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" id="btn-adduser">Aggiungi</button> ';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button> ';
 		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteusers">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
@@ -165,10 +162,6 @@ function loadUsers() {
 		                        
 		                        $("#btn-deleteusers").click(function() {
 		                        	deleteUsers();
-		                    	});
-		                        
-		                        $("#btn-adduser").click(function() {
-		                        	addUser();
 		                    	});
                         }
                     },
@@ -251,7 +244,7 @@ function loadPlates() {
 		                            
 		                            i++;
 		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" id="btn-addplate">Aggiungi</button> ';
+		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
 		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteplates">Elimina</button></form>';
 		
 		                        toAppend+=buttonAdd;
@@ -262,11 +255,6 @@ function loadPlates() {
 		                        $("#btn-deleteplates").click(function() {
 		                    		deletePlates();
 		                    	});
-		                        
-		                        $("#btn-addplate").click(function() {
-		                    		addPlate();
-		                    	});
-		                        
                         }
                     },
                     url: 'jsonfiles/listaPiatti.json',
