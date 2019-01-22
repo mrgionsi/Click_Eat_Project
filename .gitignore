@@ -15,3 +15,7 @@
 # Maven
 log/
 target/
+<<<<<<< HEAD
+=======
+target/*
+>>>>>>> 31bac3ec5056697f3dff877861a0eb29f6b132f1
