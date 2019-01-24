@@ -101,10 +101,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.41</version>
+	  	 	<groupId>mysql</groupId>
+	   		<artifactId>mysql-connector-java</artifactId>
+	    	<version>8.0.14</version>
 			<type>jar</type>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
