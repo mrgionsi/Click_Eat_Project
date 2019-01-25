@@ -54,6 +54,20 @@
 	width: 100%;
     height: 10em;
 }
+.container-table:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
 .bg-success{
 	background-color:#008000;
+}
+
+
+.span-centered{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 3em;
 }

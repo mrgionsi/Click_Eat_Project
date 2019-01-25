@@ -5,12 +5,13 @@ var d2 = null;
 do { d2 = new Date(); }
 while(d2-d < ms);
 }
-
+$(document).ready(function(){
+	$("#btn-table").click(function(){
+		loadTables();
+	});
+});
 function loadTables() {
-    $(document).ready(function(){
-        var tables = null;
-        var xhttp = new XMLHttpRequest();
-        
+/*  
     	$("#canChange").empty();
         $("#showForm").empty();
         
@@ -25,71 +26,45 @@ function loadTables() {
         
         $(newSpinner).append(newSpan);
         $("#canChange").append(newSpinner);
-
-        xhttp.onreadystatechange = function () {
-            if(xhttp.readyState == 4 && xhttp.status == 200) {
-
-                $.ajax({
-                    cache: false,
-                    dataType: "json",
-                    timeout: 3000,
-                    error: function(){
-                    	$("#canChange").empty();
-                        
-                        var newPar = document.createElement("p");
-                        $(newPar).addClass("h4");
-                        $(newPar).text("Non è stato possibile ottenere i dati")
-                        
-                        
-                        $("#canChange").append(newPar);
-                        },
-                    success: function (tables) {
-                        toAppend = "";
-
-                        $("#canChange").append().html(toAppend);
-                        var i = 0;
-                        console.log(tables.length);
-                        if(tables.length == 0){
-                        	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        		<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button>';
-                            $("#canChange").append().html(toAppend);
-
-                        	} else {
-		                        while(i < tables.length ){
-		
-		                            var checkbox = '<form><div class="form-check" id="tableList">\
-		                            				<input class="form-check-input" type="radio" name="tableList" value="' + tables[i].numeroTavolo + '" id="table_'+ tables[i].numeroTavolo +'">\
-		                            				<label class="form-check-label" for="table_'+ tables[i].numeroTavolo +'">\
-		                            				Tavolo '+ tables[i].numeroTavolo +'\
-		                            				</label>\
-		                            				</div>';
-		                            
-		                            toAppend+=checkbox;
-		                            
-		                            i++;
-		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addTable()">Aggiungi</button> ';
-		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deletetables">Elimina</button></form>';
-		
-		                        toAppend+=buttonAdd;
-		                        toAppend+=buttonDelete;
-		                        
-		                        $("#canChange").append().html(toAppend);
-		                        
-		                        $("#btn-deletetables").click(function() {
-		                    		deleteTables();
-		                    	});
-		                       }
-                    },
-                    url: 'jsonfiles/listaTavoli.json',
-                });
-            }
-        }
-
-        xhttp.open("GET", "ControllerTavolo?op=" + 1 , true);
-        xhttp.send();
-    });
+*/
+	$.get("ServletGetAllTavoli",function(data,status){
+		var tavoli = JSON.parse(data);
+		if(tavoli)
+			{
+				showTable(tavoli);
+				console.log(tavoli);
+			}
+	})
 }
+
+function showTable(tavoli){
+	var thead = $("#table-tablelist > thead");
+	
+	var tr = document.createElement("tr");
+	
+	var th = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("N. Tavoli");
+
+	var th1 = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("Stato(Libero/Occupato)");
+	
+	var th2 = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("Numero Ordinazione");
+	
+	var th3 = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("Aggiungi");
+	
+	$(tr).append(th);
+	$(tr).append(th1);
+	$(tr).append(th2);
+	$(tr).append(th3);
+	$(thead).append(tr);
+}
+
 
 function loadUsers() {
     $(document).ready(function(){

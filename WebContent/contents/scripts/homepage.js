@@ -5,32 +5,25 @@ $( document ).ready(function() {
 function tablesList() {
 		var row = "";
 		row = document.createElement("div");
-		$(row).addClass("row");
+		$(row).addClass("row mx-auto");
 
-				$.ajax({
-					cache: false,
-					dataType: "json",
-					error: function(){
-						console.log("json not found");
-					},
-					success: function (tables) {
-						console.log("success");
-						
+		$.get("ServletGetAllTavoli",function(data,status)  {
+						var tables =JSON.parse(data);
 						$("#tablesList").empty();
 						tables.forEach(element =>{
 
 							var col = document.createElement("div");
-							$(col).addClass("col-3 pr-3 mb-5");
+							$(col).addClass("col-2 pr-4 mb-5 container-table");
 
 							var btn = document.createElement("div");
-							
+							var text = document.createElement("span");
+							$(text).addClass("span-centered");
+							$(text).text(element.numeroTavolo);
+							$(col).append(text);
 							 // <object data="./contents/images/Tavolo.svg" type="image/svg+xml"></object>	
 							var svg = document.createElement("img");
 							$(svg).addClass("table");
 							$(svg).attr("id","table-img");
-							
-							
-
 							
 							$(btn).attr("id", "table-"+element.numeroTavolo);
 							if(element.flagOccupato){
@@ -53,8 +46,6 @@ function tablesList() {
 							$(row).append(col);
 							$("#tablesList").append(row);
 						});
-					},
-					url: 'jsonfiles/listaTavoli.json',
 				});
 
 }
