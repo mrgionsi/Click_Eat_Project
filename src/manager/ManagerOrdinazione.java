@@ -93,7 +93,7 @@ public class ManagerOrdinazione {
 			
 			numeroOrdine = tavoloManager.getOrdinazioneDiTavolo(numeroTavolo);
 			
-			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdine = ?");
+			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdinazione = ?");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, numeroOrdine);
