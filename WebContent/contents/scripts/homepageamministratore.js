@@ -62,7 +62,12 @@ function showTable(tavoli){
 	
 	var th3 = document.createElement("th");
 	$(th3).attr("scope","col");
-	$(th3).text("Aggiungi");
+	var add = document.createElement("img");
+	$(add).attr("id","add-btn-table");
+	$(add).addClass("btn-rowtable btn-add");
+	$(add).attr("src","./contents/images/add-button.png");
+	
+	$(th3).append(add);
 	
 	$(tr).append(th);
 	$(tr).append(th1);
