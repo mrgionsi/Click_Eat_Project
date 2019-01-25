@@ -43,13 +43,14 @@ public class ManagerTavolo {
 			try {
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
+				return listaTavoli;
 
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-		return listaTavoli;
+		return null;
 	}
 
 	public synchronized BeanTavolo creaTavolo(Integer numeroTavolo) {

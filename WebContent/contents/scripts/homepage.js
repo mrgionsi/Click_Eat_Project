@@ -7,15 +7,8 @@ function tablesList() {
 		row = document.createElement("div");
 		$(row).addClass("row");
 
-				$.ajax({
-					cache: false,
-					dataType: "json",
-					error: function(){
-						console.log("json not found");
-					},
-					success: function (tables) {
-						console.log("success");
-						
+		$.get("ControllerTavolo?op=1",function(data,status)  {
+						var tables =JSON.parse(data);
 						$("#tablesList").empty();
 						tables.forEach(element =>{
 
@@ -53,8 +46,6 @@ function tablesList() {
 							$(row).append(col);
 							$("#tablesList").append(row);
 						});
-					},
-					url: 'jsonfiles/listaTavoli.json',
 				});
 
 }
