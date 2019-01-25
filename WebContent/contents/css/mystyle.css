@@ -71,3 +71,18 @@
   font-weight: bold;
   font-size: 3em;
 }
+
+.btn-edit{   
+}
+
+.btn-rowtable{
+	width:4em;
+	height:4em;
+		padding: 4px;
+	
+}
+
+.btn-rowtable:hover{
+	transform: scale(1.1);
+	cursor:pointer;
+}

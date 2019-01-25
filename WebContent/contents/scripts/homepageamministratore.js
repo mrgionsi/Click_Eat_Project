@@ -6,8 +6,12 @@ do { d2 = new Date(); }
 while(d2-d < ms);
 }
 $(document).ready(function(){
-	$("#btn-table").click(function(){
-		loadTables();
+	$("#btn-table").click(function(e){
+		var thead = $("#table-tablelist > thead");
+		if($(thead).children().length > 0){
+			
+		}else loadTables();
+        
 	});
 });
 function loadTables() {
@@ -38,6 +42,8 @@ function loadTables() {
 }
 
 function showTable(tavoli){
+	
+	//thead ---- intestazione start
 	var thead = $("#table-tablelist > thead");
 	
 	var tr = document.createElement("tr");
@@ -47,22 +53,58 @@ function showTable(tavoli){
 	$(th).text("N. Tavoli");
 
 	var th1 = document.createElement("th");
-	$(th).attr("scope","col");
-	$(th).text("Stato(Libero/Occupato)");
+	$(th1).attr("scope","col");
+	$(th1).text("Stato(Libero/Occupato)");
 	
 	var th2 = document.createElement("th");
-	$(th).attr("scope","col");
-	$(th).text("Numero Ordinazione");
+	$(th2).attr("scope","col");
+	$(th2).text("Numero Ordinazione");
 	
 	var th3 = document.createElement("th");
-	$(th).attr("scope","col");
-	$(th).text("Aggiungi");
+	$(th3).attr("scope","col");
+	$(th3).text("Aggiungi");
 	
 	$(tr).append(th);
 	$(tr).append(th1);
 	$(tr).append(th2);
 	$(tr).append(th3);
 	$(thead).append(tr);
+
+	//thead ---- intestazione end
+	
+	// tbody --- corpo start 
+	var tbody = $("#table-tablelist > tbody");
+	tavoli.forEach(function(element){
+		var tr = document.createElement("tr");
+		var th = document.createElement("th");
+		$(th).attr("scope","row");
+		$(th).text(element.numeroTavolo);
+		
+		var th1 = document.createElement("th");
+		$(th1).text(element.flagOccupato);
+		
+		var th2 = document.createElement("th");
+		$(th2).text(element.numeroOrdinazione);
+		
+		var th3 = document.createElement("th");
+			var modify = document.createElement("img");
+				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
+				$(modify).addClass("btn-rowtable btn-edit");
+				$(modify).attr("src","./contents/images/edit-button.png");
+			var remove = document.createElement("img");
+				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
+				$(remove).attr("src","./contents/images/remove-button.png");
+				$(remove).addClass("btn-rowtable");
+				$(th3).append(modify);
+				$(th3).append(remove);
+		
+		$(tr).append(th);
+		$(tr).append(th1);
+		$(tr).append(th2);
+		$(tr).append(th3);
+		$(tbody).append(tr);
+		
+	})
 }
 
 
@@ -150,7 +192,7 @@ function loadUsers() {
     });
 }
 
-function loadPlates() {
+/*function loadPlates() {
     $(document).ready(function(){
         var plates = null;
         var xhttp = new XMLHttpRequest();
@@ -239,8 +281,9 @@ function loadPlates() {
 
         xhttp.open("GET", "ControllerPiatto?op=" + 1, true);
         xhttp.send();
-    });}
-
+    });
+ }
+*/
 function addUser() {
 	
 	$("#canChange").empty();
