@@ -122,8 +122,8 @@ public class ManagerPiatto {
 			
 			int value = ps.executeUpdate();
 
-			//Controllare solo se value non è 0 non va più bene visto che il nome del piatto deve essere unico
-			//già modificata la struttura della tabella
+			//Controllare solo se value non ï¿½ 0 non va piï¿½ bene visto che il nome del piatto deve essere unico
+			//giï¿½ modificata la struttura della tabella
 			//Aggiunto al finally il ritorno del piatto
 			if(value != 0) {
 				System.out.println("Registrazione effettuata con successo");
@@ -131,8 +131,8 @@ public class ManagerPiatto {
 		}
 		catch(SQLException e){
 			if(e.getErrorCode() == 1062) {
-				//così sappiamo che non è stato veramente aggiunto
-				System.out.println("Piatto già esistente");
+				//cosï¿½ sappiamo che non ï¿½ stato veramente aggiunto
+				System.out.println("Piatto giï¿½ esistente");
 
 				//return new BeanUtente("duplicato","duplicato"); 
 			}
@@ -142,11 +142,11 @@ public class ManagerPiatto {
 			try {
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
-				//deve essere creato e ritornato qui perché il piatto potrebbe già esistere o meno nel db
+				//deve essere creato e ritornato qui perchï¿½ il piatto potrebbe giï¿½ esistere o meno nel db
 				//Ma a prescindere deve essere ritornato
 				System.out.println("PiattoCreato");
-				BeanPiatto piatto =  new BeanPiatto(nomePiatto, categoriaPiatto, prezzoPiatto);
-				return settaIdPiatto(piatto);
+				 
+				return settaIdPiatto(new BeanPiatto(nomePiatto, categoriaPiatto, prezzoPiatto));
 				
 				//in questo modo ritorno un piatto con id settato e non ricevo puntatori nulla quando inserisco
 				// nella tabella ingredienti nel piatto
@@ -177,8 +177,8 @@ public class ManagerPiatto {
 					String sqlString = new String("INSERT INTO IngredientiPiatto(idPiatto, idIngrediente) VALUES(?,?)");
 					ps = conn.prepareStatement(sqlString);
 
-					//questo idPiatto non può mai funzionare se non viene mai definito
-					//qual è l'id del piatto
+					//questo idPiatto non puï¿½ mai funzionare se non viene mai definito
+					//qual ï¿½ l'id del piatto
 					//i piatti vengono inseriti nel db ma mai viene preso il loro id
 					ps.setInt(1, idPiatto);
 					ps.setInt(2, idIngrediente);
@@ -211,7 +211,7 @@ public class ManagerPiatto {
 	}
 
 //Questo metodo serve a settare un idPiatto preso dal db subito dopo l'inserimento del piatto stesso
-public synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
+private synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
 	Connection conn =  null;
 	PreparedStatement ps = null;
 
@@ -233,12 +233,10 @@ public synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
 		}
 	}
 	catch(SQLException e){
-		if(e.getErrorCode() == 1062) {
+		e.printStackTrace(); 
 
-			//return new BeanUtente("duplicato","duplicato"); 
+		
 		}
-
-	}
 	finally {
 		try {
 			ps.close();
@@ -270,7 +268,7 @@ public synchronized Boolean eliminaPiatto(Integer i){
 
 			if(value != 0) {
 				System.out.println("Piatto eliminato con successo");
-				return true;
+				return eliminaPiattiFromIngredientiPiatto(i);
 			}
 		}
 		catch(SQLException e){
@@ -289,4 +287,79 @@ public synchronized Boolean eliminaPiatto(Integer i){
 		}
 		return false;
 	}
+
+
+private synchronized Boolean eliminaPiattiFromIngredientiPiatto(int i){
+	Connection conn =  null;
+	PreparedStatement ps = null;
+
+	try {
+		conn = ConnectionPool.getConnection();
+		String sqlString = new String("DELETE FROM IngredientiPiatto WHERE idPiatto = ?");
+		ps = conn.prepareStatement(sqlString);
+
+		
+		ps.setInt(1, i);
+
+		int value = ps.executeUpdate();
+
+		if(value != 0) {
+			System.out.println("Piatto eliminato da IngredientiPiatto con successo");
+			return true;
+		}
+	}
+	catch(SQLException e){
+			e.printStackTrace(); 
+
+	}
+	finally {
+		try {
+
+			ps.close();
+			ConnectionPool.releaseConnection(conn);
+		}
+		catch(Exception e2) {
+			e2.printStackTrace();
+		}
+	}
+	return false;
+}
+
+public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione) {
+	//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?)
+
+	Connection conn =  null;
+	PreparedStatement ps = null;
+
+	try {
+		conn = ConnectionPool.getConnection();
+		String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione) VALUES(?,?)");
+		ps = conn.prepareStatement(sqlString);
+
+		ps.setInt(1, idPiatto);
+		ps.setInt(2, numeroOrdinazione);
+
+		
+		int value = ps.executeUpdate();
+
+		if(value != 0) {
+			return true;
+		}
+	}
+	catch(SQLException e){
+
+	}
+	finally {
+		try {
+			ps.close();
+			ConnectionPool.releaseConnection(conn);
+		}
+		catch(Exception e2) {
+			e2.printStackTrace();
+		}
+	}
+	return false;
+}
+
+
 }

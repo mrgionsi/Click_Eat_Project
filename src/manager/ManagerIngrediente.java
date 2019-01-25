@@ -19,25 +19,16 @@ public class ManagerIngrediente {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			//String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES(?))"); parentesi in pi� che rompeva le palle
-			//																						e restituiva sempre ingrediente nullo
-			//																						visto che non inseriva nulla nel db
 			String sqlString = new String("INSERT INTO Ingrediente(nomeIngrediente) VALUES (?)");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setString(1, nomeIngrediente);
 
-			int value = ps.executeUpdate(); // non vorrei sbagliarmi ma dalla documentazione ho letto che
-			//									questo non restituisce nulla quindi non puoi prendere l'id dell'ingrediente
-				
-			//int idIngrediente = ps.getResultSet().getInt("idLogin"); inolte prendevi idLogin e non idIngrediente
-					
+			int value = ps.executeUpdate(); 
 			if(value != 0 ) {
 				System.out.println("Ingrediente aggiunto con successo nel Database");
 				
 			}
-			
-
 			
 		}
 		catch(SQLException e){
@@ -180,7 +171,6 @@ public class ManagerIngrediente {
 		Connection conn =  null;
 		PreparedStatement ps = null;
 	
-		//Ho creato un nuovo metodo per avere una funzione in pi� e non impasticciare troppo la prima funzione "creaUtente"
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("SELECT idIngrediente FROM Ingrediente WHERE nomeIngrediente = ?");
@@ -189,8 +179,7 @@ public class ManagerIngrediente {
 	
 			ResultSet res = ps.executeQuery();
 
-			int  idIngrediente = 0;// infatti questo era sempre null e quindi � null pure
-	//																		la creazione dell'ingrediente
+			int  idIngrediente = 0;
 	
 			while(res.next()) {
 				idIngrediente = res.getInt("idIngrediente");
