@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import manager.ManagerPiatto;
+
 /**
  * Servlet implementation class ServeltAggiungiPiattoOrdinazione
  */
@@ -26,8 +28,16 @@ public class ServeltAggiungiPiattoOrdinazione extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int idPiatto = Integer.parseInt(request.getParameter("idPiatto"));
+		int numeroOrdinazione = Integer.parseInt(request.getParameter("numeroOrdinazione"));
+		
+		ManagerPiatto manPiatto = new ManagerPiatto();
+		
+		if(manPiatto.InserisciPiattoIntoOrdinazione(idPiatto, numeroOrdinazione)) {
+			response.setStatus(200);
+		}
+		
 	}
 
 	/**
