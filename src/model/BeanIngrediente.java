@@ -17,6 +17,12 @@ public class BeanIngrediente {
 		setNomeIngrediente(nomeIngrediente);
 
 	}
+	
+	public BeanIngrediente(String nomeIngrediente) {
+		
+		setNomeIngrediente(nomeIngrediente);
+
+	}
 
 	public Integer getIdIngrediente() {
 		return idIngrediente;
