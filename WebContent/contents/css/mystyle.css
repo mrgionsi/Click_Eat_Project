@@ -86,3 +86,14 @@
 	transform: scale(1.1);
 	cursor:pointer;
 }
+
+#add-btn-table{
+	float:right;
+}
+#container-tabella{
+	width:55%;
+}
+
+tbody > tr > th{
+	font-weight: normal;
+}

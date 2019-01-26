@@ -16,7 +16,7 @@ import manager.ManagerPiatto;
 import model.BeanPiatto;
 
 
-@WebServlet("/ControllerPiatto")
+@WebServlet("/ServletGetAllPiatti")
 public class ServletGetAllPiatti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

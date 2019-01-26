@@ -6,14 +6,11 @@ do { d2 = new Date(); }
 while(d2-d < ms);
 }
 $(document).ready(function(){
-	$("#btn-table").click(function(e){
-		var thead = $("#table-tablelist > thead");
-		if($(thead).children().length > 0){
-			
-		}else loadTables();
-        
-	});
+	loadTables();
+	loadUsers();
+	loadPlates();
 });
+
 function loadTables() {
 /*  
     	$("#canChange").empty();
@@ -114,181 +111,122 @@ function showTable(tavoli){
 
 
 function loadUsers() {
-    $(document).ready(function(){
-        var users = null;
-        var xhttp = new XMLHttpRequest();
-        
-        $("#canChange").empty();
-        $("#showForm").empty();
-        
-
-        var newSpinner = document.createElement("div");
-        $(newSpinner).addClass("spinner-border text-primary");
-        $(newSpinner).attr("role", "status");
-        
-        var newSpan = document.createElement("span");
-        $(newSpan).addClass("sr-only");
-        $(newSpan).text("Loading...")
-        
-        $(newSpinner).append(newSpan);
-        
-        $("#canChange").append(newSpinner);
-
-        xhttp.onreadystatechange = function () {
-            if(xhttp.readyState == 4 && xhttp.status == 200) {
-
-                $.ajax({
-                    cache: false,
-                    dataType: "json",
-                    timeout: 3000,
-                    error: function(){
-                    	$("#canChange").empty();
-                        
-                        var newPar = document.createElement("p");
-                        $(newPar).addClass("h4");
-                        $(newPar).text("Non è stato possibile ottenere i dati")
-                        $("#canChange").append(newPar);
-                        
-                        },
-                    success: function (users) {
-                        toAppend = "";
-                        $("#canChange").append().html(toAppend);
-                        var i = 0;
-                        if(users.length<0){
-                        	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button>';
-                        
-                            $("#canChange").append().html(toAppend);
-
-                        	} else {
-                        
-		                        while(i < users.length ){
-		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" name="usersList" type="radio" value="' + users[i].idUtente + '" id="user_'+ users[i].idUtente +'">\
-		                            				<label class="form-check-label" for="user_'+ users[i].idUtente +'">\
-		                            				'+ users[i].nomeUtente +' '+ users[i].cognomeUtente +' | Ruolo: '+ users[i].ruoloUtente +'\
-		                            				</label>\
-		                            				</div>';
-		                            
-		                            toAppend+=checkbox;
-		                            
-		                            i++;
-		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addUser()">Aggiungi</button> ';
-		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteusers">Elimina</button></form>';
-		
-		                        toAppend+=buttonAdd;
-		                        toAppend+=buttonDelete;
-		                        
-		                        $("#canChange").append().html(toAppend);
-		                        
-		                        $("#btn-deleteusers").click(function() {
-		                        	deleteUsers();
-		                    	});
-                        }
-                    },
-                    url: 'jsonfiles/listaUtenti.json',
-                });
-            }
-        }
-
-        xhttp.open("GET", "ControllerUtente?op=" + 1, true);
-        xhttp.send();
-    });
+	$.get("ServletGetAllUtenti",function(data,status){
+		var utenti = JSON.parse(data);
+		if(utenti)
+			{
+				showUsers(utenti);
+				console.log(utenti);
+			}
+	})
 }
 
-/*function loadPlates() {
-    $(document).ready(function(){
-        var plates = null;
-        var xhttp = new XMLHttpRequest();
-        
-        var newForm = "";
-        
-    	$("#canChange").empty();
-        $("#showForm").empty();
-        
+function showUsers(utenti){
+	//thead ---- intestazione start
+	var thead = $("#table-tablelistuser > thead");
+	
+	var tr = document.createElement("tr");
+	
+	var th = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("Nome");
 
-        var newSpinner = document.createElement("div");
-        $(newSpinner).addClass("spinner-border text-primary");
-        $(newSpinner).attr("role", "status");
-        
-        var newSpan = document.createElement("span");
-        $(newSpan).addClass("sr-only");
-        $(newSpan).text("Loading...")
-        
-        $(newSpinner).append(newSpan);
-        
-        $("#canChange").append(newSpinner);
+	var th1 = document.createElement("th");
+	$(th1).attr("scope","col");
+	$(th1).text("Cognome");
+	
 
-        xhttp.onreadystatechange = function () {
-            if(xhttp.readyState == 4 && xhttp.status == 200) {
-
-                $.ajax({
-                    cache: false,
-                    dataType: "json",
-                    timeout: 3000,
-                    error: function(){
-                   
-                    	
-                    		
-                            $("#canChange").empty();
-                            
-                            var newPar = document.createElement("p");
-                            $(newPar).addClass("h4");
-                            $(newPar).text("Non è stato possibile ottenere i dati")
-                            
-                            
-                            $("#canChange").append(newPar);
-                    	
- 	
-                    },
-                    success: function (plates) {
-                        toAppend = "";
-                        $("#canChange").append().html(toAppend);
-                        var i = 0;
-                        if(plates.length<0){
-                        	toAppend='<p><h4>Non sono presenti elementi.</h4></p>\
-                        				<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button>';
-                        
-                            $("#canChange").append().html(toAppend);
-
-                        	} else {
-                        
-		                        while(i < plates.length ){
-		                            var checkbox = '<form><div class="form-check">\
-		                            				<input class="form-check-input" name="platesList" type="radio" value="' + plates[i].idPiatto + '" id="plate_'+ plates[i].idPiatto +'">\
-		                            				<label class="form-check-label" for="plate_'+ plates[i].idPiatto +'">\
-		                            				'+ plates[i].nomePiatto +' | '+ plates[i].prezzoPiatto + '&euro;' + '\
-		                            				</label>\
-		                            				</div>';
-		                            
-		                            toAppend+=checkbox;
-		                            
-		                            i++;
-		                        }
-		                        buttonAdd='<br><button type="button" class="btn btn-primary btn-lg" onclick="addPlate()">Aggiungi</button> ';
-		                        buttonDelete='<button type="button" class="btn btn-primary btn-lg" id="btn-deleteplates">Elimina</button></form>';
+	var th2 = document.createElement("th");
+	$(th2).attr("scope","col");
+	$(th2).text("Ruolo");
 		
-		                        toAppend+=buttonAdd;
-		                        toAppend+=buttonDelete;
-		                        
-		                        $("#canChange").append().html(toAppend);
-		                        
-		                        $("#btn-deleteplates").click(function() {
-		                    		deletePlates();
-		                    	});
-                        }
-                    },
-                    url: 'jsonfiles/listaPiatti.json',
-                });
-            }
-        }
+	var th3 = document.createElement("th");
+	$(th3).attr("scope","col");
+	$(th3).text("Username");
+	
+	var th4 = document.createElement("th");
+	$(th4).attr("scope","col");
+	$(th4).text("Password");
+	
+	var th5 = document.createElement("th");
+	$(th5).attr("scope","col");
+	var add = document.createElement("img");
+	$(add).attr("id","add-btn-table");
+	$(add).addClass("btn-rowtable btn-add");
+	$(add).attr("src","./contents/images/add-button.png");
+	
+	$(th5).append(add);
+	
+	$(tr).append(th);
+	$(tr).append(th1);
+	$(tr).append(th2);
+	$(tr).append(th3);
+	$(tr).append(th4);
+	$(tr).append(th5);
+	$(thead).append(tr);
 
-        xhttp.open("GET", "ControllerPiatto?op=" + 1, true);
-        xhttp.send();
-    });
- }
-*/
+	//thead ---- intestazione end
+	
+	// tbody --- corpo start 
+	var tbody = $("#table-tablelistuser > tbody");
+	utenti.forEach(function(element){
+		var tr = document.createElement("tr");
+		var th = document.createElement("th");
+		$(th).attr("scope","row");
+		$(th).text(element.nomeUtente);
+		
+		var th1 = document.createElement("th");
+		$(th1).text(element.cognomeUtente);
+		
+		var th2 = document.createElement("th");
+		$(th2).text(element.ruoloUtente);
+		
+		var th3 = document.createElement("th");
+		$(th3).text(element.idLogin);
+		
+		var th4 = document.createElement("th");
+		$(th4).text(element.passwordUtente);
+		
+		var th5 = document.createElement("th");
+			var modify = document.createElement("img");
+				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
+				$(modify).addClass("btn-rowtable btn-edit");
+				$(modify).attr("src","./contents/images/edit-button.png");
+			var remove = document.createElement("img");
+				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
+				$(remove).attr("src","./contents/images/remove-button.png");
+				$(remove).addClass("btn-rowtable");
+				$(th5).append(modify);
+				$(th5).append(remove);
+		
+		$(tr).append(th);
+		$(tr).append(th1);
+		$(tr).append(th2);
+		$(tr).append(th3);
+		$(tr).append(th4);
+		$(tr).append(th5);
+		$(tbody).append(tr);
+		
+	})
+}
+
+
+function loadPlates(){
+	$.get("ServletGetAllPiatti",function(data,status){
+		var piatti = JSON.parse(data);
+		if(piatti)
+			{
+				showPlates(piatti);
+				console.log(piatti);
+			}
+	})
+}
+
+function showPlates(piatti){
+	
+}
+
+
 function addUser() {
 	
 	$("#canChange").empty();
@@ -421,6 +359,7 @@ function addUser() {
 		getAllFieldUser();
 	});
 }
+
 
 function getAllFieldUser(){
 	var userField = $("#addUser").serializeArray();
