@@ -3,63 +3,58 @@ $( document ).ready(function() {
 });
 
 function tablesList() {
-	$(document).ready(function(){
-		var tables = null;
-		var xhttp = new XMLHttpRequest();
-
 		var row = "";
 		row = document.createElement("div");
 		$(row).addClass("row mx-auto");
 
-		xhttp.onreadystatechange = function () {
-			if(xhttp.readyState == 4 && xhttp.status == 200) {
-
-				$.ajax({
-					cache: false,
-					dataType: "json",
-					error: function(){
-						console.log("json not found");
-					},
-					success: function (tables) {
-						console.log("success");
-						
+		$.get("ServletGetAllTavoli",function(data,status)  {
+						var tables =JSON.parse(data);
 						$("#tablesList").empty();
 						tables.forEach(element =>{
 
 							var col = document.createElement("div");
-							$(col).addClass("col-3 pr-3 table");
+							$(col).addClass("col-2 pr-4 mb-5 container-table");
 
 							var btn = document.createElement("div");
+							var text = document.createElement("span");
+							$(text).addClass("span-centered");
+							$(text).text(element.numeroTavolo);
+							$(col).append(text);
+							 // <object data="./contents/images/Tavolo.svg" type="image/svg+xml"></object>	
+							var svg = document.createElement("img");
+							$(svg).addClass("table");
+							$(svg).attr("id","table-img");
 							
-
-
-
 							$(btn).attr("id", "table-"+element.numeroTavolo);
 							if(element.flagOccupato){
+								colorTable(svg,"red");
 								$(btn).text("Tavolo #"+ element.numeroTavolo + " | Occupato | Ordinazione #" + element.numeroOrdinazione);
 								$(btn).addClass("bg-danger");
+								
 							} else {
+								colorTable(svg,"green");
 								$(btn).text("Tavolo #"+ element.numeroTavolo +  " | Libero");
 								$(btn).addClass("bg-success");
 							}
 
+							
+							$(col).append(svg);
+							$(row).append(col);
+							$("#tablesList").append(row);
+							
 							$(col).append(btn);
 							$(row).append(col);
 							$("#tablesList").append(row);
 						});
-
-
-
-
-
-					},
-					url: 'jsonfiles/listaTavoli.json',
 				});
-			}
-		}
 
-
-		xhttp.open("GET", "ControllerTavolo?op=" + 1, true);
-		xhttp.send();
-	});
 }
+
+
+//la funzione colorTable seleziona tutti gli elementi del tavolo e gli assegna una classe che contiene il colore
+function colorTable(svg, colorclass)
+{
+	$(svg).attr("src","./contents/images/table-"+colorclass+".png");
+}
+
+

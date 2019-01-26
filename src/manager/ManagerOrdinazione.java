@@ -25,6 +25,8 @@ public class ManagerOrdinazione {
 			
 			if(value != 0) {
 				System.out.println("Ordinazione creata con successo");
+				return impostaIdEDataOrdine(ordine);
+
 			}
 		}
 		catch(SQLException e){
@@ -35,7 +37,6 @@ public class ManagerOrdinazione {
 			try {
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
-				return impostaIdEDataOrdine(ordine);
 				
 			}
 			catch(Exception e2) {
@@ -45,23 +46,22 @@ public class ManagerOrdinazione {
 		return null;
 	}
 	
-	public synchronized BeanOrdinazione impostaIdEDataOrdine(BeanOrdinazione ordine) {
+	private synchronized BeanOrdinazione impostaIdEDataOrdine(BeanOrdinazione ordine) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdinazione = ? AND dataOrdine");
+			String sqlString = new String("SELECT * FROM Ordinazione");
 			ps = conn.prepareStatement(sqlString);
-
-			ps.setInt(1, ordine.getNumeroOrdinazione());
-			ps.setTimestamp(2, ordine.getDataOrdine());
 			
 			ResultSet res = ps.executeQuery();
 
-			if(res.next()) {
+			if(res.last()) {
 				ordine.setNumeroOrdinazione(res.getInt("numeroOrdinazione"));
 				ordine.setDataOrdine(res.getTimestamp("dataOrdine"));
 				System.out.println("numero e data dell'ordine impostati");
+				return ordine;
+
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -70,7 +70,6 @@ public class ManagerOrdinazione {
 			try {
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
-				return ordine;
 
 			}
 			catch(Exception e2) {
@@ -93,7 +92,7 @@ public class ManagerOrdinazione {
 			
 			numeroOrdine = tavoloManager.getOrdinazioneDiTavolo(numeroTavolo);
 			
-			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdine = ?");
+			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdinazione = ?");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, numeroOrdine);

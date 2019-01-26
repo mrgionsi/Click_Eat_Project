@@ -34,22 +34,23 @@ public class ManagerTavolo {
 				listaTavoli.add(tavolo);
 			}
 
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+		} catch (SQLException e2) {
+				e2.printStackTrace();
+			
 
 		}finally{
 
 			try {
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
+				return listaTavoli;
 
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 			}
 		}
-		return listaTavoli;
+		return null;
 	}
 
 	public synchronized BeanTavolo creaTavolo(Integer numeroTavolo) {
@@ -62,12 +63,10 @@ public class ManagerTavolo {
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, numeroTavolo);
-			System.out.println("Prima di update");
 
 			int value = ps.executeUpdate();
 			
 			
-			System.out.println("Dopo di update");
 			System.out.println(value);
 			if(value != 0) {
 
@@ -131,7 +130,7 @@ public class ManagerTavolo {
 		return false;
 	}
 
-	public synchronized Boolean freeTavolo(Integer numeroTavolo){
+	public synchronized BeanTavolo freeTavolo(BeanTavolo tavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -140,13 +139,18 @@ public class ManagerTavolo {
 			String sqlString = new String("UPDATE Tavolo SET numeroOrdinazione = 0 AND flagOccupato = false AND flagConto = false WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, numeroTavolo);
+			ps.setInt(1, tavolo.getNumeroTavolo());
 
 			int value = ps.executeUpdate();
 			
 			if(value != 0) {
 				System.out.println("Tavolo liberato");
-				return true;
+				tavolo.setFlagConto(false);
+				tavolo.setFlagOccupato(false);
+				tavolo.setNumeroOrdinazione(0);
+				
+				return tavolo;
+
 			}
 		}
 		catch(SQLException e){
@@ -162,7 +166,7 @@ public class ManagerTavolo {
 				e2.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public synchronized Boolean isOccupato(Integer numeroTavolo){
@@ -245,7 +249,7 @@ public class ManagerTavolo {
 		return null;
 	}
 	
-	public synchronized Boolean setOccupato(Integer numeroTavolo){
+	public synchronized BeanTavolo setOccupato(BeanTavolo tavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -254,19 +258,16 @@ public class ManagerTavolo {
 			String sqlString = new String("UPDATE Tavolo SET flagOccupato = true WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, numeroTavolo);
+			ps.setInt(1, tavolo.getNumeroTavolo());
 
-			ResultSet res = ps.executeQuery();
+			int value = ps.executeUpdate();
 
-			Boolean flagControllo = res.getBoolean("flagOccupato");
 
-			if(flagControllo) {
+			if(value != 0) {
 				System.out.println("il tavolo è stato occupato");
-				return true;
-			}
-			else {
-				System.out.println("il tavolo non è stato occupato");
-				return false;
+				tavolo.setFlagOccupato(true);
+				return tavolo;
+			
 			}
 		}
 		catch(SQLException e){
@@ -286,7 +287,7 @@ public class ManagerTavolo {
 	}
 
 
-	public synchronized Boolean setOrdinazionePerTavolo(Integer numeroTavolo, BeanOrdinazione ordinazione){
+	public synchronized BeanTavolo setOrdinazionePerTavolo(BeanTavolo tavolo, BeanOrdinazione ordinazione){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -296,16 +297,13 @@ public class ManagerTavolo {
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, ordinazione.getNumeroOrdinazione());
-			ps.setInt(2,numeroTavolo);
+			ps.setInt(2, tavolo.getNumeroTavolo());
 
 			int value = ps.executeUpdate();
 			
 			if(value != 0) {
 				System.out.println("Ordinazione registrata");
-				return true;
-			}else {
-				System.out.println("Si è verificato un errore nell'esecuzione dell'update");
-				return false;
+				tavolo.setNumeroOrdinazione(ordinazione.getNumeroOrdinazione());
 			}
 
 		}

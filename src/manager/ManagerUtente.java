@@ -81,9 +81,8 @@ public class ManagerUtente {
 			}
 		}
 		catch(SQLException e){
-			if(e.getErrorCode() == 1062) {
-				e.printStackTrace(); 
-			}
+			e.printStackTrace();
+
 
 		}
 		finally {
@@ -147,7 +146,6 @@ public class ManagerUtente {
 
 		Connection conn = null;
 		PreparedStatement ps = null;
-		System.out.println("SONO NEL TRY DI MANAGER UTENTE");
 
 		try {
 			conn = ConnectionPool.getConnection();
@@ -157,7 +155,6 @@ public class ManagerUtente {
 
 			ResultSet res = ps.executeQuery();
 			
-			System.out.println("SONO NEL TRY DI MANAGER UTENTE");
 			// 4. Prendi il risultato
 			if(res.next()){
 				String nomeUtente= res.getString("nomeUtente");

@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -32,7 +31,6 @@ public class ServletLogin extends HttpServlet {
 		String idLogin = request.getParameter("idLogin");
 		String passwordUtente = request.getParameter("passwordUtente");
 		BeanUtente utente = null;
-		RequestDispatcher rq = null;
 		PrintWriter out = response.getWriter();
 		System.out.println("idlogin     " + idLogin);
 		try {	
