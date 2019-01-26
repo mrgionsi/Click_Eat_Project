@@ -223,9 +223,97 @@ function loadPlates(){
 }
 
 function showPlates(piatti){
+	//thead ---- intestazione start
+	var thead = $("#table-tablelistpiatti > thead");
 	
+	var tr = document.createElement("tr");
+	
+	var th = document.createElement("th");
+	$(th).attr("scope","col");
+	$(th).text("Nome Piatto");
+
+	var th1 = document.createElement("th");
+	$(th1).attr("scope","col");
+	$(th1).text("Categoria");
+	
+
+	var th2 = document.createElement("th");
+	$(th2).attr("scope","col");
+	$(th2).text("Prezzo");
+		
+	var th3 = document.createElement("th");
+	$(th3).attr("scope","col");
+	$(th3).text("Lista Ingredienti");
+	
+	
+	var th5 = document.createElement("th");
+	$(th5).attr("scope","col");
+	var add = document.createElement("img");
+	$(add).attr("id","add-btn-table");
+	$(add).addClass("btn-rowtable btn-add");
+	$(add).attr("src","./contents/images/add-button.png");
+	
+	$(th5).append(add);
+	
+	$(tr).append(th);
+	$(tr).append(th1);
+	$(tr).append(th2);
+	$(tr).append(th3);
+
+	$(tr).append(th5);
+	$(thead).append(tr);
+
+	//thead ---- intestazione end
+	
+	// tbody --- corpo start 
+	var tbody = $("#table-tablelistpiatti > tbody");
+	piatti.forEach(function(element){
+		var tr = document.createElement("tr");
+		var th = document.createElement("th");
+		$(th).attr("scope","row");
+		$(th).text(element.nomePiatto);
+		
+		var th1 = document.createElement("th");
+		$(th1).text(element.categoriaPiatto);
+		
+		var th2 = document.createElement("th");
+		$(th2).text(element.prezzoPiatto);
+		
+		var th3 = document.createElement("th");
+		$(th3).text(concatIngredienti(element.listaIngredienti));
+		
+		
+		var th5 = document.createElement("th");
+			var modify = document.createElement("img");
+				$(modify).attr("id","modifyrow-" + element.idPiatto);
+				$(modify).addClass("btn-rowtable btn-edit");
+				$(modify).attr("src","./contents/images/edit-button.png");
+			var remove = document.createElement("img");
+				$(remove).attr("id","removerow-" +  + element.idPiatto);
+				$(remove).attr("src","./contents/images/remove-button.png");
+				$(remove).addClass("btn-rowtable");
+				$(th5).append(modify);
+				$(th5).append(remove);
+		
+		$(tr).append(th);
+		$(tr).append(th1);
+		$(tr).append(th2);
+		$(tr).append(th3);
+		$(tr).append(th5);
+		$(tbody).append(tr);
+		
+	})
 }
 
+
+function concatIngredienti(lista){
+	var result = "";
+	lista.forEach(item =>{
+		console.log(item.nomeIngrediente);
+		result += item.nomeIngrediente +",";
+	});
+	return result;
+}
 
 function addUser() {
 	
