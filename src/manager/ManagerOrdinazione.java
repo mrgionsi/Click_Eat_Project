@@ -99,18 +99,28 @@ public class ManagerOrdinazione {
 			ps.setInt(1, numeroTavolo);
 			
 			ResultSet res = ps.executeQuery();
-			
+			BeanOrdinazione ordine = new BeanOrdinazione();
+			ArrayList<BeanPiatto> listaPiatti = new ArrayList<BeanPiatto>();
+
 			if(res.next()) {
 				dataOrdine = res.getTimestamp("dataOrdine");
 				numeroOrdine = res.getInt("numeroOrdinazione");
-				
-				
-				BeanOrdinazione ordine = new BeanOrdinazione(numeroOrdine, dataOrdine);
+				ordine = new BeanOrdinazione(numeroOrdine, dataOrdine);
+				listaPiatti.add(manPiatto.ottieniPiatto(res.getInt("idPiatto")));
 
 				
-				
-				return ordine;
 			}
+			
+			while(res.next()) {
+				
+				listaPiatti.add(manPiatto.ottieniPiatto(res.getInt("idPiatto")));
+				
+			}
+		
+			ordine.setListaPiatti(listaPiatti);
+			
+			return ordine;
+			
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
