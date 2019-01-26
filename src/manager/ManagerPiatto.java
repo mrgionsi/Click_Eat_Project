@@ -5,12 +5,62 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import connessione.ConnectionPool;
 import model.BeanIngrediente;
 import model.BeanPiatto;
 
 public class ManagerPiatto {
+	
+	public synchronized BeanPiatto ottieniPiatto(int idPiatto) {
+		Connection conn =  null;
+		PreparedStatement ps = null;
+		
+
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("SELECT * FROM v_DescPiattiCompleti where idPiatto = ?");
+			ps = conn.prepareStatement(sqlString);
+			ps.setInt(1, idPiatto);
+
+
+			ResultSet res = ps.executeQuery();
+			
+			
+			if(res.next()) {
+				
+				List<String> listIngredienti = new ArrayList<String>(Arrays.asList(res.getString("lista_ingredienti").split(",")));
+			    ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
+
+				
+				listIngredienti.forEach(element -> {
+					listaIngredienti.add(new BeanIngrediente(element));
+				});
+				
+				return new BeanPiatto (res.getInt("idPiatto"), res.getString("nomePiatto"), res.getString("categoriaPiatto"), res.getFloat("prezzoPiatto"), listaIngredienti);
+				
+			}
+			
+			
+		}
+		catch(SQLException e){
+				e.printStackTrace(); 
+
+		}
+		finally {
+			try {
+				
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
 	
 	public synchronized ArrayList<BeanPiatto> ottieniListaPiatti(){
 		Connection conn =  null;
@@ -19,7 +69,7 @@ public class ManagerPiatto {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("SELECT * FROM Piatto");
+			String sqlString = new String("SELECT * FROM v_DescPiattiCompleti");
 			ps = conn.prepareStatement(sqlString);
 
 
@@ -29,7 +79,6 @@ public class ManagerPiatto {
 			Float prezzoPiatto = null;
 			String categoriaPiatto = null;
 			Integer idPiatto = 0;
-			ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
 			
 			while(res.next()) {
 				
@@ -38,13 +87,21 @@ public class ManagerPiatto {
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
 				
+				System.out.println(res.getString("lista_ingredienti"));
+				
+				List<String> listIngredienti = new ArrayList<String>(Arrays.asList(res.getString("lista_ingredienti").split(",")));
+				ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
+
+				
+				listIngredienti.forEach(element -> {
+				    listaIngredienti.add(new BeanIngrediente(element));
+				});
+				
+				listaPiatti.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto, listaIngredienti));
 				System.out.println(idPiatto);
 				
-				BeanPiatto piatto = new BeanPiatto(nomePiatto,categoriaPiatto,prezzoPiatto);
-				piatto.setIdPiatto(idPiatto);
-				listaIngredienti.addAll( ingredientiNelPiatto(idPiatto)) ; //probabile errore
-				piatto.setListaIngredienti(listaIngredienti);
-				listaPiatti.add(piatto);
+				
+				
 			}
 			
 			return listaPiatti;

@@ -7,6 +7,7 @@ public class BeanOrdinazione {
 	
 	private Integer numeroOrdinazione;
 	private ArrayList<BeanPiatto> listaPiatti;
+	
 	private Timestamp dataOrdine;
 	
 	public BeanOrdinazione() {

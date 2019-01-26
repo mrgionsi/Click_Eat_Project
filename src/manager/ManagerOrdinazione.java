@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import connessione.ConnectionPool;
+import model.BeanIngrediente;
 import model.BeanOrdinazione;
+import model.BeanPiatto;
 
 public class ManagerOrdinazione {
 	
@@ -83,25 +86,29 @@ public class ManagerOrdinazione {
 		
 		Connection conn =  null;
 		PreparedStatement ps = null;
-		ManagerTavolo tavoloManager = new ManagerTavolo();
-		Integer numeroOrdine = 0;
+		Integer numeroOrdine;
 		Timestamp dataOrdine;
+		//BeanPiatto piatto = new BeanPiatto();
+		ManagerPiatto manPiatto = new ManagerPiatto();
 		
 		try {
 			conn = ConnectionPool.getConnection();
-			
-			numeroOrdine = tavoloManager.getOrdinazioneDiTavolo(numeroTavolo);
-			
-			String sqlString = new String("SELECT * FROM Ordinazione WHERE numeroOrdinazione = ?");
+			String sqlString = new String("SELECT * FROM v_DescOrdinazioniComplete WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, numeroOrdine);
+			ps.setInt(1, numeroTavolo);
 			
 			ResultSet res = ps.executeQuery();
-
+			
 			if(res.next()) {
 				dataOrdine = res.getTimestamp("dataOrdine");
+				numeroOrdine = res.getInt("numeroOrdinazione");
+				
+				
 				BeanOrdinazione ordine = new BeanOrdinazione(numeroOrdine, dataOrdine);
+
+				
+				
 				return ordine;
 			}
 		}catch(SQLException e){

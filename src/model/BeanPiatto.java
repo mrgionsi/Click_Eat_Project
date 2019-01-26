@@ -25,6 +25,24 @@ public class BeanPiatto {
 		listaIngredienti = new ArrayList<BeanIngrediente> ();
 		setPrezzoPiatto(prezzoPiatto);
 	}
+	
+	public BeanPiatto(int idPiatto, String nomePiatto, String categoriaPiatto, Float prezzoPiatto) {
+		
+		setIdPiatto(idPiatto);
+		setNomePiatto(nomePiatto);
+		setCategoriaPiatto(categoriaPiatto);
+		listaIngredienti = new ArrayList<BeanIngrediente> ();
+		setPrezzoPiatto(prezzoPiatto);
+	}
+
+	public BeanPiatto(int idPiatto, String nomePiatto, String categoriaPiatto, Float prezzoPiatto, ArrayList<BeanIngrediente> listaIngredienti) {
+	
+		setIdPiatto(idPiatto);
+		setListaIngredienti(listaIngredienti);
+		setNomePiatto(nomePiatto);
+		setCategoriaPiatto(categoriaPiatto);
+		setPrezzoPiatto(prezzoPiatto);
+	}
 
 	public String getNomePiatto() {
 		return nomePiatto;
