@@ -1,39 +1,25 @@
-function wait(ms)
-{
-var d = new Date();
-var d2 = null;
-do { d2 = new Date(); }
-while(d2-d < ms);
-}
+
 $(document).ready(function(){
 	loadTables();
 	loadUsers();
 	loadPlates();
+	
 });
 
 function loadTables() {
-/*  
-    	$("#canChange").empty();
-        $("#showForm").empty();
-        
 
-        var newSpinner = document.createElement("div");
-        $(newSpinner).addClass("spinner-border text-primary");
-        $(newSpinner).attr("role", "status");
-        
-        var newSpan = document.createElement("span");
-        $(newSpan).addClass("sr-only");
-        $(newSpan).text("Loading...")
-        
-        $(newSpinner).append(newSpan);
-        $("#canChange").append(newSpinner);
-*/
 	$.get("ServletGetAllTavoli",function(data,status){
 		var tavoli = JSON.parse(data);
 		if(tavoli)
 			{
 				showTable(tavoli);
-				console.log(tavoli);
+				//console.log(tavoli);
+				$("#table-tablelist").DataTable({
+						"paging": false,
+						"bInfo" : false
+				});
+				$('.dataTables_length').addClass('bs-select');
+
 			}
 	})
 }
@@ -46,24 +32,21 @@ function showTable(tavoli){
 	var tr = document.createElement("tr");
 	
 	var th = document.createElement("th");
-	$(th).attr("scope","col");
 	$(th).text("N. Tavoli");
 
 	var th1 = document.createElement("th");
-	$(th1).attr("scope","col");
 	$(th1).text("Stato(Libero/Occupato)");
 	
 	var th2 = document.createElement("th");
-	$(th2).attr("scope","col");
 	$(th2).text("Numero Ordinazione");
 	
 	var th3 = document.createElement("th");
-	$(th3).attr("scope","col");
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");
 	$(add).attr("src","./contents/images/add-button.png");
-	
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#exampleModalCenter");
 	$(th3).append(add);
 	
 	$(tr).append(th);
@@ -78,17 +61,18 @@ function showTable(tavoli){
 	var tbody = $("#table-tablelist > tbody");
 	tavoli.forEach(function(element){
 		var tr = document.createElement("tr");
-		var th = document.createElement("th");
+		var th = document.createElement("td");
+		$(th).attr("data-sortable","true");
 		$(th).attr("scope","row");
 		$(th).text(element.numeroTavolo);
 		
-		var th1 = document.createElement("th");
+		var th1 = document.createElement("td");
 		$(th1).text(element.flagOccupato);
 		
-		var th2 = document.createElement("th");
+		var th2 = document.createElement("td");
 		$(th2).text(element.numeroOrdinazione);
 		
-		var th3 = document.createElement("th");
+		var th3 = document.createElement("td");
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
 				$(modify).addClass("btn-rowtable btn-edit");
@@ -105,8 +89,10 @@ function showTable(tavoli){
 		$(tr).append(th2);
 		$(tr).append(th3);
 		$(tbody).append(tr);
-		
+
 	})
+
+
 }
 
 
@@ -116,6 +102,8 @@ function loadUsers() {
 		if(utenti)
 			{
 				showUsers(utenti);
+				$("#table-tablelistuser").DataTable();
+				$('.dataTables_length').addClass('bs-select');
 				console.log(utenti);
 			}
 	})
@@ -206,8 +194,9 @@ function showUsers(utenti){
 		$(tr).append(th4);
 		$(tr).append(th5);
 		$(tbody).append(tr);
-		
-	})
+
+	});
+
 }
 
 
@@ -218,6 +207,8 @@ function loadPlates(){
 			{
 				showPlates(piatti);
 				console.log(piatti);
+				$("#table-tablelistpiatti").DataTable();
+				$('.dataTables_length').addClass('bs-select');
 			}
 	})
 }
@@ -309,7 +300,6 @@ function showPlates(piatti){
 function concatIngredienti(lista){
 	var result = "";
 	lista.forEach(item =>{
-		console.log(item.nomeIngrediente);
 		result += item.nomeIngrediente +",";
 	});
 	return result;
