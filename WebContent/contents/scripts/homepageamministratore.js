@@ -50,6 +50,10 @@ function showTable(tavoli){
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");
+	//data attribute for modal
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#ModalAddtable");
+	
 	$(add).attr("src","./contents/images/add-button.png");
 
 	$(th3).append(add);

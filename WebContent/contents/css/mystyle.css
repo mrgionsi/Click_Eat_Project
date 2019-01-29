@@ -102,7 +102,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 	float:right;
 }
 #container-tabella{
-	width:55%;
+	/*width:55%;*/
 }
 
 tbody > tr > th{
