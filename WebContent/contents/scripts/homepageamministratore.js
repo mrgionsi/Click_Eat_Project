@@ -16,7 +16,11 @@ function loadTables() {
 				//console.log(tavoli);
 				$("#table-tablelist").DataTable({
 						"paging": false,
-						"bInfo" : false
+						"bInfo" : false, 
+						"columnDefs": [ {
+					          "targets": 'no-sort',
+					          "orderable": false,
+					    } ]
 				});
 				$('.dataTables_length').addClass('bs-select');
 
@@ -41,12 +45,13 @@ function showTable(tavoli){
 	$(th2).text("Numero Ordinazione");
 	
 	var th3 = document.createElement("th");
+	$(th3).addClass("no-sort");
+
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");
 	$(add).attr("src","./contents/images/add-button.png");
-	$(add).attr("data-toggle","modal");
-	$(add).attr("data-target","#exampleModalCenter");
+
 	$(th3).append(add);
 	
 	$(tr).append(th);
@@ -62,7 +67,6 @@ function showTable(tavoli){
 	tavoli.forEach(function(element){
 		var tr = document.createElement("tr");
 		var th = document.createElement("td");
-		$(th).attr("data-sortable","true");
 		$(th).attr("scope","row");
 		$(th).text(element.numeroTavolo);
 		
@@ -102,7 +106,14 @@ function loadUsers() {
 		if(utenti)
 			{
 				showUsers(utenti);
-				$("#table-tablelistuser").DataTable();
+				$("#table-tablelistuser").DataTable({
+					"paging": false,
+					"bInfo" : false, 
+					 "columnDefs": [ {
+				          "targets": 'no-sort',
+				          "orderable": false,
+				    } ]
+				});
 				$('.dataTables_length').addClass('bs-select');
 				console.log(utenti);
 			}
@@ -137,6 +148,8 @@ function showUsers(utenti){
 	$(th4).text("Password");
 	
 	var th5 = document.createElement("th");
+	$(th5).addClass("no-sort");
+
 	$(th5).attr("scope","col");
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
@@ -207,7 +220,14 @@ function loadPlates(){
 			{
 				showPlates(piatti);
 				console.log(piatti);
-				$("#table-tablelistpiatti").DataTable();
+				$("#table-tablelistpiatti").DataTable({
+					"paging": false,
+					"bInfo" : false, 
+					 "columnDefs": [ {
+				          "targets": 'no-sort',
+				          "orderable": false,
+				    } ]
+				});
 				$('.dataTables_length').addClass('bs-select');
 			}
 	})
@@ -239,6 +259,8 @@ function showPlates(piatti){
 	
 	var th5 = document.createElement("th");
 	$(th5).attr("scope","col");
+	$(th5).addClass("no-sort");
+
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");

@@ -41,8 +41,7 @@
 			<div class="tab-pane fade show active" id="nav-tavoli"
 				role="tabpanel" aria-labelledby="nav-home-tab">
 				<div id="container-tabella" class="mx-auto">
-					<table data-pagination="true" data-search="true"
-						class="table table-hover" id="table-tablelist" class="display">
+					<table class="table table-striped table-bordered" id="table-tablelist" class="display">
 						<thead>
 						</thead>
 						<tbody>
@@ -53,7 +52,7 @@
 			<div class="tab-pane fade" id="nav-utenti" role="tabpanel"
 				aria-labelledby="nav-utenti-tab">
 				<div id="container-tabella-utenti" class="mx-auto">
-					<table class="table table-hover" id="table-tablelistuser">
+					<table class="table table-striped table-bordered" id="table-tablelistuser">
 						<thead>
 						</thead>
 						<tbody>
@@ -64,7 +63,7 @@
 			<div class="tab-pane fade" id="nav-piatti" role="tabpanel"
 				aria-labelledby="nav-piatti-tab">
 				<div id="container-tabella-piatti" class="mx-auto">
-					<table class="table table-striped table-hover"
+					<table class="table table-striped table-bordered"
 						id="table-tablelistpiatti">
 						<thead>
 						</thead>
