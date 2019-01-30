@@ -1,5 +1,7 @@
 $( document ).ready(function() {
+	
 	tablesList();
+
 });
 
 function tablesList() {
