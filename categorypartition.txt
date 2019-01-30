@@ -1,1 +1,53 @@
-Category partition
+Metodi da testare
+
+creaUtente
+valoriLogin
+
+creaTavolo
+
+creaPiatto
+
+creaIngrediente
+
+
+------------------
+
+Category partition:
+
+creaUtente
+
+Parametro: nomeUtente
+Formato: ^[A-Za-z ‘]+$
+Lunghezza[lenght_nome] 
+1. <3 or >35 [error]
+2. >=3 and <=34 [lenght_nome_OK]
+
+Parametro: cognomeUtente
+Formato: ^[A-Za-z ‘]+$
+Lunghezza[lenght_cognome] 
+1. <3 or >35 [error]
+2. >=3 and <=34 [lenght_cognome_OK]
+
+Parametro: ruoloUtente
+Formato: ^[A-Za-z ‘]+$
+Lunghezza[lenght_ruolo] 
+1. <8 or >14 [error]
+2. >=8 and <=14 [lenght_ruolo_OK]
+
+Parametro: idLogin
+Formato: ^[a-z]+([.]?)+[a-z]+$
+Lunghezza[lenght_idLogin] 
+1. <4 or >36 [error]
+2. >=4 and <=36 [lenght_idLogin_OK]
+
+
+Parametro: passwordUtente
+Formato: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Lunghezza[lenght_passwordUtente] 
+1. <8 or >36 [error]
+2. >=8 and <=36 [lenght_passwordUtente_OK]
+
+
+
+
+
