@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import connessione.ConnectionPool;
-import model.BeanIngrediente;
 import model.BeanOrdinazione;
 import model.BeanPiatto;
 
