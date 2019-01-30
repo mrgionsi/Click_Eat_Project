@@ -17,93 +17,96 @@ Category partition:
 creaUtente
 
 Parametro: nomeUtente
-Formato: ^[A-Za-z ‘]+$
-Lunghezza[lenght_nomeUtente] 
+Formato [FNU] : ^[A-Za-z ‘]+$
+Lunghezza[LNU] 
 1. <3 or >35 [error]
-2. >=3 and <=34 [lenght_nomeUtente_OK]
+2. >=3 and <=35 [LNU OK]
 
-Non rispetta il formato [if lenght_nomeUtente_OK] [error]
-Rispetta il formato [if lenght_nomeUtente_OK] [property lenght_nomeUtente_OK]
+Non rispetta il formato [if LNU_OK] [error]
+Rispetta il formato [if LNU_OK] [property LNU_OK]
 
 Parametro: cognomeUtente
-Formato: ^[A-Za-z ‘]+$
-Lunghezza[lenght_cognomeUtente] 
+Formato [FCU]: ^[A-Za-z ‘]+$
+Lunghezza[LCU] 
 1. <3 or >35 [error]
-2. >=3 and <=34 [lenght_cognomeUtente_OK]
+2. >=3 and <=35 [LCU_OK]
 
-Non rispetta il formato [if lenght_cognomeUtente_OK] [error]
-Rispetta il formato [if lenght_cognomeUtente_OK] [property lenght_cognomeUtente_OK]
+Non rispetta il formato [if LCU_OK] [error]
+Rispetta il formato [if LCU_OK] [property LCU_OK]
 
 Parametro: ruoloUtente
-Formato: ^[A-Za-z ‘]+$
-Lunghezza[lenght_ruoloUtente] 
+Formato [FRU]: ^[A-Za-z ‘]+$
+Lunghezza[LRU] 
 1. <8 or >14 [error]
-2. >=8 and <=14 [lenght_ruoloUtente_OK]
+2. >=8 and <=14 [LRU_OK]
 
-Non rispetta il formato [if lenght_ruoloUtente_OK] [error]
-Rispetta il formato [if lenght_ruoloUtente_OK] [property lenght_ruoloUtente_OK]
+Non rispetta il formato [if LRU_OK] [error]
+Rispetta il formato [if LRU_OK] [property LRU_OK]
 
 
 Parametro: idLogin
-Formato: ^[a-z]+([.]?)+[a-z]+$
-Lunghezza[lenght_idLogin] 
+Formato [FIL]: ^[a-z]+([.]?)+[a-z]+$
+Lunghezza[LIL] 
 1. <4 or >36 [error]
-2. >=4 and <=36 [lenght_idLogin_OK]
+2. >=4 and <=36 [LIL_OK]
 
-Non rispetta il formato [if lenght_idLogin_OK] [error]
-Rispetta il formato [if lenght_idLogin_OK] [property lenght_idLogin_OK]
+Non rispetta il formato [if LIL_OK] [error]
+Rispetta il formato [if LIL_OK] [property LIL_OK]
 
 Parametro: passwordUtente
-Formato: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
-Lunghezza[lenght_passwordUtente] 
+Formato [FPU]: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Lunghezza[LPU] 
 1. <8 or >36 [error]
-2. >=8 and <=36 [lenght_passwordUtente_OK]
+2. >=8 and <=36 [LPU_OK]
 
-Non rispetta il formato [if lenght_passwordUtente_OK] [error]
-Rispetta il formato [if lenght_passwordUtente_OK] [property lenght_passwordUtente_OK]
+Non rispetta il formato [if LPU_OK] [error]
+Rispetta il formato [if LPU_OK] [property LPU_OK]
+
+
 
 -------------------------------------
 valoriLogin
 
 Parametro: idLogin
-Formato: ^[a-z]+([.]?)+[a-z]+$
-Lunghezza[lenght_idLogin] 
+Formato [FIL]: ^[a-z]+([.]?)+[a-z]+$
+Lunghezza[LIL] 
 1. <4 or >36 [error]
-2. >=4 and <=36 [lenght_idLogin_OK]
+2. >=4 and <=36 [LIL_OK]
 
-Non rispetta il formato [if lenght_idLogin_OK] [error]
-Rispetta il formato [if lenght_idLogin_OK] [property lenght_idLogin_OK]
+Non rispetta il formato [if LIL_OK] [error]
+Rispetta il formato [if LIL_OK] [property LIL_OK]
 
 Parametro: passwordUtente
-Formato: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
-Lunghezza[lenght_passwordUtente] 
+Formato [FPU]: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Lunghezza[LPU] 
 1. <8 or >36 [error]
-2. >=8 and <=36 [lenght_passwordUtente_OK]
+2. >=8 and <=36 [LPU_OK]
 
-Non rispetta il formato [if lenght_passwordUtente_OK] [error]
-Rispetta il formato [if lenght_passwordUtente_OK] [property lenght_passwordUtente_OK]
+Non rispetta il formato [if LPU_OK] [error]
+Rispetta il formato [if LPU_OK] [property LPU_OK]
+
 
 -------------------------------------
 creaTavolo
 
 Parametro: numeroTavolo
-Formato: ^[0-9]*$
-Lunghezza[lenght_numeroTavolo] 
+Formato [FNT]: ^[0-9]*$
+Lunghezza[LNT] 
 1. < or >36 [error]
-2. >=8 and <=36 [lenght_numeroTavolo_OK]
+2. >=8 and <=36 [LNT_OK]
 
-Non rispetta il formato [if lenght_numeroTavolo_OK] [error]
-Rispetta il formato [if lenght_numeroTavolo_OK] [property lenght_numeroTavolo_OK]
+Non rispetta il formato [if LNT_OK] [error]
+Rispetta il formato [if LNT_OK] [property LNT_OK]
 
 -------------------------------------
 creaIngrediente
 
 Parametro: nomeIngrediente
-Formato: ^[A-Za-z ‘]+$
-Lunghezza[lenght_nomeIngrediente] 
+Formato [FNI]: ^[A-Za-z ‘]+$
+Lunghezza[LNI] 
 1. <4 or >36 [error]
-2. >=4 and <=36 [lenght_nomeIngrediente_OK]
+2. >=4 and <=36 [LNI_OK]
 
-Non rispetta il formato [if lenght_nomeIngrediente_OK] [error]
-Rispetta il formato [if lenght_nomeIngrediente_OK] [property format_nomeIngrediente_OK]
+Non rispetta il formato [if LNI_OK] [error]
+Rispetta il formato [if LNI_OK] [property LNI_OK]
 
