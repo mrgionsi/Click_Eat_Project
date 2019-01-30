@@ -186,4 +186,43 @@ public class ManagerUtente {
 		}
 		return null;
 	}
+	
+	/*metodo utile per eliminare l'utente con l'identificativo di appartenenza
+	 */
+	public synchronized boolean eliminaUtenteViaIdLogin(String idLogin){
+		Connection conn =  null;
+		PreparedStatement ps = null;
+
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("DELETE FROM Utente WHERE idLogin = ?");
+			ps = conn.prepareStatement(sqlString);
+
+			ps.setString(1,idLogin);
+
+			int value = ps.executeUpdate();
+			
+			if(value != 0) {
+				System.out.println("eliminazione effettuata");
+				return true;
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+
+
+		}
+		finally {
+			try {
+				
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 }
