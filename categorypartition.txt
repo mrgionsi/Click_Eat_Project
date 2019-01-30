@@ -2,11 +2,8 @@ Metodi da testare
 
 creaUtente
 valoriLogin
-
 creaTavolo
-
 creaPiatto
-
 creaIngrediente
 
 
@@ -61,7 +58,6 @@ Lunghezza[LPU]
 
 Non rispetta il formato [if LPU_OK] [error]
 Rispetta il formato [if LPU_OK] [property LPU_OK]
-
 
 
 -------------------------------------
