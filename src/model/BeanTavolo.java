@@ -27,6 +27,12 @@ public class BeanTavolo {
 		setFlagOccupato(false);
 	}
 
+	public BeanTavolo(int numeroTavolo, int numeroOrdinazione, boolean flagOccupato, boolean flagConto) {
+		setNumeroTavolo(numeroTavolo);
+		setNumeroOrdinazione(numeroOrdinazione);
+		setFlagConto(flagConto);
+		setFlagOccupato(flagOccupato);	}
+
 	public Integer getNumeroTavolo() {
 		return numeroTavolo;
 	}
