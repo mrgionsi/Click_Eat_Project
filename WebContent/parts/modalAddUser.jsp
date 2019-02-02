@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalAddtableTitle">Aggiunti nuovo utente</h5>
+        <h5 class="modal-title" id="ModalAddUserTitle">Aggiunti nuovo utente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -24,12 +24,9 @@
        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<<<<<<< HEAD
-        <button type="button" class="btn btn-primary" id)">Crea</button>
-=======
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+
         <button type="button" class="btn btn-primary">Aggiungi</button>
->>>>>>> b5ccbadd516a5fc9d799ac84351185b6f7cdfef2
       </div>
     </div>
   </div>

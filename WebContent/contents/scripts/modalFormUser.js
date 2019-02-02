@@ -1,4 +1,4 @@
-class Modal{
+class ModalUser{
 	constructor(title,textButton,id_button, name, surname, password, login, role)
 	{
 		this.title = title;
@@ -12,6 +12,7 @@ class Modal{
 
 		this.onLoad();
 	}
+	
 	onLoad(){
 		$("#ModalAddUserTitle").text(this.title);
 		$(".btn-modal").attr("id",this.id_button);
@@ -24,17 +25,22 @@ class Modal{
 	}
 	caseCreate(utenti){
 		$("#"+ this.id_button).click(function(){
+			console.log("pressed");
 			var nameInput = $("#nomeUtente").val();
 			var surnameInput = $("#cognomeUtente").val();
 			var roleInput = $("#ruoloUtente").val();
 			var passwordInput = $("#passwordUtente").val();
 			var loginInput = $("#idLogin").val();
 			
-//funzione controllo da aggiungere
+//funzione controllo lato server
 
 				$.get({
 					url: "ServletAggiungiUtente",
-					data : 'nomeUtente=' + nameInput + 'cognomeUtente' + surnameInput + 'userId' + loginInput + 'passwordUtente' + passwordInput + 'ruoloUtente' + roleInput
+					data : {'nomeUtente=' : nameInput ,
+							'cognomeUtente': surnameInput ,
+							'userId' : loginInput ,
+							'passwordUtente' : passwordInput , 
+							'ruoloUtente' : roleInput }
 				})
 				.done(function(data){
 //					$("#ModalAddUser").modal('hide');

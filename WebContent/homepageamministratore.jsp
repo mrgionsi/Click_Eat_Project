@@ -85,6 +85,11 @@
 		<%@include file="./parts/modalConfirmDelete.jsp"%>
 
 </div>
+	<div class="modal fade" id="modalAddUser" tabindex="-1"
+		role="dialog" aria-labelledby="modalAddUser"
+		aria-hidden="true">
+		<%@include file="./parts/modalAddUser.jsp"%>
+	</div>
 </body>
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/jquery-3.3.1.min.js"></script>
@@ -102,10 +107,7 @@
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
   <script src="./contents/scripts/modalFormTable.js"></script>
-<<<<<<< HEAD
   <script src="./contents/scripts/modalFormUser.js"></script>
 
-=======
   <script src="./contents/scripts/modalConfirm.js"></script>
->>>>>>> cc579726adadd5628ce17c6f7ecd17f12936a7a5
 </html>

@@ -202,8 +202,15 @@ function showUsers(utenti){
 	
 	//data attribute for modal
 	$(add).attr("data-toggle","modal");
-	$(add).attr("data-target","#ModalAddUser");
+	$(add).attr("data-target","#modalAddUser");
 	
+	$(add).click(function(){
+		removeErrorText();
+		var createModal = new ModalUser("Aggiungi nuovo utente", "Aggiungi","btn-createuser", "", "", "", "", "");
+		createModal.caseCreate(utenti);
+		
+	
+	});
 	$(th5).append(add);
 	
 	$(tr).append(th);
