@@ -192,6 +192,10 @@ function showUsers(utenti){
 	$(add).addClass("btn-rowtable btn-add");
 	$(add).attr("src","./contents/images/add-button.png");
 	
+	//data attribute for modal
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#ModalAddUser");
+	
 	$(th5).append(add);
 	
 	$(tr).append(th);

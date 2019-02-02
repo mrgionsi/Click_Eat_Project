@@ -99,5 +99,6 @@
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
   <script src="./contents/scripts/modalFormTable.js"></script>
+  <script src="./contents/scripts/modalFormUser.js"></script>
 
 </html>
