@@ -14,7 +14,6 @@ $(document).ready(function(){
 });
 
 function loadTables() {
-
 	$.get("ServletGetAllTavoli",function(data,status){
 		var tavoli = JSON.parse(data);
 		if(tavoli)
@@ -121,6 +120,15 @@ function showTable(tavoli){
 				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
+				$(remove).attr("data-toggle","modal");
+				$(remove).attr("data-target","#ConfirmModal");
+				$(remove).click(function(){
+					console.log("CIAOO");
+					var removeModal = new ModalConfirm("Elimina", "Eliminare tavolo "+ element.numeroTavolo+ "?");
+					removeModal.onConfirm(element.numeroTavolo);
+	
+				});
+				
 				$(th3).append(divmodify);
 				$(th3).append(remove);
 		

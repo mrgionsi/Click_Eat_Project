@@ -81,7 +81,10 @@
 		aria-hidden="true">
 		<%@include file="./parts/modalAddTable.jsp"%>
 	</div>
+<div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalLabel" aria-hidden="true">
+		<%@include file="./parts/modalConfirmDelete.jsp"%>
 
+</div>
 </body>
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/jquery-3.3.1.min.js"></script>
@@ -99,5 +102,5 @@
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
   <script src="./contents/scripts/modalFormTable.js"></script>
-
+  <script src="./contents/scripts/modalConfirm.js"></script>
 </html>

@@ -121,3 +121,8 @@ table.dataTable thead .sorting_desc_disabled:before {
 tbody > tr > th{
 	font-weight: normal;
 }
+
+.modal-body{
+	font-weight: bold;
+	text-align: center;
+}

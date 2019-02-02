@@ -14,14 +14,14 @@ import manager.ManagerTavolo;
 /**
  * Servlet implementation class ServletElminaTavolo
  */
-@WebServlet("/ServletElminaTavolo")
-public class ServletElminaTavolo extends HttpServlet {
+@WebServlet("/ServletEliminaTavolo")
+public class ServletEliminaTavolo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ServletElminaTavolo() {
+	public ServletEliminaTavolo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
