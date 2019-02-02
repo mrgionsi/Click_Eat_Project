@@ -25,7 +25,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<<<<<<< HEAD
+        <button type="button" class="btn btn-primary" id)">Crea</button>
+=======
         <button type="button" class="btn btn-primary">Aggiungi</button>
+>>>>>>> b5ccbadd516a5fc9d799ac84351185b6f7cdfef2
       </div>
     </div>
   </div>
