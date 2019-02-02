@@ -46,7 +46,10 @@ function showTable(tavoli){
 	
 	var th3 = document.createElement("th");
 	$(th3).addClass("no-sort");
-
+	
+	var divimg = document.createElement("div");
+	$(divimg).attr("id","btn-add-table");
+	
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");
@@ -55,8 +58,14 @@ function showTable(tavoli){
 	$(add).attr("data-target","#ModalAddtable");
 	
 	$(add).attr("src","./contents/images/add-button.png");
-
-	$(th3).append(add);
+	$(divimg).append(add);
+	$(th3).append(divimg);
+	
+	$(divimg).click(function(){
+		var createModal = new Modal("Crea nuovo tavolo", "Aggiungi");
+		createModal.onLoad();
+		checkNumberTables(tavoli);
+	});
 	
 	$(tr).append(th);
 	$(tr).append(th1);
@@ -81,15 +90,28 @@ function showTable(tavoli){
 		$(th2).text(element.numeroOrdinazione);
 		
 		var th3 = document.createElement("td");
+		var divmodify = document.createElement("div");
+		$(divmodify).attr("id","removerow-" +  + element.numeroTavolo);
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
+				$(divmodify).append(modify);
+				$(divmodify).attr("data-toggle","modal");
+				$(divmodify).attr("data-target","#ModalAddtable");
+				//$(divmodify).attr("data-ntavolo",element.numeroTavolo);
+
+			$(divmodify).click(function(){
+				var modifyModal = new Modal("Modifica numero tavolo", "Modifica",element.numeroTavolo);
+				modifyModal.onLoad();
+
+			});
+			
 			var remove = document.createElement("img");
 				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
-				$(th3).append(modify);
+				$(th3).append(divmodify);
 				$(th3).append(remove);
 		
 		$(tr).append(th);

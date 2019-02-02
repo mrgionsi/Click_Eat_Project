@@ -82,6 +82,19 @@ table.dataTable thead .sorting_desc_disabled:before {
   font-weight: bold;
   font-size: 3em;
 }
+.text-error{
+	font-weight:bold;
+	color:red;
+}
+
+.text-success{
+	font-weight:bold;
+	color:green;
+}
+
+.input-fielderror{
+	border: 1px solid red !important;
+}
 
 .btn-edit{   
 }

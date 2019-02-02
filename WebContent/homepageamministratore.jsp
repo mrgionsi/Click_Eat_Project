@@ -81,6 +81,7 @@
 		aria-hidden="true">
 		<%@include file="./parts/modalAddTable.jsp"%>
 	</div>
+
 </body>
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/jquery-3.3.1.min.js"></script>
@@ -97,6 +98,6 @@
 	src="./contents/library/MDB-Free_4.7.0/js/addons/datatables.min.js"></script>
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
-
+  <script src="./contents/scripts/modalFormTable.js"></script>
 
 </html>

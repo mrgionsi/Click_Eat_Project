@@ -1,8 +1,8 @@
 <!-- Modal -->
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document" id="modalCreaTavolo">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalAddtableTitle">Crea nuovo tavolo</h5>
+        <h5 class="modal-title" id="ModalAddtableTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,10 +16,9 @@
        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Crea</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Annulla</button>
+        <button type="button" id="btn-creatavolo" class="btn btn-primary"></button>
       </div>
     </div>
   </div>
   
-  <script src="./contents/scripts/modalFormTable.js"></script>
