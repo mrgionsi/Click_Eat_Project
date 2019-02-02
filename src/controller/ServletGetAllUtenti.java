@@ -28,7 +28,6 @@ public class ServletGetAllUtenti extends HttpServlet {
 		super();
 	}
 
-	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
