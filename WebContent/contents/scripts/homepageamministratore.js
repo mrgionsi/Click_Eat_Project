@@ -1,3 +1,10 @@
+$('html').bind('keypress', function(e)
+{
+   if(e.keyCode == 13)
+   {
+      return false;
+   }
+});
 
 $(document).ready(function(){
 	loadTables();
@@ -62,9 +69,10 @@ function showTable(tavoli){
 	$(th3).append(divimg);
 	
 	$(divimg).click(function(){
-		var createModal = new Modal("Crea nuovo tavolo", "Aggiungi");
-		createModal.onLoad();
-		checkNumberTables(tavoli);
+		removeErrorText();
+		var createModal = new Modal("Crea nuovo tavolo", "Aggiungi","","btn-createtable");
+		createModal.caseCreate(tavoli);
+		
 	});
 	
 	$(tr).append(th);
@@ -102,9 +110,11 @@ function showTable(tavoli){
 				//$(divmodify).attr("data-ntavolo",element.numeroTavolo);
 
 			$(divmodify).click(function(){
-				var modifyModal = new Modal("Modifica numero tavolo", "Modifica",element.numeroTavolo);
-				modifyModal.onLoad();
+				removeErrorText();
+				var modifyModal = new Modal("Modifica numero tavolo", "Modifica",element.numeroTavolo,"btn-modifytable");
+				modifyModal.caseUpdate(tavoli);
 
+				
 			});
 			
 			var remove = document.createElement("img");
