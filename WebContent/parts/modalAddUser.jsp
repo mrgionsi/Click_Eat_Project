@@ -1,5 +1,5 @@
 <!-- Modal -->
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" id="ModalAddUser"role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalAddUserTitle">Aggiunti nuovo utente</h5>
@@ -27,7 +27,7 @@
 
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary btn-modal">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" data-type="btn-adduser">Aggiungi</button>
 
       </div>
     </div>

@@ -14,12 +14,12 @@ import connessione.ConnectionPool;
 import model.BeanUtente;
 
 public class ManagerUtente {
-
+	Connection conn =  null;
+	PreparedStatement ps = null;
 	/* metodo utile per registrare un nuovo utente sul sistema, con i parametri scelti dall'amministratore
 	 */
 	public synchronized BeanUtente creaUtente(String nomeUtente, String passwordUtente, String cognomeUtente, String ruoloUtente, String idLogin){
-		Connection conn =  null;
-		PreparedStatement ps = null;
+		System.out.println("SONO IN creaUtente");
 
 		try {
 			conn = ConnectionPool.getConnection();
@@ -32,9 +32,9 @@ public class ManagerUtente {
 			ps.setString(3, idLogin);
 			ps.setString(5, ruoloUtente);
 
-			int value = ps.executeUpdate();
-
-			if(value != 0) {
+			boolean value = ps.execute();
+			System.out.println("VALUE" + value);
+			if(value) {
 
 				BeanUtente utente = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				System.out.println("Registrazione effettuata con successo");
@@ -74,7 +74,7 @@ public class ManagerUtente {
 			ps.setInt(1,idUtente);
 
 			int value = ps.executeUpdate();
-			
+
 			if(value != 0) {
 				System.out.println("eliminazione effettuata");
 				return true;
@@ -87,7 +87,7 @@ public class ManagerUtente {
 		}
 		finally {
 			try {
-				
+
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -141,7 +141,7 @@ public class ManagerUtente {
 		}
 		return null;
 	}
-	
+
 	public synchronized BeanUtente valoriLogin(String idLogin, String passwordUtente){ 
 
 		Connection conn = null;
@@ -154,7 +154,7 @@ public class ManagerUtente {
 			ps.setString(2, passwordUtente);
 
 			ResultSet res = ps.executeQuery();
-			
+
 			// 4. Prendi il risultato
 			if(res.next()){
 				String nomeUtente= res.getString("nomeUtente");
@@ -162,23 +162,23 @@ public class ManagerUtente {
 				String cognomeUtente = res.getString("cognomeUtente");
 				Integer idUtente = res.getInt("idUtente");
 				System.out.println("nomeUtente =======" + nomeUtente);
-				
+
 				BeanUtente utenteLoggato = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				utenteLoggato.setIdUtente(idUtente);
 				return utenteLoggato;
 			}
 
 		} catch (SQLException e) {
-				System.out.println("SqlException in ManagerUtente");
+			System.out.println("SqlException in ManagerUtente");
 			e.printStackTrace();
 
 		}finally{
 
 			try {
-				
+
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
-				
+
 			} catch (SQLException e) {
 
 				e.printStackTrace();
@@ -186,7 +186,7 @@ public class ManagerUtente {
 		}
 		return null;
 	}
-	
+
 	/*metodo utile per eliminare l'utente con l'identificativo di appartenenza
 	 */
 	public synchronized boolean eliminaUtenteViaIdLogin(String idLogin){
@@ -201,7 +201,7 @@ public class ManagerUtente {
 			ps.setString(1,idLogin);
 
 			int value = ps.executeUpdate();
-			
+
 			if(value != 0) {
 				System.out.println("eliminazione effettuata");
 				return true;
@@ -214,7 +214,7 @@ public class ManagerUtente {
 		}
 		finally {
 			try {
-				
+
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
