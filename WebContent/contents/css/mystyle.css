@@ -68,6 +68,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 .container-table:hover {
 	transform: scale(1.1);
 	cursor: pointer;
+	overflow:hidden;
 }
 .bg-success{
 	background-color:#008000;
@@ -124,5 +125,4 @@ tbody > tr > th{
 
 .modal-body{
 	font-weight: bold;
-	text-align: center;
 }

@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	
 	tablesList();
-
+//	onClickTable();
 });
 
 function tablesList() {
@@ -16,7 +16,9 @@ function tablesList() {
 
 							var col = document.createElement("div");
 							$(col).addClass("col-2 pr-4 mb-5 container-table");
-
+							$(col).attr("id","table-container");
+							$(col).attr("data-ntavolo",element.numeroTavolo);
+							onClickTable(col);
 							var btn = document.createElement("div");
 							var text = document.createElement("span");
 							$(text).addClass("span-centered");
@@ -30,13 +32,13 @@ function tablesList() {
 							$(btn).attr("id", "table-"+element.numeroTavolo);
 							if(element.flagOccupato){
 								colorTable(svg,"red");
-								$(btn).text("Tavolo #"+ element.numeroTavolo + " | Occupato | Ordinazione #" + element.numeroOrdinazione);
-								$(btn).addClass("bg-danger");
+//								$(btn).text("Tavolo #"+ element.numeroTavolo + " | Occupato | Ordinazione #" + element.numeroOrdinazione);
+//								$(btn).addClass("bg-danger");
 								
 							} else {
 								colorTable(svg,"green");
-								$(btn).text("Tavolo #"+ element.numeroTavolo +  " | Libero");
-								$(btn).addClass("bg-success");
+//								$(btn).text("Tavolo #"+ element.numeroTavolo +  " | Libero");
+//								$(btn).addClass("bg-success");
 							}
 
 							
@@ -59,4 +61,16 @@ function colorTable(svg, colorclass)
 	$(svg).attr("src","./contents/images/table-"+colorclass+".png");
 }
 
-
+function onClickTable(tavolo){
+$(tavolo).click(function(){
+	var ntavolo = $(this).data("ntavolo") 
+	localStorage.setItem("tavoloordinazione",ntavolo);
+//	console.log(localStorage.getItem("tavoloordinazione"));
+	$("#tablesList").hide();
+	
+	var prodOrdinazione = document.createElement("div");
+	$(prodOrdinazione).attr("id","productOrder");
+	$(prodOrdinazione).load("./ProdottiOrdinazione.jsp");
+	$(".container-fluid").append(prodOrdinazione);
+})
+}
