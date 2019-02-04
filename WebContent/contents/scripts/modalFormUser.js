@@ -41,7 +41,7 @@ class ModalUser{
 
 				$.get({
 					url: "ServletAggiungiUtente",
-					data : {'nomeUtente=' : nameInput ,
+					data : {'nomeUtente' : nameInput ,
 							'cognomeUtente': surnameInput ,
 							'userId' : loginInput ,
 							'passwordUtente' : passwordInput , 
@@ -50,7 +50,7 @@ class ModalUser{
 				.done(function(data){
 //					$("#ModalAddUser").modal('hide');
 					showSuccessText("Utente aggiunto con successo",$("#nomeUtente").parent());
-					//(location.reload(),3000);
+					(location.reload(),3000);
 				});
 		});
 	}

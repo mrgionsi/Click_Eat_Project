@@ -43,6 +43,7 @@ public class ManagerUtente {
 			}
 		}
 		catch(SQLException e){
+			System.out.println(e.getMessage());
 			if(e.getErrorCode() == 1062) {
 				//return new BeanUtente("duplicato","duplicato"); 
 			}
