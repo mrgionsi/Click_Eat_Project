@@ -27,10 +27,9 @@
 
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal">Aggiungi</button>
 
       </div>
     </div>
   </div>
   
-  <script src="./contents/scripts/modalFormUser.js"></script>
