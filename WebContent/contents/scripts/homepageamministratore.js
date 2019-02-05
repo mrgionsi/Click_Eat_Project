@@ -245,15 +245,24 @@ function showUsers(utenti){
 		
 		var th5 = document.createElement("th");
 			var modify = document.createElement("img");
-				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
+				$(modify).attr("id","modifyrow-" + element.idLogin);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
+				
 			var remove = document.createElement("img");
-				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
+				$(remove).attr("id","removerow-" +  + element.idLogin);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
 				$(th5).append(modify);
 				$(th5).append(remove);
+				
+				$(modify).click(function(){
+					removeErrorText();
+				
+					var modifyModal = new ModalUser("Modifica utente", "Modifica","btn-modifyuser-"+ element.idLogin ,element.nomeUtente, element.cognomeUtente, element.passworUtente, element.idLogin, element.ruoloUtente);
+					modifyModal.caseUpdate(utenti);
+					
+				});
 		
 		$(tr).append(th);
 		$(tr).append(th1);

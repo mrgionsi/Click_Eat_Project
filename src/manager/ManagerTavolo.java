@@ -290,23 +290,23 @@ public class ManagerTavolo {
 	}
 
 
-	public synchronized BeanTavolo setOrdinazionePerTavolo(BeanTavolo tavolo, BeanOrdinazione ordinazione){
+	public synchronized BeanTavolo getTavolo(Integer numeroTavolo) {
+		
 		Connection conn =  null;
 		PreparedStatement ps = null;
-
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("UPDATE Tavolo SET numeroOrdinazione = ? WHERE numeroTavolo = ?");
+			String sqlString = new String("SELECT * FROM Tavolo WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, ordinazione.getNumeroOrdinazione());
-			ps.setInt(2, tavolo.getNumeroTavolo());
+			ps.setInt(1,numeroTavolo);
 
-			int value = ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
 			
-			if(value != 0) {
-				System.out.println("Ordinazione registrata");
-				tavolo.setNumeroOrdinazione(ordinazione.getNumeroOrdinazione());
+			if(rs.next()) {
+				
+				return new BeanTavolo(numeroTavolo, rs.getInt("numeroOrdinazione"), rs.getBoolean("falgOccupato"), rs.getBoolean("flagConto"));
+
 			}
 
 		}
@@ -324,6 +324,7 @@ public class ManagerTavolo {
 			}
 		}
 		return null;
+		
 	}
 	
 	public synchronized Integer getOrdinazioneDiTavolo(Integer numeroTavolo) {
