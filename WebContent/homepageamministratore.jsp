@@ -76,10 +76,19 @@
 
 	</div>
 
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
+	<div class="modal fade" id="ModalAddtable" tabindex="-1"
+		role="dialog" aria-labelledby="ModalAddtable"
 		aria-hidden="true">
 		<%@include file="./parts/modalAddTable.jsp"%>
+	</div>
+<div class="modal fade" id="ConfirmModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalLabel" aria-hidden="true">
+		<%@include file="./parts/modalConfirmDelete.jsp"%>
+
+</div>
+	<div class="modal fade" id="modalAddUser" tabindex="-1"
+		role="dialog" aria-labelledby="modalAddUser"
+		aria-hidden="true">
+		<%@include file="./parts/modalAddUser.jsp"%>
 	</div>
 </body>
 <script type="text/javascript"
@@ -91,13 +100,14 @@
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript"
-	src="./contents/library/MDB-Free_4.7.0/js/mdb.js"></script>
+<script type="text/javascript"src="./contents/library/MDB-Free_4.7.0/js/mdb.js"></script>
 
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/addons/datatables.min.js"></script>
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
+  <script src="./contents/scripts/modalFormTable.js"></script>
+  <script src="./contents/scripts/modalFormUser.js"></script>
 
-
+  <script src="./contents/scripts/modalConfirm.js"></script>
 </html>

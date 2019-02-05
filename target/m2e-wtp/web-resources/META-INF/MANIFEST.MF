@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Built-By: wakeed
 Build-Jdk: 1.8.0_181
 Created-By: Maven Integration for Eclipse
 
+=======
+Manifest-Version: 1.0
+Built-By: emrllcx
+Build-Jdk: 1.8.0_201
+Created-By: Maven Integration for Eclipse
+
+>>>>>>> 0fc42afc31db69e9a8f6808f0978010ecfe5acd2

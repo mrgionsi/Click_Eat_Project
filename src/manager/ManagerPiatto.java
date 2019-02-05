@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import connessione.ConnectionPool;
@@ -13,12 +14,13 @@ import model.BeanIngrediente;
 import model.BeanPiatto;
 
 public class ManagerPiatto {
+	Connection conn =  null;
+	PreparedStatement ps = null;
 	
 	public synchronized BeanPiatto ottieniPiatto(int idPiatto) {
-		Connection conn =  null;
-		PreparedStatement ps = null;
-		
 
+		
+		List<String> listIngredienti = new LinkedList<String>();
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("SELECT * FROM v_DescPiattiCompleti where idPiatto = ?");
@@ -31,7 +33,7 @@ public class ManagerPiatto {
 			
 			if(res.next()) {
 				
-				List<String> listIngredienti = new ArrayList<String>(Arrays.asList(res.getString("lista_ingredienti").split(",")));
+				 listIngredienti = Arrays.asList(res.getString("lista_ingredienti").split(","));
 			    ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
 
 				
@@ -63,10 +65,8 @@ public class ManagerPiatto {
 	}
 	
 	public synchronized ArrayList<BeanPiatto> ottieniListaPiatti(){
-		Connection conn =  null;
-		PreparedStatement ps = null;
+		
 		ArrayList<BeanPiatto> listaPiatti = new ArrayList<BeanPiatto>();
-
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("SELECT * FROM v_DescPiattiCompleti");
@@ -86,22 +86,24 @@ public class ManagerPiatto {
 				prezzoPiatto = res.getFloat("prezzoPiatto");
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
-				
+				String lista_ingredienti= res.getString("lista_ingredienti");
 				System.out.println(res.getString("lista_ingredienti"));
 				
-				List<String> listIngredienti = new ArrayList<String>(Arrays.asList(res.getString("lista_ingredienti").split(",")));
-				ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
-
-				
-				listIngredienti.forEach(element -> {
-				    listaIngredienti.add(new BeanIngrediente(element));
-				});
-				
-				listaPiatti.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto, listaIngredienti));
+//			//	listIngredienti = Arrays.asList(res.getString("lista_ingredienti").split(","));
+//				List<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
+//				
+//				listaIngredienti.addAll(((List<BeanIngrediente>)Arrays.asList(res.getString("lista_ingredienti").split(","))));
+//				listaIngredienti.set
+//				
+//				
+////				// controllare questo manager!!!!!!!!!!!!!!!				
+////				listIngredienti.forEach(element -> {
+////				    listaIngredienti.add(new BeanIngrediente(element));
+////				});
+				//override del costruttore ove gli passo la stringo e crea lui la lista di ingredienti.
+				listaPiatti.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto, lista_ingredienti));
 				System.out.println(idPiatto);
-				
-				
-				
+
 			}
 			
 			return listaPiatti;

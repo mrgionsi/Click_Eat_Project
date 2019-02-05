@@ -1,3 +1,10 @@
+$('html').bind('keypress', function(e)
+{
+   if(e.keyCode == 13)
+   {
+      return false;
+   }
+});
 
 $(document).ready(function(){
 	loadTables();
@@ -7,7 +14,6 @@ $(document).ready(function(){
 });
 
 function loadTables() {
-
 	$.get("ServletGetAllTavoli",function(data,status){
 		var tavoli = JSON.parse(data);
 		if(tavoli)
@@ -46,13 +52,27 @@ function showTable(tavoli){
 	
 	var th3 = document.createElement("th");
 	$(th3).addClass("no-sort");
-
+	
+	var divimg = document.createElement("div");
+	$(divimg).attr("id","btn-add-table");
+	
 	var add = document.createElement("img");
 	$(add).attr("id","add-btn-table");
 	$(add).addClass("btn-rowtable btn-add");
+	//data attribute for modal
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#ModalAddtable");
+	
 	$(add).attr("src","./contents/images/add-button.png");
-
-	$(th3).append(add);
+	$(divimg).append(add);
+	$(th3).append(divimg);
+	
+	$(divimg).click(function(){
+		removeErrorText();
+		var createModal = new Modal("Crea nuovo tavolo", "Aggiungi","","btn-createtable");
+		createModal.caseCreate(tavoli);
+		
+	});
 	
 	$(tr).append(th);
 	$(tr).append(th1);
@@ -77,15 +97,39 @@ function showTable(tavoli){
 		$(th2).text(element.numeroOrdinazione);
 		
 		var th3 = document.createElement("td");
+		var divmodify = document.createElement("div");
+		$(divmodify).attr("id","removerow-" +  + element.numeroTavolo);
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
+				$(divmodify).append(modify);
+				$(divmodify).attr("data-toggle","modal");
+				$(divmodify).attr("data-target","#ModalAddtable");
+				//$(divmodify).attr("data-ntavolo",element.numeroTavolo);
+
+			$(divmodify).click(function(){
+				removeErrorText();
+				var modifyModal = new Modal("Modifica numero tavolo", "Modifica",element.numeroTavolo,"btn-modifytable");
+				modifyModal.caseUpdate(tavoli);
+
+				
+			});
+			
 			var remove = document.createElement("img");
 				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
-				$(th3).append(modify);
+				$(remove).attr("data-toggle","modal");
+				$(remove).attr("data-target","#ConfirmModal");
+				$(remove).click(function(){
+					console.log("CIAOO");
+					var removeModal = new ModalConfirm("Elimina", "Eliminare tavolo "+ element.numeroTavolo+ "?");
+					removeModal.onConfirm(element.numeroTavolo);
+	
+				});
+				
+				$(th3).append(divmodify);
 				$(th3).append(remove);
 		
 		$(tr).append(th);
@@ -156,6 +200,17 @@ function showUsers(utenti){
 	$(add).addClass("btn-rowtable btn-add");
 	$(add).attr("src","./contents/images/add-button.png");
 	
+	//data attribute for modal
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#modalAddUser");
+	
+	$(add).click(function(){
+		removeErrorText();
+		var createModal = new ModalUser("Aggiungi nuovo utente", "Aggiungi","btn-createuser", "", "", "", "", "");
+		createModal.caseCreate(utenti);
+		
+	
+	});
 	$(th5).append(add);
 	
 	$(tr).append(th);
@@ -190,15 +245,24 @@ function showUsers(utenti){
 		
 		var th5 = document.createElement("th");
 			var modify = document.createElement("img");
-				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
+				$(modify).attr("id","modifyrow-" + element.idLogin);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
+				
 			var remove = document.createElement("img");
-				$(remove).attr("id","removerow-" +  + element.numeroTavolo);
+				$(remove).attr("id","removerow-" +  + element.idLogin);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
 				$(th5).append(modify);
 				$(th5).append(remove);
+				
+				$(modify).click(function(){
+					removeErrorText();
+				
+					var modifyModal = new ModalUser("Modifica utente", "Modifica","btn-modifyuser-"+ element.idLogin ,element.nomeUtente, element.cognomeUtente, element.passworUtente, element.idLogin, element.ruoloUtente);
+					modifyModal.caseUpdate(utenti);
+					
+				});
 		
 		$(tr).append(th);
 		$(tr).append(th1);

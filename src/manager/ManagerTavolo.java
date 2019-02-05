@@ -27,9 +27,13 @@ public class ManagerTavolo {
 
 				Integer numeroTavolo = res.getInt("numeroTavolo");
 				Integer numeroOrdinazione = res.getInt("numeroOrdinazione");
-
+				Boolean flagOccupato = (Boolean) res.getBoolean("flagOccupato");
+				Boolean flagConto = (Boolean) res.getBoolean("flagConto");
+				
 				BeanTavolo tavolo = new BeanTavolo(numeroTavolo);
 				tavolo.setNumeroOrdinazione(numeroOrdinazione);
+				tavolo.setFlagConto(flagConto);
+				tavolo.setFlagOccupato(flagOccupato);
 
 				listaTavoli.add(tavolo);
 			}
@@ -53,7 +57,7 @@ public class ManagerTavolo {
 		return null;
 	}
 
-	public synchronized BeanTavolo creaTavolo(Integer numeroTavolo) {
+	public synchronized Boolean creaTavolo(Integer numeroTavolo) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -73,7 +77,7 @@ public class ManagerTavolo {
 				BeanTavolo tavolo = new BeanTavolo(numeroTavolo);
 				System.out.println("Registrazione effettuata con successo");
 
-				return tavolo;
+				return true;
 			}
 		}
 		catch(SQLException e){
@@ -91,7 +95,7 @@ public class ManagerTavolo {
 				e2.printStackTrace();
 			}
 		}
-		return null;
+		return false;
 	}
 
 	public synchronized Boolean eliminaTavolo(Integer i){
@@ -249,7 +253,7 @@ public class ManagerTavolo {
 		return null;
 	}
 	
-	public synchronized BeanTavolo setOccupato(BeanTavolo tavolo){
+	public synchronized Boolean setOccupato(Integer numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -258,15 +262,14 @@ public class ManagerTavolo {
 			String sqlString = new String("UPDATE Tavolo SET flagOccupato = true WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, tavolo.getNumeroTavolo());
+			ps.setInt(1, numeroTavolo);
 
 			int value = ps.executeUpdate();
 
 
 			if(value != 0) {
 				System.out.println("il tavolo è stato occupato");
-				tavolo.setFlagOccupato(true);
-				return tavolo;
+				return true;
 			
 			}
 		}
@@ -283,27 +286,27 @@ public class ManagerTavolo {
 				e2.printStackTrace();
 			}
 		}
-		return null;
+		return false;
 	}
 
 
-	public synchronized BeanTavolo setOrdinazionePerTavolo(BeanTavolo tavolo, BeanOrdinazione ordinazione){
+	public synchronized BeanTavolo getTavolo(Integer numeroTavolo) {
+		
 		Connection conn =  null;
 		PreparedStatement ps = null;
-
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("UPDATE Tavolo SET numeroOrdinazione = ? WHERE numeroTavolo = ?");
+			String sqlString = new String("SELECT * FROM Tavolo WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, ordinazione.getNumeroOrdinazione());
-			ps.setInt(2, tavolo.getNumeroTavolo());
+			ps.setInt(1,numeroTavolo);
 
-			int value = ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();
 			
-			if(value != 0) {
-				System.out.println("Ordinazione registrata");
-				tavolo.setNumeroOrdinazione(ordinazione.getNumeroOrdinazione());
+			if(rs.next()) {
+				
+				return new BeanTavolo(numeroTavolo, rs.getInt("numeroOrdinazione"), rs.getBoolean("falgOccupato"), rs.getBoolean("flagConto"));
+
 			}
 
 		}
@@ -321,6 +324,7 @@ public class ManagerTavolo {
 			}
 		}
 		return null;
+		
 	}
 	
 	public synchronized Integer getOrdinazioneDiTavolo(Integer numeroTavolo) {
@@ -360,4 +364,6 @@ public class ManagerTavolo {
 		return null;
 		
 	}
+	
+	
 }

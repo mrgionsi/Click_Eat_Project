@@ -68,6 +68,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 .container-table:hover {
 	transform: scale(1.1);
 	cursor: pointer;
+	overflow:hidden;
 }
 .bg-success{
 	background-color:#008000;
@@ -81,6 +82,19 @@ table.dataTable thead .sorting_desc_disabled:before {
   transform: translate(-50%, -50%);
   font-weight: bold;
   font-size: 3em;
+}
+.text-error{
+	font-weight:bold;
+	color:red;
+}
+
+.text-success{
+	font-weight:bold;
+	color:green;
+}
+
+.input-fielderror{
+	border: 1px solid red !important;
 }
 
 .btn-edit{   
@@ -102,9 +116,13 @@ table.dataTable thead .sorting_desc_disabled:before {
 	float:right;
 }
 #container-tabella{
-	width:55%;
+	/*width:55%;*/
 }
 
 tbody > tr > th{
 	font-weight: normal;
+}
+
+.modal-body{
+	font-weight: bold;
 }

@@ -15,5 +15,7 @@
 
 	
 	</div>
+	
+<script src="./contents/scripts/homepage.js"></script>
 </body>
 </html>

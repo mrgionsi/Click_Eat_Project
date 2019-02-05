@@ -51,6 +51,7 @@ public class ServletAggiungiUtente extends HttpServlet {
 
 		try {
 			ManagerUtente utenteManager = new ManagerUtente();
+			System.out.println("PROVO A CREARE UN UTENTE");
 			utente = utenteManager.creaUtente(nomeUtente, passwordUtente, cognomeUtente, ruoloUtente, idLogin);
 
 		}catch(Exception e) {
