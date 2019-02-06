@@ -15,7 +15,7 @@ class ModalUser{
 	
 	onLoad(){
 		$("#ModalAddUserTitle").text(this.title);
-		$(".btn-modal[data-type='btn-adduser']").attr("id",this.id_button);
+		$(".btn-modal[data-type='"+ this.id_button+"']").attr("id",this.id_button);
 		$("#nomeUtente").val(this.name);
 		$("#cognomeUtente").val(this.surname);
 		$("#passwordUtente").val(this.password);
@@ -52,6 +52,29 @@ class ModalUser{
 					showSuccessText("Utente aggiunto con successo",$("#nomeUtente").parent());
 					(location.reload(),3000);
 				});
+		});
+	}
+	
+	caseUpdate(utenti){
+		$("#"+this.id_button).click(function(e){
+				e.preventDefault();
+			
+				$.get({
+					url: "ServletModificaUtente",
+					data : {'nomeUtente' : nameInput ,
+							'cognomeUtente': surnameInput ,
+							'userId' : loginInput ,
+							'passwordUtente' : passwordInput , 
+							'ruoloUtente' : roleInput }
+				})
+				.done(function(data){
+//					$("#ModalAddUser").modal('hide');
+					showSuccessText("Utente modificato con successo",$("#nomeUtente").parent());
+					(location.reload(),3000);
+				});
+			
+			e.stopPropagation();
+
 		});
 	}
 }

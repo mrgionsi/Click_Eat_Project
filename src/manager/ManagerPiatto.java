@@ -1,3 +1,8 @@
+/*class: ManagerPiatto
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
+ * classe utile per la gestione della classe BeanPiatto
+ */
 package manager;
 
 import java.sql.Connection;
@@ -17,6 +22,10 @@ public class ManagerPiatto {
 	Connection conn =  null;
 	PreparedStatement ps = null;
 	
+	/*metodo utile per ottenere i dettagli di un singolo piatto, specificato tramite l'id
+	 * @params idPiatto, identificativo univoco della singola entità Piatto
+	 * @return BeanPiatto != null se il piatto è stato trovato nel DB
+	 */
 	public synchronized BeanPiatto ottieniPiatto(int idPiatto) {
 
 		
@@ -64,6 +73,9 @@ public class ManagerPiatto {
 		return null;
 	}
 	
+	/* metodo utile per ottenere la lista completa dei piatti registrati
+	 * @return listaPiatti, ArrayList <BeanPiatto> con i Piatto presenti nel sistema
+	 */
 	public synchronized ArrayList<BeanPiatto> ottieniListaPiatti(){
 		
 		ArrayList<BeanPiatto> listaPiatti = new ArrayList<BeanPiatto>();
@@ -125,6 +137,10 @@ public class ManagerPiatto {
 		return null;
 	}
 	
+	/*metodo utile per ottenere la lsita di ingredienti presenti in un Piatto
+	 * @params idPiatto, identificativo univoco della singola entità Piatto
+	 * @return listaIngredienti, ArrayList<BeanInrgediente> contentente gli ingredienti del Piatto
+	 */
 	public synchronized ArrayList<BeanIngrediente> ingredientiNelPiatto(Integer idPiatto){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -166,6 +182,10 @@ public class ManagerPiatto {
 		return null;
 	}
 	
+	/*metodo utile per creare una nuova entità Piatto
+	 * @params nomePiatto, nome del piatto da inserire; prezzoPiatto, prezzo del piatto da inserire; categoriaPiatto, categoria del piatto (es. primo, secondo, ecc)
+	 * @return BeanPiatto != null se l'inserimento ha avuto successo
+	 */
 	public synchronized BeanPiatto creaPiatto(String nomePiatto, Float prezzoPiatto, String categoriaPiatto) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -218,6 +238,10 @@ public class ManagerPiatto {
 		return null;
 	}
 	
+	/*metodo utile per inserire ingredienti all'interno di un piatto registrato
+	 * @params piatto, piatto da modificare
+	 * @return true se la modifica ha avuto successo, false altriemnti
+	 */
 	public synchronized Boolean inserisciIngredientiNelPiatto(BeanPiatto piatto) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -269,49 +293,58 @@ public class ManagerPiatto {
 		return null;
 	}
 
-//Questo metodo serve a settare un idPiatto preso dal db subito dopo l'inserimento del piatto stesso
-private synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
-	Connection conn =  null;
-	PreparedStatement ps = null;
+	/*
+	 * questo metodo serve a settare un idPiatto preso dal db subito dopo l'inserimento del piatto stesso
+	 * @params BeanPiatto piatto, istanza del piatto inserito
+	 * @return piatto.idPiatto != null
+	 */
+	private synchronized BeanPiatto settaIdPiatto(BeanPiatto piatto) {
+		Connection conn =  null;
+		PreparedStatement ps = null;
 
-	try {
-		conn = ConnectionPool.getConnection();
-		String sqlString = new String("SELECT idPiatto FROM Piatto WHERE nomePiatto = ?");
-		ps = conn.prepareStatement(sqlString);
-
-		ps.setString(1, piatto.getNomePiatto());
-		
-		
-		ResultSet res = ps.executeQuery();
-
-		if(res.next()) {
-			piatto.setIdPiatto(res.getInt("idPiatto"));
-			System.out.println("Id piatto settato");
-
-			
-		}
-	}
-	catch(SQLException e){
-		e.printStackTrace(); 
-
-		
-		}
-	finally {
 		try {
-			ps.close();
-			ConnectionPool.releaseConnection(conn);
-			return piatto;
-			
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("SELECT idPiatto FROM Piatto WHERE nomePiatto = ?");
+			ps = conn.prepareStatement(sqlString);
+
+			ps.setString(1, piatto.getNomePiatto());
+
+
+			ResultSet res = ps.executeQuery();
+
+			if(res.next()) {
+				piatto.setIdPiatto(res.getInt("idPiatto"));
+				System.out.println("Id piatto settato");
+
+
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace(); 
+
 
 		}
-		catch(Exception e2) {
-			e2.printStackTrace();
+		finally {
+			try {
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+				return piatto;
+
+
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
 		}
+		return null;
 	}
-	return null;
-}
 
-public synchronized Boolean eliminaPiatto(Integer i){
+	/*
+	 * metodo utile per eliminare un Piatto mediante il suo identificativo
+	 * @params idPiatto, identificativo univoco della singola entità Piatto
+	 * @return true se l'eliminazione ha avuto successo, false altrimenti
+	 */
+	public synchronized Boolean eliminaPiatto(Integer idPiatto){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -320,23 +353,23 @@ public synchronized Boolean eliminaPiatto(Integer i){
 			String sqlString = new String("DELETE FROM Piatto WHERE idPiatto = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			
-			ps.setInt(1, i);
+
+			ps.setInt(1, idPiatto);
 
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
 				System.out.println("Piatto eliminato con successo");
-				return eliminaPiattiFromIngredientiPiatto(i);
+				return eliminaPiattiFromIngredientiPiatto(idPiatto);
 			}
 		}
 		catch(SQLException e){
-				e.printStackTrace(); 
+			e.printStackTrace(); 
 
 		}
 		finally {
 			try {
-	
+
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -347,78 +380,82 @@ public synchronized Boolean eliminaPiatto(Integer i){
 		return false;
 	}
 
+	/*
+	 * metodo utile per eliminare il piatto dalla tabella IngredientiPiatto che associa ad un istanza di Piatto i relativi ingredienti
+	 * @params idPiatto, identificativo univoco dell'entità Piatto
+	 * @return true se l'eliminazione ha avuto successo, false altrimenti
+	 */
+	private synchronized Boolean eliminaPiattiFromIngredientiPiatto(int idPiatto){
+		Connection conn =  null;
+		PreparedStatement ps = null;
 
-private synchronized Boolean eliminaPiattiFromIngredientiPiatto(int i){
-	Connection conn =  null;
-	PreparedStatement ps = null;
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("DELETE FROM IngredientiPiatto WHERE idPiatto = ?");
+			ps = conn.prepareStatement(sqlString);
 
-	try {
-		conn = ConnectionPool.getConnection();
-		String sqlString = new String("DELETE FROM IngredientiPiatto WHERE idPiatto = ?");
-		ps = conn.prepareStatement(sqlString);
 
-		
-		ps.setInt(1, i);
+			ps.setInt(1, idPiatto);
 
-		int value = ps.executeUpdate();
+			int value = ps.executeUpdate();
 
-		if(value != 0) {
-			System.out.println("Piatto eliminato da IngredientiPiatto con successo");
-			return true;
+			if(value != 0) {
+				System.out.println("Piatto eliminato da IngredientiPiatto con successo");
+				return true;
+			}
 		}
-	}
-	catch(SQLException e){
+		catch(SQLException e){
 			e.printStackTrace(); 
 
+		}
+		finally {
+			try {
+
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
 	}
-	finally {
+
+	public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione) {
+		//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?)
+
+		Connection conn =  null;
+		PreparedStatement ps = null;
+
 		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione) VALUES(?,?)");
+			ps = conn.prepareStatement(sqlString);
 
-			ps.close();
-			ConnectionPool.releaseConnection(conn);
+			ps.setInt(1, idPiatto);
+			ps.setInt(2, numeroOrdinazione);
+
+
+			int value = ps.executeUpdate();
+
+			if(value != 0) {
+				return true;
+			}
 		}
-		catch(Exception e2) {
-			e2.printStackTrace();
+		catch(SQLException e){
+
 		}
+		finally {
+			try {
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
 	}
-	return false;
-}
-
-public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione) {
-	//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?)
-
-	Connection conn =  null;
-	PreparedStatement ps = null;
-
-	try {
-		conn = ConnectionPool.getConnection();
-		String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione) VALUES(?,?)");
-		ps = conn.prepareStatement(sqlString);
-
-		ps.setInt(1, idPiatto);
-		ps.setInt(2, numeroOrdinazione);
-
-		
-		int value = ps.executeUpdate();
-
-		if(value != 0) {
-			return true;
-		}
-	}
-	catch(SQLException e){
-
-	}
-	finally {
-		try {
-			ps.close();
-			ConnectionPool.releaseConnection(conn);
-		}
-		catch(Exception e2) {
-			e2.printStackTrace();
-		}
-	}
-	return false;
-}
 
 
 }

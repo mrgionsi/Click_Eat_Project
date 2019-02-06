@@ -1,3 +1,8 @@
+/*class: ManagerOrdinazione
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
+ * classe utile per la gestione della classe BeanIngrediente
+ */
 package manager;
 
 import java.sql.Connection;
@@ -12,7 +17,11 @@ import model.BeanIngrediente;
 
 public class ManagerIngrediente {
 	
-	
+	/*
+	 * metodo utile per creare un'entità Ingrediente
+	 * @params nomeIngrediente, nome dell'ingrediente da creare
+	 * @return BeanIngrediente ingrediente, con i parametri inseriti; SQLException altrimenti
+	 */
 	public synchronized BeanIngrediente creaIngrediente(String nomeIngrediente) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -52,7 +61,12 @@ public class ManagerIngrediente {
 		return null;
 
 	}
-	
+
+	/*
+	 * metodo utile per eliminare un'entità Ingrediente
+	 * @params idIngrediente, identificativo univoco dell'ingrediente selezionato
+	 * @return true se l'eliminazione ha avuto successo, false altrimenti
+	 */
 	public synchronized boolean eliminaIngrediente(Integer idIngrediente){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -88,6 +102,10 @@ public class ManagerIngrediente {
 		return false;
 	}
 	
+	/*
+	 * metodo utile per ottenere la lista di dingredienti presenti nel sistema
+	 * @return ArrayList<BeanIngrediente> != null se ci sono ingredienti nel sistema, ArrayList<BeanIngrediente> = null altrimenti
+	 */
 	public synchronized ArrayList<BeanIngrediente> ottieniListaIngredienti(){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -127,7 +145,9 @@ public class ManagerIngrediente {
 		return null;
 	}
 	
-	/*metodo che ricerca nella tabella Ingrediente un Ingrediente con l'id specificato e ritorna il Bean relativo ad esso*/
+	/*metodo che ricerca nella tabella Ingrediente un Ingrediente con l'id specificato 
+	 * @params idIngrediente, identificativo univoco dell'entità ingrediente
+	 * @return BeanIngrediente con l'idIngrediente specificato*/
 	public synchronized BeanIngrediente ricercaPerId(Integer idIngrediente) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -166,7 +186,10 @@ public class ManagerIngrediente {
 		return null;
 	}
 
-/*metodo che ricerca nella tabella Ingrediente un Ingrediente con il nome specificato e ritorna il Bean relativo ad esso*/
+	/*metodo che ricerca nella tabella Ingrediente un Ingrediente con il nome specificato 
+	 * @params nomeIngrediente, nome dell'ingrediente selezionato
+	 * @return BeanIngrediente relativo al nome indicato
+	 */
 	public synchronized BeanIngrediente ricercaPerNome(String nomeIngrediente) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
