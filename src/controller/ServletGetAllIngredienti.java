@@ -1,3 +1,8 @@
+/* class: ServletGetAllIngredienti
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
+ * 
+ */
 package controller;
 
 import java.io.IOException;

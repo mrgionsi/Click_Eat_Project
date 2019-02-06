@@ -1,3 +1,8 @@
+/*class: ManagerTavolo
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
+ * classe utile per la gestione della classe BeanTavolo
+ */
 package manager;
 
 import java.sql.Connection;
@@ -12,6 +17,10 @@ import model.BeanTavolo;
 
 public class ManagerTavolo {
 
+	/*
+	 * metodo utile per ottenere la lsita dei tavoli registrati
+	 * @return ArrayList <BeanTavolo> 
+	 */
 	public synchronized ArrayList<BeanTavolo> ottieniTavoli(){ 
 
 		ArrayList<BeanTavolo> listaTavoli = new ArrayList<BeanTavolo>();
@@ -57,6 +66,11 @@ public class ManagerTavolo {
 		return null;
 	}
 
+	/*
+	 * metodo utile per creare un'entità di BeanTavolo
+	 * @params numeroTavolo, identificativo univoco del tavolo
+	 * @return true se la creazione ha avuto successo, false altrimenti
+	 */
 	public synchronized Boolean creaTavolo(Integer numeroTavolo) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -98,7 +112,12 @@ public class ManagerTavolo {
 		return false;
 	}
 
-	public synchronized Boolean eliminaTavolo(Integer i){
+	/*
+	 * metodo utile per eliminare un Tavolo registrato nel sistema
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return true se l'eliminazione ha avuto successo, false altrimenti
+	 */
+	public synchronized Boolean eliminaTavolo(Integer numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
@@ -108,7 +127,7 @@ public class ManagerTavolo {
 			ps = conn.prepareStatement(sqlString);
 
 			
-			ps.setInt(1, i);
+			ps.setInt(1, numeroTavolo);
 
 			int value = ps.executeUpdate();
 
@@ -134,6 +153,11 @@ public class ManagerTavolo {
 		return false;
 	}
 
+	/*
+	 * metodo utile per liberare un Tavolo registrato nel sistema
+	 * @params tavolo, entità tavolo selezionata
+	 * @return BeanTavolo tavolo modificato
+	 */
 	public synchronized BeanTavolo freeTavolo(BeanTavolo tavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -173,6 +197,11 @@ public class ManagerTavolo {
 		return null;
 	}
 
+	/*
+	 * metodo utile per conoscere lo stato di un Tavolo registrato nel sistema
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return true se il tavolo è occupato, false altrimenti
+	 */
 	public synchronized Boolean isOccupato(Integer numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -213,6 +242,11 @@ public class ManagerTavolo {
 		return null;
 	}
 
+	/*
+	 * metodo utile per conoscere lo stato, relativo alla segnalazione del conto, di un Tavolo registrato nel sistema
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return true se il tavolo conto è stato emesso, false altrimenti
+	 */
 	public synchronized Boolean isContoPresente(Integer numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -253,6 +287,11 @@ public class ManagerTavolo {
 		return null;
 	}
 	
+	/*
+	 * metodo utile per settare lo stato di un Tavolo ad occupato registrato nel sistema
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return true se il tavolo è stato occupato, false altrimenti
+	 */
 	public synchronized Boolean setOccupato(Integer numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -289,7 +328,11 @@ public class ManagerTavolo {
 		return false;
 	}
 
-
+	/*
+	 * metodo utile per ottenere un Tavolo registrato nel sistema
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return BeanTavolo tavolo, istanza del tavolo selezionato
+	 */
 	public synchronized BeanTavolo getTavolo(Integer numeroTavolo) {
 		
 		Connection conn =  null;
@@ -327,6 +370,11 @@ public class ManagerTavolo {
 		
 	}
 	
+	/*
+	 * metodo utile per ottenere il numero dell'ordinazione allegata ad un Tavolo
+	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
+	 * @return Integere numeroOrdinazione se il tavolo ha un ordinazione allegata, null altrimenti
+	 */
 	public synchronized Integer getOrdinazioneDiTavolo(Integer numeroTavolo) {
 		
 		Connection conn =  null;

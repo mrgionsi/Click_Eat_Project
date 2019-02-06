@@ -1,8 +1,6 @@
-/* servlet Tavolo, si occupa della logica applicativa riguardante il dato Tavolo
- * author: Andrea Cupito
- * ogni operazione possibile verrà indicata con un numero intero (op):
- * ottieni listaTavoli: 1
- * aggiungere un tavolo al sistema: 2
+/* class: ServletGetAllTavoli
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
  * 
  */
 package controller;

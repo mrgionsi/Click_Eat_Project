@@ -1,3 +1,8 @@
+/*class: ManagerOrdinazione
+ * author: AndreaCupito / LucaAmoriello
+ * version: 1.0
+ * classe utile per la gestione della classe BeanOrdinazione
+ */
 package manager;
 
 import java.sql.Connection;
@@ -13,6 +18,10 @@ import model.BeanPiatto;
 
 public class ManagerOrdinazione {
 	
+	/*
+	 * metodo utile per la creazione di una nuova Ordinazione
+	 * @return BeanOrdinazione != null
+	 */
 	public synchronized BeanOrdinazione creaOrdinazione() {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -48,6 +57,10 @@ public class ManagerOrdinazione {
 		return null;
 	}
 	
+	/* metodo utile per settare id e data ad un'ordinazione già registrata
+	 * @params ordine, ordinazione da inizializzare
+	 * @return BeanOrdinazione.numeroOrdinazione != null, BeanOrdinazione.dataOrdinazione != null
+	 */
 	private synchronized BeanOrdinazione impostaIdEDataOrdine(BeanOrdinazione ordine) {
 		Connection conn =  null;
 		PreparedStatement ps = null;
@@ -81,6 +94,11 @@ public class ManagerOrdinazione {
 		return null;
 	}
 	
+	/*
+	 * metodo utile per ottenere l'ordinazione allegata ad un tavolo selezionato
+	 * @params numerotavolo, numero del tavolo selezionato
+	 * @return BeanOrdinazione ordine != null se l'ordine esiste, null altrimenti
+	 */
 	public synchronized BeanOrdinazione ottieniOrdinazione(Integer numeroTavolo) {
 		
 		Connection conn =  null;
