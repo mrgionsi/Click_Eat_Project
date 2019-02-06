@@ -1,5 +1,6 @@
 /* class: BeanUtente
  * author: Andrea Cupito
+ * version: 1.0
  * classe utile per rappresentare l'oggetto persistente Utente.
  */
 
