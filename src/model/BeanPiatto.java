@@ -55,11 +55,16 @@ public class BeanPiatto {
 		setPrezzoPiatto(prezzoPiatto);
 		
 		this.listaIngredienti = new ArrayList<BeanIngrediente> ();
+		
+		if(listaIngredienti!=null)
+		{
 		List<String> list =Arrays.asList(listaIngredienti.split(","));
 		list.forEach(element -> {
 			this.listaIngredienti.add(new BeanIngrediente(element));
+			System.out.println(element);
 		});
-		
+		}else this.listaIngredienti = new ArrayList<BeanIngrediente>();
+			
 	}
 
 

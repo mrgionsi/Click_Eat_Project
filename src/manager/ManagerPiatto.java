@@ -91,28 +91,17 @@ public class ManagerPiatto {
 			Float prezzoPiatto = null;
 			String categoriaPiatto = null;
 			Integer idPiatto = 0;
-			
+			String lista_ingredienti="";
 			while(res.next()) {
 				
 				nomePiatto = res.getString("nomePiatto");
 				prezzoPiatto = res.getFloat("prezzoPiatto");
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
-				String lista_ingredienti= res.getString("lista_ingredienti");
-				System.out.println(res.getString("lista_ingredienti"));
-				
-//			//	listIngredienti = Arrays.asList(res.getString("lista_ingredienti").split(","));
-//				List<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
-//				
-//				listaIngredienti.addAll(((List<BeanIngrediente>)Arrays.asList(res.getString("lista_ingredienti").split(","))));
-//				listaIngredienti.set
-//				
-//				
-////				// controllare questo manager!!!!!!!!!!!!!!!				
-////				listIngredienti.forEach(element -> {
-////				    listaIngredienti.add(new BeanIngrediente(element));
-////				});
-				//override del costruttore ove gli passo la stringo e crea lui la lista di ingredienti.
+				lista_ingredienti= res.getString("lista_ingredienti");
+				System.out.println("lista ingredienti ->" + lista_ingredienti);
+
+
 				listaPiatti.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto, lista_ingredienti));
 				System.out.println(idPiatto);
 
@@ -136,6 +125,48 @@ public class ManagerPiatto {
 		}
 		return null;
 	}
+	
+	
+	public synchronized ArrayList<BeanPiatto> ottieniCategorie(){
+		try {
+			ArrayList<BeanPiatto> listaCategorie = new ArrayList<BeanPiatto>();
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("SELECT DISTINCT categoriaPiatto from Piatto");
+			ps = conn.prepareStatement(sqlString);
+
+
+			ResultSet res = ps.executeQuery();
+			
+			String nomePiatto = null;
+			Float prezzoPiatto = null;
+			String categoriaPiatto = null;
+			Integer idPiatto = 0;
+			
+			while(res.next()) {
+				
+				categoriaPiatto = res.getString("categoriaPiatto");
+				listaCategorie.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto));
+			}
+			
+			return listaCategorie;
+		}
+		catch(SQLException e){
+				e.printStackTrace(); 
+
+		}
+		finally {
+			try {
+				
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 	
 	/*metodo utile per ottenere la lsita di ingredienti presenti in un Piatto
 	 * @params idPiatto, identificativo univoco della singola entità Piatto
@@ -345,8 +376,7 @@ public class ManagerPiatto {
 	 * @return true se l'eliminazione ha avuto successo, false altrimenti
 	 */
 	public synchronized Boolean eliminaPiatto(Integer idPiatto){
-		Connection conn =  null;
-		PreparedStatement ps = null;
+
 
 		try {
 			conn = ConnectionPool.getConnection();
@@ -456,6 +486,6 @@ public class ManagerPiatto {
 		}
 		return false;
 	}
-
+	
 
 }
