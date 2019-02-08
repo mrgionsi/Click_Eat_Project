@@ -124,7 +124,7 @@ function showTable(tavoli){
 				$(remove).attr("data-target","#ConfirmModal");
 				$(remove).click(function(){
 					console.log("CIAOO");
-					var removeModal = new ModalConfirm("Elimina", "Eliminare tavolo "+ element.numeroTavolo+ "?");
+					var removeModal = new ModalConfirmTable("Elimina", "Eliminare tavolo "+ element.numeroTavolo+ "?");
 					removeModal.onConfirm(element.numeroTavolo);
 	
 				});
@@ -249,13 +249,6 @@ function showUsers(utenti){
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
 				
-			var remove = document.createElement("img");
-				$(remove).attr("id","removerow-" +  + element.idLogin);
-				$(remove).attr("src","./contents/images/remove-button.png");
-				$(remove).addClass("btn-rowtable");
-				$(th5).append(modify);
-				$(th5).append(remove);
-				
 				$(modify).click(function(){
 					removeErrorText();
 				
@@ -263,6 +256,25 @@ function showUsers(utenti){
 					modifyModal.caseUpdate(utenti);
 					
 				});
+
+
+				var remove = document.createElement("img");
+				$(remove).attr("id","removerow-" +  + element.idLogin);
+				$(remove).attr("src","./contents/images/remove-button.png");
+				$(remove).addClass("btn-rowtable");
+				$(remove).attr("data-toggle","modal");
+				$(remove).attr("data-target","#ConfirmModal");
+				$(remove).click(function(){
+					console.log("CIAOO UTENTE");
+					var removeModal = new ModalConfirmUser("Elimina", "Eliminare utente "+ element.idLogin+ "?");
+					removeModal.onConfirm(element.idLogin);
+	
+				});
+				
+				$(th3).append(modify);
+				$(th3).append(remove);
+				
+				
 		
 		$(tr).append(th);
 		$(tr).append(th1);

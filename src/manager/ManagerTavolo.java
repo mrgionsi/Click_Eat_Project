@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import connessione.ConnectionPool;
-import model.BeanOrdinazione;
+
 import model.BeanTavolo;
 
 public class ManagerTavolo {
@@ -88,7 +88,6 @@ public class ManagerTavolo {
 			System.out.println(value);
 			if(value != 0) {
 
-				BeanTavolo tavolo = new BeanTavolo(numeroTavolo);
 				System.out.println("Registrazione effettuata con successo");
 
 				return true;

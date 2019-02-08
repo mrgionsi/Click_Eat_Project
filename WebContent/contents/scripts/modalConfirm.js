@@ -1,4 +1,4 @@
-class ModalConfirm{
+class ModalConfirmTable{
 	constructor(title,message){
 		this.title = title; 
 		this.message = message;
@@ -26,3 +26,30 @@ class ModalConfirm{
 	}
 }
 
+class ModalConfirmUser{
+	constructor(title,message){
+		this.title = title; 
+		this.message = message;
+		this.onLoad();
+	}
+	onLoad(){
+		$("#modal-confirm-title").text(this.title);
+		$("#messageModal").text(this.message).css("font-weight:bold;");
+	}
+	
+	onConfirm(ntavolo){
+		$("#delete-button").click(function(){
+			console.log("IN CONFIRM");
+
+			$.get({
+				url: "ServletEliminaUtente",
+				data : "idLogin=" + idLogin
+			})
+			.done(function(data){
+				$("#messageModal").text("");
+				showSuccessText("Utente eliminato con successo",$("#messageModal"));
+				(location.reload(),4000);
+			});
+		});
+	}
+}

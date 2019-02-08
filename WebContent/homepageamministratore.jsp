@@ -15,11 +15,29 @@
 
 
 
-<title>Benvenuto _amministratore_</title>
+<title>Benvenuto 
+<% 
+		String name = "ospite";
+		name = request.getParameter("cookie");
+		if(name!="ospite" || name!=null)
+		{
+		
+			name = request.getParameter("cookie");
+		}
+
+%>
+<%=name %>
+</title>
 </head>
 
 <body>
 
+	<%
+	if(role==null /*|| role !="amministratore" || role !="Amministratore"*/){
+           
+				request.getRequestDispatcher("./parts/noauth.jsp").forward(request, response);	   
+           }
+	%>
 	<div class="container-fluid">
 		<%@include file="./parts/navbar.jsp"%>
 		<p class="text-center">
