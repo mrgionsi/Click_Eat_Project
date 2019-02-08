@@ -14,7 +14,7 @@ Category partition:
 creaUtente
 
 Parametro: nomeUtente
-Formato [FNU] : ^[A-Za-z ‘]+$
+Formato [FNU] : ^[A-Za-z]{3,35}$
 Lunghezza[LNU] 
 1. <3 or >35 [error]
 2. >=3 and <=35 [LNU OK]
@@ -23,7 +23,7 @@ Non rispetta il formato [if LNU_OK] [error]
 Rispetta il formato [if LNU_OK] [property FNU_OK]
 
 Parametro: cognomeUtente
-Formato [FCU]: ^[A-Za-z ‘]+$
+Formato [FCU]: ^[A-Za-z]{3,35}$
 Lunghezza[LCU] 
 1. <3 or >35 [error]
 2. >=3 and <=35 [LCU_OK]
@@ -32,7 +32,7 @@ Non rispetta il formato [if LCU_OK] [error]
 Rispetta il formato [if LCU_OK] [property FCU_OK]
 
 Parametro: ruoloUtente
-Formato [FRU]: ^[A-Za-z ‘]+$
+Formato [FRU]: ^[A-Za-z]{8,14}$
 Lunghezza[LRU] 
 1. <8 or >14 [error]
 2. >=8 and <=14 [LRU_OK]
@@ -42,11 +42,11 @@ Rispetta il formato [if LRU_OK] [property FRU_OK]
 
 
 Parametro: idLogin
-Formato [FIL]: ^[a-z]+([.]?)+[a-z]+$
+Formato [FIL]: ^[a-z]{1}\.{1}[a-z]{4,34}$
 Lunghezza[LIL] 
 Uguaglianza[UIL]
-1. <4 or >36 [error]
-2. >=4 and <=36 [LIL_OK]
+1. <6 or >36 [error]
+2. >=6 and <=36 [LIL_OK]
 
 Non rispetta il formato [if LIL_OK] [error]
 Rispetta il formato [if LIL_OK] [property FIL_OK]
@@ -55,7 +55,7 @@ Uguale ad un dato già presente [if LIL_OK] [if FIL_OK] [error]
 Differente dai dati già presenti [if LIL_OK] [if FIL_OK] [property UIL_OK]
 
 Parametro: passwordUtente
-Formato [FPU]: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Formato [FPU]: ^[A-Za-z0-9]{8,36}$
 Lunghezza[LPU] 
 1. <8 or >36 [error]
 2. >=8 and <=36 [LPU_OK]
@@ -68,7 +68,7 @@ Rispetta il formato [if LPU_OK] [property FPU_OK]
 valoriLogin
 
 Parametro: idLogin
-Formato [FIL]: ^[a-z]+([.]?)+[a-z]+$
+Formato [FIL]: ^[a-z]{1}\.{1}[a-z]{4,34}$
 Lunghezza[LIL] 
 Uguaglianza[UIL]
 1. <4 or >36 [error]
@@ -81,7 +81,7 @@ Differente dai dati presenti [if LIL_OK] [if FIL_OK] [error]
 Uguale ad un dato già presente[if LIL_OK] [if FIL_OK] [property UIL_OK]
 
 Parametro: passwordUtente
-Formato [FPU]: ^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$
+Formato [FPU]: ^[A-Za-z0-9]{8,36}$
 Lunghezza[LPU] 
 Uguaglianza[UPU]
 1. <8 or >36 [error]
@@ -97,7 +97,7 @@ Uguale ad un dato già presente[if LPU_OK] [if FPU_OK] [property UPU_OK]
 creaTavolo
 
 Parametro: numeroTavolo
-Formato [FNT]: ^[0-9]*$
+Formato [FNT]: ^[0-9]+$
 Lunghezza[LNT] 
 Uguaglianza[UNT]
 1. < or >36 [error]
@@ -112,7 +112,7 @@ Differente dai dati già presenti [if LNT_OK] [if FNT_OK] [property UNT_OK]
 creaIngrediente
 
 Parametro: nomeIngrediente
-Formato [FNI]: ^[A-Za-z ‘]+$
+Formato [FNI]: ^[A-Za-z\s]{4,36}$
 Lunghezza[LNI] 
 Uguaglianza[UNI]
 1. <4 or >36 [error]
@@ -127,7 +127,7 @@ Differente dai dati già presenti [if LNI_OK] [if FNI_OK] [property UNI_OK]
 creaPiatto
 
 Parametro: nomePiatto
-Formato [FNP] : ^[A-Za-z ‘]+$
+Formato [FNP] :^[A-Za-z\s]{4,36}$
 Lunghezza[LNP] 
 Uguaglianza [UNP]
 1. <3 or >35 [error]
@@ -140,7 +140,7 @@ Uguale ad un dato già presente [if LNP_OK] [if FNP_OK] [error]
 Differente dai dati già presenti [if LNP_OK] [if FNP_OK] [property UNP_OK]
 
 Parametro: categoriaPiatto
-Formato [FCP]: ^[A-Za-z ‘]+$
+Formato [FCP]: ^[A-Za-z]{5,10}$
 Lunghezza[LCP] 
 1. <5 or >10 [error]
 2. >=5 and <=10 [LCP_OK]
@@ -149,7 +149,7 @@ Non rispetta il formato [if LCP_OK] [error]
 Rispetta il formato [if LCP_OK] [property FCP_OK]
 
 Parametro: prezzoPiatto
-Formato [FPP]: ^[0-9]+,[0-9]{2}$
+Formato [FPP]: ^[0-9]{1,5},[0-9]{2}$
 Lunghezza[LPP] 
 1. <8 or >14 [error]
 2. >=8 and <=14 [LPP_OK]
@@ -159,7 +159,7 @@ Rispetta il formato [if LPP_OK] [property FPP_OK]
 
 
 Parametro: listaIngredienti
-Formato [FLI]: ^[a-ZA-Z,]+$
+Formato [FLI]: ^[a-ZA-Z,\s]*$
 Lunghezza[LLI] 
 1. <4 or >150 [error]
 2. >=4 and <=150 [LLI_OK]
