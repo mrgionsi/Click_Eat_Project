@@ -159,7 +159,7 @@ Rispetta il formato [if LPP_OK] [property FPP_OK]
 
 
 Parametro: listaIngredienti
-Formato [FLI]: ^[a-ZA-Z,\s]*$
+Formato [FLI]: ^((,{0,1})([A-Za-z\s]{4,36})(,{0,1}))+$
 Lunghezza[LLI] 
 1. <4 or >150 [error]
 2. >=4 and <=150 [LLI_OK]
