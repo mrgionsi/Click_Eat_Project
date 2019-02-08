@@ -14,7 +14,7 @@ Category partition:
 creaUtente
 
 Parametro: nomeUtente
-Formato [FNU] : ^[A-Za-z]{3,35}$
+Formato [FNU] : ^[A-Za-z\s]{3,35}$
 Lunghezza[LNU] 
 1. <3 or >35 [error]
 2. >=3 and <=35 [LNU OK]
@@ -23,7 +23,7 @@ Non rispetta il formato [if LNU_OK] [error]
 Rispetta il formato [if LNU_OK] [property FNU_OK]
 
 Parametro: cognomeUtente
-Formato [FCU]: ^[A-Za-z]{3,35}$
+Formato [FCU]: ^[A-Za-z\s]{3,35}$
 Lunghezza[LCU] 
 1. <3 or >35 [error]
 2. >=3 and <=35 [LCU_OK]
