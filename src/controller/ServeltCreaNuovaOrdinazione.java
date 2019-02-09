@@ -7,11 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import manager.ManagerOrdinazione;
-import manager.ManagerPiatto;
+
 import manager.ManagerTavolo;
-import model.BeanOrdinazione;
-import model.BeanTavolo;
 
 /**
  * Servlet implementation class ServeltCreaNuovaOrdinazione

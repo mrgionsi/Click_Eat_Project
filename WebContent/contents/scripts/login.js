@@ -35,6 +35,7 @@ function callApi(apiName){
 		{
 			console.log(typeof data);
 			if(data.toString() == "true"){
+				console.log(data);
 				// similar behavior as clicking on a link
 				window.location.href = "./homepage.jsp";
 			}else{

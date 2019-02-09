@@ -7,6 +7,7 @@
 <title>Catalogo Prodotti</title>
 </head>
 <body>
+
 	<div class="container-fluid">
 		<%@include file="./parts/navbar.jsp"%>
 		<nav>

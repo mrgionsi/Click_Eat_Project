@@ -1,22 +1,19 @@
 
-<%
-    	String username= "";
-    	Cookie[] cookies = request.getCookies();
-   if(cookies!= null){
-    for(Cookie c : cookies)
-    {
-    	if(c.getName().equals("username"))
-    	{
-    		 username = c.getValue();
-    	}
-   	} 
-   }
-%>
-
-
+ 
 
 
 <nav class="nav border-bottom">
-  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> </span> </a>
-  <a class="nav-link" href="/logout">Logout</a>
+  <a class="nav-link">Benvenuto <span class="username-menu">
+<% 	 
+	if(request.getParameter("cookie") != null  && request.getParameter("cookierole") != null)
+	{
+		username = request.getParameter("cookie");
+		role = request.getParameter("cookierole");
+
+
+	}
+%>
+<%=username %> <%=role %>
+ </span> </a>
+  <a class="nav-link" href="ServletLogout">Logout</a>
 </nav>
