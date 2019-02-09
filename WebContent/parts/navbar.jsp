@@ -9,8 +9,6 @@
 	{
 		username = request.getParameter("cookie");
 		role = request.getParameter("cookierole");
-
-
 	}
 %>
 <%=username %> <%=role %>
