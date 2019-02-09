@@ -22,7 +22,7 @@ Amministrazione
 
 <body>
 	<div class="container-fluid">
-		<%@include file="./parts/navbar.jsp"%>
+			<%@include file="./parts/navbar.jsp"%>
 		<%
 			if (utente == null  || !role.equalsIgnoreCase("Amministratore")) {
 				response.sendRedirect("./homepage.jsp");

@@ -17,6 +17,7 @@
 				}
 		%>
 					<nav>
+
 					<ul class="nav nav-pills nav-fill justify-content-center"
 						id="pills-tab" role="tablist">
 
