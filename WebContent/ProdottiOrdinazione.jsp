@@ -2,21 +2,22 @@
 <html>
 <head>
 <%@include file="./parts/head.jsp"%>
+<%@include file="./parts/GetCookies.jsp"%>
 
 <title>Catalogo Prodotti</title>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-8">
-				<%@include file="./parts/navbar.jsp"%>
-				<%
-					if (utente == null || role == null) {
-						response.sendRedirect("./login.jsp");
-						return;
-					}
-				%>
-				<nav>
+
+			<div class="col-9">
+<%
+				if (utente == null  || role==null) {
+					response.sendRedirect("./login.jsp");
+					return;
+				}
+		%>
+					<nav>
 
 					<ul class="nav nav-pills nav-fill justify-content-center mb-5"
 						id="pills-tab" role="tablist">
