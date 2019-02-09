@@ -2,6 +2,7 @@
 <html>
 <head>
 <%@include file="./parts/head.jsp"%>
+<%@include file="./parts/GetCookies.jsp"%>
 
 <title>Catalogo Prodotti</title>
 </head>
@@ -9,7 +10,6 @@
 <div class="container-fluid">
 		<div class="row">
 			<div class="col-9">
-				<%@include file="./parts/navbar.jsp"%>
 <%
 				if (utente == null  || role==null) {
 					response.sendRedirect("./login.jsp");
