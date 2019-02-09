@@ -14,6 +14,3 @@
 <script src="./contents/library/jQuery.js"></script>
 <script src="./contents/library/popper.min.js" ></script>
 <script src="./contents/library/bootstrap4.0/js/bootstrap.min.js"></script>
-
-
-
