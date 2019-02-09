@@ -10,7 +10,7 @@
 		<%@include file="./parts/navbar.jsp"%>
 		<%
 		
-		if (utente == null /* || !utente.getRuoloUtente().equalsIgnoreCase("Cassiere") || !utente.getRuoloUtente().equalsIgnoreCase("Cameriere") */ ) {
+		if (utente == null  || role==null) {
 			response.sendRedirect("./login.jsp");
 			return;
 		}
