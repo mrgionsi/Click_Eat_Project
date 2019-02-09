@@ -56,41 +56,59 @@ $(document).ready(function(){
 	createNavPills();
 });
 
+
 function createNavPills(){
 	var howToAppendlink = $("#pills-tab");
 	var howToAppendContent = $("#pills-tabContent");
 	$.get("ServletGetAllPiatti",function(data,status)  {
 		var products =JSON.parse(data);
-		console.log(products);
+		//transformo la lista di oggetti ingredienti in una lista di stringhe
+		products.forEach(function(p){
+			p.listaIngredienti = concatIngredienti(p.listaIngredienti);
+		}) 
+
 		var filter = Array.from(new Set(products.map(p => p.categoriaPiatto)))
 		.map(categoriaPiatto =>{
 			return categoriaPiatto;
 		});
-		
+
 		console.log(filter);
 		filter.forEach(function(e){;
-			if(f == 0){
-				var link = new navLink(true,e,e);
-				f=1;
-			}else
-			{
-				var link = new navLink(false,e,e);
-			}
-			var li = document.createElement("li");
-			$(li).addClass("nav-item");
-			$(li).append(link.createNavLink());
-			$(howToAppendlink).append(li);
-			$(howToAppendContent).append(link.createTabPanel());
-
+		if(f == 0){
+			var link = new navLink(true,e,e);
+			f=1;
+		}else
+		{
+			var link = new navLink(false,e,e);
+		}
+		var li = document.createElement("li");
+		$(li).addClass("nav-item");
+		$(li).append(link.createNavLink());
+		$(howToAppendlink).append(li);
+		$(howToAppendContent).append(link.createTabPanel());
 		});
-		splitProduct(products);
+		splitProduct(products,navLink.id);
+
 	});
 }
 
 function splitProduct(products){
-	products.forEach(function(p){
-		$("div[data-name='"+ p.categoriaPiatto +"']").append(p.nomePiatto);
+	var categorie = Object.getOwnPropertyNames(products[0]);
+	product.forEach(item =>{
+		categorie.forEach(c =>
+		{
+			if(item.categoriaPiatto == c){
+				
+			}
+		});
+
 	});
+
+	var table = new Table(products,"");
+	console.log(table);
+	//$("div[data-name='"+ p.categoriaPiatto +"']").append(createTable);
+	$("div[data-name='Primi']").append(table.createTable());
+
 }
 
 

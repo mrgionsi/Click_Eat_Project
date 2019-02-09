@@ -3,6 +3,7 @@
 <head>
 
 <%@include file="./parts/head.jsp"%>
+
 <title>Catalogo Prodotti</title>
 </head>
 <body>
@@ -18,8 +19,9 @@
 			</div>
 		</nav>
 	</div>
-
-
+		<script src="./contents/scripts/utility.js"></script>
+	
+	<script src="./contents/scripts/classes/ClassTable.js"></script>
 	<script src="./contents/scripts/ProdottiOrdinazione.js"></script>
 
 </body>
