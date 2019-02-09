@@ -1,4 +1,4 @@
-class Table{
+class TablewithCrudButtons extends Table{
 	//column:contiene un array di elementi di questo tipo {column: "idPiatto",nome:"id Piatto",show:false}
 						//column corrisponde al nome del campo nell'array fields
 						//nome corrisponde al nome da scrivere al posto del nome del campo nell'array fields

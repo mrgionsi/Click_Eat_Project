@@ -126,3 +126,7 @@ tbody > tr > th{
 .modal-body{
 	font-weight: bold;
 }
+
+#selected-items{
+	border: 1px solid grey;
+}
