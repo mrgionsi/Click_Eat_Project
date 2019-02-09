@@ -16,24 +16,4 @@
 <script src="./contents/library/bootstrap4.0/js/bootstrap.min.js"></script>
 
 
-<%
-    	String username= "ospite";
-		String role = null;
-    	Cookie[] cookies = request.getCookies();
-   if(cookies!= null){
-    for(Cookie c : cookies)
-    {
-    	if(c.getName().equals("username"))
-    	{
-    		
-    		 username = c.getValue();
-    	}
-    	
-    	if(c.getName().equals("role"))
-    	{
-    		
-    		 role = c.getValue();
-    	}
-   	} 
-   }
-%>
+

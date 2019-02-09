@@ -15,7 +15,7 @@
 					</div>
 				</div>
 
-				<div class="row  align-items-center mt-5">
+				<form action="ServletLogin" method="post" class="row  align-items-center mt-5">
 					<div
 						class="col-lg-4 col-sm-6 col-xs-12 mx-auto login-form py-4 mt-5">
 						<div class="row">
@@ -26,30 +26,29 @@
 						<div class="row">
 							<div class="col-8 mx-auto">
 								<label for="username">Username</label> <input type="text"
-									class="form-control" id="username"
+									class="form-control" id="username" name="idLogin"
 									placeholder="Inserisci username" required>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-8 mx-auto">
 								<label for="password">Password</label> <input type="password"
-									class="form-control" id="password"
+									class="form-control" id="password" name="passwordUtente"
 									placeholder="Inserisci password" required>
 							</div>
 						</div>
 						<div class="row mx-auto">
 							<div class="col-8 col-md-4 col-lg-4 mx-auto mt-4">
-								<button class="btn btn-primary btn-accedi" id="btn-login">Accedi</button>
+								<button type="submit" class="btn btn-primary btn-accedi" id="btn-login">Accedi</button>
 							</div>
 						</div>
 						<div class="col-12 text-center access-problem mt-4">Problemi
 							di accesso?</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	<script src="./contents/scripts/login.js"></script>
 
 </body>
 

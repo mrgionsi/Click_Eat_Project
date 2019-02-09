@@ -1,19 +1,10 @@
-
- 
-
-
+<%@include file="./GetCookies.jsp"%>
 <nav class="nav border-bottom">
-  <a class="nav-link">Benvenuto <span class="username-menu">
-<% 	 
-	if(request.getParameter("cookie") != null  && request.getParameter("cookierole") != null)
-	{
-		username = request.getParameter("cookie");
-		role = request.getParameter("cookierole");
-
-
-	}
-%>
-<%=username %> <%=role %>
- </span> </a>
-  <a class="nav-link" href="ServletLogout">Logout</a>
+  <% if(role!=null && username!=null){ %>
+  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <%=role %> </span> </a>
+ <a class="nav-link" href="ServletLogout">Logout</a>
+ <% }else{%>
+ <a class="nav-link" href="/login.jsp">Accedi</a>
+ <% }%>
+ 
 </nav>

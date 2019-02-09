@@ -8,12 +8,14 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import manager.ManagerUtente;
 import model.BeanUtente;
@@ -35,53 +37,43 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idLogin = request.getParameter("idLogin");
 		String passwordUtente = request.getParameter("passwordUtente");
-		BeanUtente utente = null;
-		PrintWriter out = response.getWriter();
+		BeanUtente utente = new BeanUtente();
 		System.out.println("idlogin     " + idLogin);
+		HttpSession session = request.getSession();
+
 		try {	
 			ManagerUtente utenteManager = new ManagerUtente();
 			
 			utente = utenteManager.valoriLogin(idLogin, passwordUtente);
-			if(utente == null) {
-				/*request.setAttribute("data", true); //attributo da inserire, utile per gestire casi di login errato
-				rq = request.getRequestDispatcher(""); //jsp da inserire
-				rq.forward(request, response);
-				*/
-	    		request.getSession().setAttribute("adminRoles",false);
+			utente.getRuoloUtente();
+			System.out.println("ruolo"+utente.getRuoloUtente());
 
-				out.print(false);
-			}
-			else {
-				/*switch(utente.getRuoloUtente().toLowerCase()) {
-				case  "amministratore":
-					 rq = request.getRequestDispatcher("./homeAmministratore.jsp"); //jsp da inserire
-						rq.forward(request, response);
+	        	RequestDispatcher requestDispatcher;
+    			session.setAttribute("BeanUtente", utente);
+		
+	    		if(utente.getRuoloUtente().equalsIgnoreCase("amministratore")) {
+					requestDispatcher = request.getRequestDispatcher("./homepageamministratore.jsp");
+					requestDispatcher.forward(request, response);
+					System.out.println("Sono un admin");
+					
+	    		}
+	    		else if(utente.getRuoloUtente().equalsIgnoreCase("cassiere")||utente.getRuoloUtente().equalsIgnoreCase("cameriere")){
+	    			response.setHeader("Location", "./homepage.jsp");
+	    			
+	    			requestDispatcher = request.getRequestDispatcher("./homepage.jsp");
+					requestDispatcher.forward(request, response);
 
-				break;
-				case "cameriere":
-					 rq = request.getRequestDispatcher("./homeCameriere.jsp"); //jsp da inserire
+					System.out.println("Sono uno schiavo");
+	    		}else {
+	    			requestDispatcher = request.getRequestDispatcher("./parts/noauth.jsp");
+					requestDispatcher.forward(request, response);
 
-					break;
-				case "cassiere":
-					 rq = request.getRequestDispatcher("./homeCassiere.jsp"); //jsp da inserire
-					break;
-				}
-				*/
-				Cookie cookie = new Cookie("username",utente.getIdLogin());
-	        	Cookie cookierole = new Cookie("role",utente.getRuoloUtente());
-	        	System.out.println(cookie);
-	        	cookie.setMaxAge(3600);
-	        	cookierole.setMaxAge(3600);
-	    		request.getSession().setAttribute("adminRoles",true);
-
-	    		response.addCookie(cookie);
-	    		response.addCookie(cookierole);
-	    		out.print(true);
-			}
+					System.out.println("Sono uno stronzo");
+	    		}
+				
+				
 		}catch(Exception e){
-    		request.getSession().setAttribute("adminRoles",false);
-
-			out.print(false);
+			e.printStackTrace();
 
 		}
 	

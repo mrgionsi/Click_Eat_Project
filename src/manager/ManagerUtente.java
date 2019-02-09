@@ -176,6 +176,7 @@ public class ManagerUtente {
 				String cognomeUtente = res.getString("cognomeUtente");
 				Integer idUtente = res.getInt("idUtente");
 				System.out.println("nomeUtente =======" + nomeUtente);
+				System.out.println("nomeUtente =======" + ruoloUtente);
 
 				BeanUtente utenteLoggato = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				utenteLoggato.setIdUtente(idUtente);

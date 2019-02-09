@@ -23,6 +23,7 @@
 	<div class="container-fluid">
 		<%@include file="./navbar.jsp"%>
 		<h1>Non hai l'autorizzazione per accedere alla pagina richiesta</h1>
+		<a href="/login.jsp">Fai Login</a>
 		</div>
 </body>
 <script type="text/javascript"

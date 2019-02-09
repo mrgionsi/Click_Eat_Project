@@ -15,31 +15,25 @@
 
 
 
-<title>Benvenuto 
-<% 
-		String name = "ospite";
-		name = request.getParameter("cookie");
-		if(name!="ospite" || name!=null)
-		{
-		
-			name = request.getParameter("cookie");
-		}
-
-%>
-<%=name %>
+<title>
+Amministrazione
 </title>
 </head>
 
 <body>
-
-	<%
-	if(role==null /*|| role !="amministratore" || role !="Amministratore"*/){
-           
-				request.getRequestDispatcher("./parts/noauth.jsp").forward(request, response);	   
-           }
-	%>
 	<div class="container-fluid">
 		<%@include file="./parts/navbar.jsp"%>
+		<%
+			if (utente == null  || !role.equalsIgnoreCase("Amministratore")) {
+				response.sendRedirect("./login.jsp");
+				return;
+			}/* else if(utente.getRuoloUtente().equalsIgnoreCase("Cameriere")|| utente.getRuoloUtente().equalsIgnoreCase("Cassiere")){
+				response.sendRedirect("./homepage.jsp");
+				return;
+			} */
+			
+		
+		%>
 		<p class="text-center">
 		<h3 class="welcome_amministrazione">Pagina amministrazione</h3>
 		</p>

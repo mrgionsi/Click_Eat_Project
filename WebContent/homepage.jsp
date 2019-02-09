@@ -2,31 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%@include file="./parts/head.jsp"%>
-<title>Benvenuto 
-<% 
-		String name = "ospite";
-		name = request.getParameter("cookie");
-		if(name!="ospite" || name!=null)
-		{
-		
-			name = request.getParameter("cookie");
-		}
-
-%>
-<%=name %>
+<title>Ordinazioni 
 </title>
 </head>
 <body>
-<%
-		if(role==null /*|| role !="amministratore" || role !="Amministratore" || role != "cameriere" || role != "Cameriere" */){
-           
-				request.getRequestDispatcher("./parts/noauth.jsp").forward(request, response);
-
-        	   
-           }
-	%>
 	<div class="container-fluid">
 		<%@include file="./parts/navbar.jsp"%>
+		<%
+		
+		if (utente == null /* || !utente.getRuoloUtente().equalsIgnoreCase("Cassiere") || !utente.getRuoloUtente().equalsIgnoreCase("Cameriere") */ ) {
+			response.sendRedirect("./login.jsp");
+			return;
+		}
+		
+		
+		%>
 		<div class="row mt-5" id="tablesList"></div>
 		<!-- 	<script type="text/javascript">tablesList();</script> questa è una caagata in mezzo alla stanza -->
 
