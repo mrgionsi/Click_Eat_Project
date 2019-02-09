@@ -11,9 +11,10 @@
 			<div class="col-9">
 				<%@include file="./parts/navbar.jsp"%>
 <%
-			if(role != null && (role != "cameriere" || role!="Cameriere" || role!="Cassiere" || role!="cassiere" || role!="Amministratore" || role!="amministratore")){
-				request.getRequestDispatcher("/login.jsp").forward(request, response);	   
-		    }
+				if (utente == null  || role==null) {
+					response.sendRedirect("./login.jsp");
+					return;
+				}
 		%>
 					<nav>
 

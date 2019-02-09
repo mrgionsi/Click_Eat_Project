@@ -25,12 +25,9 @@ Amministrazione
 			<%@include file="./parts/navbar.jsp"%>
 		<%
 			if (utente == null  || !role.equalsIgnoreCase("Amministratore")) {
-				response.sendRedirect("./login.jsp");
-				return;
-			}/* else if(utente.getRuoloUtente().equalsIgnoreCase("Cameriere")|| utente.getRuoloUtente().equalsIgnoreCase("Cassiere")){
 				response.sendRedirect("./homepage.jsp");
 				return;
-			} */
+			}
 			
 		
 		%>
@@ -116,6 +113,8 @@ Amministrazione
 
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/addons/datatables.min.js"></script>
+	<script src="./contents/scripts/utility.js"></script>
+	
 <script src="./contents/scripts/homepageamministratore.js"></script>
 
   <script src="./contents/scripts/modalFormTable.js"></script>

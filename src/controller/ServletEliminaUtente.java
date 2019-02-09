@@ -36,7 +36,7 @@ public class ServletEliminaUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		Integer idLogin = Integer.parseInt(request.getParameter("idLogin"));
+		String idLogin = (request.getParameter("idLogin"));
 
 		try {
 			ManagerUtente utenteManager = new ManagerUtente();

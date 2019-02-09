@@ -70,16 +70,16 @@ public class ManagerUtente {
 	 * @params idUtente, identificativo dell'utente 
 	 * @return true se l'eliminazione è andata a buon fine, false altrimenti.
 	 */
-	public synchronized boolean eliminaUtente(Integer idLogin){
+	public synchronized boolean eliminaUtente(String idLogin){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("DELETE FROM Utente WHERE idLogin = ?");
+			String sqlString = new String("DELETE FROM Utente WHERE userId = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1,idLogin);
+			ps.setString(1,idLogin);
 
 			int value = ps.executeUpdate();
 
