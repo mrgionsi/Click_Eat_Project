@@ -37,7 +37,7 @@ class ModalConfirmUser{
 		$("#messageModal").text(this.message).css("font-weight:bold;");
 	}
 	
-	onConfirm(ntavolo){
+	onConfirm(idLogin){
 		$("#delete-button").click(function(){
 			console.log("IN CONFIRM");
 
