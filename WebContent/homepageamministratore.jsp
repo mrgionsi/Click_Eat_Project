@@ -25,12 +25,9 @@ Amministrazione
 		<%@include file="./parts/navbar.jsp"%>
 		<%
 			if (utente == null  || !role.equalsIgnoreCase("Amministratore")) {
-				response.sendRedirect("./login.jsp");
-				return;
-			}/* else if(utente.getRuoloUtente().equalsIgnoreCase("Cameriere")|| utente.getRuoloUtente().equalsIgnoreCase("Cassiere")){
 				response.sendRedirect("./homepage.jsp");
 				return;
-			} */
+			}
 			
 		
 		%>
