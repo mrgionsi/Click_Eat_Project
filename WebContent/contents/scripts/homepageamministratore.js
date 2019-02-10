@@ -202,7 +202,7 @@ function showUsers(utenti){
 	
 	//data attribute for modal
 	$(add).attr("data-toggle","modal");
-	$(add).attr("data-target","#modalAddUser");
+	$(add).attr("data-target","#ModalAddUser");
 	
 	$(add).click(function(){
 		removeErrorText();
@@ -243,18 +243,19 @@ function showUsers(utenti){
 		var th4 = document.createElement("th");
 		$(th4).text(element.passwordUtente);
 		
-		var th5 = document.createElement("th");
+		var th5 = document.createElement("td");
 		var divmodify = document.createElement("div");
-		$(divmodify).attr("id","removerow-" +  + element.idLogin);
+		$(divmodify).attr("id","modifyrow-" +  + element.idLogin);
 			var modify = document.createElement("img");
-				$(modify).attr("id","modifyrow-" + element.idLogin);
+				$(modify).attr("id","modifyimg-" + element.idLogin);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
 				$(divmodify).append(modify);
 				$(divmodify).attr("data-toggle","modal");
 				$(divmodify).attr("data-target","#ModalAddUser");
-				
-				$(divmodify).click(function(){
+				console.log("dopo data target");
+
+				$(modify).click(function(){
 					removeErrorText();
 					console.log("CIAOO UTENTE MODIFICA");
 
@@ -277,7 +278,7 @@ function showUsers(utenti){
 	
 				});
 				
-				$(th5).append(modify);
+				$(th5).append(divmodify);
 				$(th5).append(remove);
 				
 		

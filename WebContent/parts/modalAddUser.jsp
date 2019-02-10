@@ -1,5 +1,5 @@
 <!-- Modal -->
-  <div class="modal-dialog modal-dialog-centered" id="ModalAddUser"role="document">
+  <div class="modal-dialog modal-dialog-centered" id="ModalAggiungiUtente"role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalAddUserTitle">Aggiunti nuovo utente</h5>

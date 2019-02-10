@@ -94,8 +94,8 @@ Amministrazione
 		<%@include file="./parts/modalConfirmDelete.jsp"%>
 
 </div>
-	<div class="modal fade" id="modalAddUser" tabindex="-1"
-		role="dialog" aria-labelledby="modalAddUser"
+	<div class="modal fade" id="ModalAddUser" tabindex="-1"
+		role="dialog" aria-labelledby="ModalAddUser"
 		aria-hidden="true">
 		<%@include file="./parts/modalAddUser.jsp"%>
 	</div>
