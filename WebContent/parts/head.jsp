@@ -2,6 +2,11 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<noscript>
+    <meta HTTP-EQUIV="refresh" content=0;url="./noscript.jsp">
+    
+</noscript>
+
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="./contents/library/bootstrap4.0/css/bootstrap.css">

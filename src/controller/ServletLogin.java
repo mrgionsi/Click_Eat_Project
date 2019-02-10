@@ -48,7 +48,6 @@ public class ServletLogin extends HttpServlet {
 			utente.getRuoloUtente();
 			System.out.println("ruolo"+utente.getRuoloUtente());
 
-	        	RequestDispatcher requestDispatcher;
     			session.setAttribute("BeanUtente", utente);
 		
 	    		if(utente.getRuoloUtente().equalsIgnoreCase("amministratore")) {
@@ -67,8 +66,8 @@ public class ServletLogin extends HttpServlet {
 
 					System.out.println("Sono uno schiavo");
 	    		}else {
-	    			requestDispatcher = request.getRequestDispatcher("./parts/noauth.jsp");
-					requestDispatcher.forward(request, response);
+	    			response.sendRedirect(request.getContextPath() + "./parts/noauth.jsp");
+
 
 					System.out.println("Sono uno stronzo");
 	    		}

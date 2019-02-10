@@ -28,6 +28,7 @@
 								<label for="username">Username</label> <input type="text"
 									class="form-control" id="username" name="idLogin"
 									placeholder="Inserisci username" required>
+									
 							</div>
 						</div>
 						<div class="row">
@@ -53,3 +54,5 @@
 </body>
 
 </html>
+
+
