@@ -354,7 +354,9 @@ function showPlates(piatti){
 	
 	$(add).click(function(){
 		removeErrorText();
-		var createModal = new ModalPlate("Modifica piatto", "Modifica","btn-modifyplate-"+ "" ,"", "", "", "");
+		//constructor(title,textButton,id_button, idPiatto, name, category, price, list)
+		console.log("nuovo piatto");
+		var createModal = new ModalPlate("Aggiungi piatto", "Aggiungi","btn-addplate-"+ "" ,"", "", "", "");
 		createModal.caseCreate(piatti);
 	});
 		
@@ -407,7 +409,7 @@ function showPlates(piatti){
 
 					var modifyModal = new ModalPlate("Modifica piatto", "Modifica","btn-modifyplate-"+ element.idPiatto ,element.nomePiatto, element.categoriaPiatto, element.prezzoPiatto, element.listaIngredienti);
 					modifyModal.caseUpdate(piatti);
-					
+					console.log(element.idPiatto);
 				});
 
 

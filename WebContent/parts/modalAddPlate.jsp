@@ -24,7 +24,6 @@
     			
     			<label for="listaIngredienti">Lista Ingredienti</label>
     			<input type="text" class="form-control" id="listaIngredienti" placeholder="Inserisci la lista degli ingredienti">
-    			<label for="listaIngredienti">Lista Ingredienti</label>
     			<small id="listaIngredientiHelpBlock" class="form-text text-muted">
     				Inserisci gli ingredienti separati da una virgola. Es: "Alici, Capperi, Sale, Olio".
     			</small>
@@ -41,7 +40,7 @@
 
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary btn-modal" id="btn-createplate" data-type="btn-createplate">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createplate">Aggiungi</button>
 
       </div>
     </div>

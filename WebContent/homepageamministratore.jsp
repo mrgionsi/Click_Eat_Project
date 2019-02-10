@@ -125,6 +125,8 @@ Amministrazione
 
   <script src="./contents/scripts/modalFormTable.js"></script>
   <script src="./contents/scripts/modalFormUser.js"></script>
+    <script src="./contents/scripts/modalFormPlate.js"></script>
+  
 
   <script src="./contents/scripts/modalConfirm.js"></script>
   <script src="./contents/scripts/regex.js"></script>
