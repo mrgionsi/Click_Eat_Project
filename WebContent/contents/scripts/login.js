@@ -31,10 +31,13 @@ function callApi(apiName){
 			{
 		"idLogin":name,
 		"passwordUtente":pwd},
-		function(data)
+		function(data, status)
 		{
-			console.log(typeof data);
-			if(data.toString() == "true"){
+			console.log(status);
+
+			if(status.toString() == "success"){
+				window.location.href = "./login.jsp";
+
 			}else{
 				if($(".row-error").length > 0 )
 				{

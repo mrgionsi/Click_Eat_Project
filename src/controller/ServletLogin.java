@@ -52,30 +52,30 @@ public class ServletLogin extends HttpServlet {
     			session.setAttribute("BeanUtente", utente);
 		
 	    		if(utente.getRuoloUtente().equalsIgnoreCase("amministratore")) {
+	    			response.setContentType("text/plain");
+	    			out.write("true");
 	    			response.sendRedirect(request.getContextPath() + "/homepageamministratore.jsp");
-	    			out.print(true);
 //					requestDispatcher = request.getRequestDispatcher("./homepageamministratore.jsp");
 //					requestDispatcher.forward(request, response);
 					System.out.println("Sono un admin");
 					
 	    		}
 	    		else if(utente.getRuoloUtente().equalsIgnoreCase("cassiere")||utente.getRuoloUtente().equalsIgnoreCase("cameriere")){
+	    			response.setContentType("text/plain");
+	    			out.write("true");
 	    			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 	    			
 //	    			requestDispatcher = request.getRequestDispatcher("./homepage.jsp");
 //					requestDispatcher.forward(request, response);
-	    			out.print(true);
 					System.out.println("Sono uno schiavo");
-	    		}else {
-	        		out.print(false);
-
 	    		}
-	    		
+
 				
 				
 		}catch(Exception e){
 			e.printStackTrace();
-    		out.print(false);
+			  response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
 
 		}
 	
