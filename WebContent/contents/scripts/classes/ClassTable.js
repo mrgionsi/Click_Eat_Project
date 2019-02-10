@@ -20,7 +20,7 @@ class Table{
 		var reloadcolumn; 
 		var finalcolumn=[];
 		//prendo tutti i nomi dei campi dell'array
-		console.log(_.fields[0]);
+		//console.log(_.fields[0]);
 		var col = Object.getOwnPropertyNames(_.fields[0]);
 		//per ogni campo
 		col.forEach(function(c){
