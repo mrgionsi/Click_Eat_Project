@@ -42,7 +42,7 @@
 
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createuser">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" id="btn-createuser" data-type="btn-createuser">Aggiungi</button>
 
       </div>
     </div>
