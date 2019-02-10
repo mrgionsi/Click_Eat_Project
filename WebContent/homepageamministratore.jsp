@@ -99,6 +99,12 @@ Amministrazione
 		aria-hidden="true">
 		<%@include file="./parts/modalAddUser.jsp"%>
 	</div>
+	
+	<div class="modal fade" id="ModalAddPlate" tabindex="-1"
+		role="dialog" aria-labelledby="ModalAddPlate"
+		aria-hidden="true">
+		<%@include file="./parts/modalAddPlate.jsp"%>
+	</div>
 </body>
 <script type="text/javascript"
 	src="./contents/library/MDB-Free_4.7.0/js/jquery-3.3.1.min.js"></script>

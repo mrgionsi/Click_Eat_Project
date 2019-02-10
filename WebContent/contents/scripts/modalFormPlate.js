@@ -1,6 +1,7 @@
-class ModalTable{
-	constructor(title,textButton,id_button, name, category, price, list)
+class ModalPlate{
+	constructor(title,textButton,id_button, id, name, category, price, list)
 	{
+		this.id = id;
 		this.title = title;
 		this.textButton = textButton;
 		this.name = name;
