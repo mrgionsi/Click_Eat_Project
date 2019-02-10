@@ -97,18 +97,17 @@ function showTable(tavoli){
 		$(th2).text(element.numeroOrdinazione);
 		
 		var th3 = document.createElement("td");
-		var divmodify = document.createElement("div");
-		$(divmodify).attr("id","removerow-" +  + element.numeroTavolo);
+		//var divmodify = document.createElement("div");
+		//$(divmodify).attr("id","removerow-" +  + element.numeroTavolo);
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyrow-" + element.numeroTavolo);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
-				$(divmodify).append(modify);
-				$(divmodify).attr("data-toggle","modal");
-				$(divmodify).attr("data-target","#ModalAddtable");
+				$(modify).attr("data-toggle","modal");
+				$(modify).attr("data-target","#ModalAddtable");
 				//$(divmodify).attr("data-ntavolo",element.numeroTavolo);
 
-			$(divmodify).click(function(){
+			$(modify).click(function(){
 				removeErrorText();
 				var modifyModal = new Modal("Modifica numero tavolo", "Modifica",element.numeroTavolo,"btn-modifytable");
 				modifyModal.caseUpdate(tavoli);
@@ -129,7 +128,7 @@ function showTable(tavoli){
 	
 				});
 				
-				$(th3).append(divmodify);
+				$(th3).append(modify);
 				$(th3).append(remove);
 		
 		$(tr).append(th);

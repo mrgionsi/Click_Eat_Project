@@ -47,6 +47,7 @@
 		</div>
 	</div>
 	<script src="./contents/scripts/utility.js"></script>
+		<script src="./contents/scripts/classes/ClassElementToOrder.js"></script>
 	<script src="./contents/scripts/classes/ClassTable.js"></script>
 	<script src="./contents/scripts/classes/ClassTablewithCrudButtons.js"></script>
 	<script src="./contents/scripts/ProdottiOrdinazione.js"></script>

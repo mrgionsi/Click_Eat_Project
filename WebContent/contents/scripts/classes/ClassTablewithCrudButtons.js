@@ -6,7 +6,7 @@ class TablewithCrudButtons extends Table{
 	//fields: array di elementi
 
 
-	createTable()
+	createTable(element,howToAppend,tableOrdering)
 	{
 		var _ = this;
 		var col_name = this.column_name;
@@ -40,6 +40,7 @@ class TablewithCrudButtons extends Table{
 				{
 					$(tr).attr("data-"+c.column,f[c.column]);
 					var td = document.createElement("td");
+					$(td).attr("data-field",c.column);
 					$(td).text(f[c.column]);
 					$(tr).append(td);
 				}
@@ -65,15 +66,25 @@ class TablewithCrudButtons extends Table{
 				case "remove":
 					$(table).addClass("table table-sm table-bordered");
 					$(thead).addClass("thead-light");
-					var divimg = document.createElement("div");
-					$(divimg).attr("class","remove-from-ordering");
+					//var divimg = document.createElement("div");
+					//$(divimg).attr("class","remove-from-ordering");
 					var remove = document.createElement("img");
-					//$(remove).attr("id","remove-from-ordering");
+					$(remove).attr("id","remove-from-ordering");
 					$(remove).addClass("btn-rowtable-ordering btn-remove");
 					$(remove).attr("src","./contents/images/remove-button.png");
-					$(divimg).append(remove);
-					$(tdimage).append(divimg);
+					//$(divimg).append(remove);
+					$(tdimage).append(remove);
 					$(tr).append(tdimage);
+					
+					$(remove).click(function(){
+						console.log($(remove));
+						elementsOrder.isToRemove(element,this,_,howToAppend);
+						$(howToAppend).children().remove();
+						$(howToAppend).append(_.createTable(element,howToAppend));
+					});
+						
+					
+					
 					break;
 				}
 

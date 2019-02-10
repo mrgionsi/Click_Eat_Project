@@ -1,6 +1,7 @@
 
+
+var elementsOrder = new elementsToOrder();
 var f = 0;
-var elements = [];
 class navLink
 {
 	//active : true o false, per settare su attivo un pills al caricamento
@@ -96,7 +97,7 @@ function createNavPills(){
 		//popolo il nav-panel
 		splitProduct(products,e,panel);
 		});
-		
+
 
 	});
 }
@@ -109,75 +110,54 @@ function splitProduct(products,navlink,paneltoAppend){
 	var table_filtred = products.filter(filterBycategory);
 	//creo la tabella
 	var table = new TablewithCrudButtons(
-							table_filtred,
-							navlink,
-							[{column:"nomePiatto", nome:"Nome Piatto",show:true},
-							{column: "categoriaPiatto",nome:"Categoria",show:false},
-							{column: "listaIngredienti",nome:"Lista Ingredienti",show:true},
-							{column: "prezzoPiatto",nome:"Prezzo",show:true},
-							{column: "idPiatto",nome:"id Piatto",show:false}
-							],"add");
+			table_filtred,
+			navlink,
+			[{column:"nomePiatto", nome:"Nome Piatto",show:true},
+				{column: "categoriaPiatto",nome:"Categoria",show:false},
+				{column: "listaIngredienti",nome:"Lista Ingredienti",show:true},
+				{column: "prezzoPiatto",nome:"Prezzo",show:true},
+				{column: "idPiatto",nome:"id Piatto",show:false}
+				],"add");
 	//appendo la tabella al panel
 	$(paneltoAppend).append(table.createTable());
-
+	var howToAppend = $("#selected-items");
+	var tableOrdering = "";
 	//al click di una riga viene aggiunta alla selezione prodotti
 	var btn_add = $("#table-"+_category + " > tbody").children("tr").children("td").children("div #add-to-ordering");
 	$(btn_add).click(function(event,status){
-		var howToAppend = $("#selected-items");
 		$(howToAppend).children().remove();
 		var element = {"nomePiatto" : $(this).parent().parent().data("nomepiatto"),
 					   "prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
-		 				"quantita" : 1};
-		
-		
-		elements.push(element);
+				       "quantita" : 1};
 
-		var tableOrdering = new TablewithCrudButtons(elements,
-									  "ordering",
-									  [{column: "idPiatto",nome:"id Piatto",show:false},
-									   {column:"nomePiatto", nome:"Nome Piatto",show:true},
-									   {column: "prezzoPiatto",nome:"Prezzo",show:true}
-									  ],"remove");
-		$(howToAppend).append(tableOrdering.createTable());
-		console.log($("#remove-from-ordering"));
-		$(".remove-from-ordering").click(function(event,status){
-			elements.pop(element);
-			$(this).parent().parent().remove();
-		});
+
+		elementsOrder.checkifExist(element);
+//		elementsOrder.elements.push(element);
+		tableOrdering = new TablewithCrudButtons(elementsOrder.elements,
+				"ordering",
+				   [{column: "idPiatto",nome:"id Piatto",show:false},
+					{column:"nomePiatto", nome:"Nome Piatto",show:true},
+					{column: "prezzoPiatto",nome:"Prezzo",show:false}
+					],"remove");
+		$(howToAppend).append(tableOrdering.createTable(element,howToAppend,tableOrdering));
+
+		//console.log($("#remove-from-ordering"));
+//		$(".btn-rowtable-ordering.btn-remove").click(function(event,status){
+//			
+//			elementsOrder.isToRemove(element,this);
+//			//$(howToAppend).children().remove();
+//			
+//			
+//		});
 	});
-
 }
 
 function filterBycategory(item) {
-	  if (item.categoriaPiatto == _category) {
-	    return true;
-	  } 
+	if (item.categoriaPiatto == _category) {
+		return true;
+	} 
 }
 
-function checkifExist(array,element)
-{
-
-	array.forEach(e =>{
-		if(array.includes(element))
-			e.quantita ++;
-		else 
-			array.push(element);
-	})
-	return array;
-
-}
-function isToRemove(array,element,that)
-{
-	array.forEach(e =>{
-		if(array.includes(element))
-			e.quantita --;
-		else {
-			array.pop(element);
-			$(that).parent().parent().remove();
-		}
-	})
-	return array;
-}
 
 
 
