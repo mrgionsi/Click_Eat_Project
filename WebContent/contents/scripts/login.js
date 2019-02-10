@@ -55,6 +55,13 @@ function callApi(apiName){
 				}
 			}
 		}).fail(function(data){
-			alert("Errore nel login");
+			console.log("Error");
+			var div = document.createElement("div");
+			$(div).addClass("row text-center row-error");
+			var texterror = document.createElement("span");
+			$(texterror).addClass("error col-12 text-center");
+			$(texterror).text("Errore username e/o password");
+			$(div).append(texterror);
+			$(".login-form").append(div);
 		});
 }
