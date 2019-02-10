@@ -121,4 +121,6 @@ Amministrazione
   <script src="./contents/scripts/modalFormUser.js"></script>
 
   <script src="./contents/scripts/modalConfirm.js"></script>
+  <script src="./contents/scripts/regex.js"></script>
+  
 </html>

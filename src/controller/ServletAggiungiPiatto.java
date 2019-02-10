@@ -55,6 +55,8 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			String prezzo = request.getParameter("prezzoPiatto");
 			Float prezzoPiatto = Float.parseFloat(prezzo);
 			
+			
+			
 			String[] parts = ingredienti.split(",");
 			
 			int i = 0;

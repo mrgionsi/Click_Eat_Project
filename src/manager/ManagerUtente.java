@@ -25,7 +25,6 @@ public class ManagerUtente {
 	 */
 	public synchronized BeanUtente creaUtente(String nomeUtente, String passwordUtente, String cognomeUtente, String ruoloUtente, String idLogin){
 		System.out.println("SONO IN creaUtente");
-
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("INSERT INTO Utente(nomeUtente, cognomeUtente, userId, passwordUtente, ruoloUtente) VALUES(?,?,?,?,?)");
@@ -66,9 +65,9 @@ public class ManagerUtente {
 		return null;
 	}
 
-	/*metodo utile per eliminare l'utente con l'identificativo di appartenenza
-	 * @params idUtente, identificativo dell'utente 
-	 * @return true se l'eliminazione è andata a buon fine, false altrimenti.
+	/*metodo utile per eliminare l'utente con l'username di appartenenza
+	 * @params idLogin, username dell'utente
+	 * @return true se l'eliminazione ha avuto successo, false altrimenti
 	 */
 	public synchronized boolean eliminaUtente(String idLogin){
 		Connection conn =  null;
@@ -202,44 +201,7 @@ public class ManagerUtente {
 		return null;
 	}
 
-	/*metodo utile per eliminare l'utente con l'username di appartenenza
-	 * @params idLogin, username dell'utente
-	 * @return true se l'eliminazione ha avuto successo, false altrimenti
-	 */
-	public synchronized boolean eliminaUtenteViaIdLogin(String idLogin){
-		Connection conn =  null;
-		PreparedStatement ps = null;
-
-		try {
-			conn = ConnectionPool.getConnection();
-			String sqlString = new String("DELETE FROM Utente WHERE idLogin = ?");
-			ps = conn.prepareStatement(sqlString);
-
-			ps.setString(1,idLogin);
-
-			int value = ps.executeUpdate();
-
-			if(value != 0) {
-				System.out.println("eliminazione effettuata");
-				return true;
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-
-
-		}
-		finally {
-			try {
-
-				ps.close();
-				ConnectionPool.releaseConnection(conn);
-			}
-			catch(Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return false;
-	}
+	
+	
 
 }

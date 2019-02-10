@@ -41,7 +41,7 @@
 
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createplate">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" id="btn-createplate" data-type="btn-createplate">Aggiungi</button>
 
       </div>
     </div>

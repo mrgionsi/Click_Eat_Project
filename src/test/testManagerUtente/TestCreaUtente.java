@@ -43,7 +43,7 @@ public class TestCreaUtente {
 	@After
 	public static void tearDown() {
 		
-		mU.eliminaUtenteViaIdLogin(idLogin);
+		mU.eliminaUtente(idLogin);
 	}
 	
 	

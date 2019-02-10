@@ -38,6 +38,7 @@ public class ServletLogin extends HttpServlet {
 		String idLogin = request.getParameter("idLogin");
 		String passwordUtente = request.getParameter("passwordUtente");
 		BeanUtente utente = new BeanUtente();
+		PrintWriter out = response.getWriter();
 		System.out.println("idlogin     " + idLogin);
 		HttpSession session = request.getSession();
 
@@ -48,34 +49,33 @@ public class ServletLogin extends HttpServlet {
 			utente.getRuoloUtente();
 			System.out.println("ruolo"+utente.getRuoloUtente());
 
-	        	RequestDispatcher requestDispatcher;
     			session.setAttribute("BeanUtente", utente);
 		
 	    		if(utente.getRuoloUtente().equalsIgnoreCase("amministratore")) {
+	    			response.setContentType("text/plain");
+	    			out.write("true");
 	    			response.sendRedirect(request.getContextPath() + "/homepageamministratore.jsp");
-
 //					requestDispatcher = request.getRequestDispatcher("./homepageamministratore.jsp");
 //					requestDispatcher.forward(request, response);
 					System.out.println("Sono un admin");
 					
 	    		}
 	    		else if(utente.getRuoloUtente().equalsIgnoreCase("cassiere")||utente.getRuoloUtente().equalsIgnoreCase("cameriere")){
+	    			response.setContentType("text/plain");
+	    			out.write("true");
 	    			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 	    			
 //	    			requestDispatcher = request.getRequestDispatcher("./homepage.jsp");
 //					requestDispatcher.forward(request, response);
-
 					System.out.println("Sono uno schiavo");
-	    		}else {
-	    			requestDispatcher = request.getRequestDispatcher("./parts/noauth.jsp");
-					requestDispatcher.forward(request, response);
-
-					System.out.println("Sono uno stronzo");
 	    		}
+
 				
 				
 		}catch(Exception e){
 			e.printStackTrace();
+			  response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
 
 		}
 	
