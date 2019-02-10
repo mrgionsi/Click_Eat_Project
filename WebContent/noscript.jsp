@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <%@include file="./parts/head.jsp"%>
-<%@include file="./parts/GetCookies.jsp"%>
 
 <title>Accedi a ClickEat</title>
 </head>
