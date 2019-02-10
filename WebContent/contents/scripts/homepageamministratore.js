@@ -355,7 +355,7 @@ function showPlates(piatti){
 		removeErrorText();
 		//constructor(title,textButton,id_button, idPiatto, name, category, price, list)
 		console.log("nuovo piatto");
-		var createModal = new ModalPlate("Aggiungi piatto", "Aggiungi","btn-addplate-"+ "" ,"", "", "", "");
+		var createModal = new ModalPlate("Aggiungi piatto", "Aggiungi","btn-createplate"+ "" ,"", "", "");
 		createModal.caseCreate(piatti);
 	});
 		
@@ -406,8 +406,11 @@ function showPlates(piatti){
 					console.log("CIAOO PIATTO MODIFICA");
 //	constructor(title,textButton,id_button, name, category, price, list)
 
-					var modifyModal = new ModalPlate("Modifica piatto", "Modifica","btn-modifyplate-"+ element.idPiatto ,element.nomePiatto, element.categoriaPiatto, element.prezzoPiatto, element.listaIngredienti);
+					var modifyModal = new ModalPlate("Modifica piatto", "Modifica","btn-createplate", element.idPiatto ,element.nomePiatto, element.categoriaPiatto, element.prezzoPiatto, element.listaIngredienti);
 					modifyModal.caseUpdate(piatti);
+					console.log(element.nomePiatto);
+					console.log(element.categoriaPiatto);
+
 					console.log(element.idPiatto);
 				});
 
@@ -420,7 +423,7 @@ function showPlates(piatti){
 				$(remove).attr("data-target","#ConfirmModal");
 				$(remove).click(function(){
 					console.log("CIAOO PIATTO");
-					var removeModal = new ModalConfirmUser("Elimina", "Eliminare piatto: "+ element.nomePiatto+ "?");
+					var removeModal = new ModalConfirmPlate("Elimina", "Eliminare piatto: "+ element.nomePiatto+ "?");
 					removeModal.onConfirm(element.idPiatto);
 	
 				});

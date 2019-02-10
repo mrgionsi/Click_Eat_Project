@@ -1,5 +1,6 @@
 class ModalPlate{
 	constructor(title,textButton,id_button, idPiatto, name, category, price, list)
+
 	{
 		this.idPiatto = idPiatto;
 		this.title = title;
@@ -7,15 +8,26 @@ class ModalPlate{
 		this.name = name;
 		this.category = category;
 		this.price = price;
-		this.list = list;
+		this.list = function(){
+			var result= "";
+			if(list!=null){
+				list.forEach(function(e){
+					result += e.nomeIngrediente + ", ";
+				});
+				return result;
+			}
+		};
+
+
 		this.id_button = id_button;
 
 		this.onLoad();
 	}
-	
+
 	onLoad(){
 		$("#ModalAddPlateTitle").text(this.title);
 		$(".btn-modal[data-type='"+ this.id_button+"']").attr("id",this.id_button);
+		console.log(this.name);
 		$("#nomePiatto").val(this.name);
 		$("#categoriaPiatto").val(this.category);
 		$("#prezzoPiatto").val(this.price);
@@ -34,44 +46,44 @@ class ModalPlate{
 			var categoryInput = $("#categoriaPiatto").val();
 			var priceInput = $("#prezzoPiatto").val();
 			var listInput = $("#listaIngredienti").val();
-			
-//funzione controllo lato server
 
-				$.get({
-					url: "ServletAggiungiPiatto",
-					data : {'nomePiatto' : nameInput ,
-							'categoriaPiatto': categoryInput ,
-							'prezzoPiatto' : priceInput ,
-							'listaIngredienti' : listInput }
-				})
-				.done(function(data){
-//					$("#ModalAddUser").modal('hide');
-					showSuccessText("Piatto aggiunto con successo",$("#nomePiatto").parent());
-					(location.reload(),3000);
-				});
+//			funzione controllo lato server
+
+			$.get({
+				url: "ServletAggiungiPiatto",
+				data : {'nomePiatto' : nameInput ,
+					'categoriaPiatto': categoryInput ,
+					'prezzoPiatto' : priceInput ,
+					'listaIngredienti' : listInput }
+			})
+			.done(function(data){
+//				$("#ModalAddUser").modal('hide');
+				showSuccessText("Piatto aggiunto con successo",$("#nomePiatto").parent());
+				(location.reload(),3000);
+			});
 		});
 	}
-	
+
 	caseUpdate(piatti){
 		$("#"+this.id_button).click(function(e){
-					e.preventDefault();
-				
-					$.get({
-						url: "ServletModificaPiatto",
-						data : {'nomePiatto' : nameInput ,
-								'categoriaPiatto': categoryInput ,
-								'prezzoPiatto' : priceInput ,
-								'idPiatto' : id,
-								'listaIngredienti' : listInput }
-					})
-					.done(function(data){
-	//					$("#ModalAddUser").modal('hide');
-						showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
-						(location.reload(),3000);
-					});
-				
-				e.stopPropagation();
-	
+			e.preventDefault();
+
+			$.get({
+				url: "ServletModificaPiatto",
+				data : {'nomePiatto' : nameInput ,
+					'categoriaPiatto': categoryInput ,
+					'prezzoPiatto' : priceInput ,
+					'idPiatto' : id,
+					'listaIngredienti' : listInput }
+			})
+			.done(function(data){
+				//					$("#ModalAddUser").modal('hide');
+				showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
+				(location.reload(),3000);
 			});
-		}s
+
+			e.stopPropagation();
+
+		});
+	}s
 }
