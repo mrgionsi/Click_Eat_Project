@@ -6,7 +6,7 @@ class TablewithCrudButtons extends Table{
 	//fields: array di elementi
 
 
-	createTable(element,howToAppend,tableOrdering)
+	createTable(howToAppend)
 	{
 		var _ = this;
 		var col_name = this.column_name;
@@ -66,21 +66,26 @@ class TablewithCrudButtons extends Table{
 				case "remove":
 					$(table).addClass("table table-sm table-bordered");
 					$(thead).addClass("thead-light");
-					//var divimg = document.createElement("div");
-					//$(divimg).attr("class","remove-from-ordering");
+					
 					var remove = document.createElement("img");
 					$(remove).attr("id","remove-from-ordering");
 					$(remove).addClass("btn-rowtable-ordering btn-remove");
 					$(remove).attr("src","./contents/images/remove-button.png");
-					//$(divimg).append(remove);
 					$(tdimage).append(remove);
 					$(tr).append(tdimage);
 					
+					//qui gli viene detto di aggiungere al click la funzione di rimozione, e richiama ricorsivamente
+					//la creazione della tabella
 					$(remove).click(function(){
-						console.log($(remove));
-						elementsOrder.isToRemove(element,this,_,howToAppend);
+						var element = {"nomePiatto" : $(this).parent().parent().data("nomepiatto"),
+								   //"prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
+							       "quantita" :  $(this).parent().parent().data("quantita")};
+						//in questa funzione viene controllato se il campo deve essere eliminato o sottratta la quantità
+						elementsOrder.isToRemove(element);
+						//elimino la tabella
 						$(howToAppend).children().remove();
-						$(howToAppend).append(_.createTable(element,howToAppend));
+						//creo la nuova tabella ricorsivamente, con i nuovi elementi
+						$(howToAppend).append(_.createTable(howToAppend));
 					});
 						
 					

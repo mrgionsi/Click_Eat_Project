@@ -139,17 +139,11 @@ function splitProduct(products,navlink,paneltoAppend){
 					{column:"nomePiatto", nome:"Nome Piatto",show:true},
 					{column: "prezzoPiatto",nome:"Prezzo",show:false}
 					],"remove");
-		$(howToAppend).append(tableOrdering.createTable(element,howToAppend,tableOrdering));
+		$(howToAppend).append(tableOrdering.createTable(howToAppend));
 
-		//console.log($("#remove-from-ordering"));
-//		$(".btn-rowtable-ordering.btn-remove").click(function(event,status){
-//			
-//			elementsOrder.isToRemove(element,this);
-//			//$(howToAppend).children().remove();
-//			
-//			
-//		});
 	});
+
+	
 }
 
 function filterBycategory(item) {
