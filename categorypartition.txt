@@ -32,7 +32,7 @@ Non rispetta il formato [if LCU_OK] [error]
 Rispetta il formato [if LCU_OK] [property FCU_OK]
 
 Parametro: ruoloUtente
-Formato [FRU]: ^[A-Za-z]{8,14}$
+Formato [FRU]: ^((\b(Cameriere)\b)*(\b(Amministratore)\b)*(\b(Cassiere)\b)*)+$
 Lunghezza[LRU] 
 1. <8 or >14 [error]
 2. >=8 and <=14 [LRU_OK]
@@ -140,7 +140,7 @@ Uguale ad un dato già presente [if LNP_OK] [if FNP_OK] [error]
 Differente dai dati già presenti [if LNP_OK] [if FNP_OK] [property UNP_OK]
 
 Parametro: categoriaPiatto
-Formato [FCP]: ^[A-Za-z]{5,10}$
+Formato [FCP]: ^((\b(Primi)\b)*(\b(Secondi)\b)*(\b(Contorni)\b)*)+$
 Lunghezza[LCP] 
 1. <5 or >10 [error]
 2. >=5 and <=10 [LCP_OK]
