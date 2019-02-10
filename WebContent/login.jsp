@@ -28,7 +28,7 @@
 					</div>
 				</div>
 
-				<div <!-- action="ServletLogin" method="post" --> class="row  align-items-center mt-5">
+				<div class="row  align-items-center mt-5">
 					<div
 						class="col-lg-4 col-sm-6 col-xs-12 mx-auto login-form py-4 mt-5">
 						<div class="row">
