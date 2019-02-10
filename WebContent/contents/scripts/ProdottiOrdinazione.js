@@ -1,5 +1,6 @@
 
 var f = 0;
+var elements = [];
 class navLink
 {
 	//active : true o false, per settare su attivo un pills al caricamento
@@ -119,6 +120,23 @@ function splitProduct(products,navlink,paneltoAppend){
 	//appendo la tabella al panel
 	$(paneltoAppend).append(table.createTable());
 
+	console.log($("#table-"+_category + " > tbody").children("tr"));
+	$("#table-"+_category + " > tbody").children("tr").click(function(event,status){
+		var howToAppend = $("#selected-items");
+		$(howToAppend).children().remove();
+		var element = {"nomePiatto" : $(this).data("nomepiatto"),
+					   "prezzoPiatto" : $(this).data("prezzopiatto"),
+		 				"quantita" : 1};
+		elements.push(element);
+
+		var tableOrdering = new Table(elements,
+									  "ordering",
+									  [{column: "idPiatto",nome:"id Piatto",show:false},
+									   {column:"nomePiatto", nome:"Nome Piatto",show:true},
+									   {column: "prezzoPiatto",nome:"Prezzo",show:true}
+									  ]);
+		$(howToAppend).append(tableOrdering.createTable());
+	});
 }
 
 function filterBycategory(item) {
