@@ -201,7 +201,7 @@ function showUsers(utenti){
 	
 	//data attribute for modal
 	$(add).attr("data-toggle","modal");
-	$(add).attr("data-target","#modalAddUser");
+	$(add).attr("data-target","#ModalAddUser");
 	
 	$(add).click(function(){
 		removeErrorText();
@@ -242,18 +242,19 @@ function showUsers(utenti){
 		var th4 = document.createElement("th");
 		$(th4).text(element.passwordUtente);
 		
-		var th5 = document.createElement("th");
+		var th5 = document.createElement("td");
 		var divmodify = document.createElement("div");
-		$(divmodify).attr("id","removerow-" +  + element.idLogin);
+		$(divmodify).attr("id","modifyrow-" +  + element.idLogin);
 			var modify = document.createElement("img");
-				$(modify).attr("id","modifyrow-" + element.idLogin);
+				$(modify).attr("id","modifyimg-" + element.idLogin);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
 				$(divmodify).append(modify);
 				$(divmodify).attr("data-toggle","modal");
 				$(divmodify).attr("data-target","#ModalAddUser");
-				
-				$(divmodify).click(function(){
+				console.log("dopo data target");
+
+				$(modify).click(function(){
 					removeErrorText();
 					console.log("CIAOO UTENTE MODIFICA");
 
@@ -276,7 +277,7 @@ function showUsers(utenti){
 	
 				});
 				
-				$(th5).append(modify);
+				$(th5).append(divmodify);
 				$(th5).append(remove);
 				
 		
@@ -346,6 +347,18 @@ function showPlates(piatti){
 	$(add).addClass("btn-rowtable btn-add");
 	$(add).attr("src","./contents/images/add-button.png");
 	
+	//data attribute for modal
+	$(add).attr("data-toggle","modal");
+	$(add).attr("data-target","#ModalAddPlate");
+	
+	$(add).click(function(){
+		removeErrorText();
+		//constructor(title,textButton,id_button, idPiatto, name, category, price, list)
+		console.log("nuovo piatto");
+		var createModal = new ModalPlate("Aggiungi piatto", "Aggiungi","btn-addplate-"+ "" ,"", "", "", "");
+		createModal.caseCreate(piatti);
+	});
+		
 	$(th5).append(add);
 	
 	$(tr).append(th);
@@ -376,16 +389,43 @@ function showPlates(piatti){
 		$(th3).text(concatIngredienti(element.listaIngredienti));
 		
 		
-		var th5 = document.createElement("th");
+		var th5 = document.createElement("td");
+		var divmodify = document.createElement("div");
+		$(divmodify).attr("id","modifyrow-" +  + element.idPiatto);
 			var modify = document.createElement("img");
-				$(modify).attr("id","modifyrow-" + element.idPiatto);
+				$(modify).attr("id","modifyimg-" + element.idPiatto);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
-			var remove = document.createElement("img");
-				$(remove).attr("id","removerow-" +  + element.idPiatto);
+				$(divmodify).append(modify);
+				$(divmodify).attr("data-toggle","modal");
+				$(divmodify).attr("data-target","#ModalAddPlate");
+				console.log("dopo data target");
+
+				$(modify).click(function(){
+					removeErrorText();
+					console.log("CIAOO PIATTO MODIFICA");
+//	constructor(title,textButton,id_button, name, category, price, list)
+
+					var modifyModal = new ModalPlate("Modifica piatto", "Modifica","btn-modifyplate-"+ element.idPiatto ,element.nomePiatto, element.categoriaPiatto, element.prezzoPiatto, element.listaIngredienti);
+					modifyModal.caseUpdate(piatti);
+					console.log(element.idPiatto);
+				});
+
+
+				var remove = document.createElement("img");
+				$(remove).attr("id","removerow-" + element.idPiatto);
 				$(remove).attr("src","./contents/images/remove-button.png");
 				$(remove).addClass("btn-rowtable");
-				$(th5).append(modify);
+				$(remove).attr("data-toggle","modal");
+				$(remove).attr("data-target","#ConfirmModal");
+				$(remove).click(function(){
+					console.log("CIAOO PIATTO");
+					var removeModal = new ModalConfirmUser("Elimina", "Eliminare piatto: "+ element.nomePiatto+ "?");
+					removeModal.onConfirm(element.idPiatto);
+	
+				});
+				
+				$(th5).append(divmodify);
 				$(th5).append(remove);
 		
 		$(tr).append(th);

@@ -53,3 +53,31 @@ class ModalConfirmUser{
 		});
 	}
 }
+
+class ModalConfirmPlate{
+	constructor(title,message){
+		this.title = title; 
+		this.message = message;
+		this.onLoad();
+	}
+	onLoad(){
+		$("#modal-confirm-title").text(this.title);
+		$("#messageModal").text(this.message).css("font-weight:bold;");
+	}
+	
+	onConfirm(idPiatto){
+		$("#delete-button").click(function(){
+			console.log("IN CONFIRM");
+
+			$.get({
+				url: "ServletEliminaPiatto",
+				data : "idPiatto=" + idPiatto
+			})
+			.done(function(data){
+				$("#messageModal").text("");
+				showSuccessText("Piatto eliminato con successo",$("#messageModal"));
+				(location.reload(),4000);
+			});
+		});
+	}
+}

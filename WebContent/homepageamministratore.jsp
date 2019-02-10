@@ -94,10 +94,16 @@ Amministrazione
 		<%@include file="./parts/modalConfirmDelete.jsp"%>
 
 </div>
-	<div class="modal fade" id="modalAddUser" tabindex="-1"
-		role="dialog" aria-labelledby="modalAddUser"
+	<div class="modal fade" id="ModalAddUser" tabindex="-1"
+		role="dialog" aria-labelledby="ModalAddUser"
 		aria-hidden="true">
 		<%@include file="./parts/modalAddUser.jsp"%>
+	</div>
+	
+	<div class="modal fade" id="ModalAddPlate" tabindex="-1"
+		role="dialog" aria-labelledby="ModalAddPlate"
+		aria-hidden="true">
+		<%@include file="./parts/modalAddPlate.jsp"%>
 	</div>
 </body>
 <script type="text/javascript"
@@ -119,6 +125,8 @@ Amministrazione
 
   <script src="./contents/scripts/modalFormTable.js"></script>
   <script src="./contents/scripts/modalFormUser.js"></script>
+    <script src="./contents/scripts/modalFormPlate.js"></script>
+  
 
   <script src="./contents/scripts/modalConfirm.js"></script>
   <script src="./contents/scripts/regex.js"></script>

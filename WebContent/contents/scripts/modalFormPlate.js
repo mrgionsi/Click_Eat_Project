@@ -1,6 +1,7 @@
-class ModalTable{
-	constructor(title,textButton,id_button, name, category, price, list)
+class ModalPlate{
+	constructor(title,textButton,id_button, idPiatto, name, category, price, list)
 	{
+		this.idPiatto = idPiatto;
 		this.title = title;
 		this.textButton = textButton;
 		this.name = name;
@@ -16,9 +17,9 @@ class ModalTable{
 		$("#ModalAddPlateTitle").text(this.title);
 		$(".btn-modal[data-type='"+ this.id_button+"']").attr("id",this.id_button);
 		$("#nomePiatto").val(this.name);
-		$("#categoriaPiatto").val(this.surname);
-		$("#prezzoPiatto").val(this.password);
-		$("#listaIngredienti").val(this.login);
+		$("#categoriaPiatto").val(this.category);
+		$("#prezzoPiatto").val(this.price);
+		$("#listaIngredienti").val(this.list);
 		$("#"+ this.id_button).text(this.textButton);
 		console.log("plate on load");
 		console.log($("#"+ this.id_button));
@@ -53,23 +54,24 @@ class ModalTable{
 	
 	caseUpdate(piatti){
 		$("#"+this.id_button).click(function(e){
-				e.preventDefault();
-			
-				$.get({
-					url: "ServletModificaPiatto",
-					data : {'nomePiatto' : nameInput ,
-							'categoriaPiatto': categoryInput ,
-							'prezzoPiatto' : priceInput ,
-							'listaIngredienti' : listInput }
-				})
-				.done(function(data){
-//					$("#ModalAddUser").modal('hide');
-					showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
-					(location.reload(),3000);
-				});
-			
-			e.stopPropagation();
-
-		});
-	}
+					e.preventDefault();
+				
+					$.get({
+						url: "ServletModificaPiatto",
+						data : {'nomePiatto' : nameInput ,
+								'categoriaPiatto': categoryInput ,
+								'prezzoPiatto' : priceInput ,
+								'idPiatto' : id,
+								'listaIngredienti' : listInput }
+					})
+					.done(function(data){
+	//					$("#ModalAddUser").modal('hide');
+						showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
+						(location.reload(),3000);
+					});
+				
+				e.stopPropagation();
+	
+			});
+		}s
 }
