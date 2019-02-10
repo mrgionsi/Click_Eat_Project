@@ -108,7 +108,7 @@ function splitProduct(products,navlink,paneltoAppend){
 	//mi prendo tutti i campi che hanno per categoria _category
 	var table_filtred = products.filter(filterBycategory);
 	//creo la tabella
-	var table = new Table(
+	var table = new TablewithCrudButtons(
 							table_filtred,
 							navlink,
 							[{column:"nomePiatto", nome:"Nome Piatto",show:true},
@@ -116,27 +116,36 @@ function splitProduct(products,navlink,paneltoAppend){
 							{column: "listaIngredienti",nome:"Lista Ingredienti",show:true},
 							{column: "prezzoPiatto",nome:"Prezzo",show:true},
 							{column: "idPiatto",nome:"id Piatto",show:false}
-							]);
+							],"add");
 	//appendo la tabella al panel
 	$(paneltoAppend).append(table.createTable());
 
-	console.log($("#table-"+_category + " > tbody").children("tr"));
-	$("#table-"+_category + " > tbody").children("tr").click(function(event,status){
+	//al click di una riga viene aggiunta alla selezione prodotti
+	var btn_add = $("#table-"+_category + " > tbody").children("tr").children("td").children("div #add-to-ordering");
+	$(btn_add).click(function(event,status){
 		var howToAppend = $("#selected-items");
 		$(howToAppend).children().remove();
-		var element = {"nomePiatto" : $(this).data("nomepiatto"),
-					   "prezzoPiatto" : $(this).data("prezzopiatto"),
+		var element = {"nomePiatto" : $(this).parent().parent().data("nomepiatto"),
+					   "prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
 		 				"quantita" : 1};
+		
+		
 		elements.push(element);
 
-		var tableOrdering = new Table(elements,
+		var tableOrdering = new TablewithCrudButtons(elements,
 									  "ordering",
 									  [{column: "idPiatto",nome:"id Piatto",show:false},
 									   {column:"nomePiatto", nome:"Nome Piatto",show:true},
 									   {column: "prezzoPiatto",nome:"Prezzo",show:true}
-									  ]);
+									  ],"remove");
 		$(howToAppend).append(tableOrdering.createTable());
+		console.log($("#remove-from-ordering"));
+		$(".remove-from-ordering").click(function(event,status){
+			elements.pop(element);
+			$(this).parent().parent().remove();
+		});
 	});
+
 }
 
 function filterBycategory(item) {
@@ -144,5 +153,31 @@ function filterBycategory(item) {
 	    return true;
 	  } 
 }
+
+function checkifExist(array,element)
+{
+
+	array.forEach(e =>{
+		if(array.includes(element))
+			e.quantita ++;
+		else 
+			array.push(element);
+	})
+	return array;
+
+}
+function isToRemove(array,element,that)
+{
+	array.forEach(e =>{
+		if(array.includes(element))
+			e.quantita --;
+		else {
+			array.pop(element);
+			$(that).parent().parent().remove();
+		}
+	})
+	return array;
+}
+
 
 

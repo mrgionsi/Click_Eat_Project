@@ -3,12 +3,14 @@ class Table{
 						//column corrisponde al nome del campo nell'array fields
 						//nome corrisponde al nome da scrivere al posto del nome del campo nell'array fields
 						//show può essere true o false, (DEFAULT TRUE) per specificare se mostrare o meno la colonna
+						//specifica quale bottone inserire
 	//fields: array di elementi
-	constructor(fields,id,column){
+	constructor(fields,id,column,addremove){
 		this.fields = fields;
 		this.column_name = column ||  Object.getOwnPropertyNames(fields[0]);
 		this.column = this._setColumn();
 		this.id = "table-"+id;
+		this.addremove = addremove;
 	}
 	//verifico se è stato specificato per la colonna il nome e lo show. 
 	//se gli viene passato column al costruttore prende i valori da lì, altrimenti mostra, di default, 
@@ -18,6 +20,7 @@ class Table{
 		var reloadcolumn; 
 		var finalcolumn=[];
 		//prendo tutti i nomi dei campi dell'array
+		console.log(_.fields[0]);
 		var col = Object.getOwnPropertyNames(_.fields[0]);
 		//per ogni campo
 		col.forEach(function(c){
@@ -75,9 +78,10 @@ class Table{
 					$(td).text(f[c.column]);
 					$(tr).append(td);
 
-					$(tbody).append(tr);
 				}
 			});
+			$(tbody).append(tr);
+
 		});
 			$(table).append(thead);
 			$(table).append(tbody);

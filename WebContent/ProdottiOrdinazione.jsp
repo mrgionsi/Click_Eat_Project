@@ -10,14 +10,14 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<div class="col-9">
-<%
+			<div class="col-8">
+				<%
 				if (utente == null  || role==null) {
 					response.sendRedirect("./login.jsp");
 					return;
 				}
 		%>
-					<nav>
+				<nav>
 
 					<ul class="nav nav-pills nav-fill justify-content-center mb-5"
 						id="pills-tab" role="tablist">
@@ -32,16 +32,23 @@
 					<div class="col-12 text-center">
 						<span class="h3 text-center">Ordinazione Tavolo n. 1</span>
 					</div>
-					
-				</div>
-				<div id="selected-items">
-					</div>
 
+				</div>
+				<div id="selected-items"></div>
+
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col-12 text-right">
+				<div class="btn btn-lg btn-success"> 
+					Aggiungi ordinazione
+				</div>
 			</div>
 		</div>
 	</div>
 	<script src="./contents/scripts/utility.js"></script>
 	<script src="./contents/scripts/classes/ClassTable.js"></script>
+	<script src="./contents/scripts/classes/ClassTablewithCrudButtons.js"></script>
 	<script src="./contents/scripts/ProdottiOrdinazione.js"></script>
 </body>
 </html>
