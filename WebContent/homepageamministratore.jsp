@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <!-- MDBootstrap Datatables  -->
   <link href="./contents/library/MDB-Free_4.7.0/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="./contents/library/MDB-Free_4.7.0/css/mdb.min.css" rel="stylesheet">
+ <!-- Material Design Bootstrap -->
+   <!-- <link href="./contents/library/MDB-Free_4.7.0/css/mdb.min.css" rel="stylesheet"> -->
   <!-- Your custom styles (optional) -->
   <link href="./contents/library/MDB-Free_4.7.0/css/style.css" rel="stylesheet">
   <!-- MDBootstrap Datatables  -->

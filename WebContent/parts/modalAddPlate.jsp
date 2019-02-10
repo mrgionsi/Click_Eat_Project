@@ -19,7 +19,7 @@
     			<label for="categoriaPiatto">Categoria piatto</label>
     			<input type="text" class="form-control" id="categoriaPiatto" placeholder="Inserisci la categoria del piatto">
     			<small id="categoriaPiattoHelpBlock" class="form-text text-muted">
-    				La categoria del piatto è una parola lunga minimo 5 caratteri e massimo 10.
+    				Primi o Secondi o Contorni.
     			</small>
     			
     			<label for="listaIngredienti">Lista Ingredienti</label>

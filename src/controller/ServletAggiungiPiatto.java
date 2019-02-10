@@ -52,7 +52,7 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			String nomePiatto = request.getParameter("nomePiatto");
 			String categoriaPiatto = request.getParameter("categoriaPiatto");
 			String ingredienti = request.getParameter("listaIngredienti");
-			String prezzo = request.getParameter("prezzoPiatto");
+			String prezzo = request.getParameter("prezzoPiatto").replace(",", ".");
 			Float prezzoPiatto = Float.parseFloat(prezzo);
 			
 			
