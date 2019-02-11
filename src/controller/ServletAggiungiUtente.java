@@ -58,14 +58,17 @@ public class ServletAggiungiUtente extends HttpServlet {
 
 			System.out.print(utente.getErrorCode());
 			if(utente.getErrorCode()==1062) {
+				System.out.print("setto bad");
+
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
 			}else {
+				System.out.print("setto ok");
+
 				response.setStatus(200);
 
 			}
 		}catch(Exception e) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
 		}
 	}
