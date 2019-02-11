@@ -86,7 +86,7 @@ class ModalPlate{
 			.done(function(data){
 //				$("#ModalAddPlate").modal('hide');
 				showSuccessText("Piatto aggiunto con successo",$("#nomePiatto").parent());
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			}).
 			fail(function(data){
 				
@@ -97,7 +97,7 @@ class ModalPlate{
 				$(button).text("Fallito");
 				
 				$(".modal-footer").append(button);
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 				
 				
 				
@@ -110,6 +110,11 @@ class ModalPlate{
 		$("#"+this.id_button).click(function(e){
 			e.preventDefault();
 
+			var nameInput = $("#nomePiatto").val();
+			var categoryInput = $("#categoriaPiatto").val();
+			var priceInput = $("#prezzoPiatto").val();
+			var listInput = $("#listaIngredienti").val();
+			
 			$.get({
 				url: "ServletModificaPiatto",
 				data : {'nomePiatto' : nameInput ,
@@ -121,7 +126,7 @@ class ModalPlate{
 			.done(function(data){
 				//					$("#ModalAddUser").modal('hide');
 				showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			}).
 			fail(function(data){
 				
@@ -133,7 +138,7 @@ class ModalPlate{
 				$(button).text("Fallito");
 				
 				$(".modal-footer").append(button);
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 				
 				
 				

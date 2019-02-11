@@ -74,7 +74,7 @@ class ModalUser{
 				.done(function(data){
 //					$("#ModalAddUser").modal('hide');
 					showSuccessText("Utente aggiunto con successo",$("#nomeUtente").parent());
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 				}).
 				fail(function(data){
 				
@@ -86,7 +86,7 @@ class ModalUser{
 					$(button).text("Fallito");
 					
 					$(".modal-footer").append(button);
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 					
 					
 					
@@ -122,7 +122,7 @@ class ModalUser{
 					$(button).text("Fallito");
 					
 					$(".modal-footer").append(button);
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 					
 					
 					

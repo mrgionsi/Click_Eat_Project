@@ -56,7 +56,7 @@ class Modal{
 				.done(function(data){
 //					$("#ModalAddtable").modal('hide');
 					showSuccessText("Tavolo creato con successo",$("#numeroTavolo").parent());
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 				}).
 				fail(function(data){
 				
@@ -67,7 +67,7 @@ class Modal{
 					$(button).text("Fallito");
 					
 					$(".modal-footer").append(button);
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 					
 					
 
@@ -105,7 +105,7 @@ class Modal{
 					$(button).text("Fallito");
 					
 					$(".modal-footer").append(button);
-					setTimeout(function () { location.reload(1); }, 5000);
+					setTimeout(function () { location.reload(1); }, 2500);
 					
 					
 					
