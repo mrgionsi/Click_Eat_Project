@@ -8,7 +8,18 @@ const categoriaPiatto = new RegExp(/^((\b(Primi)\b)*(\b(Secondi)\b)*(\b(Contorni
 const prezzoPiatto = new RegExp(/^[0-9]{1,5},[0-9]{2}$/, "g");
 const listaIngredienti = new RegExp(/^((,{0,1})([A-Za-z\s]{4,36})(,{0,1}))+$/, "g");
 
-var nur = $("#nomeUtente").keyup(function(event, status){
+var nur = false;
+var cur = false;
+var rur = false;
+var ilr = false;
+var pur = false;
+
+var npr = false;
+var cpr = false;
+var lir = false;
+var ppr = false;
+
+  $("#nomeUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -18,15 +29,17 @@ var nur = $("#nomeUtente").keyup(function(event, status){
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		nur =  false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
+		nur = true;
 		checkFormUser();
 		
 	}
 });
 
-var cur = $("#cognomeUtente").keyup(function(event, status){
+  $("#cognomeUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -36,14 +49,17 @@ var cur = $("#cognomeUtente").keyup(function(event, status){
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		cur = false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
+		cur = true;
+
 		checkFormUser();
 		}
 });
 
-var rur= $("#ruoloUtente").keyup(function(event, status){
+  $("#ruoloUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -53,14 +69,17 @@ var rur= $("#ruoloUtente").keyup(function(event, status){
 	if(!value.match(ruoloRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		rur= false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
+		rur = true;
+
 		checkFormUser();
 		}
 });
 
-var ilr = $("#idLogin").keyup(function(event, status){
+  $("#idLogin").keyup(function(event, status){
 	
 	
 	
@@ -70,24 +89,30 @@ var ilr = $("#idLogin").keyup(function(event, status){
 	if(!value.match(loginRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		ilr = false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
+		ilr = true;
+
 		checkFormUser();
 		}
 });
 
-var pur = $("#passwordUtente").keyup(function(event, status){
+ $("#passwordUtente").keyup(function(event, status){
 	
 	var value = this.value;
 	
 	if(!value.match(passwordRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		 pur = false;
 
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
+		 pur = true;
+
 		checkFormUser();
 	}
 });
@@ -95,6 +120,7 @@ var pur = $("#passwordUtente").keyup(function(event, status){
 function checkFormUser(){
 	if(pur && nur && cur && rur && lir){
 		$(".btn-modal").prop( "disabled", false);
+		console.log("tutto ok, abilito il bottnone");
 	}
 }
 
@@ -118,7 +144,7 @@ $("#numeroTavolo").keyup(function(event, status){
 
 
 	
-	var npr= $("#nomePiatto").keyup(function(event, status){
+	  $("#nomePiatto").keyup(function(event, status){
 		
 		
 		var value = this.value;
@@ -128,15 +154,17 @@ $("#numeroTavolo").keyup(function(event, status){
 		if(!value.match(nomePiatto)){
 			$(this).addClass("input-fielderror");
 			$(".btn-modal").prop( "disabled", true );
+			npr = false;
 		}else{
 			$(this).removeClass("input-fielderror");
 			//$(".btn-modal").prop( "disabled", false);
+			npr = true;
 			checkFormPlate();
 
 		}
 	});
 
-	var cpr = $("#categoriaPiatto").keyup(function(event, status){
+	  $("#categoriaPiatto").keyup(function(event, status){
 		
 		
 		var value = this.value;
@@ -146,16 +174,18 @@ $("#numeroTavolo").keyup(function(event, status){
 		if(!value.match(categoriaPiatto)){
 			$(this).addClass("input-fielderror");
 			$(".btn-modal").prop( "disabled", true );
+			cpr = false;
 
 		}else{
 			$(this).removeClass("input-fielderror");
 			//$(".btn-modal").prop( "disabled", false);
+			cpr = true;
 			checkFormPlate();
 
 		}
 	});
 
-	var lir = $("#listaIngredienti").keyup(function(event, status){
+	  $("#listaIngredienti").keyup(function(event, status){
 		
 		
 		var value = this.value;
@@ -165,16 +195,18 @@ $("#numeroTavolo").keyup(function(event, status){
 		if(!value.match(listaIngredienti)){
 			$(this).addClass("input-fielderror");
 			$(".btn-modal").prop( "disabled", true );
+			lir = false;
 
 		}else{
 			$(this).removeClass("input-fielderror");
 			//$(".btn-modal").prop( "disabled", false);
+			lir = true;
 			checkFormPlate();
 
 		}
 	});
 
-	var ppr = $("#prezzoPiatto").keyup(function(event, status){
+	  $("#prezzoPiatto").keyup(function(event, status){
 		
 		
 		var value = this.value;
@@ -184,10 +216,12 @@ $("#numeroTavolo").keyup(function(event, status){
 		if(!value.match(prezzoPiatto)){
 			$(this).addClass("input-fielderror");
 			$(".btn-modal").prop( "disabled", true );
+			ppr = false;
 
 		}else{
 			$(this).removeClass("input-fielderror");
 			//$(".btn-modal").prop( "disabled", false);
+			ppr = true;
 			checkFormPlate();
 		}
 	});

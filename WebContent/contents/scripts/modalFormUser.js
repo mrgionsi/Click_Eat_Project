@@ -29,7 +29,7 @@ class ModalUser{
 
 			var spinner = document.createElement("button");			
 			$(spinner).addClass("btn btn-primary");
-			$(spinner).prop("disabled");
+			$(spinner).prop("disabled", true);
 			$(spinner).attr("type", "button");
 			$(spinner).attr("id", "spinner-loading");
 
@@ -97,6 +97,11 @@ class ModalUser{
 	
 	caseUpdate(utenti){
 		$("#"+this.id_button).click(function(e){
+			var nameInput = $("#nomeUtente").val();
+			var surnameInput = $("#cognomeUtente").val();
+			var roleInput = $("#ruoloUtente").val();
+			var passwordInput = $("#passwordUtente").val();
+			var loginInput = $("#idLogin").val();
 				e.preventDefault();
 			
 				$.get({

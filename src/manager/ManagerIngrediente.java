@@ -35,7 +35,6 @@ public class ManagerIngrediente {
 
 			int value = ps.executeUpdate(); 
 			if(value != 0 ) {
-				System.out.println("Ingrediente aggiunto con successo nel Database");
 				
 			}
 			
@@ -81,7 +80,6 @@ public class ManagerIngrediente {
 			int value = ps.executeUpdate();
 			
 			if(value != 0) {
-				System.out.println("eliminazione dell'ingrediente effettuata");
 				return true;
 			}
 		}
@@ -212,7 +210,6 @@ public class ManagerIngrediente {
 	
 			if(idIngrediente != 0) {
 				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
-				System.out.println("Ingrediente ottenuto con successo dal Database");
 	
 				return ingrediente;
 			}

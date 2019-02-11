@@ -47,9 +47,13 @@ public class ManagerUtente {
 			}
 		}
 		catch(SQLException e){
+			System.out.println("il codice errore è: " + e.getErrorCode());
+
 			System.out.println(e.getMessage());
 			if(e.getErrorCode() == 1062) {
 				//esiste utente 
+				System.out.println("il codice è 1062");
+
 				return new BeanUtente(1062);
 			}
 			if(e.getErrorCode() == 1613) {
