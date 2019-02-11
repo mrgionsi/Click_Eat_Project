@@ -6,16 +6,15 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import manager.ManagerUtente;
 import model.BeanUtente;
@@ -35,17 +34,41 @@ public class ServletLogin extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String idLogin = request.getParameter("idLogin");
 		String passwordUtente = request.getParameter("passwordUtente");
-		BeanUtente utente = new BeanUtente();
-		PrintWriter out = response.getWriter();
+		BeanUtente utente;
 		System.out.println("idlogin     " + idLogin);
 		HttpSession session = request.getSession();
-
+		
 		try {	
 			ManagerUtente utenteManager = new ManagerUtente();
-			
+			System.out.println("prima di managerutente");
+
 			utente = utenteManager.valoriLogin(idLogin, passwordUtente);
+			System.out.println(utente.getErrorCode());
+			
+			if(utente.getErrorCode()==1329) {
+				System.out.println(utente.getErrorCode());
+
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return;
+			}
+			
+			if(utente.getErrorCode()==1613) {
+				System.out.println("Sono in Connection timeout");
+				response.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+				return;
+
+
+			}
+			if(utente.getErrorCode()==1329) {
+				
+				System.out.println("Sono in no data4");
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+			}
+			
 			utente.getRuoloUtente();
 			System.out.println("ruolo"+utente.getRuoloUtente());
 
@@ -70,13 +93,12 @@ public class ServletLogin extends HttpServlet {
 
 				
 				
-		}catch(Exception e){
-			e.printStackTrace();
-			  response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-
+		}
+		catch(Exception e1) {
+			e1.getStackTrace();
 
 		}
-	
+			
 	}
 
 }

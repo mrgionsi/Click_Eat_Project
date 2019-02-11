@@ -22,15 +22,11 @@ class ModalUser{
 		$("#idLogin").val(this.login);
 		$("#ruoloUtente").val(this.role);
 		$("#"+ this.id_button).text(this.textButton);
-		console.log("loaded");
-		console.log($("#"+ this.id_button));
 
 
 	}
 	caseCreate(utenti){
-		console.log($("#"+this.id_button));
 		$("#"+ this.id_button).click(function(){
-			console.log($("#"+ this.id_button));
 			var nameInput = $("#nomeUtente").val();
 			var surnameInput = $("#cognomeUtente").val();
 			var roleInput = $("#ruoloUtente").val();

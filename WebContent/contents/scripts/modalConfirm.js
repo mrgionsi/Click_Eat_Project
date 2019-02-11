@@ -11,7 +11,6 @@ class ModalConfirmTable{
 	
 	onConfirm(ntavolo){
 		$("#delete-button").click(function(){
-			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaTavolo",
@@ -20,7 +19,7 @@ class ModalConfirmTable{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Tavolo eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				(location.reload(),5000);
 			});
 		});
 	}
@@ -39,7 +38,6 @@ class ModalConfirmUser{
 	
 	onConfirm(idLogin){
 		$("#delete-button").click(function(){
-			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaUtente",
@@ -48,7 +46,7 @@ class ModalConfirmUser{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Utente eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				(location.reload(),5000);
 			});
 		});
 	}
@@ -67,7 +65,6 @@ class ModalConfirmPlate{
 	
 	onConfirm(idPiatto){
 		$("#delete-button").click(function(){
-			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaPiatto",
@@ -76,7 +73,7 @@ class ModalConfirmPlate{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Piatto eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				(location.reload(),5000);
 			});
 		});
 	}

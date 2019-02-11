@@ -49,7 +49,13 @@ public class ManagerUtente {
 		catch(SQLException e){
 			System.out.println(e.getMessage());
 			if(e.getErrorCode() == 1062) {
-				//return new BeanUtente("duplicato","duplicato"); 
+				//esiste utente 
+				return new BeanUtente(1062);
+			}
+			if(e.getErrorCode() == 1613) {
+				//timeout connession
+				return new BeanUtente(1613);
+
 			}
 
 		}
@@ -181,10 +187,25 @@ public class ManagerUtente {
 				utenteLoggato.setIdUtente(idUtente);
 				return utenteLoggato;
 			}
+			else {
+				//non esiste utente 
+
+				return new BeanUtente(1329);
+
+			}
+			
 
 		} catch (SQLException e) {
-			System.out.println("SqlException in ManagerUtente");
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			if(e.getErrorCode() == 1329) {
+				//non esiste utente 
+				return new BeanUtente(1329);
+			}
+			if(e.getErrorCode() == 1613) {
+				//timeout connession
+				return new BeanUtente(1613);
+
+			}
 
 		}finally{
 
