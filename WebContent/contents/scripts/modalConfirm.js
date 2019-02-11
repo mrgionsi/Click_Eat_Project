@@ -19,7 +19,7 @@ class ModalConfirmTable{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Tavolo eliminato con successo",$("#messageModal"));
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			}).
 			fail(function(data){
 				
@@ -31,7 +31,7 @@ class ModalConfirmTable{
 				$(button).text("Fallito");
 				
 				$(".modal-footer").append(button);
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 				
 				
 				
@@ -63,7 +63,7 @@ class ModalConfirmUser{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Utente eliminato con successo",$("#messageModal"));
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			});
 		});
 	}
@@ -91,7 +91,7 @@ class ModalConfirmPlate{
 			.done(function(data){
 				$("#messageModal").text("");
 				showSuccessText("Piatto eliminato con successo",$("#messageModal"));
-				setTimeout(function () { location.reload(1); }, 5000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			});
 		});
 	}
