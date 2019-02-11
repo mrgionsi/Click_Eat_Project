@@ -94,6 +94,22 @@ class Modal{
 ////					$("#ModalAddtable").modal('hide');
 //					showSuccessText("Tavolo creato con successo",$("#numeroTavolo").parent());
 //					setTimeout(function () { location.reload(1); }, 5000);
+				}).
+				fail(function(data){
+				
+					var button = document.createElement("button");
+					$(button).addClass("btn btn-danger");
+					$(button).attr("id", "fail");
+					$("#spinner-loading").remove();
+
+					$(button).text("Fallito");
+					
+					$(".modal-footer").append(button);
+					setTimeout(function () { location.reload(1); }, 5000);
+					
+					
+					
+
 				});
 			}
 			e.stopPropagation();
