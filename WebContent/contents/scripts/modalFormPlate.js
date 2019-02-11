@@ -35,6 +35,7 @@ class ModalPlate{
 		
 		$("#"+ this.id_button).click(function(){
 			$("#spinner-loading").remove();
+			$("#fail").remove();
 
 			var spinner = document.createElement("button");			
 			$(spinner).addClass("btn btn-primary");
@@ -55,6 +56,9 @@ class ModalPlate{
 			$(spinner).append(span1);	
 			
 			$("#btn-close").remove();
+			$(".modal-footer").append(spinner);
+			
+			
 		});
 
 
@@ -80,9 +84,24 @@ class ModalPlate{
 					'listaIngredienti' : listInput }
 			})
 			.done(function(data){
-//				$("#ModalAddUser").modal('hide');
+//				$("#ModalAddPlate").modal('hide');
 				showSuccessText("Piatto aggiunto con successo",$("#nomePiatto").parent());
-				(location.reload(),4000);
+				setTimeout(function () { location.reload(1); }, 5000);
+			}).
+			fail(function(data){
+				
+				var button = document.createElement("button");
+				$(button).addClass("btn btn-danger");
+				$("#spinner-loading").remove();
+
+				$(button).text("Fallito");
+				
+				$(".modal-footer").append(button);
+				setTimeout(function () { location.reload(1); }, 5000);
+				
+				
+				
+
 			});
 		});
 	}
@@ -102,7 +121,7 @@ class ModalPlate{
 			.done(function(data){
 				//					$("#ModalAddUser").modal('hide');
 				showSuccessText("Piatto modificato con successo",$("#nomePiatto").parent());
-				(location.reload(),4000);
+				setTimeout(function () { location.reload(1); }, 5000);
 			});
 
 			e.stopPropagation();

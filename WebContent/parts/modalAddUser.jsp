@@ -40,9 +40,10 @@
       </div>
       <div class="modal-footer">
 
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createuser">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createuser" disabled>Aggiungi</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        
 
       </div>
     </div>

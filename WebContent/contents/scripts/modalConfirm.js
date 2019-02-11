@@ -38,6 +38,7 @@ class ModalConfirmUser{
 	
 	onConfirm(idLogin){
 		$("#delete-button").click(function(){
+			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaUtente",
@@ -65,6 +66,7 @@ class ModalConfirmPlate{
 	
 	onConfirm(idPiatto){
 		$("#delete-button").click(function(){
+			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaPiatto",

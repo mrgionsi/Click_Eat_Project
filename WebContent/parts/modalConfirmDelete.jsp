@@ -12,8 +12,9 @@
         <span id="messageModal"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Chiudi</button>
         <button type="button" class="btn btn-danger" id="delete-button">Conferma</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Chiudi</button>
+        
       </div>
     </div>
   </div>

@@ -38,9 +38,10 @@
       </div>
       <div class="modal-footer">
 
-        <button type="button" class="btn btn-warning" data-dismiss="modal" id="btn-close">Close</button>
+        
 
-        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createplate">Aggiungi</button>
+        <button type="button" class="btn btn-primary btn-modal" data-type="btn-createplate" disabled>Aggiungi</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" id="btn-close">Close</button>
 
       </div>
     </div>
