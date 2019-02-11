@@ -19,6 +19,16 @@ var cpr = false;
 var lir = false;
 var ppr = false;
 
+
+function checkFormUser(){
+	console.log("chiamata checkFormUser");
+
+	if(pur && nur && cur && rur && ilr){
+		$(".btn-modal").prop("disabled", false);
+		console.log("tutto ok, abilito il bottnone");
+	}
+}
+
   $("#nomeUtente").keyup(function(event, status){
 	
 	
@@ -29,11 +39,15 @@ var ppr = false;
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
 		nur =  false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
 		nur = true;
+		console.log("è ok");
+
 		checkFormUser();
 		
 	}
@@ -49,6 +63,9 @@ var ppr = false;
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+		console.log("è ok");
+
 		cur = false;
 	}else{
 		$(this).removeClass("input-fielderror");
@@ -69,11 +86,14 @@ var ppr = false;
 	if(!value.match(ruoloRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
 		rur= false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
 		rur = true;
+		console.log("è ok");
 
 		checkFormUser();
 		}
@@ -89,11 +109,14 @@ var ppr = false;
 	if(!value.match(loginRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
 		ilr = false;
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
 		ilr = true;
+		console.log("è ok");
 
 		checkFormUser();
 		}
@@ -106,23 +129,21 @@ var ppr = false;
 	if(!value.match(passwordRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
 		 pur = false;
 
 	}else{
 		$(this).removeClass("input-fielderror");
 		//$(".btn-modal").prop( "disabled", false);
 		 pur = true;
+			console.log("è ok");
 
 		checkFormUser();
 	}
 });
 
-function checkFormUser(){
-	if(pur && nur && cur && rur && lir){
-		$(".btn-modal").prop( "disabled", false);
-		console.log("tutto ok, abilito il bottnone");
-	}
-}
+
 
 $("#numeroTavolo").keyup(function(event, status){
 	

@@ -148,5 +148,5 @@ class ModalPlate{
 			e.stopPropagation();
 
 		});
-	}s
+	}
 }
