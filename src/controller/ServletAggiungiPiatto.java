@@ -39,9 +39,7 @@ public class ServletAggiungiPiatto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			System.out.println("-----------------------");
-			System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
-			System.out.println("-----------------------");
+		
 			
 			BeanPiatto piatto = new BeanPiatto();
 			BeanIngrediente ingrediente = new BeanIngrediente();
@@ -84,9 +82,6 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			}
 			
 
-			System.out.println("-----------------------");
-			System.out.println("Fine Servlet: ControllerPiatto");
-			System.out.println("-----------------------");
 		
 	}
 

@@ -85,10 +85,8 @@ public class ManagerTavolo {
 			int value = ps.executeUpdate();
 			
 			
-			System.out.println(value);
 			if(value != 0) {
 
-				System.out.println("Registrazione effettuata con successo");
 
 				return true;
 			}
@@ -131,7 +129,6 @@ public class ManagerTavolo {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("tavolo eliminato con successo");
 				return true;
 			}
 		}
@@ -172,7 +169,6 @@ public class ManagerTavolo {
 
 
 			if(value != 0) {
-				System.out.println("il tavolo è stato liberato");
 				return true;
 			
 			}
@@ -214,12 +210,9 @@ public class ManagerTavolo {
 
 			if(res.next()) {
 				if(res.getBoolean("flagOccupato") == true) {
-					System.out.println("Il tavolo sembra essere occupato. Il valore di res e': " + res.getBoolean("flagOccupato"));
 					return true;
 				}
 				else {
-					System.out.println("Il tavolo sembra essere libero. Il valore di res e': " + res.getBoolean("flagOccupato"));
-
 					return false;
 				}
 			}
@@ -304,7 +297,6 @@ public class ManagerTavolo {
 
 
 			if(value != 0) {
-				System.out.println("il tavolo è stato occupato");
 				return true;
 			
 			}
@@ -387,7 +379,6 @@ public class ManagerTavolo {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println("Il tavolo " + numeroTavolo + " sembra avere l'ordinazione #: " + rs.getInt("numeroOrdinazione") );
 				return rs.getInt("numeroOrdinazione");
 			}
 

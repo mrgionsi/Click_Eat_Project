@@ -39,12 +39,10 @@ public class ServletEliminaTavolo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		Integer numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
-		System.out.println("Cancella tavolo #: " + numeroTavolo);
 
 		try {
 			ManagerTavolo tavoloManager = new ManagerTavolo();
 			if(tavoloManager.eliminaTavolo(numeroTavolo))
-				System.out.println("tavolo eliminato");
 			out.print(true);
 			return;
 		}catch(Exception e) {

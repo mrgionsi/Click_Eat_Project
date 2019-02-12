@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" data-type="btn-creatavolo" class="btn btn-primary btn-modal" disabled></button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-warning" id="btn-close" data-dismiss="modal">Annulla</button>
         
       </div>
     </div>

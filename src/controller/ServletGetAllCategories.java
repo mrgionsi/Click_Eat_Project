@@ -36,11 +36,6 @@ public class ServletGetAllCategories extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-
-		System.out.println("-----------------------");
-		System.out.println("Inizio metodo: doGet - Servlet: GetAllCategories");
-		System.out.println("-----------------------");
-
 		ManagerPiatto piatto = new ManagerPiatto();
 
 		ArrayList<BeanPiatto> listaCategorie = piatto.ottieniCategorie();

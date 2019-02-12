@@ -29,7 +29,7 @@ class ModalUser{
 
 			var spinner = document.createElement("button");			
 			$(spinner).addClass("btn btn-primary");
-			$(spinner).prop("disabled", true);
+			$(spinner).prop("disabled");
 			$(spinner).attr("type", "button");
 			$(spinner).attr("id", "spinner-loading");
 

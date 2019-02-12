@@ -34,9 +34,7 @@ public class ServletGetAllPiatti extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 
-		System.out.println("-----------------------");
-		System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
-		System.out.println("-----------------------");
+
 
 		ManagerPiatto piatto = new ManagerPiatto();
 

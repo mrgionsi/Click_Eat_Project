@@ -41,7 +41,6 @@ public class ManagerIngrediente {
 		}
 		catch(SQLException e){
 			if(e.getErrorCode() == 1062) {
-				System.out.println("Ingrediente gi� esiste nel Database");
 				e.printStackTrace();
 			}
 

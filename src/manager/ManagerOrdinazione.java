@@ -35,7 +35,6 @@ public class ManagerOrdinazione {
 			int value = ps.executeUpdate();
 			
 			if(value != 0) {
-				System.out.println("Ordinazione creata con successo");
 				return impostaIdEDataOrdine(ordine);
 
 			}

@@ -36,34 +36,23 @@ public class ServletAggiungiUtente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BeanUtente utente = new BeanUtente();
-		System.out.println("Nuovo Utente");
 		String nomeUtente = request.getParameter("nomeUtente");
 		String cognomeUtente = request.getParameter("cognomeUtente");
 		String ruoloUtente = request.getParameter("ruoloUtente");
 		String passwordUtente = request.getParameter("passwordUtente");
 		String idLogin = request.getParameter("userId");
 		
-		System.out.println(nomeUtente);
 
-		System.out.println(cognomeUtente);
-
-		System.out.println(ruoloUtente);
-
-		System.out.println(idLogin);
 
 		try {
 			ManagerUtente utenteManager = new ManagerUtente();
-			System.out.println("PROVO A CREARE UN UTENTE");
 			utente = utenteManager.creaUtente(nomeUtente, passwordUtente, cognomeUtente, ruoloUtente, idLogin);
 
-			System.out.print(utente.getErrorCode());
 			if(utente.getErrorCode()==1062) {
-				System.out.print("setto bad");
 
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
 			}else {
-				System.out.print("setto ok");
 
 				response.setStatus(200);
 

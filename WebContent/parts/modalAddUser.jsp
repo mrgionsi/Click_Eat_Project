@@ -42,7 +42,7 @@
 
 
         <button type="button" class="btn btn-primary btn-modal" data-type="btn-createuser" disabled>Aggiungi</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" id="btn-close" data-dismiss="modal">Close</button>
         
 
       </div>

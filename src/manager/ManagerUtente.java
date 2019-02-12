@@ -24,7 +24,6 @@ public class ManagerUtente {
 	 * @return: un BeanUtente con i params inseriti.
 	 */
 	public synchronized BeanUtente creaUtente(String nomeUtente, String passwordUtente, String cognomeUtente, String ruoloUtente, String idLogin){
-		System.out.println("SONO IN creaUtente");
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("INSERT INTO Utente(nomeUtente, cognomeUtente, userId, passwordUtente, ruoloUtente) VALUES(?,?,?,?,?)");
@@ -38,22 +37,17 @@ public class ManagerUtente {
 
 			int value = ps.executeUpdate();
 			
-			System.out.println("VALUE" + value);
 			if(value!=0) {
 
 				BeanUtente utente = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
-				System.out.println("Registrazione effettuata con successo");
 
 				return utente;
 			}
 		}
 		catch(SQLException e){
-			System.out.println("il codice errore è: " + e.getErrorCode());
 
-			System.out.println(e.getMessage());
 			if(e.getErrorCode() == 1062) {
 				//esiste utente 
-				System.out.println("il codice è 1062");
 
 				return new BeanUtente(1062);
 			}
@@ -94,7 +88,6 @@ public class ManagerUtente {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("eliminazione effettuata");
 				return true;
 			}
 		}
@@ -200,7 +193,6 @@ public class ManagerUtente {
 			
 
 		} catch (SQLException e) {
-			System.out.println("codice errore: " + e.getErrorCode());
 
 			e.getStackTrace();
 			if(e.getErrorCode() == 1329) {
