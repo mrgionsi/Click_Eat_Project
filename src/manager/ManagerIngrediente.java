@@ -66,16 +66,16 @@ public class ManagerIngrediente {
 	 * @params idIngrediente, identificativo univoco dell'ingrediente selezionato
 	 * @return true se l'eliminazione ha avuto successo, false altrimenti
 	 */
-	public synchronized boolean eliminaIngrediente(Integer idIngrediente){
+	public synchronized boolean eliminaIngrediente(String nomeIngrediente){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("DELETE FROM Ingrediente WHERE idIngrediente = ?");
+			String sqlString = new String("DELETE FROM Ingrediente WHERE nomeIngrediente = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1,idIngrediente);
+			ps.setString(1,nomeIngrediente);
 
 			int value = ps.executeUpdate();
 			
@@ -99,6 +99,8 @@ public class ManagerIngrediente {
 		}
 		return false;
 	}
+	
+	
 	
 	/*
 	 * metodo utile per ottenere la lista di dingredienti presenti nel sistema
@@ -162,10 +164,10 @@ public class ManagerIngrediente {
 			String nomeIngrediente = null;
 			
 			if(res.next()) {
-				nomeIngrediente = res.getString("nomeIngrediente");
+				return new BeanIngrediente(idIngrediente, res.getString("nomeIngrediente"));
+
 			}
 			
-			return new BeanIngrediente(idIngrediente, nomeIngrediente);
 		}
 		catch(SQLException e){
 				e.printStackTrace(); 
@@ -200,18 +202,10 @@ public class ManagerIngrediente {
 	
 			ResultSet res = ps.executeQuery();
 
-			int  idIngrediente = 0;
-	
-			while(res.next()) {
-				idIngrediente = res.getInt("idIngrediente");
-			}
-	
-	
-	
-			if(idIngrediente != 0) {
-				BeanIngrediente ingrediente = new BeanIngrediente(idIngrediente, nomeIngrediente);
-	
-				return ingrediente;
+			
+
+			if(res.next()) {
+				return new BeanIngrediente(res.getInt("idIngrediente"), nomeIngrediente);
 			}
 		}
 		catch(SQLException e){

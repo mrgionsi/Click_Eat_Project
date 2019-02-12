@@ -1,3 +1,7 @@
+//When I executed tests, every test was properly done.
+//After some tests I noticed that something was wrong with tests.
+//I looked for the order of execution and I realized that is not guaranteed.
+
 package test;
 
 import org.junit.jupiter.api.Test;
