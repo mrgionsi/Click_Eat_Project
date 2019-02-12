@@ -1,14 +1,3 @@
-Metodi da testare
-
-creaUtente
-valoriLogin
-creaTavolo
-creaPiatto
-creaIngrediente
-
-
-------------------
-
 Category partition:
 
 creaUtente
