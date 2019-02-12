@@ -25,7 +25,7 @@ public class ConnectionPool {
 		String username = "clickeat";
 		String password = "clickeat";
 		
-		   String url = "jdbc:mysql://db4free.net:3306/clickeat?autoReconnect=true";
+		   String url = "jdbc:mysql://db4free.net:3307/clickeat?autoReconnect=true";
 		   newConnection = DriverManager.getConnection(url, username, password);
 		   
 		

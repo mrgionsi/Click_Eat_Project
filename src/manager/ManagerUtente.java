@@ -36,9 +36,10 @@ public class ManagerUtente {
 			ps.setString(3, idLogin);
 			ps.setString(5, ruoloUtente);
 
-			boolean value = ps.execute();
+			int value = ps.executeUpdate();
+			
 			System.out.println("VALUE" + value);
-			if(value) {
+			if(value!=0) {
 
 				BeanUtente utente = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				System.out.println("Registrazione effettuata con successo");
@@ -184,8 +185,7 @@ public class ManagerUtente {
 				String ruoloUtente = res.getString("ruoloUtente");
 				String cognomeUtente = res.getString("cognomeUtente");
 				Integer idUtente = res.getInt("idUtente");
-				System.out.println("nomeUtente =======" + nomeUtente);
-				System.out.println("nomeUtente =======" + ruoloUtente);
+				
 
 				BeanUtente utenteLoggato = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				utenteLoggato.setIdUtente(idUtente);
@@ -200,7 +200,9 @@ public class ManagerUtente {
 			
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("codice errore: " + e.getErrorCode());
+
+			e.getStackTrace();
 			if(e.getErrorCode() == 1329) {
 				//non esiste utente 
 				return new BeanUtente(1329);
@@ -210,6 +212,10 @@ public class ManagerUtente {
 				return new BeanUtente(1613);
 
 			}
+			if(e.getMessage().contains("Could not create connection to database server")) {
+				return new BeanUtente(1613);
+			}
+			
 
 		}finally{
 
