@@ -14,7 +14,11 @@ public class BeanUtente {
 	private String ruoloUtente;
 	private String idLogin;
 	private Integer idUtente;
-
+	private int errorCode = 0;
+	
+	public BeanUtente(int errorCode) {
+		this.setErrorCode(errorCode);
+	}
 	
 	/* costruttore vuoto per l'oggetto BeanUtente; permette di creare un oggetto BeanUtente vuoto
  	*/
@@ -98,6 +102,14 @@ public class BeanUtente {
 
 	public void setIdUtente(Integer idUtente) {
 		this.idUtente = idUtente;
+	}
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
 	}
 
 } 

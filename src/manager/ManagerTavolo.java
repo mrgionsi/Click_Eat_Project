@@ -85,10 +85,8 @@ public class ManagerTavolo {
 			int value = ps.executeUpdate();
 			
 			
-			System.out.println(value);
 			if(value != 0) {
 
-				System.out.println("Registrazione effettuata con successo");
 
 				return true;
 			}
@@ -131,7 +129,6 @@ public class ManagerTavolo {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("tavolo eliminato con successo");
 				return true;
 			}
 		}
@@ -157,27 +154,23 @@ public class ManagerTavolo {
 	 * @params tavolo, entità tavolo selezionata
 	 * @return BeanTavolo tavolo modificato
 	 */
-	public synchronized BeanTavolo freeTavolo(BeanTavolo tavolo){
+	public synchronized boolean freeTavolo(int numeroTavolo){
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("UPDATE Tavolo SET numeroOrdinazione = 0 AND flagOccupato = false AND flagConto = false WHERE numeroTavolo = ?");
+			String sqlString = new String("UPDATE Tavolo SET flagOccupato = false WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
-			ps.setInt(1, tavolo.getNumeroTavolo());
+			ps.setInt(1, numeroTavolo);
 
 			int value = ps.executeUpdate();
-			
-			if(value != 0) {
-				System.out.println("Tavolo liberato");
-				tavolo.setFlagConto(false);
-				tavolo.setFlagOccupato(false);
-				tavolo.setNumeroOrdinazione(0);
-				
-				return tavolo;
 
+
+			if(value != 0) {
+				return true;
+			
 			}
 		}
 		catch(SQLException e){
@@ -185,7 +178,7 @@ public class ManagerTavolo {
 		}
 		finally {
 			try {
-			
+				
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
@@ -193,7 +186,8 @@ public class ManagerTavolo {
 				e2.printStackTrace();
 			}
 		}
-		return null;
+		//impossibile liberare il tavolo
+		return false;
 	}
 
 	/*
@@ -214,15 +208,13 @@ public class ManagerTavolo {
 
 			ResultSet res = ps.executeQuery();
 
-			Boolean flagControllo = res.getBoolean("flagOccupato");
-
-			if(flagControllo) {
-				System.out.println("tavolo Occupato");
-				return true;
-			}
-			else {
-				System.out.println("tavolo libero");
-				return false;
+			if(res.next()) {
+				if(res.getBoolean("flagOccupato") == true) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		}
 		catch(SQLException e){
@@ -259,15 +251,14 @@ public class ManagerTavolo {
 
 			ResultSet res = ps.executeQuery();
 
-			Boolean flagControllo = res.getBoolean("flagConto");
-
-			if(flagControllo) {
-				System.out.println("Il Conto è stato richiesto per il tavolo");
-				return true;
-			}
-			else {
-				System.out.println("il conto non è stato richiesto per il tavolo");
-				return false;
+			
+			if(res.next()) {
+				if(res.getBoolean("flagConto")) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		}
 		catch(SQLException e){
@@ -306,7 +297,6 @@ public class ManagerTavolo {
 
 
 			if(value != 0) {
-				System.out.println("il tavolo è stato occupato");
 				return true;
 			
 			}
@@ -347,7 +337,7 @@ public class ManagerTavolo {
 			
 			if(rs.next()) {
 				
-				return new BeanTavolo(numeroTavolo, rs.getInt("numeroOrdinazione"), rs.getBoolean("falgOccupato"), rs.getBoolean("flagConto"));
+				return new BeanTavolo(numeroTavolo, rs.getInt("numeroOrdinazione"), rs.getBoolean("flagOccupato"), rs.getBoolean("flagConto"));
 
 			}
 
@@ -378,7 +368,6 @@ public class ManagerTavolo {
 		
 		Connection conn =  null;
 		PreparedStatement ps = null;
-		Integer numeroOrdine = 0;
 
 		try {
 			conn = ConnectionPool.getConnection();
@@ -390,8 +379,7 @@ public class ManagerTavolo {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				rs.getInt("numeroOrdinazione");
-				return numeroOrdine;
+				return rs.getInt("numeroOrdinazione");
 			}
 
 		}
@@ -408,7 +396,7 @@ public class ManagerTavolo {
 				e2.printStackTrace();
 			}
 		}
-		return null;
+		return 0;
 		
 	}
 	

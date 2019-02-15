@@ -11,16 +11,32 @@ class ModalConfirmTable{
 	
 	onConfirm(ntavolo){
 		$("#delete-button").click(function(){
-			console.log("IN CONFIRM");
 
 			$.get({
 				url: "ServletEliminaTavolo",
 				data : "numeroTavolo=" + ntavolo
 			})
 			.done(function(data){
+				$(".btn").remove();
 				$("#messageModal").text("");
 				showSuccessText("Tavolo eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				setTimeout(function () { location.reload(1); }, 2500);
+			}).
+			fail(function(data){
+				
+				var button = document.createElement("button");
+				$(button).addClass("btn btn-danger");
+				$(button).attr("id", "fail");
+				$("#spinner-loading").remove();
+
+				$(button).text("Fallito");
+				
+				$(".modal-footer").append(button);
+				setTimeout(function () { location.reload(1); }, 2500);
+				
+				
+				
+
 			});
 		});
 	}
@@ -40,15 +56,17 @@ class ModalConfirmUser{
 	onConfirm(idLogin){
 		$("#delete-button").click(function(){
 			console.log("IN CONFIRM");
-
+			
 			$.get({
 				url: "ServletEliminaUtente",
 				data : "idLogin=" + idLogin
 			})
 			.done(function(data){
+				$(".btn").remove();
+
 				$("#messageModal").text("");
 				showSuccessText("Utente eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			});
 		});
 	}
@@ -74,9 +92,11 @@ class ModalConfirmPlate{
 				data : "idPiatto=" + idPiatto
 			})
 			.done(function(data){
+				$(".btn").remove();
+
 				$("#messageModal").text("");
 				showSuccessText("Piatto eliminato con successo",$("#messageModal"));
-				(location.reload(),4000);
+				setTimeout(function () { location.reload(1); }, 2500);
 			});
 		});
 	}

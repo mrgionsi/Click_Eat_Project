@@ -7,7 +7,29 @@ const nomePiatto = new RegExp(/^[A-Za-z\s]{4,36}$/, "g");
 const categoriaPiatto = new RegExp(/^((\b(Primi)\b)*(\b(Secondi)\b)*(\b(Contorni)\b)*)+$/, "g");
 const prezzoPiatto = new RegExp(/^[0-9]{1,5},[0-9]{2}$/, "g");
 const listaIngredienti = new RegExp(/^((,{0,1})([A-Za-z\s]{4,36})(,{0,1}))+$/, "g");
-$("#nomeUtente").keyup(function(event, status){
+
+var nur = false;
+var cur = false;
+var rur = false;
+var ilr = false;
+var pur = false;
+
+var npr = false;
+var cpr = false;
+var lir = false;
+var ppr = false;
+
+
+function checkFormUser(){
+	console.log("chiamata checkFormUser");
+
+	if(pur && nur && cur && rur && ilr){
+		$(".btn-modal").prop("disabled", false);
+		console.log("tutto ok, abilito il bottnone");
+	}
+}
+
+  $("#nomeUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -17,14 +39,21 @@ $("#nomeUtente").keyup(function(event, status){
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
+		nur =  false;
 	}else{
 		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", true );
+		//$(".btn-modal").prop( "disabled", false);
+		nur = true;
+		console.log("è ok");
 
+		checkFormUser();
+		
 	}
 });
 
-$("#cognomeUtente").keyup(function(event, status){
+  $("#cognomeUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -34,13 +63,20 @@ $("#cognomeUtente").keyup(function(event, status){
 	if(!value.match(nomeRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+		console.log("è ok");
+
+		cur = false;
 	}else{
 		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
+		//$(".btn-modal").prop( "disabled", false);
+		cur = true;
+
+		checkFormUser();
+		}
 });
 
-$("#ruoloUtente").keyup(function(event, status){
+  $("#ruoloUtente").keyup(function(event, status){
 	
 	
 	var value = this.value;
@@ -50,13 +86,20 @@ $("#ruoloUtente").keyup(function(event, status){
 	if(!value.match(ruoloRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
+		rur= false;
 	}else{
 		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
+		//$(".btn-modal").prop( "disabled", false);
+		rur = true;
+		console.log("è ok");
+
+		checkFormUser();
+		}
 });
 
-$("#idLogin").keyup(function(event, status){
+  $("#idLogin").keyup(function(event, status){
 	
 	
 	
@@ -66,25 +109,41 @@ $("#idLogin").keyup(function(event, status){
 	if(!value.match(loginRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
+		ilr = false;
 	}else{
 		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
+		//$(".btn-modal").prop( "disabled", false);
+		ilr = true;
+		console.log("è ok");
+
+		checkFormUser();
+		}
 });
 
-$("#passwordUtente").keyup(function(event, status){
+ $("#passwordUtente").keyup(function(event, status){
 	
 	var value = this.value;
 	
 	if(!value.match(passwordRegex)){
 		$(this).addClass("input-fielderror");
 		$(".btn-modal").prop( "disabled", true );
+		console.log("non è ok");
+
+		 pur = false;
 
 	}else{
 		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
+		//$(".btn-modal").prop( "disabled", false);
+		 pur = true;
+			console.log("è ok");
+
+		checkFormUser();
 	}
 });
+
+
 
 $("#numeroTavolo").keyup(function(event, status){
 	
@@ -102,70 +161,97 @@ $("#numeroTavolo").keyup(function(event, status){
 	}
 });
 
-$("#nomePiatto").keyup(function(event, status){
+
+
+
 	
+	  $("#nomePiatto").keyup(function(event, status){
+		
+		
+		var value = this.value;
+		
+		
+		
+		if(!value.match(nomePiatto)){
+			$(this).addClass("input-fielderror");
+			$(".btn-modal").prop( "disabled", true );
+			npr = false;
+		}else{
+			$(this).removeClass("input-fielderror");
+			//$(".btn-modal").prop( "disabled", false);
+			npr = true;
+			checkFormPlate();
+
+		}
+	});
+
+	  $("#categoriaPiatto").keyup(function(event, status){
+		
+		
+		var value = this.value;
+		
+		
+		
+		if(!value.match(categoriaPiatto)){
+			$(this).addClass("input-fielderror");
+			$(".btn-modal").prop( "disabled", true );
+			cpr = false;
+
+		}else{
+			$(this).removeClass("input-fielderror");
+			//$(".btn-modal").prop( "disabled", false);
+			cpr = true;
+			checkFormPlate();
+
+		}
+	});
+
+	  $("#listaIngredienti").keyup(function(event, status){
+		
+		
+		var value = this.value;
+		
+		
+		
+		if(!value.match(listaIngredienti)){
+			$(this).addClass("input-fielderror");
+			$(".btn-modal").prop( "disabled", true );
+			lir = false;
+
+		}else{
+			$(this).removeClass("input-fielderror");
+			//$(".btn-modal").prop( "disabled", false);
+			lir = true;
+			checkFormPlate();
+
+		}
+	});
+
+	  $("#prezzoPiatto").keyup(function(event, status){
+		
+		
+		var value = this.value;
+		
+		
+		
+		if(!value.match(prezzoPiatto)){
+			$(this).addClass("input-fielderror");
+			$(".btn-modal").prop( "disabled", true );
+			ppr = false;
+
+		}else{
+			$(this).removeClass("input-fielderror");
+			//$(".btn-modal").prop( "disabled", false);
+			ppr = true;
+			checkFormPlate();
+		}
+	});
 	
-	var value = this.value;
-	
-	
-	
-	if(!value.match(nomePiatto)){
-		$(this).addClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", true );
-	}else{
-		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
+	function checkFormPlate(){
+		if(npr && cpr && ppr && lir){
+			$(".btn-modal").prop( "disabled", false);
+		}
+		
 	}
-});
 
-$("#categoriaPiatto").keyup(function(event, status){
-	
-	
-	var value = this.value;
-	
-	
-	
-	if(!value.match(categoriaPiatto)){
-		$(this).addClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", true );
-
-	}else{
-		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
-});
-
-$("#listaIngredienti").keyup(function(event, status){
-	
-	
-	var value = this.value;
-	
-	
-	
-	if(!value.match(listaIngredienti)){
-		$(this).addClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", true );
-
-	}else{
-		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
-});
-
-$("#prezzoPiatto").keyup(function(event, status){
-	
-	
-	var value = this.value;
-	
-	
-	
-	if(!value.match(prezzoPiatto)){
-		$(this).addClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", true );
-
-	}else{
-		$(this).removeClass("input-fielderror");
-		$(".btn-modal").prop( "disabled", false);
-	}
-});
 

@@ -40,10 +40,7 @@ public class ServletGetAllIngredienti extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		//String toGet = request.getParameter("operation"); switching operations
-		System.out.println("-----------------------");
-		System.out.println("Inizio metodo: doGet - Servlet: ControllerIngrediente");
-		System.out.println("-----------------------");
+		
 		
 		ManagerIngrediente ingrediente = new ManagerIngrediente();
 
@@ -52,9 +49,7 @@ public class ServletGetAllIngredienti extends HttpServlet {
 
 		out.print(gson.toJson(listaIngredienti));
 
-		System.out.println("-----------------------");
-		System.out.println("Fine metodo: doGet - Servlet: ControllerIngrediente");
-		System.out.println("-----------------------");
+		
 
 	}
 

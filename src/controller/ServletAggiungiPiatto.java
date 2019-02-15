@@ -39,9 +39,7 @@ public class ServletAggiungiPiatto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-			System.out.println("-----------------------");
-			System.out.println("Inizio metodo: doGet - Servlet: ControllerPiatto");
-			System.out.println("-----------------------");
+		
 			
 			BeanPiatto piatto = new BeanPiatto();
 			BeanIngrediente ingrediente = new BeanIngrediente();
@@ -61,10 +59,8 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			
 			int i = 0;
 			while(i<parts.length) {
-				System.out.println("Aggiungendo al db " + parts[i]);
 				ingrediente = ingredienteManager.creaIngrediente(parts[i]);
 				listaIngredienti.add(ingrediente);
-				System.out.println(listaIngredienti.get(i).getNomeIngrediente());
 
 				i++;
 			}
@@ -72,11 +68,7 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			piatto = piattoManager.creaPiatto(nomePiatto, prezzoPiatto, categoriaPiatto);
 			
 			if(piatto!=null) {
-				System.out.println("Piatto non nullo");
-				System.out.println(piatto.getCategoriaPiatto());
-				System.out.println(piatto.getNomePiatto());
-				System.out.println(piatto.getPrezzoPiatto());
-				System.out.println("Setto in locale la lista di ingredeienti");
+				
 
 				piatto.setListaIngredienti(listaIngredienti);
 				
@@ -85,15 +77,11 @@ public class ServletAggiungiPiatto extends HttpServlet {
 			}
 			
 			if(piatto.getListaIngredienti()!=null){
-				System.out.println("Lista ingredienti non nullo");
 
 				piattoManager.inserisciIngredientiNelPiatto(piatto);
 			}
 			
 
-			System.out.println("-----------------------");
-			System.out.println("Fine Servlet: ControllerPiatto");
-			System.out.println("-----------------------");
 		
 	}
 

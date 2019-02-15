@@ -122,7 +122,6 @@ function showTable(tavoli){
 				$(remove).attr("data-toggle","modal");
 				$(remove).attr("data-target","#ConfirmModal");
 				$(remove).click(function(){
-					console.log("CIAOO");
 					var removeModal = new ModalConfirmTable("Elimina", "Eliminare tavolo "+element.numeroTavolo+ "?");
 					removeModal.onConfirm(element.numeroTavolo);
 	
@@ -157,9 +156,7 @@ function loadUsers() {
 				          "orderable": false,
 				    } ]
 				});
-				$('.dataTables_length').addClass('bs-select');
-				console.log(utenti);
-			}
+				$('.dataTables_length').addClass('bs-select');			}
 	})
 }
 
@@ -252,12 +249,9 @@ function showUsers(utenti){
 				$(divmodify).append(modify);
 				$(divmodify).attr("data-toggle","modal");
 				$(divmodify).attr("data-target","#ModalAddUser");
-				console.log("dopo data target");
 
 				$(modify).click(function(){
 					removeErrorText();
-					console.log("CIAOO UTENTE MODIFICA");
-
 					var modifyModal = new ModalUser("Modifica utente", "Modifica","btn-modifyuser-"+ element.idLogin ,element.nomeUtente, element.cognomeUtente, element.passworUtente, element.idLogin, element.ruoloUtente);
 					modifyModal.caseUpdate(utenti);
 					
@@ -271,7 +265,6 @@ function showUsers(utenti){
 				$(remove).attr("data-toggle","modal");
 				$(remove).attr("data-target","#ConfirmModal");
 				$(remove).click(function(){
-					console.log("CIAOO UTENTE");
 					var removeModal = new ModalConfirmUser("Elimina", "Eliminare utente "+ element.idLogin+ "?");
 					removeModal.onConfirm(element.idLogin);
 	
@@ -300,7 +293,6 @@ function loadPlates(){
 		if(piatti)
 			{
 				showPlates(piatti);
-				console.log(piatti);
 				$("#table-tablelistpiatti").DataTable({
 					"paging": false,
 					"bInfo" : false, 
@@ -353,8 +345,7 @@ function showPlates(piatti){
 	
 	$(add).click(function(){
 		removeErrorText();
-		//constructor(title,textButton,id_button, idPiatto, name, category, price, list)
-		console.log("nuovo piatto");
+		
 		var createModal = new ModalPlate("Aggiungi piatto", "Aggiungi","btn-createplate"+ "" ,"", "", "");
 		createModal.caseCreate(piatti);
 	});
@@ -388,7 +379,6 @@ function showPlates(piatti){
 		var th3 = document.createElement("th");
 		$(th3).text(concatIngredienti(element.listaIngredienti));
 		
-		
 		var th5 = document.createElement("td");
 		var divmodify = document.createElement("div");
 		$(divmodify).attr("id","modifyrow-" +  + element.idPiatto);
@@ -399,19 +389,13 @@ function showPlates(piatti){
 				$(divmodify).append(modify);
 				$(divmodify).attr("data-toggle","modal");
 				$(divmodify).attr("data-target","#ModalAddPlate");
-				console.log("dopo data target");
 
 				$(modify).click(function(){
 					removeErrorText();
-					console.log("CIAOO PIATTO MODIFICA");
-//	constructor(title,textButton,id_button, name, category, price, list)
 
 					var modifyModal = new ModalPlate("Modifica piatto", "Modifica","btn-createplate", element.idPiatto ,element.nomePiatto, element.categoriaPiatto, element.prezzoPiatto, element.listaIngredienti);
 					modifyModal.caseUpdate(piatti);
-					console.log(element.nomePiatto);
-					console.log(element.categoriaPiatto);
 
-					console.log(element.idPiatto);
 				});
 
 
@@ -422,7 +406,6 @@ function showPlates(piatti){
 				$(remove).attr("data-toggle","modal");
 				$(remove).attr("data-target","#ConfirmModal");
 				$(remove).click(function(){
-					console.log("CIAOO PIATTO");
 					var removeModal = new ModalConfirmPlate("Elimina", "Eliminare piatto: "+ element.nomePiatto+ "?");
 					removeModal.onConfirm(element.idPiatto);
 	

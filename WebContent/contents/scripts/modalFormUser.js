@@ -22,15 +22,39 @@ class ModalUser{
 		$("#idLogin").val(this.login);
 		$("#ruoloUtente").val(this.role);
 		$("#"+ this.id_button).text(this.textButton);
-		console.log("loaded");
-		console.log($("#"+ this.id_button));
+		
+		$("#"+ this.id_button).click(function(){
+			$("#spinner-loading").remove();
+			$("#fail").remove();
+
+			var spinner = document.createElement("button");			
+			$(spinner).addClass("btn btn-primary");
+			$(spinner).prop("disabled");
+			$(spinner).attr("type", "button");
+			$(spinner).attr("id", "spinner-loading");
+
+			
+			var span = document.createElement("span");
+			$(span).addClass("spinner-border spinner-border-sm");
+			$(span).attr("role","status");
+			$(span).attr("aria-hidden","true");
+			$(spinner).append(span);
+			
+			var span1 = document.createElement("span");
+			$(span1).addClass("sr-only");
+			$(span1).text("Loading...");
+			$(spinner).append(span1);	
+			
+			$("#btn-close").remove();
+			$(".modal-footer").append(spinner);
+			
+			
+		});
 
 
 	}
 	caseCreate(utenti){
-		console.log($("#"+this.id_button));
 		$("#"+ this.id_button).click(function(){
-			console.log($("#"+ this.id_button));
 			var nameInput = $("#nomeUtente").val();
 			var surnameInput = $("#cognomeUtente").val();
 			var roleInput = $("#ruoloUtente").val();
@@ -50,13 +74,34 @@ class ModalUser{
 				.done(function(data){
 //					$("#ModalAddUser").modal('hide');
 					showSuccessText("Utente aggiunto con successo",$("#nomeUtente").parent());
-					(location.reload(),3000);
+					setTimeout(function () { location.reload(1); }, 2500);
+				}).
+				fail(function(data){
+				
+					var button = document.createElement("button");
+					$(button).addClass("btn btn-danger");
+					$(button).attr("id", "fail");
+					$("#spinner-loading").remove();
+
+					$(button).text("Fallito");
+					
+					$(".modal-footer").append(button);
+					setTimeout(function () { location.reload(1); }, 2500);
+					
+					
+					
+
 				});
 		});
 	}
 	
 	caseUpdate(utenti){
 		$("#"+this.id_button).click(function(e){
+			var nameInput = $("#nomeUtente").val();
+			var surnameInput = $("#cognomeUtente").val();
+			var roleInput = $("#ruoloUtente").val();
+			var passwordInput = $("#passwordUtente").val();
+			var loginInput = $("#idLogin").val();
 				e.preventDefault();
 			
 				$.get({
@@ -71,6 +116,22 @@ class ModalUser{
 //					$("#ModalAddUser").modal('hide');
 					showSuccessText("Utente modificato con successo",$("#nomeUtente").parent());
 					(location.reload(),3000);
+				}).
+				fail(function(data){
+				
+					var button = document.createElement("button");
+					$(button).addClass("btn btn-danger");
+					$(button).attr("id", "fail");
+					$("#spinner-loading").remove();
+
+					$(button).text("Fallito");
+					
+					$(".modal-footer").append(button);
+					setTimeout(function () { location.reload(1); }, 2500);
+					
+					
+					
+
 				});
 			
 			e.stopPropagation();

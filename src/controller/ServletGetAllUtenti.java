@@ -30,9 +30,6 @@ public class ServletGetAllUtenti extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 
-		System.out.println("-----------------------");
-		System.out.println("Inizio metodo: doGet - Servlet: controllerUtente");
-		System.out.println("-----------------------");
 
 		ManagerUtente utenteManager = new ManagerUtente();
 
@@ -40,9 +37,6 @@ public class ServletGetAllUtenti extends HttpServlet {
 		Gson gson = new Gson();
 		out.print(gson.toJson(listaUtenti));
 
-		System.out.println("-----------------------");
-		System.out.println("Fine metodo: doGet - Servlet: ControllerUtente");
-		System.out.println("-----------------------");
 		return;
 
 	}

@@ -36,11 +36,7 @@ public class ServletAggiungiTavolo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		System.out.println("-----------------------");
-		System.out.println("Inizio metodo: doGet - Servlet: ControllerTavolo");
-		System.out.println("-----------------------");
-
-		System.out.println("nuovo Tavolo");
+		
 
 		String number = request.getParameter("numeroTavolo");
 		Integer numeroTavolo = Integer.parseInt(number);
@@ -48,7 +44,6 @@ public class ServletAggiungiTavolo extends HttpServlet {
 		try {
 			ManagerTavolo tavoloManager = new ManagerTavolo();
 			tavoloManager.creaTavolo(numeroTavolo);
-			System.out.println("tavolo creato");
 			out.print(true);
 			return;
 		}catch(Exception e) {

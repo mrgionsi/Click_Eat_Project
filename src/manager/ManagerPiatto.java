@@ -99,11 +99,9 @@ public class ManagerPiatto {
 				categoriaPiatto = res.getString("categoriaPiatto");
 				idPiatto = res.getInt("idPiatto");
 				lista_ingredienti= res.getString("lista_ingredienti");
-				System.out.println("lista ingredienti ->" + lista_ingredienti);
 
 
 				listaPiatti.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto, lista_ingredienti));
-				System.out.println(idPiatto);
 
 			}
 			
@@ -236,13 +234,12 @@ public class ManagerPiatto {
 			//gi� modificata la struttura della tabella
 			//Aggiunto al finally il ritorno del piatto
 			if(value != 0) {
-				System.out.println("Registrazione effettuata con successo");
+
 			}
 		}
 		catch(SQLException e){
 			if(e.getErrorCode() == 1062) {
 				//cos� sappiamo che non � stato veramente aggiunto
-				System.out.println("Piatto gi� esistente");
 
 				//return new BeanUtente("duplicato","duplicato"); 
 			}
@@ -254,7 +251,6 @@ public class ManagerPiatto {
 				ConnectionPool.releaseConnection(conn);
 				//deve essere creato e ritornato qui perch� il piatto potrebbe gi� esistere o meno nel db
 				//Ma a prescindere deve essere ritornato
-				System.out.println("PiattoCreato");
 				 
 				return settaIdPiatto(new BeanPiatto(nomePiatto, categoriaPiatto, prezzoPiatto));
 				
@@ -300,7 +296,6 @@ public class ManagerPiatto {
 					int value = ps.executeUpdate();
 
 					if(value != 0) {
-						System.out.println("Aggiunto con successo ingrediente: " + ingrediente.getNomeIngrediente());
 						//return true;
 						//con questo return faceva solo il primo giro del for
 					}
@@ -345,7 +340,6 @@ public class ManagerPiatto {
 
 			if(res.next()) {
 				piatto.setIdPiatto(res.getInt("idPiatto"));
-				System.out.println("Id piatto settato");
 
 
 			}
@@ -389,7 +383,7 @@ public class ManagerPiatto {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("Piatto eliminato con successo");
+
 				return eliminaPiattiFromIngredientiPiatto(idPiatto);
 			}
 		}
@@ -430,7 +424,6 @@ public class ManagerPiatto {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("Piatto eliminato da IngredientiPiatto con successo");
 				return true;
 			}
 		}

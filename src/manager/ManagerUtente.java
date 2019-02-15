@@ -24,7 +24,6 @@ public class ManagerUtente {
 	 * @return: un BeanUtente con i params inseriti.
 	 */
 	public synchronized BeanUtente creaUtente(String nomeUtente, String passwordUtente, String cognomeUtente, String ruoloUtente, String idLogin){
-		System.out.println("SONO IN creaUtente");
 		try {
 			conn = ConnectionPool.getConnection();
 			String sqlString = new String("INSERT INTO Utente(nomeUtente, cognomeUtente, userId, passwordUtente, ruoloUtente) VALUES(?,?,?,?,?)");
@@ -36,20 +35,26 @@ public class ManagerUtente {
 			ps.setString(3, idLogin);
 			ps.setString(5, ruoloUtente);
 
-			boolean value = ps.execute();
-			System.out.println("VALUE" + value);
-			if(value) {
+			int value = ps.executeUpdate();
+			
+			if(value!=0) {
 
 				BeanUtente utente = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
-				System.out.println("Registrazione effettuata con successo");
 
 				return utente;
 			}
 		}
 		catch(SQLException e){
-			System.out.println(e.getMessage());
+
 			if(e.getErrorCode() == 1062) {
-				//return new BeanUtente("duplicato","duplicato"); 
+				//esiste utente 
+
+				return new BeanUtente(1062);
+			}
+			if(e.getErrorCode() == 1613) {
+				//timeout connession
+				return new BeanUtente(1613);
+
 			}
 
 		}
@@ -83,7 +88,6 @@ public class ManagerUtente {
 			int value = ps.executeUpdate();
 
 			if(value != 0) {
-				System.out.println("eliminazione effettuata");
 				return true;
 			}
 		}
@@ -174,17 +178,36 @@ public class ManagerUtente {
 				String ruoloUtente = res.getString("ruoloUtente");
 				String cognomeUtente = res.getString("cognomeUtente");
 				Integer idUtente = res.getInt("idUtente");
-				System.out.println("nomeUtente =======" + nomeUtente);
-				System.out.println("nomeUtente =======" + ruoloUtente);
+				
 
 				BeanUtente utenteLoggato = new BeanUtente(nomeUtente, cognomeUtente, passwordUtente, ruoloUtente, idLogin);
 				utenteLoggato.setIdUtente(idUtente);
 				return utenteLoggato;
 			}
+			else {
+				//non esiste utente 
+
+				return new BeanUtente(1329);
+
+			}
+			
 
 		} catch (SQLException e) {
-			System.out.println("SqlException in ManagerUtente");
-			e.printStackTrace();
+
+			e.getStackTrace();
+			if(e.getErrorCode() == 1329) {
+				//non esiste utente 
+				return new BeanUtente(1329);
+			}
+			if(e.getErrorCode() == 1613) {
+				//timeout connession
+				return new BeanUtente(1613);
+
+			}
+			if(e.getMessage().contains("Could not create connection to database server")) {
+				return new BeanUtente(1613);
+			}
+			
 
 		}finally{
 
