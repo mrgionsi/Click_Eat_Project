@@ -445,7 +445,7 @@ public class ManagerPiatto {
 	}
 
 	public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione) {
-		//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?)
+		//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?) BRAVO 
 
 		Connection conn =  null;
 		PreparedStatement ps = null;

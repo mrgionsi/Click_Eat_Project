@@ -2,15 +2,18 @@
 <html>
 <head>
 <%@include file="./parts/head.jsp"%>
-<%@include file="./parts/GetCookies.jsp"%>
+<!-- </%@include file="./parts/GetCookies.jsp"%> -->
 
 <title>Catalogo Prodotti</title>
 </head>
 <body>
 	<div class="container-fluid">
+				<%@include file="./parts/navbar.jsp"%>
+	
 		<div class="row">
 
 			<div class="col-8">
+				
 				<%
 				if (utente == null  || role==null) {
 					response.sendRedirect("./login.jsp");
@@ -30,7 +33,7 @@
 			<div class="col-4" id="right-container">
 				<div class="row">
 					<div class="col-12 text-center">
-						<span class="h3 text-center">Ordinazione Tavolo n. 1</span>
+						<span class="h3 text-center">Ordinazione Tavolo n. <span id="ntavolo"> </span></span>
 					</div>
 
 				</div>
@@ -40,7 +43,7 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col-12 text-right">
-				<div class="btn btn-lg btn-success"> 
+				<div class="btn btn-lg btn-success" id="sendOrder"> 
 					Aggiungi ordinazione
 				</div>
 			</div>

@@ -65,12 +65,13 @@ function onClickTable(tavolo){
 $(tavolo).click(function(){
 	var ntavolo = $(this).data("ntavolo") 
 	localStorage.setItem("tavoloordinazione",ntavolo);
+	window.location = "./ProdottiOrdinazione.jsp";
 //	console.log(localStorage.getItem("tavoloordinazione"));
-	$("#tablesList").hide();
+//	$("#tablesList").hide();
 	
-	var prodOrdinazione = document.createElement("div");
-	$(prodOrdinazione).attr("id","productOrder");
-	$(prodOrdinazione).load("./ProdottiOrdinazione.jsp");
-	$(".container-fluid").append(prodOrdinazione);
+//	var prodOrdinazione = document.createElement("div");
+//	$(prodOrdinazione).attr("id","productOrder");
+//	$(prodOrdinazione).load("./ProdottiOrdinazione.jsp");
+//	$(".container-fluid").append(prodOrdinazione);
 })
 }
