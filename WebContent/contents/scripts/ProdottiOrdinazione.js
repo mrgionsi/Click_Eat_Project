@@ -56,10 +56,23 @@ class navLink
 }
 
 var ntavolo = 0;
+var nordinazione = 0;
 $(document).ready(function(){
 	ntavolo = localStorage.getItem("tavoloordinazione");
 	$("#ntavolo").text(ntavolo);
-//	console.log(localStorage.getItem("tavoloordinazione"));
+	
+	
+	$.get("ServeltCreaOrdinazione",
+			{ 
+			'numeroTavolo':ntavolo
+			})
+	.done(function(data){
+		console.log(data);
+		nordinazione = data;
+	}).
+	fail(function(data){
+		console.log(data);
+	});
 
 	createNavPills();
 
@@ -172,13 +185,14 @@ function sendOrder(){
 		console.log(elemsToSend);
 
 
-		$.post("ServeltCreaNuovaOrdinazione",
+		$.post("ServeltAddProdOrdinazione",
 				{ 
 				'numeroTavolo':ntavolo,
-				'ProdottiOrdinati':  JSON.stringify(elemsToSend)
+				'ProdottiOrdinati':  JSON.stringify(elemsToSend),
+				'numeroOrdinazione': nordinazione
 				})
-		.done(function(data){
-			console.log(data);
+		.done(function(data,status){
+			console.log(status);
 		}).
 		fail(function(data){
 			console.log(data);

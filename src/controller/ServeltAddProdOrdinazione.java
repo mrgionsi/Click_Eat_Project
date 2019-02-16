@@ -12,60 +12,62 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import manager.ManagerPiatto;
 import manager.ManagerTavolo;
+import model.ProdottiOrdinati;
 
 /**
  * Servlet implementation class ServeltCreaNuovaOrdinazione
  */
-@WebServlet("/ServeltCreaNuovaOrdinazione")
-public class ServeltCreaNuovaOrdinazione extends HttpServlet {
+@WebServlet("/ServeltAddProdOrdinazione")
+public class ServeltAddProdOrdinazione extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServeltCreaNuovaOrdinazione() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ServeltAddProdOrdinazione() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Gson gson = new Gson();
-		class ProdottiOrdinati {
-			int idPiatto;
-			int quantita;
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		int numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
+		String JsonProducts = request.getParameter("ProdottiOrdinati");
+		int ordinazione = Integer.parseInt(request.getParameter("numeroOrdinazione"));
+		System.out.println(numeroTavolo);
+		try {
+			List<ProdottiOrdinati> listaprodotti = mapper.readValue(JsonProducts,new TypeReference<List<ProdottiOrdinati>>(){});
+			
+			for(ProdottiOrdinati e : listaprodotti)
+			{
+				ManagerPiatto mp = new  ManagerPiatto();
+				boolean exec = mp.InserisciPiattoIntoOrdinazione(e.idPiatto, ordinazione, e.quantita);
+			}
 			
 		}
-		
-		int numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
-		String o = request.getParameter("ProdottiOrdinati");
-		System.out.println(o);
-
-		// see there https://futurestud.io/tutorials/gson-mapping-of-arrays-and-lists-of-objects
-		ProdottiOrdinati[] listaprodotti ;
-		//Type listType = new TypeToken<List<ProdottiOrdinati>>() {}.getType();
-
-		listaprodotti = gson.fromJson(o, ProdottiOrdinati[].class);
-		for(int i = 0; i<listaprodotti.length; i++)
+		catch(Exception e)
 		{
-			System.out.println(listaprodotti[i]);
-			System.out.println("LUCA VA QUI IN ECCEZIONE");
+			e.printStackTrace();
 		}
-	
-		ManagerTavolo manTavolo = new ManagerTavolo();
 
-		manTavolo.setOccupato(numeroTavolo);
 		
-		
-		
-		
-		
+
+
+
+
 	}
 
 	/**
