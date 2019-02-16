@@ -88,7 +88,7 @@ class Modal{
 					url: "ServletModificaTavolo",
 					data :{ 
 							'numeroTavolo':numberInput,
-							'new_val=':  (this.ntavolo)
+							'new_val':  (this.ntavolo)
 						  }
 				})
 				.done(function(data){

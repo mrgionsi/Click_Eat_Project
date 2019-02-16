@@ -406,19 +406,19 @@ public class ManagerPiatto {
 		return false;
 	}
 
-	public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione) {
-		//o forse si dovrebbe fare inserisci listaPiattiIntoOrdinazione (?)
+	public synchronized boolean InserisciPiattoIntoOrdinazione(int idPiatto, int numeroOrdinazione,int quantita) {
 
 		Connection conn =  null;
 		PreparedStatement ps = null;
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione) VALUES(?,?)");
+			String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione, quantita) VALUES(?,?,?)");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, idPiatto);
 			ps.setInt(2, numeroOrdinazione);
+			ps.setInt(3, quantita);
 
 
 			int value = ps.executeUpdate();

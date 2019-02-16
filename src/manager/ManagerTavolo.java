@@ -281,6 +281,7 @@ public class ManagerTavolo {
 	 * metodo utile per settare lo stato di un Tavolo ad occupato registrato nel sistema
 	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
 	 * @return true se il tavolo è stato occupato, false altrimenti
+	 * !!!!!!!potrebbe ritornare il numero dell'ordinazione in riferimento al tavolo, oppure 0 se c'è un problema
 	 */
 	public synchronized Boolean setOccupato(Integer numeroTavolo){
 		Connection conn =  null;

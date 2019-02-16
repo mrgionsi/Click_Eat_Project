@@ -55,9 +55,28 @@ class navLink
 	}
 }
 
-
+var ntavolo = 0;
+var nordinazione = 0;
 $(document).ready(function(){
+	ntavolo = localStorage.getItem("tavoloordinazione");
+	$("#ntavolo").text(ntavolo);
+	
+	
+	$.get("ServeltCreaOrdinazione",
+			{ 
+			'numeroTavolo':ntavolo
+			})
+	.done(function(data){
+		console.log(data);
+		nordinazione = data;
+	}).
+	fail(function(data){
+		console.log(data);
+	});
+
 	createNavPills();
+
+	sendOrder();
 });
 
 
@@ -127,15 +146,16 @@ function splitProduct(products,navlink,paneltoAppend){
 	$(btn_add).click(function(event,status){
 		$(howToAppend).children().remove();
 		var element = {"nomePiatto" : $(this).parent().parent().data("nomepiatto"),
-					   "prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
-				       "quantita" : 1};
+				"prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
+				"idPiatto": $(this).parent().parent().data("idpiatto"),
+				"quantita" : 1};
 
 
 		elementsOrder.checkifExist(element);
 //		elementsOrder.elements.push(element);
 		tableOrdering = new TablewithCrudButtons(elementsOrder.elements,
 				"ordering",
-				   [{column: "idPiatto",nome:"id Piatto",show:false},
+				[{column: "idPiatto",nome:"id Piatto",show:false},
 					{column:"nomePiatto", nome:"Nome Piatto",show:true},
 					{column: "prezzoPiatto",nome:"Prezzo",show:false}
 					],"remove");
@@ -143,7 +163,7 @@ function splitProduct(products,navlink,paneltoAppend){
 
 	});
 
-	
+
 }
 
 function filterBycategory(item) {
@@ -153,5 +173,35 @@ function filterBycategory(item) {
 }
 
 
+//funzione che invia i dati al server 
+function sendOrder(){
+	$("#sendOrder").click(function(){
+		var elemsToSend = [];
+		$("#table-ordering > tbody").children("tr").each(function(){
+			var elem ={"idPiatto": $(this).data("idpiatto"),
+					   "quantita": $(this).data("quantita")};
+			elemsToSend.push(elem);
+		});
+		console.log(elemsToSend);
+
+
+		$.post("ServeltAddProdOrdinazione",
+				{ 
+				'numeroTavolo':ntavolo,
+				'ProdottiOrdinati':  JSON.stringify(elemsToSend),
+				'numeroOrdinazione': nordinazione
+				})
+		.done(function(data,status){
+			console.log(status);
+		}).
+		fail(function(data){
+			console.log(data);
+		});
+
+
+
+
+	});
+}
 
 

@@ -19,11 +19,11 @@ class TablewithCrudButtons extends Table{
 		
 		var tr 	  = document.createElement("tr");
 		this.column.forEach(function(c){
-
-			if(c.show)
+			var th = document.createElement("th");
+			$(th).text(c.nome);
+			if(!(c.show))
 			{
-				var th = document.createElement("th");
-				$(th).text(c.nome);
+				$(th).hide();
 			}
 
 			$(tr).append(th);
@@ -36,13 +36,14 @@ class TablewithCrudButtons extends Table{
 			var tr = document.createElement("tr");
 			
 			col.forEach(function(c){
-				if(c.show)
+				$(tr).attr("data-"+c.column,f[c.column]);
+				var td = document.createElement("td");
+				$(td).attr("data-field",c.column);
+				$(td).text(f[c.column]);
+				$(tr).append(td);
+				if(!(c.show))
 				{
-					$(tr).attr("data-"+c.column,f[c.column]);
-					var td = document.createElement("td");
-					$(td).attr("data-field",c.column);
-					$(td).text(f[c.column]);
-					$(tr).append(td);
+					$(td).hide();
 				}
 			});
 			var tdimage = document.createElement("td");
