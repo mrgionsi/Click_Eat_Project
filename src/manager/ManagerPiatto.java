@@ -125,47 +125,6 @@ public class ManagerPiatto {
 	}
 	
 	
-	public synchronized ArrayList<BeanPiatto> ottieniCategorie(){
-		try {
-			ArrayList<BeanPiatto> listaCategorie = new ArrayList<BeanPiatto>();
-			conn = ConnectionPool.getConnection();
-			String sqlString = new String("SELECT DISTINCT categoriaPiatto from Piatto");
-			ps = conn.prepareStatement(sqlString);
-
-
-			ResultSet res = ps.executeQuery();
-			
-			String nomePiatto = null;
-			Float prezzoPiatto = null;
-			String categoriaPiatto = null;
-			Integer idPiatto = 0;
-			
-			while(res.next()) {
-				
-				categoriaPiatto = res.getString("categoriaPiatto");
-				listaCategorie.add(new BeanPiatto(idPiatto, nomePiatto, categoriaPiatto, prezzoPiatto));
-			}
-			
-			return listaCategorie;
-		}
-		catch(SQLException e){
-				e.printStackTrace(); 
-
-		}
-		finally {
-			try {
-				
-				ps.close();
-				ConnectionPool.releaseConnection(conn);
-			}
-			catch(Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return null;
-	}
-	
-	
 	/*metodo utile per ottenere la lsita di ingredienti presenti in un Piatto
 	 * @params idPiatto, identificativo univoco della singola entità Piatto
 	 * @return listaIngredienti, ArrayList<BeanInrgediente> contentente gli ingredienti del Piatto
@@ -192,7 +151,11 @@ public class ManagerPiatto {
 				ingrediente = ingredienteManager.ricercaPerId(idIngrediente);
 				listaIngredienti.add(ingrediente);
 			}
-			return listaIngredienti;
+			if(listaIngredienti.isEmpty())
+				return null;
+			else
+				return listaIngredienti;
+
 		}
 		catch(SQLException e){
 				e.printStackTrace(); 
@@ -340,8 +303,7 @@ public class ManagerPiatto {
 
 			if(res.next()) {
 				piatto.setIdPiatto(res.getInt("idPiatto"));
-
-
+				
 			}
 		}
 		catch(SQLException e){

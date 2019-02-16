@@ -45,7 +45,7 @@ class ModalUser{
 			$(span1).text("Loading...");
 			$(spinner).append(span1);	
 			
-			$("#btn-close").remove();
+			$("#btn-close").hide();
 			$(".modal-footer").append(spinner);
 			
 			
