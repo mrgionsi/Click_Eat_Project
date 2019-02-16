@@ -35,7 +35,7 @@ public class ManagerTavoloTest {
 	
 	@Test 
 	public void setOccupatoTest() {
-		//restituisce false se il tavolo non esiste  MODIFCARE
+		//restituisce false se il tavolo non esiste 
 		assertFalse(mT.setOccupato(tavoloNotDb));
 
 		

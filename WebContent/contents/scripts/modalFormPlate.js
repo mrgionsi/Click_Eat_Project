@@ -54,9 +54,12 @@ class ModalPlate{
 			$(span1).addClass("sr-only");
 			$(span1).text("Loading...");
 			$(spinner).append(span1);	
+//			
+//			//$("#btn-close").remove();
+//			$(".modal-footer").append(spinner);
 			
-			$("#btn-close").remove();
-			$(".modal-footer").append(spinner);
+			$(".modal-footer").remove();
+
 			
 			
 		});

@@ -39,7 +39,8 @@ class Modal{
 			$("#btn-close").remove();
 			$(".modal-footer").append(spinner);
 			
-			
+//			$(".modal-footer").remove();
+
 		});
 	}
 

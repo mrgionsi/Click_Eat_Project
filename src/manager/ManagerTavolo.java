@@ -298,7 +298,6 @@ public class ManagerTavolo {
 
 			if(value != 0) {
 				return true;
-			
 			}
 		}
 		catch(SQLException e){
