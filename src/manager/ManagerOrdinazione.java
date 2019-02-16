@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import connessione.ConnectionPool;
 import model.BeanOrdinazione;
 import model.BeanPiatto;
+import model.EFACT_BeanPiatto;
 
 public class ManagerOrdinazione {
 	
@@ -105,7 +106,6 @@ public class ManagerOrdinazione {
 		Integer numeroOrdine;
 		Timestamp dataOrdine;
 		//BeanPiatto piatto = new BeanPiatto();
-		ManagerPiatto manPiatto = new ManagerPiatto();
 		
 		try {
 			conn = ConnectionPool.getConnection();
@@ -122,14 +122,25 @@ public class ManagerOrdinazione {
 				dataOrdine = res.getTimestamp("dataOrdine");
 				numeroOrdine = res.getInt("numeroOrdinazione");
 				ordine = new BeanOrdinazione(numeroOrdine, dataOrdine);
-				listaPiatti.add(manPiatto.ottieniPiatto(res.getInt("idPiatto")));
-
 				
+				listaPiatti.add(new EFACT_BeanPiatto(res.getInt("idPiatto"),
+							res.getString("nomePiatto"),
+							res.getString("categoriaPiatto"),
+							res.getFloat("prezzoPiatto"),
+							res.getString("lista_ingredienti"),
+							res.getInt("quantitaPiatto")
+					));
 			}
 			
 			while(res.next()) {
 				
-				listaPiatti.add(manPiatto.ottieniPiatto(res.getInt("idPiatto")));
+				listaPiatti.add(new EFACT_BeanPiatto(res.getInt("idPiatto"),
+						 								res.getString("nomePiatto"),
+						 								res.getString("categoriaPiatto"),
+						 								res.getFloat("prezzoPiatto"),
+						 								res.getString("lista_ingredienti"),
+						 								res.getInt("quantitaPiatto")
+													));
 				
 			}
 		

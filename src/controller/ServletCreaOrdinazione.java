@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import manager.ManagerOrdinazione;
 import manager.ManagerTavolo;
 import model.ProdottiOrdinati;
 
@@ -37,16 +38,25 @@ public class ServletCreaOrdinazione extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-
+		Gson gson = new Gson();
 		
 		int numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
 
 		ManagerTavolo manTavolo = new ManagerTavolo();
-
-		manTavolo.setOccupato(numeroTavolo);
-		int ordinazione = manTavolo.getOrdinazioneDiTavolo(numeroTavolo);
+		ManagerOrdinazione manOrder = new ManagerOrdinazione();
+		if((manTavolo.getTavolo(numeroTavolo).isFlagOccupato()))
+		{
+			
+			out.print(gson.toJson(manOrder.ottieniOrdinazione(numeroTavolo)));
+		}else {
+			out.print(false);
+//			manTavolo.setOccupato(numeroTavolo);
+//			int ordinazione = manTavolo.getOrdinazioneDiTavolo(numeroTavolo);
+//			
+//			out.print(gson.toJson(ordinazione));
+		}
+			
 		
-		out.print(ordinazione);
 		
 	}
 

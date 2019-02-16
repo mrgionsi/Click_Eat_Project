@@ -451,7 +451,7 @@ public class ManagerPiatto {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione, quantita) VALUES(?,?,?)");
+			String sqlString = new String("INSERT INTO PiattiOrdinazioni(idPiatto, numeroOrdinazione, quantitaPiatto) VALUES(?,?,?)");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, idPiatto);
@@ -478,6 +478,72 @@ public class ManagerPiatto {
 			}
 		}
 		return false;
+	}
+	
+	public synchronized boolean UpdateQtaIntoOrdinazione(int idPiatto, int numeroOrdinazione,int quantita) {
+
+
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("Update PiattiOrdinazioni SET quantitaPiatto = ? WHERE idPiatto = ? AND numeroOrdinazione = ?");
+			ps = conn.prepareStatement(sqlString);
+		
+			ps.setInt(1, quantita);
+			ps.setInt(2, idPiatto);
+			ps.setInt(3, numeroOrdinazione);
+
+
+			int value = ps.executeUpdate();
+
+			if(value != 0) {
+				return true;
+			}
+		}
+		catch(SQLException e){
+
+		}
+		finally {
+			try {
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public boolean eliminaPiattoIntoOrdinazione(Integer idPiatto, int ordinazione) {
+		try {
+			conn = ConnectionPool.getConnection();
+			String sqlString = new String("delete from PiattiOrdinazioni WHERE idPiatto = ? AND numeroOrdinazione = ?");
+			ps = conn.prepareStatement(sqlString);
+		
+			ps.setInt(1, idPiatto);
+			ps.setInt(2, ordinazione);
+
+
+			int value = ps.executeUpdate();
+
+			if(value != 0) {
+				return true;
+			}
+		}
+		catch(SQLException e){
+
+		}
+		finally {
+			try {
+				ps.close();
+				ConnectionPool.releaseConnection(conn);
+			}
+			catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+		
 	}
 	
 

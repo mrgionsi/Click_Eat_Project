@@ -19,7 +19,13 @@ public class BeanPiatto {
 		listaIngredienti = new ArrayList<BeanIngrediente> ();
 		setPrezzoPiatto(null);
 	}
-
+	public BeanPiatto(int idPiatto) {
+		setIdPiatto(idPiatto);
+		setNomePiatto("");
+		setCategoriaPiatto("");
+		listaIngredienti = new ArrayList<BeanIngrediente> ();
+		setPrezzoPiatto(null);
+	}
 	public BeanPiatto(String nomePiatto, String categoriaPiatto, Float prezzoPiatto) {
 
 		setNomePiatto(nomePiatto);
@@ -107,6 +113,16 @@ public class BeanPiatto {
 
 	public void setIdPiatto(Integer idPiatto) {
 		this.idPiatto = idPiatto;
+	}
+	public boolean equals(Object other) {
+	    if (other == null) return false;
+	    if (!(other instanceof BeanPiatto))return false;
+		
+	    BeanPiatto o = (BeanPiatto) other;
+		if(this.idPiatto == o.getIdPiatto())
+			return true;
+		return false;
+		
 	}
 
 }

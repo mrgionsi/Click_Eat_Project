@@ -3,8 +3,10 @@ package controller;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +19,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import manager.ManagerOrdinazione;
 import manager.ManagerPiatto;
 import manager.ManagerTavolo;
+import model.BeanOrdinazione;
+import model.BeanPiatto;
+import model.EFACT_BeanPiatto;
 import model.ProdottiOrdinati;
 
 /**
@@ -35,35 +41,84 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Gson gson = new Gson();
-
+		ManagerPiatto mp = new  ManagerPiatto();
+		ManagerTavolo manTavolo = new ManagerTavolo();
+		ManagerOrdinazione mO = new ManagerOrdinazione();
+		BeanOrdinazione bO = new BeanOrdinazione();
+		String JsonProducts = request.getParameter("ProdottiOrdinati");
+		List<ProdottiOrdinati> listaprodotti = null;
 		ObjectMapper mapper = new ObjectMapper();
+		ArrayList<EFACT_BeanPiatto> nuoviprodotti = new ArrayList<EFACT_BeanPiatto>() ;
+
+		try {
+			listaprodotti = mapper.readValue(JsonProducts,new TypeReference<List<ProdottiOrdinati>>(){});
+			listaprodotti.forEach( prod ->{
+				nuoviprodotti.add(new EFACT_BeanPiatto(prod.getIdPiatto(),prod.getQuantita()));
+			});
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
+		
 
 		int numeroTavolo = Integer.parseInt(request.getParameter("numeroTavolo"));
-		String JsonProducts = request.getParameter("ProdottiOrdinati");
 		int ordinazione = Integer.parseInt(request.getParameter("numeroOrdinazione"));
-		System.out.println(numeroTavolo);
-		try {
-			List<ProdottiOrdinati> listaprodotti = mapper.readValue(JsonProducts,new TypeReference<List<ProdottiOrdinati>>(){});
+		if(ordinazione != 0)
+		{
+			boolean flagPiattoExist = false;
+
+			bO = mO.ottieniOrdinazione(numeroTavolo);
+			ArrayList<BeanPiatto> ListaPiattiPrecedenti = bO.getListaPiatti();
 			
-			for(ProdottiOrdinati e : listaprodotti)
+			for(EFACT_BeanPiatto bP : nuoviprodotti)
 			{
-				ManagerPiatto mp = new  ManagerPiatto();
-				boolean exec = mp.InserisciPiattoIntoOrdinazione(e.idPiatto, ordinazione, e.quantita);
+				if(ListaPiattiPrecedenti.contains(bP)) {
+					flagPiattoExist = true;
+					mp.UpdateQtaIntoOrdinazione(bP.getIdPiatto(), ordinazione, bP.getQuantita());
+					ListaPiattiPrecedenti.remove(bP);
+				}
+				else if(!ListaPiattiPrecedenti.contains(bP))
+				{
+					mp.InserisciPiattoIntoOrdinazione(bP.getIdPiatto(), ordinazione, bP.getQuantita());
+				}
+			}
+			
+			
+			ListaPiattiPrecedenti.forEach( prod ->{
+				mp.eliminaPiattoIntoOrdinazione(prod.getIdPiatto(), ordinazione);
+				System.out.println(prod.getNomePiatto());
+				});
+			
+			
+		}else
+		{
+			manTavolo.setOccupato(numeroTavolo);
+			int numberOrder = manTavolo.getOrdinazioneDiTavolo(numeroTavolo);
+			
+			
+			try {
+
+				for(ProdottiOrdinati e : listaprodotti)
+				{
+					System.out.println(" idPiatto === " + e.getIdPiatto() + "\n quantitaPiatto === " + e.getQuantita());
+
+					boolean exec = mp.InserisciPiattoIntoOrdinazione(e.getIdPiatto(), numberOrder, e.getQuantita());
+				}
+
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
 			}
 			
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 
-		
+
 
 
 

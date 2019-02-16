@@ -79,8 +79,8 @@ class TablewithCrudButtons extends Table{
 					//la creazione della tabella
 					$(remove).click(function(){
 						var element = {"nomePiatto" : $(this).parent().parent().data("nomepiatto"),
-								   //"prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
-							       "quantita" :  $(this).parent().parent().data("quantita")};
+								   		//"prezzoPiatto" : $(this).parent().parent().data("prezzopiatto"),
+							       		"quantita" :  $(this).parent().parent().data("quantita")};
 						//in questa funzione viene controllato se il campo deve essere eliminato o sottratta la quantità
 						elementsOrder.isToRemove(element);
 						//elimino la tabella

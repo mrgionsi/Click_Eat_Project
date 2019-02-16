@@ -56,23 +56,55 @@ class navLink
 }
 
 var ntavolo = 0;
-var nordinazione = 0;
+var nordinazione;
 $(document).ready(function(){
 	ntavolo = localStorage.getItem("tavoloordinazione");
 	$("#ntavolo").text(ntavolo);
-	
-	
+
+
 	$.get("ServeltCreaOrdinazione",
 			{ 
-			'numeroTavolo':ntavolo
+				'numeroTavolo':ntavolo
 			})
-	.done(function(data){
-		console.log(data);
-		nordinazione = data;
-	}).
-	fail(function(data){
-		console.log(data);
-	});
+			.done(function(data){
+				data = JSON.parse(data);
+				console.log(data);
+				if(!data|| data === undefined || data.listaPiatti.length === 0)
+					{
+					 nordinazione = 0;
+
+					}
+				else{
+					nordinazione = data.numeroOrdinazione;
+					console.log(data.listaPiatti);
+					var elements = [];
+					//nordinazione = data;
+					data.listaPiatti.forEach(function(e) {
+						var elem = {"idPiatto": e.idPiatto,
+							"nomePiatto": e.nomePiatto,
+							//"categoriaPiatto": e.categoriaPiatto,
+							"quantita": e.quantita,
+							"prezzoPiatto": e.prezzoPiatto
+						};
+						elementsOrder.checkifExist(elem);
+							});
+					var howToAppend = $("#selected-items");
+
+					var tableOrdering = new TablewithCrudButtons( elementsOrder.elements,
+							"ordering",
+							[{column: "idPiatto",nome:"id Piatto",show:false},
+								{column:"nomePiatto", nome:"Nome Piatto",show:true},
+								{column: "categoriaPiatto",nome:"Categoria",show:false},
+								{column: "prezzoPiatto",nome:"Prezzo",show:false},
+								{column: "listaIngredienti",nome:"Ingredienti",show:false},
+								{column: "quantita",nome:"Q.ta",show:true}
+								],"remove");
+					$(howToAppend).append(tableOrdering.createTable(howToAppend));
+				}
+			}).
+			fail(function(data){
+				console.log(data);
+			});
 
 	createNavPills();
 
@@ -157,7 +189,8 @@ function splitProduct(products,navlink,paneltoAppend){
 				"ordering",
 				[{column: "idPiatto",nome:"id Piatto",show:false},
 					{column:"nomePiatto", nome:"Nome Piatto",show:true},
-					{column: "prezzoPiatto",nome:"Prezzo",show:false}
+					{column: "prezzoPiatto",nome:"Prezzo",show:false},
+					{column: "quantita",nome:"Q.ta",show:true}
 					],"remove");
 		$(howToAppend).append(tableOrdering.createTable(howToAppend));
 
@@ -179,24 +212,24 @@ function sendOrder(){
 		var elemsToSend = [];
 		$("#table-ordering > tbody").children("tr").each(function(){
 			var elem ={"idPiatto": $(this).data("idpiatto"),
-					   "quantita": $(this).data("quantita")};
+					"quantita": $(this).data("quantita")};
 			elemsToSend.push(elem);
 		});
 		console.log(elemsToSend);
 
-
+		console.log("Numero Ordinazione === " + nordinazione);
 		$.post("ServeltAddProdOrdinazione",
 				{ 
-				'numeroTavolo':ntavolo,
-				'ProdottiOrdinati':  JSON.stringify(elemsToSend),
-				'numeroOrdinazione': nordinazione
+			'numeroTavolo':ntavolo,
+			'ProdottiOrdinati':  JSON.stringify(elemsToSend),
+			'numeroOrdinazione': nordinazione
 				})
-		.done(function(data,status){
-			console.log(status);
-		}).
-		fail(function(data){
-			console.log(data);
-		});
+				.done(function(data,status){
+					console.log(status);
+				}).
+				fail(function(data){
+					console.log(data);
+				});
 
 
 
