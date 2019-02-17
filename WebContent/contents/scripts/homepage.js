@@ -20,7 +20,7 @@ function tablesList() {
 		tables.forEach(element =>{
 
 			var col = document.createElement("div");
-			$(col).addClass("col-2 pr-4 mb-5 container-table");
+			$(col).addClass("col-4 col-md-2 col-lg-2 pr-4 mb-5 container-table");
 			$(col).attr("id","table-container");
 			$(col).attr("data-ntavolo",element.numeroTavolo);
 			onClickTable(col);

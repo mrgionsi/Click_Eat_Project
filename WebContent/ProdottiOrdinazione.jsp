@@ -12,7 +12,7 @@
 
 		<div class="row">
 
-			<div class="col-8">
+			<div class="col-12 col-md-8">
 
 				<%
 				if (utente == null  || role==null) {
@@ -30,7 +30,7 @@
 				</nav>
 
 			</div>
-			<div class="col-4" id="right-container">
+			<div class="col-12 col-md-4 col-lg-4" id="right-container">
 				<div class="row">
 					<div class="col-12 text-center">
 						<span class="h3 text-center">Ordinazione Tavolo n. <span
