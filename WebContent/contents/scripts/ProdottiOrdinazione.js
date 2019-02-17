@@ -102,7 +102,7 @@ $(document).ready(function(){
 								],"remove");
 					$(howToAppend).append(tableOrdering.createTable(howToAppend));
 				}
-				if(data.listaPiatti.lenght>0){
+				if(data.listaPiatti.length>0){
 					$("#resoContoTavolo").text("Resoconto tavolo");
 					$("#resoContoTavolo").prop("disabled", false);
 				}
