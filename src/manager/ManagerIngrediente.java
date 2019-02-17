@@ -159,9 +159,7 @@ public class ManagerIngrediente {
 			ps.setInt(1, idIngrediente);
 
 			ResultSet res = ps.executeQuery();
-			
-			String nomeIngrediente = null;
-			
+						
 			if(res.next()) {
 				return new BeanIngrediente(idIngrediente, res.getString("nomeIngrediente"));
 

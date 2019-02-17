@@ -152,7 +152,7 @@ public class ManagerTavolo {
 	/*
 	 * metodo utile per liberare un Tavolo registrato nel sistema
 	 * @params tavolo, entità tavolo selezionata
-	 * @return BeanTavolo tavolo modificato
+	 * @return boolean
 	 */
 	public synchronized boolean freeTavolo(int numeroTavolo){
 		Connection conn =  null;
@@ -160,7 +160,7 @@ public class ManagerTavolo {
 
 		try {
 			conn = ConnectionPool.getConnection();
-			String sqlString = new String("UPDATE Tavolo SET flagOccupato = false WHERE numeroTavolo = ?");
+			String sqlString = new String("UPDATE Tavolo SET flagOccupato = 0, flagConto = 0, numeroOrdinazione = NULL WHERE numeroTavolo = ?");
 			ps = conn.prepareStatement(sqlString);
 
 			ps.setInt(1, numeroTavolo);
