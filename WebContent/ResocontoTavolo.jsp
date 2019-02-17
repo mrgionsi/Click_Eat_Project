@@ -89,8 +89,8 @@
 		</div>
 		<div class="row mx-auto">
 			<div class="col-auto mx-auto mt-5 mb-5">
-				<button class="btn-lg btn-info" id="stampaConto">
-					<i class="fas fa-print"> </i> Stampa
+				<button class="btn-lg btn-info" id="stampaConto" disabled>
+					<i class="fas fa-print"> </i> Tavolo vuoto
 				</button>
 			</div>
 		</div>

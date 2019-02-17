@@ -23,6 +23,16 @@ function setValue(ordinazione){
 }
 var totale = 0;
 function setProducts(products){
+	if(products.length>0)
+		{
+		    var i = document.createElement("i");
+		    $(i).addClass("fas fa-print");
+
+		    $("#stampaConto").empty("Stampa");
+			$("#stampaConto").append(i);
+			$("#stampaConto").append(" Stampa");
+			$("#stampaConto").prop("disabled", false);
+		}
 	var body =$("#table-ordering").children("tbody");
 	products.forEach(function(p){
 		var tr = document.createElement("tr");

@@ -50,7 +50,7 @@
 			<%if(role.equalsIgnoreCase("amministratore")){ %>
 			<div class="col-12 text-right mt-3">
 				<button type="button" class="btn btn-lg btn-success"
-					id="resoContoTavolo">Resoconto Tavolo</button>
+					id="resoContoTavolo" disabled>Tavolo vuoto</button>
 			</div>
 			<%  } %>
 		</div>
