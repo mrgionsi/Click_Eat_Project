@@ -226,6 +226,7 @@ function sendOrder(){
 				})
 				.done(function(data,status){
 					console.log(status);
+					window.location = "./homepage.jsp";
 				}).
 				fail(function(data){
 					console.log(data);
