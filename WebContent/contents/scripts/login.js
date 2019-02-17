@@ -4,6 +4,10 @@ var pwd = "";
 $("#btn-login").click(function() {
 	if(checkParameter())
 	{
+		$("#div-error").remove();
+		$("#btn-login").text("Inviando...");
+		$("#btn-login").prop("disabled", true);
+
 		callApi("ServletLogin");
 	}
 });
@@ -60,6 +64,8 @@ function callApi(apiName){
 		}).fail(function(jqXHR){
 			
 			if(jqXHR.status==500){
+				$("#btn-login").text("Accedi");
+				$("#btn-login").prop("disabled", false);
 				$("#div-error").remove();
 				var div = document.createElement("div");
 				$(div).addClass("row text-center row-error");
@@ -72,6 +78,8 @@ function callApi(apiName){
 			}
 			
 			if(jqXHR.status==400){
+				$("#btn-login").text("Accedi");
+				$("#btn-login").prop("disabled", false);
 				$("#div-error").remove();
 				var div = document.createElement("div");
 				$(div).addClass("row text-center row-error");
@@ -85,7 +93,8 @@ function callApi(apiName){
 		}).done(function(){
 			
 			console.log("butto su login");
-
+			$("#btn-login").text("Login in corso");
+			$("#btn-login").prop("disabled", true);
 			window.location.href = "./login.jsp";
 		})
 		

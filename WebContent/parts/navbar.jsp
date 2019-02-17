@@ -1,4 +1,5 @@
 <%@include file="./GetCookies.jsp"%>
+<%@include file="./head.jsp"%>
 <nav class="nav border-bottom">
 <!-- 	if an administrator is logged the navbar should change aspect-->
   <% if(role!=null && role.equalsIgnoreCase("Amministratore")){ %>
@@ -17,6 +18,8 @@
  <% }else if(role!=null){%>
   <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <%=role %> </span> </a>
  <% }%>
+	   <a class="nav-link" href="./login.jsp">Back</a>
+
   <a class="nav-link" href="ServletLogout">Logout</a>
  
 </nav> 

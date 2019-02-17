@@ -24,7 +24,6 @@ class ModalUser{
 		$("#"+ this.id_button).text(this.textButton);
 		
 		$("#"+ this.id_button).click(function(){
-			$("#spinner-loading").remove();
 			$("#fail").remove();
 
 			var spinner = document.createElement("button");			
