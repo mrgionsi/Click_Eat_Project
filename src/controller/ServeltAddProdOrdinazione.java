@@ -1,12 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import manager.ManagerOrdinazione;
 import manager.ManagerPiatto;
@@ -39,14 +33,12 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 	 */
 	public ServeltAddProdOrdinazione() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Gson gson = new Gson();
 		ManagerPiatto mp = new  ManagerPiatto();
 		ManagerTavolo manTavolo = new ManagerTavolo();
 		ManagerOrdinazione mO = new ManagerOrdinazione();
@@ -70,7 +62,6 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 		int ordinazione = Integer.parseInt(request.getParameter("numeroOrdinazione"));
 		if(ordinazione != 0)
 		{
-			boolean flagPiattoExist = false;
 
 			bO = mO.ottieniOrdinazione(numeroTavolo);
 			ArrayList<BeanPiatto> ListaPiattiPrecedenti = bO.getListaPiatti();
@@ -78,7 +69,6 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 			for(EFACT_BeanPiatto bP : nuoviprodotti)
 			{
 				if(ListaPiattiPrecedenti.contains(bP)) {
-					flagPiattoExist = true;
 					mp.UpdateQtaIntoOrdinazione(bP.getIdPiatto(), ordinazione, bP.getQuantita());
 					ListaPiattiPrecedenti.remove(bP);
 				}
@@ -107,7 +97,7 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 				{
 					System.out.println(" idPiatto === " + e.getIdPiatto() + "\n quantitaPiatto === " + e.getQuantita());
 
-					boolean exec = mp.InserisciPiattoIntoOrdinazione(e.getIdPiatto(), numberOrder, e.getQuantita());
+					mp.InserisciPiattoIntoOrdinazione(e.getIdPiatto(), numberOrder, e.getQuantita());
 				}
 
 			}
@@ -129,7 +119,6 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
