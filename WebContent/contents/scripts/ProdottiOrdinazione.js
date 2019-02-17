@@ -102,7 +102,7 @@ $(document).ready(function(){
 								],"remove");
 					$(howToAppend).append(tableOrdering.createTable(howToAppend));
 				}
-				if(data.listaPiatti.length>0){
+				if(data.listaPiatti!=null && data.listaPiatti.length>0){
 					$("#resoContoTavolo").text("Resoconto tavolo");
 					$("#resoContoTavolo").prop("disabled", false);
 				}
@@ -220,7 +220,6 @@ function sendOrder(){
 
 		$("#sendOrder").text("Inviando...");
 		$("#sendOrder").prop("disabled", true);
-		$("#sendOrder").append(span);
 
 		$("#table-ordering > tbody").children("tr").each(function(){
 			var elem ={"idPiatto": $(this).data("idpiatto"),
