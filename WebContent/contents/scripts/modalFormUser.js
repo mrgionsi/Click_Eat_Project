@@ -23,9 +23,11 @@ class ModalUser{
 		$("#ruoloUtente").val(this.role);
 		$("#"+ this.id_button).text(this.textButton);
 		
-		$("#"+ this.id_button).click(function(){
-			$("#"+this.id_button).text("Invio...");
-			$("#"+this.id_button).prop("disabled", true);	
+		var that = this;
+		
+		$("#"+ this.id_button ).click(function(){
+			$("#" + that.id_button).text("Invio...");
+			$("#"+ that.id_button).prop("disabled", true);
 		});
 
 
@@ -56,10 +58,13 @@ class ModalUser{
 					setTimeout(function () { location.reload(1); }, 2500);
 				}).
 				fail(function(data){
+
+					showErrorText("Utente NON aggiunto",$("#nomeUtente").parent());
 				
-					$("#"+this.id_button).text(textButton);
-					$("#"+this.id_button).prop("disabled", false);
-					setTimeout(function () { location.reload(1); }, 2500);
+					setTimeout(function () { 
+						$("#"+this.id_button).text(textButton);
+						$("#"+this.id_button).prop("disabled", false);
+					}, 2500);
 					
 					
 					

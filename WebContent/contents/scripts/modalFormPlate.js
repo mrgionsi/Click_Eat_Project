@@ -33,13 +33,12 @@ class ModalPlate{
 		$("#listaIngredienti").val(this.list);
 		$("#"+ this.id_button).text(this.textButton);
 		
-		$("#"+ this.id_button).click(function(){
-			
-			$("#"+this.id_button).text("Invio...");
-			$("#"+this.id_button).prop("disabled", true);
-
+		var that = this;
+		
+		$("#"+ this.id_button ).click(function(){
+			$("#" + that.id_button).text("Invio...");
+			$("#"+ that.id_button).prop("disabled", true);
 		});
-
 
 	}
 	caseCreate(piatti){
@@ -73,7 +72,7 @@ class ModalPlate{
 				
 				$("#"+this.id_button).text(textButton);
 				$("#"+this.id_button).prop("disabled", false);
-				showErrorText("Piatto NON aggiunto con successo",$("#nomePiatto").parent());
+				showErrorText("Piatto NON aggiunto",$("#nomePiatto").parent());
 				
 				
 				
