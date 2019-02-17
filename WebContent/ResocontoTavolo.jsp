@@ -3,13 +3,16 @@
 <!DOCTYPE html>
 <html>
 <%@include file="./parts/head.jsp"%>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+	crossorigin="anonymous">
 
 
 <title>Ordinazioni</title>
 </head>
 <style>
-.container-fluid > .row {
+.container-fluid>.row {
 	font-family: monospace;
 }
 </style>
@@ -44,7 +47,7 @@
 							<p class="h4 text-center">P.Iva 12345678901</p>
 						</div>
 					</div>
-					<div class="row" id="container-infoConto" style="margin:0px;">
+					<div class="row" id="container-infoConto" style="margin: 0px;">
 						<div class="col-12 ml-5">
 							<p class="data ">
 								Data: <span id="dataOrdine" class="data">17/02/2019</span>
@@ -58,7 +61,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="row" id="ProductsOrdered" style="margin:0px;">
+					<div class="row hidden-xs" id="ProductsOrdered" style="margin: 0px;">
 						<div class="col-10 mx-auto">
 							<table class="table" id="table-ordering" class="display">
 								<thead>
@@ -76,17 +79,21 @@
 						</div>
 					</div>
 					<div class="row row-totale mt-4">
-						<div class="col-8 mx-auto">
+						<div class="col-10 col-xs-12  mx-auto">
 							<span class="">Totale </span> <span
-								class="text-right float-right mr-5 pr-5" id="totaleConto">0</span>
+								class="text-right float-right mr-5" id="totaleConto">0</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-					<div class="col-auto col-md-5 col-lg-5 mx-auto">
-				<button class="btn btn-info"><i class="fas fa-print">  </i>  Stampa</button>
+		<div class="row mx-auto">
+			<div class="col-auto mx-auto mt-5 mb-5">
+				<button class="btn-lg btn-info" id="stampaConto">
+					<i class="fas fa-print"> </i> Stampa
+				</button>
 			</div>
+		</div>
 	</div>
 	<script src="./contents/scripts/ResocontoTavolo.js"></script>
 </body>

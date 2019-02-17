@@ -109,6 +109,8 @@ $(document).ready(function(){
 	createNavPills();
 
 	sendOrder();
+
+	
 });
 
 
@@ -205,7 +207,7 @@ function filterBycategory(item) {
 	} 
 }
 
-
+var elemsToSend = [];
 //funzione che invia i dati al server 
 function sendOrder(){
 	$("#sendOrder").click(function(){
@@ -229,7 +231,7 @@ function sendOrder(){
 //		</button>
 		
 		
-		var elemsToSend = [];
+
 		$("#table-ordering > tbody").children("tr").each(function(){
 			var elem ={"idPiatto": $(this).data("idpiatto"),
 					"quantita": $(this).data("quantita")};
@@ -274,4 +276,10 @@ function sendOrder(){
 	});
 }
 
+
+$("#resoContoTavolo").click(function(){
+
+		window.location = "./ResocontoTavolo.jsp";
+	
+});
 

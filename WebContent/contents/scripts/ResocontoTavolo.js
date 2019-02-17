@@ -1,7 +1,8 @@
-
+var ntavolo = localStorage.getItem("tavoloordinazione");
 $(document).ready(function(){
+	
 	$.get("ServletOttieniOrdinazione",{
-		"numeroTavolo": localStorage.getItem("tavoloordinazione")
+		"numeroTavolo": ntavolo
 	}).done(function(data,status){
 		console.log(JSON.parse(data));
 		var  ordinazione = JSON.parse(data);
@@ -9,7 +10,7 @@ $(document).ready(function(){
 		 setProducts(ordinazione.listaPiatti);
 	})
 	
-	$("#ntavolo").text(localStorage.getItem("tavoloordinazione"));
+	$("#ntavolo").text(ntavolo);
 });
 
 
@@ -34,6 +35,7 @@ function setProducts(products){
 		$(td).addClass("text-center");
 		$(tr).append(td);
 		var td = document.createElement("td");
+
 		$(td).text(p.prezzoPiatto + " \u20AC");
 		$(td).addClass("text-center");
 		$(tr).append(td);
@@ -44,5 +46,14 @@ function setProducts(products){
 		totale = totale + (p.quantita * p.prezzoPiatto);
 		$(body).append(tr);
 	})
-	$("#totaleConto").text(totale + " \u20AC");
+	var tot = parseFloat(totale);
+	$("#totaleConto").text(tot.toFixed(2) + " \u20AC");
 }
+
+$("#stampaConto").click(function(e){
+	$.get("ServletLiberaTavolo", {
+		"numeroTavolo" : ntavolo
+	}).done(function(e){
+		window.location = "./homepage.jsp";
+	})
+})

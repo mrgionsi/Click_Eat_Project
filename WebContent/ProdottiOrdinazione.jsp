@@ -8,12 +8,12 @@
 </head>
 <body>
 	<div class="container-fluid">
-				<%@include file="./parts/navbar.jsp"%>
-	
+		<%@include file="./parts/navbar.jsp"%>
+
 		<div class="row">
 
 			<div class="col-8">
-				
+
 				<%
 				if (utente == null  || role==null) {
 					response.sendRedirect("./login.jsp");
@@ -33,7 +33,8 @@
 			<div class="col-4" id="right-container">
 				<div class="row">
 					<div class="col-12 text-center">
-						<span class="h3 text-center">Ordinazione Tavolo n. <span id="ntavolo"> </span></span>
+						<span class="h3 text-center">Ordinazione Tavolo n. <span
+							id="ntavolo"> </span></span>
 					</div>
 
 				</div>
@@ -43,14 +44,19 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col-12 text-right">
-				<button type="button" class="btn btn-lg btn-primary" id="sendOrder"> 
-					Aggiungi ordinazione
-				</button>
+				<button type="button" class="btn btn-lg btn-primary" id="sendOrder">
+					Aggiungi ordinazione</button>
 			</div>
+			<%if(role.equalsIgnoreCase("amministratore")){ %>
+			<div class="col-12 text-right mt-3">
+				<button type="button" class="btn btn-lg btn-success"
+					id="resoContoTavolo">Resoconto Tavolo</button>
+			</div>
+			<%  } %>
 		</div>
 	</div>
 	<script src="./contents/scripts/utility.js"></script>
-		<script src="./contents/scripts/classes/ClassElementToOrder.js"></script>
+	<script src="./contents/scripts/classes/ClassElementToOrder.js"></script>
 	<script src="./contents/scripts/classes/ClassTable.js"></script>
 	<script src="./contents/scripts/classes/ClassTablewithCrudButtons.js"></script>
 	<script src="./contents/scripts/ProdottiOrdinazione.js"></script>

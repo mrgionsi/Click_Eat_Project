@@ -3,7 +3,7 @@
 <nav class="nav border-bottom">
 <!-- 	if an administrator is logged the navbar should change aspect-->
   <% if(role!=null && role.equalsIgnoreCase("Amministratore")){ %>
-	  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <%=role %> </span> </a>
+	  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <span id="ruoloUtente"> <%=role %> </span></span> </a>
 	  <!-- if the admin is on homepageamministratore -->
 	   <%if(request.getRequestURI().contains("homepageamministratore")){ %>
 	   <!-- show link to the table page -->
@@ -16,7 +16,7 @@
 	   <% }%>
  
  <% }else if(role!=null){%>
-  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <%=role %> </span> </a>
+  <a class="nav-link">Benvenuto <span class="username-menu"><%=username %> | Sei un <span id="ruoloUtente"><%=role %> </span></span> </a>
  <% }%>
 	   <a class="nav-link" href="./login.jsp">Back</a>
 
