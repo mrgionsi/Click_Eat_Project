@@ -14,22 +14,20 @@ class Modal{
 		$("#"+ this.id_button).text(this.textButton);
 		$("#numeroTavolo").val(this.ntavolo);
 		
-		$("#"+ this.id_button).click(function(){
-			$("#"+this.id_button).text("Invio...");
-			$("#"+this.id_button).prop("disabled", true);
-
-		});
+		
+		
 	}
 
 	caseCreate(tavoli){
+		var that = this;
 		$("#"+ this.id_button).click(function(){
-			
-			$("#"+this.id_button).text("Invio...");
-			$("#"+this.id_button).prop("disabled", true);
 			var numberInput = $("#numeroTavolo").val();
 			var f  = checkNumberTables(tavoli,numberInput);
 			if(f== 0  && (typeof numberInput != null || typeof numberInput != undefined || numberInput.length != 0))
 			{
+					$("#" + that.id_button).text("Invio...");
+					$("#"+ that.id_button).prop("disabled", true);
+
 				$.get({
 					url: "ServletAggiungiTavolo",
 					data : 'numeroTavolo=' + numberInput
@@ -42,17 +40,15 @@ class Modal{
 					setTimeout(function () { location.reload(1); }, 2500);
 				}).
 				fail(function(data){
-				
-					var button = document.createElement("button");
-					$(button).addClass("btn btn-danger");
-					$("#spinner-loading").remove();
 
-					$(button).text("Fallito");
-					
-					$(".modal-footer").append(button);
-					setTimeout(function () { location.reload(1); }, 2500);
-					
-					
+					showErrorText("Tavolo NON creato",$("#numeroTavolo").parent());
+
+					setTimeout(function () { 
+						$("#"+this.id_button).text(textButton);
+						$("#"+this.id_button).prop("disabled", false); 
+					}, 2500);
+
+
 
 				});
 			}
@@ -61,7 +57,7 @@ class Modal{
 
 	caseUpdate(tavoli){
 		$("#"+this.id_button).click(function(e){
-				e.preventDefault();
+			e.preventDefault();
 			var numberInput = $("#numeroTavolo").val();
 			var f = checkNumberTables(tavoli,numberInput);
 			if(f== 0  && (typeof numberInput != null || typeof numberInput != undefined || numberInput.length != 0))
@@ -69,9 +65,9 @@ class Modal{
 				$.get({
 					url: "ServletModificaTavolo",
 					data :{ 
-							'numeroTavolo':numberInput,
-							'new_val':  (this.ntavolo)
-						  }
+						'numeroTavolo':numberInput,
+						'new_val':  (this.ntavolo)
+					}
 				})
 				.done(function(data){
 ////					$("#ModalAddtable").modal('hide');
@@ -79,11 +75,11 @@ class Modal{
 //					setTimeout(function () { location.reload(1); }, 5000);
 				}).
 				fail(function(data){
-				
+
 					setTimeout(function () { location.reload(1); }, 2500);
-					
-					
-					
+
+
+
 
 				});
 			}
