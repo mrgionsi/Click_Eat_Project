@@ -43,9 +43,9 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col-12 text-right">
-				<div class="btn btn-lg btn-success" id="sendOrder"> 
+				<button type="button" class="btn btn-lg btn-primary" id="sendOrder"> 
 					Aggiungi ordinazione
-				</div>
+				</button>
 			</div>
 		</div>
 	</div>

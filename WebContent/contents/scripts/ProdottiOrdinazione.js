@@ -209,6 +209,26 @@ function filterBycategory(item) {
 //funzione che invia i dati al server 
 function sendOrder(){
 	$("#sendOrder").click(function(){
+		
+		var span = document.createElement("span");
+		$(span).addClass("spinner-border spinner-border-lg");
+		$(span).attr("role", "status");
+		$(span).attr("aria-hidden", "true");
+
+		
+		
+
+		$("#sendOrder").text("Inviando...");
+		$("#sendOrder").prop("disabled", true);
+		$("#sendOrder").append(span);
+		
+		
+//		<button class="btn btn-primary" type="button" disabled>
+//		  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+//		  Loading...
+//		</button>
+		
+		
 		var elemsToSend = [];
 		$("#table-ordering > tbody").children("tr").each(function(){
 			var elem ={"idPiatto": $(this).data("idpiatto"),
@@ -218,6 +238,7 @@ function sendOrder(){
 		console.log(elemsToSend);
 
 		console.log("Numero Ordinazione === " + nordinazione);
+		if(elemsToSend.length>0){
 		$.post("ServeltAddProdOrdinazione",
 				{ 
 			'numeroTavolo':ntavolo,
@@ -226,14 +247,29 @@ function sendOrder(){
 				})
 				.done(function(data,status){
 					console.log(status);
+					$("#sendOrder").text("Salvato");
+					$("#sendOrder").addClass("btn-sucess");
+					
+					setTimeout(function () { location.reload(1); }, 3200);
 					window.location = "./homepage.jsp";
 				}).
 				fail(function(data){
-					console.log(data);
+					$("#sendOrder").text("Fallito");
+					$("#sendOrder").addClass("btn-danger");
+					
+					setTimeout(function () { location.reload(1); }, 3200);
+					window.location = "./homepage.jsp";
 				});
+		}
+		else{
+			$("#sendOrder").text("Niente da inviare");
+			$("#sendOrder").prop("disabled", true);
+			setTimeout(function () { 
+				$("#sendOrder").text("Aggiungi ordinazione");
+				$("#sendOrder").prop("disabled", false);
+			}, 3200);
 
-
-
+		}
 
 	});
 }
