@@ -24,30 +24,8 @@ class ModalUser{
 		$("#"+ this.id_button).text(this.textButton);
 		
 		$("#"+ this.id_button).click(function(){
-			$("#fail").remove();
-
-			var spinner = document.createElement("button");			
-			$(spinner).addClass("btn btn-primary");
-			$(spinner).prop("disabled");
-			$(spinner).attr("type", "button");
-			$(spinner).attr("id", "spinner-loading");
-
-			
-			var span = document.createElement("span");
-			$(span).addClass("spinner-border spinner-border-sm");
-			$(span).attr("role","status");
-			$(span).attr("aria-hidden","true");
-			$(spinner).append(span);
-			
-			var span1 = document.createElement("span");
-			$(span1).addClass("sr-only");
-			$(span1).text("Loading...");
-			$(spinner).append(span1);	
-			
-			$("#btn-close").hide();
-			$(".modal-footer").append(spinner);
-			
-			
+			$("#"+this.id_button).text("Invio...");
+			$("#"+this.id_button).prop("disabled", true);	
 		});
 
 
@@ -72,19 +50,15 @@ class ModalUser{
 				})
 				.done(function(data){
 //					$("#ModalAddUser").modal('hide');
+					$("#"+this.id_button).text("Salvato");
+					$("#"+this.id_button).prop("disabled", true);
 					showSuccessText("Utente aggiunto con successo",$("#nomeUtente").parent());
 					setTimeout(function () { location.reload(1); }, 2500);
 				}).
 				fail(function(data){
 				
-					var button = document.createElement("button");
-					$(button).addClass("btn btn-danger");
-					$(button).attr("id", "fail");
-					$("#spinner-loading").remove();
-
-					$(button).text("Fallito");
-					
-					$(".modal-footer").append(button);
+					$("#"+this.id_button).text(textButton);
+					$("#"+this.id_button).prop("disabled", false);
 					setTimeout(function () { location.reload(1); }, 2500);
 					
 					
@@ -118,14 +92,6 @@ class ModalUser{
 				}).
 				fail(function(data){
 				
-					var button = document.createElement("button");
-					$(button).addClass("btn btn-danger");
-					$(button).attr("id", "fail");
-					$("#spinner-loading").remove();
-
-					$(button).text("Fallito");
-					
-					$(".modal-footer").append(button);
 					setTimeout(function () { location.reload(1); }, 2500);
 					
 					

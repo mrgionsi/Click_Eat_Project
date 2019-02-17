@@ -5,7 +5,7 @@ $("#btn-login").click(function() {
 	if(checkParameter())
 	{
 		$("#div-error").remove();
-		$("#btn-login").text("Inviando...");
+		$("#btn-login").text("Invio...");
 		$("#btn-login").prop("disabled", true);
 
 		callApi("ServletLogin");
@@ -93,7 +93,7 @@ function callApi(apiName){
 		}).done(function(){
 			
 			console.log("butto su login");
-			$("#btn-login").text("Login in corso");
+			$("#btn-login").text("Accedo...");
 			$("#btn-login").prop("disabled", true);
 			window.location.href = "./login.jsp";
 		})
