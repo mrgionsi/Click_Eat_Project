@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-6 mx-auto">
+			<div class="col-12 col-md-6 mx-auto">
 				<div class="container-conto">
 					<div class="row" id="">
 						<div class="col-5 mx-auto mt-2">
@@ -62,7 +62,7 @@
 						</div>
 					</div>
 					<div class="row hidden-xs" id="ProductsOrdered" style="margin: 0px;">
-						<div class="col-10 mx-auto">
+						<div class="col-12 col-lg-10 mx-auto">
 							<table class="table" id="table-ordering" class="display">
 								<thead>
 									<tr>
