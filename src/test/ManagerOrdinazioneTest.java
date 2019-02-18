@@ -27,11 +27,11 @@ public class ManagerOrdinazioneTest {
 	@Test
 	public void ottieniOrdinazione() {
 		
-		//tavolo 25 ha assegnata l'ordinazione n 1, 
+		//tavolo 25 ha assegnata l'ordinazione n 320, 
 		//metodo ritorna l'ordinazione e quindi accedendo all'attr numeroOrdinazione
 		//mi assicuro che l'ordinazione viene correttamente istanziata e che 
 		//il numero dell'ordinazione è quello che mi aspetto
-		assertEquals(1, mO.ottieniOrdinazione(nTavolo).getNumeroOrdinazione());
+		assertEquals(320, mO.ottieniOrdinazione(nTavolo).getNumeroOrdinazione());
 		
 		//cerco l'ordinazione di un tavolo non esistente ottengo valore null
 		assertNull(mO.ottieniOrdinazione(88888));

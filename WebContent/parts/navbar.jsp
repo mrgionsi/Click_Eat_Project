@@ -5,7 +5,7 @@
 	
 		<!-- 	if an administrator is logged the navbar should change aspect-->
 		<% if(role!=null && role.equalsIgnoreCase("Amministratore")){ %>
-			<img src="./contents/images/logo.svg">
+			
 		<a class="nav-link">Benvenuto <span class="username-menu"><%=username %>
 				| Sei un <span id="ruoloUtente"> <%=role %>
 			</span></span>
@@ -29,6 +29,7 @@
 		<% }%>
 		<a class="nav-link" href="./login.jsp">Back</a> <a class="nav-link"
 			href="ServletLogout">Logout</a>
+			<img src="./contents/images/logo.svg">
 
 	</nav>
 </div>

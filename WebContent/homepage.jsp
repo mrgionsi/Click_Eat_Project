@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="refresh" content="20">
+
 <%@include file="./parts/head.jsp"%>
 <title>Ordinazioni 
 </title>

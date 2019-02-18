@@ -58,6 +58,7 @@ class navLink
 var ntavolo = 0;
 var nordinazione;
 $(document).ready(function(){
+	
 	ntavolo = localStorage.getItem("tavoloordinazione");
 	$("#ntavolo").text(ntavolo);
 
@@ -101,6 +102,11 @@ $(document).ready(function(){
 								],"remove");
 					$(howToAppend).append(tableOrdering.createTable(howToAppend));
 				}
+				if(data.listaPiatti!=null && data.listaPiatti.length>0){
+					$("#resoContoTavolo").text("Resoconto tavolo");
+					$("#resoContoTavolo").prop("disabled", false);
+				}
+
 			}).
 			fail(function(data){
 				console.log(data);
@@ -211,26 +217,9 @@ var elemsToSend = [];
 //funzione che invia i dati al server 
 function sendOrder(){
 	$("#sendOrder").click(function(){
-		
-		var span = document.createElement("span");
-		$(span).addClass("spinner-border spinner-border-lg");
-		$(span).attr("role", "status");
-		$(span).attr("aria-hidden", "true");
-
-		
-		
 
 		$("#sendOrder").text("Inviando...");
 		$("#sendOrder").prop("disabled", true);
-		$("#sendOrder").append(span);
-		
-		
-//		<button class="btn btn-primary" type="button" disabled>
-//		  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-//		  Loading...
-//		</button>
-		
-		
 
 		$("#table-ordering > tbody").children("tr").each(function(){
 			var elem ={"idPiatto": $(this).data("idpiatto"),

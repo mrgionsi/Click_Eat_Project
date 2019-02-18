@@ -31,28 +31,34 @@
 
 			</div>
 			<div class="col-12 col-md-4 col-lg-4" id="right-container">
+			
 				<div class="row">
+					<br>
+						<br>
 					<div class="col-12 text-center">
+				
 						<span class="h3 text-center">Ordinazione Tavolo n. <span
 							id="ntavolo"> </span></span>
 					</div>
 
 				</div>
+				<br>
+					<br>
 				<div id="selected-items"></div>
 
 			</div>
 		</div>
+		
 		<div class="row mt-5">
 			<div class="col-12 text-right">
 				<button type="button" class="btn btn-lg btn-primary" id="sendOrder">
 					Aggiungi ordinazione</button>
-			</div>
-			<%if(role.equalsIgnoreCase("amministratore")){ %>
-			<div class="col-12 text-right mt-3">
+					<%if(role.equalsIgnoreCase("amministratore")){ %>
 				<button type="button" class="btn btn-lg btn-success"
-					id="resoContoTavolo">Resoconto Tavolo</button>
-			</div>
+					id="resoContoTavolo" disabled>Tavolo vuoto</button>
 			<%  } %>
+			</div>
+			
 		</div>
 	</div>
 	<script src="./contents/scripts/utility.js"></script>
