@@ -45,7 +45,7 @@ function showTable(tavoli){
 	$(th).text("N. Tavoli");
 
 	var th1 = document.createElement("th");
-	$(th1).text("Stato(Libero/Occupato)");
+	$(th1).text("Stato");
 	
 	var th2 = document.createElement("th");
 	$(th2).text("Numero Ordinazione");
@@ -241,14 +241,14 @@ function showUsers(utenti){
 		
 		var th5 = document.createElement("td");
 		var divmodify = document.createElement("div");
-		$(divmodify).attr("id","modifyrow-" +  + element.idLogin);
+		$(modify).attr("id","modifyrow-" +  + element.idLogin);
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyimg-" + element.idLogin);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
-				$(divmodify).append(modify);
-				$(divmodify).attr("data-toggle","modal");
-				$(divmodify).attr("data-target","#ModalAddUser");
+				//$(divmodify).append(modify);
+				$(modify).attr("data-toggle","modal");
+				$(modify).attr("data-target","#ModalAddUser");
 
 				$(modify).click(function(){
 					removeErrorText();
@@ -270,7 +270,7 @@ function showUsers(utenti){
 	
 				});
 				
-				$(th5).append(divmodify);
+				$(th5).append(modify);
 				$(th5).append(remove);
 				
 		
@@ -381,14 +381,14 @@ function showPlates(piatti){
 		
 		var th5 = document.createElement("td");
 		var divmodify = document.createElement("div");
-		$(divmodify).attr("id","modifyrow-" +  + element.idPiatto);
+		$(modify).attr("id","modifyrow-" +  + element.idPiatto);
 			var modify = document.createElement("img");
 				$(modify).attr("id","modifyimg-" + element.idPiatto);
 				$(modify).addClass("btn-rowtable btn-edit");
 				$(modify).attr("src","./contents/images/edit-button.png");
-				$(divmodify).append(modify);
-				$(divmodify).attr("data-toggle","modal");
-				$(divmodify).attr("data-target","#ModalAddPlate");
+				//$(divmodify).append(modify);
+				$(modify).attr("data-toggle","modal");
+				$(modify).attr("data-target","#ModalAddPlate");
 
 				$(modify).click(function(){
 					removeErrorText();
@@ -411,7 +411,7 @@ function showPlates(piatti){
 	
 				});
 				
-				$(th5).append(divmodify);
+				$(th5).append(modify);
 				$(th5).append(remove);
 		
 		$(tr).append(th);

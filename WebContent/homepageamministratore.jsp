@@ -49,8 +49,8 @@ Amministrazione
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="nav-tavoli"
 				role="tabpanel" aria-labelledby="nav-home-tab">
-				<div id="container-tabella" class="mx-auto">
-					<table class="table table-striped table-bordered" id="table-tablelist" class="display">
+				<div id="container-tabella" class="mx-auto table-responsive">
+					<table class="table table-sm table-striped table-bordered" id="table-tablelist" class="display">
 						<thead>
 						</thead>
 						<tbody>
@@ -60,8 +60,8 @@ Amministrazione
 			</div>
 			<div class="tab-pane fade" id="nav-utenti" role="tabpanel"
 				aria-labelledby="nav-utenti-tab">
-				<div id="container-tabella-utenti" class="mx-auto">
-					<table class="table table-striped table-bordered" id="table-tablelistuser">
+				<div id="container-tabella-utenti" class="mx-auto table-responsive">
+					<table class="table table-sm table-striped table-bordered" id="table-tablelistuser">
 						<thead>
 						</thead>
 						<tbody>
@@ -71,8 +71,8 @@ Amministrazione
 			</div>
 			<div class="tab-pane fade" id="nav-piatti" role="tabpanel"
 				aria-labelledby="nav-piatti-tab">
-				<div id="container-tabella-piatti" class="mx-auto">
-					<table class="table table-striped table-bordered"
+				<div id="container-tabella-piatti" class="mx-auto table-responsive">
+					<table class="table table-sm table-striped table-bordered"
 						id="table-tablelistpiatti">
 						<thead>
 						</thead>

@@ -1,7 +1,8 @@
 <%@include file="./GetCookies.jsp"%>
 <%@include file="./head.jsp"%>
-<div class="row">
-	<nav class="nav border-bottom">
+<div class="row my-auto align-middle">
+	<nav class="nav border-bottom align-middle" style="width:100%">
+	<img src="./contents/images/logo.svg" class=".hidden-sm-down" style="width:8rem;height: 2.5rem;">
 	
 		<!-- 	if an administrator is logged the navbar should change aspect-->
 		<% if(role!=null && role.equalsIgnoreCase("Amministratore")){ %>
@@ -29,7 +30,6 @@
 		<% }%>
 		<a class="nav-link" href="./login.jsp">Back</a> <a class="nav-link"
 			href="ServletLogout">Logout</a>
-			<img src="./contents/images/logo.svg">
-
+			
 	</nav>
 </div>
