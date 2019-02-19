@@ -1,5 +1,5 @@
 /* class: ServletOttieniOrdinazione
- * author: AndreaCupito / LucaAmoriello
+ * author:  LucaAmoriello
  * version: 1.0
  * 
  */

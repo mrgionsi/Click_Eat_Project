@@ -92,6 +92,7 @@ public class ManagerTavolo {
 			}
 		}
 		catch(SQLException e){
+			//controllo se l'errore di ritorno è di tipo already exist
 			if(e.getErrorCode() == 1062) {
 				e.printStackTrace();
 			}
@@ -278,10 +279,12 @@ public class ManagerTavolo {
 	}
 	
 	/*
-	 * metodo utile per settare lo stato di un Tavolo ad occupato registrato nel sistema
+	 * metodo utile per settare lo stato di un Tavolo ad occupato registrato nel sistema.
+	 * una volta settato il valore flagOccupato a true di un tavolo, viene invocato un trigger after update che crea una ordinazione e la associa
+	 * al tavolo corrente.
 	 * @params numeroTavolo, identificativo univoco dell'entit tavolo
 	 * @return true se il tavolo è stato occupato, false altrimenti
-	 * !!!!!!!potrebbe ritornare il numero dell'ordinazione in riferimento al tavolo, oppure 0 se c'è un problema
+	 * 
 	 */
 	public synchronized Boolean setOccupato(Integer numeroTavolo){
 		Connection conn =  null;

@@ -1,3 +1,9 @@
+/*Servlet: AddProdOrdinazione
+ * author: Giovanni Pasquariello / LucaAmoriello
+ * version: 1.0
+ * classe utile per la gestione della classe BeanUtente
+ */
+
 package controller;
 
 import java.io.IOException;
@@ -49,8 +55,12 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 		ArrayList<EFACT_BeanPiatto> nuoviprodotti = new ArrayList<EFACT_BeanPiatto>() ;
 
 		try {
+			// nella request viene inviato una lista di oggetti in formato JSON avente, id piatto e quantità
+			//vengono trasformati in una lista di prodotti ordinati
 			listaprodotti = mapper.readValue(JsonProducts,new TypeReference<List<ProdottiOrdinati>>(){});
 			listaprodotti.forEach( prod ->{
+				//trasformo la lista Da prodotti ordinati in una lista EFACT_BeanPiatto
+				//la trasformo perchè successivamente utilizzo il metodo contains e gli oggetti devono essere della stessa classe
 				nuoviprodotti.add(new EFACT_BeanPiatto(prod.getIdPiatto(),prod.getQuantita()));
 			});
 		}catch(Exception e) {
@@ -64,21 +74,25 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 		{
 
 			bO = mO.ottieniOrdinazione(numeroTavolo);
+			//piatti già presenti nell'ordinazione
 			ArrayList<BeanPiatto> ListaPiattiPrecedenti = bO.getListaPiatti();
 			
 			for(EFACT_BeanPiatto bP : nuoviprodotti)
 			{
+				//controllo se nei piatti già ordinati c'è già lo stesso piatto, lo aggiorno
 				if(ListaPiattiPrecedenti.contains(bP)) {
 					mp.UpdateQtaIntoOrdinazione(bP.getIdPiatto(), ordinazione, bP.getQuantita());
+					//lo rimuovo dalla lista dei piatti già presenti
 					ListaPiattiPrecedenti.remove(bP);
 				}
 				else if(!ListaPiattiPrecedenti.contains(bP))
 				{
+					//se un nuovo piatto non è presente nell'ordinazione, lo aggiungo
 					mp.InserisciPiattoIntoOrdinazione(bP.getIdPiatto(), ordinazione, bP.getQuantita());
 				}
 			}
 			
-			
+			//i piatti rimanenti in questa lista sono piatti ordinati precedentemente e poi cancellati, quindi devono essere eliminati
 			ListaPiattiPrecedenti.forEach( prod ->{
 				mp.eliminaPiattoIntoOrdinazione(prod.getIdPiatto(), ordinazione);
 				System.out.println(prod.getNomePiatto());
@@ -87,6 +101,7 @@ public class ServeltAddProdOrdinazione extends HttpServlet {
 			
 		}else
 		{
+			////creo una nuova ordinazione
 			manTavolo.setOccupato(numeroTavolo);
 			int numberOrder = manTavolo.getOrdinazioneDiTavolo(numeroTavolo);
 			

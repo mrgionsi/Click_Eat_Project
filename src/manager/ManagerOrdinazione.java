@@ -1,5 +1,5 @@
 /*class: ManagerOrdinazione
- * author: AndreaCupito / LucaAmoriello
+ * author: Luca Amoriello /Giovanni Pasquariello
  * version: 1.0
  * classe utile per la gestione della classe BeanOrdinazione
  */
@@ -105,7 +105,6 @@ public class ManagerOrdinazione {
 		PreparedStatement ps = null;
 		Integer numeroOrdine;
 		Timestamp dataOrdine;
-		//BeanPiatto piatto = new BeanPiatto();
 		
 		try {
 			conn = ConnectionPool.getConnection();
@@ -123,6 +122,7 @@ public class ManagerOrdinazione {
 				numeroOrdine = res.getInt("numeroOrdinazione");
 				ordine = new BeanOrdinazione(numeroOrdine, dataOrdine);
 				
+				//classe da realizzare in runtime durante l'ordinazione, aggiungendo al piatto anche l'attributo quantità
 				listaPiatti.add(new EFACT_BeanPiatto(res.getInt("idPiatto"),
 							res.getString("nomePiatto"),
 							res.getString("categoriaPiatto"),

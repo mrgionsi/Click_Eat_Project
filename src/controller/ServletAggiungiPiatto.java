@@ -1,5 +1,5 @@
 /* class: ServletAggiungiPiatto
- * author: AndreaCupito / LucaAmoriello
+ * author: AndreaCupito / LucaAmoriello / Giovanni Pasquariello
  * version: 1.0
  * 
  */

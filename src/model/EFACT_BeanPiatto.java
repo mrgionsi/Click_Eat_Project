@@ -1,3 +1,10 @@
+/* class: BeanTavolo
+ * author: Giovanni Pasquariello
+ * classe che rappresentà l'entità Piatto in real time.
+ */
+
+
+
 package model;
 
 public class EFACT_BeanPiatto extends BeanPiatto {

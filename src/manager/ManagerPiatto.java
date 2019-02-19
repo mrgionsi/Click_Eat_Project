@@ -41,15 +41,15 @@ public class ManagerPiatto {
 			
 			
 			if(res.next()) {
-				
+				//trasformo la lista degli ingredienti, in arrivo come stringa in un oggetto beanIngrediente
 				 listIngredienti = Arrays.asList(res.getString("lista_ingredienti").split(","));
 			    ArrayList<BeanIngrediente> listaIngredienti = new ArrayList<BeanIngrediente>();
 
-				
+			
 				listIngredienti.forEach(element -> {
 					listaIngredienti.add(new BeanIngrediente(element));
 				});
-				
+				//aggiungo al piatto la lista degli ingredienti
 				return new BeanPiatto (res.getInt("idPiatto"), res.getString("nomePiatto"), res.getString("categoriaPiatto"), res.getFloat("prezzoPiatto"), listaIngredienti);
 				
 			}
@@ -250,18 +250,11 @@ public class ManagerPiatto {
 					String sqlString = new String("INSERT INTO IngredientiPiatto(idPiatto, idIngrediente) VALUES(?,?)");
 					ps = conn.prepareStatement(sqlString);
 
-					//questo idPiatto non pu� mai funzionare se non viene mai definito
-					//qual � l'id del piatto
-					//i piatti vengono inseriti nel db ma mai viene preso il loro id
+					
 					ps.setInt(1, idPiatto);
 					ps.setInt(2, idIngrediente);
 			
 					int value = ps.executeUpdate();
-
-					if(value != 0) {
-						//return true;
-						//con questo return faceva solo il primo giro del for
-					}
 					
 					ps.close();
 
@@ -271,7 +264,6 @@ public class ManagerPiatto {
 			}
 		finally {
 			try {
-				//ps era realmente usato e "riempita" nel for quindi puntatore nullo quando veniva chiusa
 				ps.close();
 				ConnectionPool.releaseConnection(conn);
 			}
