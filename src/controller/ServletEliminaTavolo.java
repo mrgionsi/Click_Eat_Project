@@ -1,5 +1,5 @@
 /* class: ServletEliminaTavolo
- * author: AndreaCupito / LucaAmoriello
+ * author: Giovanni Pasquariello / LucaAmoriello
  * version: 1.0
  * 
  */

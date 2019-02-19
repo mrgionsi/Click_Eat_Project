@@ -1,3 +1,8 @@
+/* Servlet: CreaOrdinazione
+ * author:  Luca Amoriello/Giovanni Pasquariello
+ * version: 1.0
+ * 
+ */
 package controller;
 
 import java.io.IOException;
@@ -45,10 +50,7 @@ public class ServletCreaOrdinazione extends HttpServlet {
 			out.print(gson.toJson(manOrder.ottieniOrdinazione(numeroTavolo)));
 		}else {
 			out.print(false);
-//			manTavolo.setOccupato(numeroTavolo);
-//			int ordinazione = manTavolo.getOrdinazioneDiTavolo(numeroTavolo);
-//			
-//			out.print(gson.toJson(ordinazione));
+
 		}
 			
 		
