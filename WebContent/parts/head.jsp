@@ -1,6 +1,8 @@
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
+<link rel="icon" href="./contents/images/favicon_logo.png">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <noscript>
     <meta HTTP-EQUIV="refresh" content=0;url="./noscript.jsp">
