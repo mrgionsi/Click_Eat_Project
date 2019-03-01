@@ -91,7 +91,8 @@ function showTable(tavoli){
 		$(th).text(element.numeroTavolo);
 		
 		var th1 = document.createElement("td");
-		$(th1).text(element.flagOccupato);
+		var status = element.flagOccupato === true ? "Occupato" : "Libero";
+		$(th1).text(status);
 		
 		var th2 = document.createElement("td");
 		$(th2).text(element.numeroOrdinazione);
