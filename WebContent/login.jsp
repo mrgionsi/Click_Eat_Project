@@ -33,7 +33,7 @@
 						class="col-lg-4 col-sm-6 col-xs-12 mx-auto login-form py-4 mt-5">
 						<div class="row">
 							<div class="col-4 mx-auto text-center h4">
-								<span>Accedi</span>
+								<span>Accedi a ClickEat</span>
 							</div>
 						</div>
 						<div class="row">
