@@ -1,0 +1,38 @@
+Requisiti non funzionali 
+Usabilità
+
+Il sistema avrà due schermate principali: una per i terminali, e una per i dispsitivi mobili per gli addetti alla sala.
+L'interazione con l'utente non prevede esperienza pregressa: difatti l'utente, avrà a disposizione tutte le funzionalità in modo chiaro e leggibile.
+La schermata del terminale, avrà uno schema dei tavoli in sala, colorati in base al loro stato( rosso-occupato, verde-libero ) per cui riuscirà in modo chiaro 
+a capire lo stato generale del ristorante. 
+Per quanto riguarda l'addetto alla sala, una volta selezionato il tavolo anch'esso dalla medesima schermata, avrà un elenco dei prodotti raggruppati, all'avvio,
+per categoria. In questo modo avrà a primo impatto tutte le sezioni del menù. L'elenco degli ordini selezionati sarà visibile o in basso alla pagina, 
+oppure in un menù a comparsa sulla destra. Nel caso siano aperte tutte le categorie, sarà possibile chiuderle tutte 
+con un bottone posizionato in alto a sinistra della pagina.
+
+Affidabilità
+Più il software sarà corretto, più di conseguenza sarà affidabile. 
+Il sistema dovrebbe evitare la perdita dei dati in real-time dei tavoli, sia al momento dell'invio dell'ordinazione, sia, ad esempio, durante la stampa di un conto. 
+Il sistema dovrebbe evitare di incorrere ad errori quando si effettuino delle operazioni. Onde prevenire problemi hardware dei terminali, si è ideato di installare due terminali: 
+uno alla cassa, uno nella zona di appoggio dei camerieri; in questo modo sarà possibile utilizzare i terminali da due postazioni, e nel caso di malfunzionamento di uno dei due terminali
+sarà possibile continuare ad usufruire dell'applicazione dal terminale ancora on-line. Essendo un'applicazione client-server si cercherà sempre di mantenere isolato il server dalle
+macchine utilizzate, per evitare danni accidentali. Il sistema prevederà un sistema di autenticazione e di autorizzazione per ogni utente. 
+
+Perfomance
+Per garantire efficienza durante l'utilizzo dell'applicazione, essendo che tutta la comunicazione dei terminali e dei dispositivi avverrà tramite rete wireless, sarà divisa 
+la banda di utilizzo: su una frequenza di 5Ghz verranno fatti viaggiare solo dati per la comunicazione del sistema, mentre lafrequenza di 2.4Ghz della rete verrà lasciata alla clientela
+In questo modo i tempi di utilizzo per le operazioni dovrebbero essere molto rapidi essendo che, nel caso peggiore, per un inserimento di un ordine non verranno inviati più di 2mb di dati. 
+per il resto, non dovrebbero esserci tempi critici di risposta. In ogni evenienza, sarà accettato un ritardo di 10 secondi da parte del sistema per la ricezione dell'ordine. 
+
+Manutenibilità 
+La manutenzione del sistema verrà affidata ad uno degli sviluppatori del progetto. Manutenzione inteso anche come estensione: si è pensato, infatti, che il software
+potrebbe espandersi includendo anche una porzione di software per la gestione del magazzino interno. In questo modo sarà anche possibile tenere traccia dei prodotti 
+acquistati e venduti.
+
+Implementazione
+L'applicazione verrà sviluppata utilizzando Java come linguaggio di programmazione per la business-logic, Tomcat come Server e mySql,database relazione, per la raccolta dati.
+Verrà utilizzato il paradigma MVC per lo sviluppo dell'applicativo, in modo da separare i concetti della presentazione, dalla logica implementativa. 
+Il software prevederà di supportare anche una grossa quantità di dati, si prevede quindi che non ci siano vincoli di utilizzo nella fase di analisi.
+
+Sicurezza
+Il sistema sarà utilizzato solo da utenti opportunamente loggati. Sarà l'amministratore a registrare nuovi utenti nel sistema. 
