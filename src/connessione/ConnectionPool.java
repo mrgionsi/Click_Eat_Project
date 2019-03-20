@@ -22,10 +22,14 @@ public class ConnectionPool {
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
 
-		String username = "dbclickeat";
-		String password = "dbclickeat";
+//		String username = "dbclickeat";
+//		String password = "dbclickeat";
+//		
+//		   String url = "jdbc:mysql://db4free.net:3306/dbclickeat?autoReconnect=true";
+		String username = "root";
+		String password = "root";
 		
-		   String url = "jdbc:mysql://db4free.net:3306/dbclickeat?autoReconnect=true";
+		   String url = "jdbc:mysql://172.17.0.2:3306/dbclickeat?autoReconnect=true";
 		   newConnection = DriverManager.getConnection(url, username, password);
 		   
 		
