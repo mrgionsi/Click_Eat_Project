@@ -44,7 +44,7 @@
 								name="copy war files to wildfly standalone deployments folder">
 								<copy
 									file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
-									tofile="/opt/wildfly/standalone/deployments/${project.build.finalName}.${project.packaging}" />
+									tofile="home/${project.build.finalName}.${project.packaging}" />
 							</target>
 						</configuration>
 					</execution>
